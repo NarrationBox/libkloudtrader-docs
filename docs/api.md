@@ -5,7 +5,7 @@ sidebar_label: API Index
 ---
 
 
-## [Alerts](/alert_api) - APIs for creating customized alerts
-## [Data](/data_api) - APIs for getting live, historical, company data
-## [Trading](/trading_api) - APIs for trading and placing orders
-## [Tradier](/tradier_api) - APIs for tradier users to know evrything about their accounts and portfolios
+## [Alerts](/docs/alert_api) - APIs for creating customized alerts
+## [Data](/docs/data_api) - APIs for getting live, historical, company data
+## [Trading](/docs/trading_api) - APIs for trading and placing orders
+## [Tradier](/docs/tradier_api) - APIs for tradier users to know evrything about their accounts and portfolios
