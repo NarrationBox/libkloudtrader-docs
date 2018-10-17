@@ -1,10 +1,9 @@
 {
   "docs": {
-    "Docusaurus": ["doc1"],
-    "First Category": ["doc2"],
-    "Second Category": ["doc3"]
-  },
-  "docs-other": {
-    "First Category": ["doc4", "doc5"]
+   
+    "Getting Started": ["intro"],
+    "API Reference": ["api_index","alert_api","data_api","trading_api","tradier_api"],
+    "Tutorials":["sample_strategy"]
+   
   }
 }
