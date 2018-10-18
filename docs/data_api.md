@@ -12,7 +12,7 @@ sidebar_label: Data
 ### Get quotes
 Get quotes for an individual or multiple symbols<br/>
 
-<code>quotes(symbols)</code>
+<code>quotes(symbols,access_token)</code>
 
 ```python
 | Paramters       | Required/Optional | Description                             | Type |
@@ -97,7 +97,7 @@ return type : json
 ### Historical Prices
 Get historical prices for a symbol<br/>
 
-<code>historical_prices(symbol,start,end,interval)</code>
+<code>historical_prices(symbol,start,end,interval,access_token)</code>
 ```python 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
@@ -146,7 +146,7 @@ return type : json
 ### Time and sales
 Get the time and sales of a given symbol<br/>
 
-<code>intraday_status()</code>
+<code>intraday_status(access_token)</code>
 
 ```python
 | Paramters       | Required/Optional | Description                             | Type |
@@ -232,7 +232,7 @@ return type : json
 ### Search symbols
 Search for securities' symbols<br/>
 
-<code>symbol_search(company_name)</code>
+<code>symbol_search(company_name,access_token)</code>
 
 ```python
 | Paramters       | Required/Optional | Description                             | Type |
@@ -285,7 +285,7 @@ return type : json
 ### Symbol lookup 
 Search for securities/companies using symbols<br/>
 
-<code>symbol_lookup(symbol)</code>
+<code>symbol_lookup(symbol,access_token)</code>
 
 ```python
 | Paramters       | Required/Optional | Description                             | Type |
@@ -332,7 +332,7 @@ return type : json
 ### Company fundamentals 
 Get company fundamental information<br/>
 
-<code>company_fundamentals(symbols)</code>
+<code>company_fundamentals(symbols,access_token)</code>
 
 ```python
 | Paramters       | Required/Optional | Description                                                   | Type |
@@ -442,7 +442,7 @@ return type : json
 ### Corporate calendars
 Get the corporate calendar information for given symbol<br/>
 
-<code>corporate_calendar(symbols)</code>
+<code>corporate_calendar(symbols,access_token)</code>
 
 ```python
 | Paramters       | Required/Optional | Description                                                   | Type |
@@ -505,7 +505,7 @@ return type : json
 ### Dividend information
 Get company dividend information for given symbol<br/>
 
-<code>corporate_calendar(symbols)</code>
+<code>corporate_calendar(symbols,access_token)</code>
 
 ```python
 | Paramters       | Required/Optional | Description                                                   | Type |
@@ -569,7 +569,7 @@ return type : json
 ### Corporate Actions
 Get corporate actions information for given symbol<br/>
 
-<code>corporate_actions(symbols)</code>
+<code>corporate_actions(symbols,access_token)</code>
 
 ```python
 | Paramters       | Required/Optional | Description                                                   | Type |
@@ -654,7 +654,7 @@ return type : json
 ### Operation ratio
 Get operation ratio information for given symbol<br/>
 
-<code>operation_ratio(symbols)</code>
+<code>operation_ratio(symbols,access_token)</code>
 
 ```python
 | Paramters       | Required/Optional | Description                                                   | Type |
@@ -774,7 +774,7 @@ return type : json
 ### Corporate financials
 Get corporate financials information for given symbol<br/>
 
-<code>corporate_financials(symbols)</code>
+<code>corporate_financials(symbols,access_token)</code>
 
 ```python
 | Paramters       | Required/Optional | Description                                                   | Type |
@@ -1014,7 +1014,7 @@ return type : json
 ### Price Statistics
 Get price statistics information for given symbol<br/>
 
-<code>price_statistics(symbols)</code>
+<code>price_statistics(symbols,access_token)</code>
 
 ```python
 | Paramters       | Required/Optional | Description                                                   | Type |
@@ -1107,13 +1107,271 @@ process of getting the streaming live data looks like this:
 ### Create Session
 Create a live session to receive sessionid which is needed for streaming live quotes and trades<br/>
 
-<code>create_session( )</code>
+<code>create_session(access_token)</code>
 
 ``` python
-| Paramters       | Required/Optional | Description                                                   | Type |
-|-----------------|-------------------|---------------------------------------------------------------|------|
- 
-| access_token    | optional          |                                                               | str  |
+| Paramters       | Required/Optional | Description | Type |
+|-----------------|-------------------|---------------------------------------------------------------|------| 
+| access_token    | optional          |             | str  |
  
 ``` 
 > We will be using create_session() as a parameter in the live market feed apis 
+
+***
+### Live Quotes
+Get live quotes direct from many exchanges<br/>
+
+<code>live_quotes(symbol, sessionid)</code>
+
+``` python
+| Paramters       | Required/Optional | Description                                    | Type |
+|-----------------|-------------------|------------------------------------------------|------| 
+| symbols         | required          | Symbol or list of symbols(seperated by a comma)| str  |
+| sessionid       | required          | create_session()                               | str  |
+
+Example:
+
+from kloudtrader.equities.data import create_session,live_quotes
+
+while True:
+      market_quotes=live_quotes('AAPL', create_session()) 
+      print(market_quotes)
+``` 
+```python
+return type : json
+
+{  
+   'type':'quote',
+   'symbol':'AAPL',
+   'bid':216.7,
+   'bidsz':1,
+   'bidexch':'Z',
+   'biddate':'1539887869000',
+   'ask':216.73,
+   'asksz':1,
+   'askexch':'V',
+   'askdate':'1539887869000'
+}
+{  
+   'type':'quote',
+   'symbol':'AAPL',
+   'bid':216.7,
+   'bidsz':2,
+   'bidexch':'B',
+   'biddate':'1539887871000',
+   'ask':216.74,
+   'asksz':2,
+   'askexch':'Q',
+   'askdate':'1539887871000'
+}
+{  
+   'type':'quote',
+   'symbol':'AAPL',
+   'bid':216.66,
+   'bidsz':1,
+   'bidexch':'X',
+   'biddate':'1539887874000',
+   'ask':216.68,
+   'asksz':2,
+   'askexch':'Q',
+   'askdate':'1539887874000'
+}
+{  
+   'type':'quote',
+   'symbol':'AAPL',
+   'bid':216.67,
+   'bidsz':4,
+   'bidexch':'Q',
+   'biddate':'1539887875000',
+   'ask':216.7,
+   'asksz':2,
+   'askexch':'Q',
+   'askdate':'1539887876000'
+}
+{  
+   'type':'quote',
+   'symbol':'AAPL',
+   'bid':216.67,
+   'bidsz':2,
+   'bidexch':'Y',
+   'biddate':'1539887878000',
+   'ask':216.69,
+   'asksz':2,
+   'askexch':'C',
+   'askdate':'1539887878000'
+}
+{  
+   'type':'quote',
+   'symbol':'AAPL',
+   'bid':216.65,
+   'bidsz':1,
+   'bidexch':'Q',
+   'biddate':'1539887880000',
+   'ask':216.67,
+   'asksz':1,
+   'askexch':'V',
+   'askdate':'1539887880000'
+}
+{  
+   'type':'quote',
+   'symbol':'AAPL',
+   'bid':216.64,
+   'bidsz':2,
+   'bidexch':'Z',
+   'biddate':'1539887881000',
+   'ask':216.66,
+   'asksz':1,
+   'askexch':'V',
+   'askdate':'1539887883000'
+}
+{  
+   'type':'quote',
+   'symbol':'AAPL',
+   'bid':216.68,
+   'bidsz':6,
+   'bidexch':'Q',
+   'biddate':'1539887886000',
+   'ask':216.7,
+   'asksz':1,
+   'askexch':'Q',
+   'askdate':'1539887886000'
+}
+
+
+```
+***
+### Live Trades
+Get live trades direct from many exchanges<br/>
+
+<code>live_trades(symbol, sessionid)</code>
+
+``` python
+| Paramters       | Required/Optional | Description                                    | Type |
+|-----------------|-------------------|------------------------------------------------|------| 
+| symbols         | required          | Symbol or list of symbols(seperated by a comma)| str  |
+| sessionid       | required          | create_session()                               | str  |
+
+Example:
+
+from kloudtrader.equities.data import create_session,live_trades
+
+while True:
+      market_trades=live_trades('AAPL', create_session()) 
+      print(market_trades)
+``` 
+```python
+return type : json
+
+{  
+   'type':'trade',
+   'symbol':'AAPL',
+   'exch':'D',
+   'price':'216.495',
+   'size':'100',
+   'cvol':'24102767',
+   'date':'1539888158000',
+   'last':'216.495'
+}
+{  
+   'type':'trade',
+   'symbol':'AAPL',
+   'exch':'B',
+   'price':'216.45',
+   'size':'200',
+   'cvol':'24104772',
+   'date':'1539888163000',
+   'last':'216.45'
+}
+{  
+   'type':'trade',
+   'symbol':'AAPL',
+   'exch':'Q',
+   'price':'216.42',
+   'size':'100',
+   'cvol':'24106342',
+   'date':'1539888166000',
+   'last':'216.42'
+}
+{  
+   'type':'trade',
+   'symbol':'AAPL',
+   'exch':'D',
+   'price':'216.448',
+   'size':'230',
+   'cvol':'24107124',
+   'date':'1539888167000',
+   'last':'216.448'
+}
+{  
+   'type':'trade',
+   'symbol':'AAPL',
+   'exch':'Q',
+   'price':'216.48',
+   'size':'100',
+   'cvol':'24108900',
+   'date':'1539888170000',
+   'last':'216.48'
+}
+{  
+   'type':'trade',
+   'symbol':'AAPL',
+   'exch':'D',
+   'price':'216.451',
+   'size':'175',
+   'cvol':'24109225',
+   'date':'1539888172000',
+   'last':'216.451'
+}
+{  
+   'type':'trade',
+   'symbol':'AAPL',
+   'exch':'Z',
+   'price':'216.51',
+   'size':'100',
+   'cvol':'24110307',
+   'date':'1539888174000',
+   'last':'216.51'
+}
+{  
+   'type':'trade',
+   'symbol':'AAPL',
+   'exch':'B',
+   'price':'216.49',
+   'size':'100',
+   'cvol':'24111408',
+   'date':'1539888176000',
+   'last':'216.49'
+}
+
+```
+
+***
+## Exchanges' codes
+These codes are returned in the <code>exch</code> field of all market data APIs. Please use this table for reference to represent the exchange as text.
+
+```
+| ID | Name of Exhange                              |
+|----|----------------------------------------------|
+| A  | NYSE MKT                                     |
+| B  | NASDAQ OMX BX                                |
+| C  | National Stock Exchange                      |
+| D  | FINRA ADF                                    |
+| E  | Market Independent (Generated by Nasdaq SIP) |
+| F  | Mutual Funds/Money Markets (NASDAQ)          |
+| G  | GLOBEX                                       |
+| I  | International Securities Exchange            |
+| J  | Direct Edge A                                |
+| K  | Direct Edge X                                |
+| M  | Chicago Stock Exchange                       |
+| N  | NYSE                                         |
+| P  | NYSE Arca                                    |
+| Q  | NASDAQ OMX                                   |
+| S  | NASDAQ Small Cap                             |
+| T  | NASDAQ Int                                   |
+| U  | OTCBB                                        |
+| V  | OTC other                                    |
+| W  | CBOE                                         |
+| X  | NASDAQ OMX PSX                               |
+| Y  | BATS Y-Exchange                              |
+| Z  | BATS                                         |
+```
