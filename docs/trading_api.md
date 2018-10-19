@@ -11,7 +11,7 @@ sidebar_label: Trading
 <code>kloudtrader.equities.trade</code>
 ***
 ### Buy Preview
-Preview buy order. This will allow you to place a <code>buy</code> order without it being sent to the market so that you can know what will it actaully be like when you place a real order
+Preview your buy order. This will allow you to place a <code>buy</code> order without it being sent to the market so that you can know what will it actaully be like when you place a real order
 
 <code>buy_preview(access_token,account_number,symbol,quantity,duration,order_type,price)</code>
 ```python

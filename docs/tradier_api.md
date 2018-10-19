@@ -9,8 +9,8 @@ sidebar_label: Tradier User
 
 # Module
 <code>kloudtrader.equities.tradier_user</code>
-***
-### Get User profile
+
+### User profile
 Get information pertaining to your tradier account<br/>
 
 <code>user_profle(access_token)</code>
@@ -51,7 +51,28 @@ return type : json
 }
 ```
 ***
-### Get Account balance
+### Account Number
+Get your account number or list of account numbers accosiated with your tradier account<br/>
+
+<code>user_account_number(access_token)</code>
+
+
+```python
+| Paramters       | Required/Optional | Description                                    | Type |
+|-----------------|-------------------|------------------------------------------------|------| 
+| access_token    | optional          |                                                | str  |
+
+Example:
+
+from kloudrader.equities.tradier_user import user_account_number
+
+user_account_number()
+```
+```python
+return type : str if one account, list if many accounts
+```
+***
+### Account balance
 Get your account balance<br/>
 
 <code>account_balance(access_token,account_number)</code>
@@ -103,11 +124,14 @@ return type : json
    }
 }
 ```
-***
-### Get Account Positions
-Get your account balance<br/>
 
-<code>account_balance(access_token,account_number)</code>
+
+
+***
+### Account Positions
+Get all the postions your account holds<br/>
+
+<code>account_positions(access_token,account_number)</code>
 
 
 ```python
@@ -118,12 +142,242 @@ Get your account balance<br/>
 
 Example:
 
-from kloudrader.equities.tradier_user import account_balance
+from kloudrader.equities.tradier_user import account_positions
 
 account_positions()
 ```
 ```python
 return type : json
 
+{  
+   'positions':{  
+      'position':{  
+         'cost_basis':12.87,
+         'date_acquired':'2018-06-19T12:55:12.764Z',
+         'id':354131,
+         'quantity':1.0,
+         'symbol':'GE'
+      }
+   }
+}
+```
+***
+### Account History
+Get your account's history<br/>
 
+<code>account_history(access_token,account_number)</code>
+
+
+```python
+| Paramters       | Required/Optional | Description                                    | Type |
+|-----------------|-------------------|------------------------------------------------|------| 
+| access_token    | optional          |                                                | str  |
+| account_number  | optional          |                                                | str  |
+
+Example:
+
+from kloudrader.equities.tradier_user import account_history
+
+account_history()
+```
+```python
+return type : json
+
+{  
+   'history':{  
+      'event':[  
+         {  
+            'amount':0,
+            'date':'2018-09-21T00:00:00Z',
+            'type':'option',
+            'option':{  
+               'option_type':'OPTEXP',
+               'description':'Expired',
+               'quantity':-1.0
+            }
+         },
+         
+        
+         {  
+            'amount':0.95,
+            'date':'2017-07-12T00:00:00Z',
+            'type':'trade',
+            'trade':{  
+               'commission':0.0,
+               'description':'PUT  SPY    07/19/17   228',
+               'price':0.01,
+               'quantity':-1.0,
+               'symbol':'SPY170719P00228000',
+               'trade_type':'Option'
+            }
+         }
+      ]
+   }
+}
+```
+***
+### Account Cost Basis
+Get your account's cost basis. This includes information of all closed positions<br/>
+
+<code>account_costbasis(access_token,account_number)</code>
+
+
+```python
+| Paramters       | Required/Optional | Description                                    | Type |
+|-----------------|-------------------|------------------------------------------------|------| 
+| access_token    | optional          |                                                | str  |
+| account_number  | optional          |                                                | str  |
+
+Example:
+
+from kloudrader.equities.tradier_user import account_costbasis
+
+account_costbasis()
+```
+```python
+return type : json
+
+{  
+   'gainloss':{  
+      'closed_position':[  
+         {  
+            'close_date':'2018-09-21T00:00:00.000Z',
+            'cost':3.05,
+            'gain_loss':-3.05,
+            'gain_loss_percent':-100.0,
+            'open_date':'2018-09-18T00:00:00.000Z',
+            'proceeds':0.0,
+            'quantity':1.0,
+            'symbol':'SNAP180921P00008500',
+            'term':3
+         },
+         .
+         .
+         .
+         {  
+            'close_date':'2015-06-08T00:00:00.000Z',
+            'cost':35.51,
+            'gain_loss':-0.55,
+            'gain_loss_percent':-1.5489,
+            'open_date':'2015-06-04T00:00:00.000Z',
+            'proceeds':34.96,
+            'quantity':1.0,
+            'symbol':'GM',
+            'term':4
+         }
+      ]
+   }
+}
+```
+***
+### Account Orders
+Get intraday and open/pending order information for your account<br/>
+
+<code>account_orders(access_token,account_number)</code>
+
+
+```python
+| Paramters       | Required/Optional | Description                                    | Type |
+|-----------------|-------------------|------------------------------------------------|------| 
+| access_token    | optional          |                                                | str  |
+| account_number  | optional          |                                                | str  |
+
+Example:
+
+from kloudrader.equities.tradier_user import account_orders
+
+account_orders()
+```
+```python
+return type : json
+
+{  
+   'orders':{  
+      'order':[  
+         {  
+            'id':1369455,
+            'type':'limit',
+            'symbol':'GE',
+            'side':'buy',
+            'quantity':1.0,
+            'status':'canceled',
+            'duration':'day',
+            'price':8.0,
+            'avg_fill_price':0.0,
+            'exec_quantity':0.0,
+            'last_fill_price':0.0,
+            'last_fill_quantity':0.0,
+            'remaining_quantity':0.0,
+            'create_date':'2018-10-19T01:38:05.650Z',
+            'transaction_date':'2018-10-19T01:38:07.253Z',
+            'class':'equity'
+         },
+          .
+          .
+          .
+         {  
+            'id':1371509,
+            'type':'limit',
+            'symbol':'GE',
+            'side':'buy',
+            'quantity':1.0,
+            'status':'canceled',
+            'duration':'day',
+            'price':8.0,
+            'avg_fill_price':0.0,
+            'exec_quantity':0.0,
+            'last_fill_price':0.0,
+            'last_fill_quantity':0.0,
+            'remaining_quantity':0.0,
+            'create_date':'2018-10-19T15:46:24.350Z',
+            'transaction_date':'2018-10-19T15:46:25.911Z',
+            'class':'equity'
+         }
+      ]
+   }
+}
+```
+***
+### Individual order
+Get detailed information for a specific order<br/>
+
+<code>account_specificorders(order_id,access_token,account_number)</code>
+
+
+```python
+| Paramters       | Required/Optional | Description                                    | Type |
+|-----------------|-------------------|------------------------------------------------|------| 
+| order_id        | required          | Order Id of the order you want info of         | str  |
+| access_token    | optional          |                                                | str  |
+| account_number  | optional          |                                                | str  |
+
+Example:
+
+from kloudrader.equities.tradier_user import account_specificorders
+
+account_specificorders('1369455')
+```
+```python
+return type : json
+
+{  
+   'order':{  
+      'id':1369455,
+      'type':'limit',
+      'symbol':'GE',
+      'side':'buy',
+      'quantity':1.0,
+      'status':'canceled',
+      'duration':'day',
+      'price':8.0,
+      'avg_fill_price':0.0,
+      'exec_quantity':0.0,
+      'last_fill_price':0.0,
+      'last_fill_quantity':0.0,
+      'remaining_quantity':0.0,
+      'create_date':'2018-10-19T01:38:05.650Z',
+      'transaction_date':'2018-10-19T01:38:07.253Z',
+      'class':'equity'
+   }
+}
 ```

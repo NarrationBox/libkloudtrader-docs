@@ -95,7 +95,7 @@ return type : json
 ```
 
 ### Historical Prices
-Get historical prices for a symbol<br/>
+Get historical prices for a symbol (As back as you want to go)<br/>
 
 <code>historical_prices(symbol,start,end,interval,access_token)</code>
 ```python 
@@ -111,10 +111,36 @@ Example:
 
 from kloudtrader.equiites.data import historical_prices
 
-historical_prices('AAPL','2018-01-01','2001-01-01','daily')
+historical_prices('AAPL','2013-01-01','2018-01-01','daily')
 ```
 ```python
 return type: json 
+
+{  
+   'history':{  
+      'day':[  
+         {  
+            'date':'2013-12-02',
+            'open':79.714286,
+            'high':80.618557,
+            'low':78.688571,
+            'close':78.747143,
+            'volume':118135885
+         },
+         .
+         .
+         .
+         {  
+            'date':'2017-12-29',
+            'open':170.52,
+            'high':170.59,
+            'low':169.22,
+            'close':169.23,
+            'volume':25999922
+         }
+      ]
+   }
+}
 ```
 ***
 ### Intraday Status
@@ -146,7 +172,7 @@ return type : json
 ### Time and sales
 Get the time and sales of a given symbol<br/>
 
-<code>intraday_status(access_token)</code>
+<code>time_and_sales(access_token)</code>
 
 ```python
 | Paramters       | Required/Optional | Description                             | Type |
