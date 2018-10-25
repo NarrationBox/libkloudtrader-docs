@@ -167,7 +167,7 @@ return type : json
    }
 }
 ```
-
+<!---
 ***
 ### Time and sales
 Get the time and sales of a given symbol<br/>
@@ -184,7 +184,7 @@ return type : json
 
 
 ```
-
+-->
 ***
 ### Market calendar
 Get the market calendar of a given month(Goes back till 2013)<br/>
