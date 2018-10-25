@@ -1,17 +1,17 @@
 ---
-id: tradier_api
-title: Tradier User
-sidebar_label: Tradier User
+id: user_api
+title: User
+sidebar_label: User
 ---
 
-## You can use Traider User Account APIs to receive any kind information about your tradier account
+## You can use User APIs to receive any kind information about your account
 
 
 # Module
-<code>kloudtrader.equities.tradier_user</code>
+<code>kloudtrader.user</code>
 
 ### User profile
-Get information pertaining to your tradier account<br/>
+Get information pertaining to your account<br/>
 
 <code>user_profle(access_token)</code>
 
@@ -23,7 +23,7 @@ Get information pertaining to your tradier account<br/>
 
 Example:
 
-from kloudrader.equities.tradier_user import user_profile
+from kloudrader.user import user_profile
 
 user_profle()
 ```
@@ -52,7 +52,7 @@ return type : json
 ```
 ***
 ### Account Number
-Get your account number or list of account numbers accosiated with your tradier account<br/>
+Get your account number or list of account numbers accosiated with your account<br/>
 
 <code>user_account_number(access_token)</code>
 
@@ -64,7 +64,7 @@ Get your account number or list of account numbers accosiated with your tradier 
 
 Example:
 
-from kloudrader.equities.tradier_user import user_account_number
+from kloudrader.user import user_account_number
 
 user_account_number()
 ```
@@ -86,7 +86,7 @@ Get your account balance<br/>
 
 Example:
 
-from kloudrader.equities.tradier_user import account_balance
+from kloudrader.user import account_balance
 
 account_balance()
 ```
@@ -142,7 +142,7 @@ Get all the postions your account holds<br/>
 
 Example:
 
-from kloudrader.equities.tradier_user import account_positions
+from kloudrader.user import account_positions
 
 account_positions()
 ```
@@ -176,7 +176,7 @@ Get your account's history<br/>
 
 Example:
 
-from kloudrader.equities.tradier_user import account_history
+from kloudrader.user import account_history
 
 account_history()
 ```
@@ -230,7 +230,7 @@ Get your account's cost basis. This includes information of all closed positions
 
 Example:
 
-from kloudrader.equities.tradier_user import account_costbasis
+from kloudrader.user import account_costbasis
 
 account_costbasis()
 ```
@@ -284,7 +284,7 @@ Get intraday and open/pending order information for your account<br/>
 
 Example:
 
-from kloudrader.equities.tradier_user import account_orders
+from kloudrader.user import account_orders
 
 account_orders()
 ```
@@ -353,7 +353,7 @@ Get detailed information for a specific order<br/>
 
 Example:
 
-from kloudrader.equities.tradier_user import account_specificorders
+from kloudrader.user import account_specificorders
 
 account_specificorders('1369455')
 ```

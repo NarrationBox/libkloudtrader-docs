@@ -46,7 +46,12 @@ class Footer extends React.Component {
           </div>
           <div>
             <h5>Community</h5>
-           
+            <a
+              href="https://join.slack.com/t/kloudtradercommunity/shared_invite/enQtNDY1MDY0ODAyNTE4LWNmNDdiZWVhODliODM2ZjRhOTVhNzQ0ZDY2ZmU0NGMyYWMwZDJjNGY0OTRkYzQ0ZjQ0Zjk1ZTNiNmQxM2ViMWY"
+              target="_blank"
+              rel="noreferrer noopener">
+              Slack
+            </a>
             <a
               href="http://stackoverflow.com/questions/tagged/kloudtrader"
               target="_blank"
