@@ -12,13 +12,14 @@ sidebar_label: Alerts
 
 ### SMS alerts 
 <code>sms(number,message)</code>
-```python 
+
 | Paramters     | Required/Optional | Description                        | Type |
 |--------------|-------------------|-------------------------------------|------|
-| number       | required          | number you want to receive alert on | str  |
+| number       | required          | Number you want to receive alert on | str  |
 | message      | required          | The alert you create                | str  |
-| access_token | optional          |                                     | str  |
 
+
+``` python
 Example:
 
 from kloudtrader.alert_me import sms
@@ -34,13 +35,11 @@ Returns: SMS alert Created!
 *** 
 ### Email alerts 
 <code>email(email_id,message)</code>
-```python 
 | Paramters    | Required/Optional | Description                           | Type |
 |--------------|-------------------|---------------------------------------|------|
 | email_id     | required          | Email Id you want to receive alert on | str  |
 | message      | required          | The alert you create                  | str  |
-| access_token | optional          |                                       | str  |
-
+```python 
 Example:
 
 from kloudtrader.alert_me import email
@@ -56,14 +55,12 @@ Returns: Email alert Created!
 *** 
 ### Both sma and email alerts
 <code>sms_and_email(number,email_id,message)</code> 
-```python 
 | Paramters    | Required/Optional | Description                           | Type |
 |--------------|-------------------|---------------------------------------|------|
 | number       | required          | Number you want to receive alert on   | str  |
 | email_id     | required          | Email Id you want to receive alert on | str  |
 | message      | required          | The alert you create                  | str  |
-| access_token | optional          |                                       | str  |
-
+```python 
 Example:
 
 from kloudtrader.alert_me import email

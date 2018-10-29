@@ -24,17 +24,17 @@ class Help extends React.Component {
     const supportLinks = [
       {
         content: `Learn more using the [documentation on this site.](${docUrl(
-          'doc1.html',
+          'intro',
           language,
         )})`,
         title: 'Browse Docs',
       },
       {
-        content: 'Ask questions about the documentation and project',
+        content: 'Ask questions about the documentation and project.<br>Join our <a href="https://join.slack.com/t/kloudtradercommunity/shared_invite/enQtNDY1MDY0ODAyNTE4LWNmNDdiZWVhODliODM2ZjRhOTVhNzQ0ZDY2ZmU0NGMyYWMwZDJjNGY0OTRkYzQ0ZjQ0Zjk1ZTNiNmQxM2ViMWY" target="_blank">slack</a> <br>or<br>Open an issue on  <a href="https://github.com/KloudTrader/kloudtrader/issues/new" target="_blank">Github</a>',
         title: 'Join the community',
       },
       {
-        content: "Find out what's new with this project",
+        content: 'Find out what is new with this project via our <a href="/blog" target="_blank">Blog</a>',
         title: 'Stay up to date',
       },
     ];
@@ -46,7 +46,7 @@ class Help extends React.Component {
             <header className="postHeader">
               <h1>Need help?</h1>
             </header>
-            <p>This project is maintained by a dedicated group of people.</p>
+            <p>This project is maintained by <a href="https://kloudtrader.com" target="_blank">KloudTrader</a>. Reach out to us at <a href="mailto:info@kloudtrader.com?subject=KloudTrader library">info@kloudtrader.com</a></p>
             <GridBlock contents={supportLinks} layout="threeColumn" />
           </div>
         </Container>
