@@ -93,7 +93,7 @@ class Footer extends React.Component {
               href="https://medium.com/@kloudtrader"
               target="_blank"
               rel="noreferrer noopener">
-              Blog
+              Medium
             </a>
             
             <a

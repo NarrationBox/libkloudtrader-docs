@@ -83,7 +83,7 @@ class HomeSplash extends React.Component {
           <PromoSection>
             <Button href="/docs/intro">Get Started</Button>
             <Button href={docUrl('doc2.html', language)}>Python Package Index</Button>
-            <Button href={docUrl('doc2.html', language)}>Github</Button>
+            <Button href="https://github.com/KloudTrader/kloudtrader" target="_blank">Github</Button>
             
           </PromoSection>
         </div>
@@ -102,20 +102,42 @@ const Block = props => (
 );
 
 const Features = () => (
-  <Block layout="fourColumn">
+  <Block layout="threeColumn">
     {[
       {
-        content: 'This is the content of my feature',
-        image: imgUrl('docusaurus.svg'),
+        content: 'Extremely simple to use trading APIs ',
+        image: imgUrl('laptop-solid.svg'),
         imageAlign: 'top',
-        title: 'Feature One',
+        title: 'Simple Trading APIs',
+        
       },
       {
-        content: 'The content of my second feature',
-        image: imgUrl('docusaurus.svg'),
+        content: 'kloudtrader provides all sort of data:<br> live market feed, historaical price data, company information and much more',
+        image: imgUrl('database-solid.svg'),
         imageAlign: 'top',
-        title: 'Feature Two',
+        title: 'Data',
       },
+      {
+        content: 'Creat own alerts for both sms and email',
+        image: imgUrl('bell-regular.svg'),
+        imageAlign: 'top',
+        title: 'Customized alerts',
+      },
+      /*
+      {
+        content: 'Do algorithmic trading with virtual money(coming soon)',
+        image: imgUrl('paper-plane-regular.svg'),
+        imageAlign: 'top',
+        title: 'Papertrading',
+      },
+      
+      {
+        content: 'Backtesting',
+        image: imgUrl('chart-line-solid.svg'),
+        imageAlign: 'top',
+        title: 'Backtesting',
+      },*/
+      
     ]}
   </Block>
 );
@@ -124,8 +146,7 @@ const FeatureCallout = () => (
   <div
     className="productShowcaseSection paddingBottom"
     style={{textAlign: 'center'}}>
-    <h2>Feature Callout</h2>
-    <MarkdownBlock>These are features of this project</MarkdownBlock>
+  
   </div>
 );
 
@@ -145,25 +166,25 @@ const LearnHow = () => (
 const TryOut = () => (
   <Block id="try">
     {[
-      {
+      /* {
         content: 'Talk about trying this out',
         image: imgUrl('docusaurus.svg'),
         imageAlign: 'left',
         title: 'Try it Out',
-      },
+      },*/
     ]}
   </Block>
 );
 
 const Description = () => (
-  <Block background="dark">
+  <Block background="">
     {[
-      {
+     /* {
         content: 'This is another description of how this project is useful',
         image: imgUrl('docusaurus.svg'),
         imageAlign: 'right',
         title: 'Description',
-      },
+      },*/
     ]}
   </Block>
 );
@@ -202,11 +223,8 @@ class Index extends React.Component {
         <HomeSplash language={language} />
         <div className="mainContainer">
           <Features />
-          <FeatureCallout />
-          <LearnHow />
-          <TryOut />
-          <Description />
-          <Showcase language={language} />
+          
+         
         </div>
       </div>
     );
