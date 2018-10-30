@@ -1,10 +1,10 @@
 FROM node:8.11.4
 
-WORKDIR /app/website
+WORKDIR /kloudtrader-docs/website
 
 EXPOSE 3000 35729
-COPY ./docs /app/docs
-COPY ./website /app/website
+COPY ./docs /kloudtrader-docs/docs
+COPY ./website /kloudtrader-docs/website
 RUN yarn install
 
 CMD ["yarn", "start"]
