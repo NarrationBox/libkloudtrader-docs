@@ -41,14 +41,24 @@ class Help extends React.Component {
 
     return (
       <div className="docMainWrapper wrapper">
+  
+         
         <Container className="mainContainer documentContainer postContainer">
           <div className="post">
             <header className="postHeader">
               <h1>Need help?</h1>
             </header>
             <p>This project is maintained by <a href="https://kloudtrader.com" target="_blank">KloudTrader</a>. Reach out to us at <a href="mailto:info@kloudtrader.com?subject=KloudTrader library">info@kloudtrader.com</a></p>
+            <p>To deploy your trading algorithm and get strated with <a href="https://kloudtrader.com/narwhal" target="_blank">Narwhal</a> take a look at this demo. </p>
+           <div style={{textAlign: 'center'}}>
+
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/4hfSJ769bDk"
+									 frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          </div>
+
             <GridBlock contents={supportLinks} layout="threeColumn" />
           </div>
+         
         </Container>
       </div>
     );
