@@ -14,13 +14,11 @@ sidebar_label: User
 Get information pertaining to your account<br/>
 
 <code>user_profle(access_token)</code>
-
-
-```python
 | Paramters       | Required/Optional | Description                                    | Type |
 |-----------------|-------------------|------------------------------------------------|------| 
-| access_token    | optional          |                                                | str  |
+| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                               | str  |
 
+```python
 Example:
 
 from kloudrader.user import user_profile
@@ -55,13 +53,11 @@ return type : json
 Get your account number or list of account numbers accosiated with your account<br/>
 
 <code>user_account_number(access_token)</code>
-
-
-```python
 | Paramters       | Required/Optional | Description                                    | Type |
 |-----------------|-------------------|------------------------------------------------|------| 
-| access_token    | optional          |                                                | str  |
+| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                               | str  |
 
+```python
 Example:
 
 from kloudrader.user import user_account_number
@@ -76,14 +72,12 @@ return type : str if one account, list if many accounts
 Get your account balance<br/>
 
 <code>account_balance(access_token,account_number)</code>
-
-
-```python
 | Paramters       | Required/Optional | Description                                    | Type |
 |-----------------|-------------------|------------------------------------------------|------| 
-| access_token    | optional          |                                                | str  |
-| account_number  | optional          |                                                | str  |
+| access_token    | optional          |Will automatically be present when you deploy to Narwhal                                                | str  |
+| account_number  | optional          |  Will automatically be present when you deploy to Narwhal                                              | str  |
 
+```python
 Example:
 
 from kloudrader.user import account_balance
@@ -132,14 +126,12 @@ return type : json
 Get all the postions your account holds<br/>
 
 <code>account_positions(access_token,account_number)</code>
-
-
-```python
 | Paramters       | Required/Optional | Description                                    | Type |
 |-----------------|-------------------|------------------------------------------------|------| 
-| access_token    | optional          |                                                | str  |
-| account_number  | optional          |                                                | str  |
+| access_token    | optional          |  Will automatically be present when you deploy to Narwhal                                              | str  |
+| account_number  | optional          |  Will automatically be present when you deploy to Narwhal                                              | str  |
 
+```python
 Example:
 
 from kloudrader.user import account_positions
@@ -166,14 +158,12 @@ return type : json
 Get your account's history<br/>
 
 <code>account_history(access_token,account_number)</code>
-
-
-```python
 | Paramters       | Required/Optional | Description                                    | Type |
 |-----------------|-------------------|------------------------------------------------|------| 
-| access_token    | optional          |                                                | str  |
-| account_number  | optional          |                                                | str  |
+| access_token    | optional          |  Will automatically be present when you deploy to Narwhal                                              | str  |
+| account_number  | optional          |   Will automatically be present when you deploy to Narwhal                                             | str  |
 
+```python
 Example:
 
 from kloudrader.user import account_history
@@ -220,14 +210,12 @@ return type : json
 Get your account's cost basis. This includes information of all closed positions<br/>
 
 <code>account_costbasis(access_token,account_number)</code>
-
-
-```python
 | Paramters       | Required/Optional | Description                                    | Type |
 |-----------------|-------------------|------------------------------------------------|------| 
-| access_token    | optional          |                                                | str  |
-| account_number  | optional          |                                                | str  |
+| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                               | str  |
+| account_number  | optional          |  Will automatically be present when you deploy to Narwhal                                              | str  |
 
+```python
 Example:
 
 from kloudrader.user import account_costbasis
@@ -274,14 +262,12 @@ return type : json
 Get intraday and open/pending order information for your account<br/>
 
 <code>account_orders(access_token,account_number)</code>
-
-
-```python
 | Paramters       | Required/Optional | Description                                    | Type |
 |-----------------|-------------------|------------------------------------------------|------| 
-| access_token    | optional          |                                                | str  |
-| account_number  | optional          |                                                | str  |
+| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                               | str  |
+| account_number  | optional          | Will automatically be present when you deploy to Narwhal                                               | str  |
 
+```python
 Example:
 
 from kloudrader.user import account_orders
@@ -342,15 +328,13 @@ return type : json
 Get detailed information for a specific order<br/>
 
 <code>account_specificorders(order_id,access_token,account_number)</code>
-
-
-```python
 | Paramters       | Required/Optional | Description                                    | Type |
 |-----------------|-------------------|------------------------------------------------|------| 
 | order_id        | required          | Order Id of the order you want info of         | str  |
-| access_token    | optional          |                                                | str  |
-| account_number  | optional          |                                                | str  |
+| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                               | str  |
+| account_number  | optional          | Will automatically be present when you deploy to Narwhal                                               | str  |
 
+```python
 Example:
 
 from kloudrader.user import account_specificorders

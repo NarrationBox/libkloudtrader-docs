@@ -14,22 +14,17 @@ sidebar_label: Trading
 Preview your buy order. This will allow you to place a <code>buy</code> order without it being sent to the market so that you can know what will it actaully look like when you place a real order
 
 <code>buy_preview(symbol,quantity,access_token,account_number,duration,order_type,price,stop)</code>
-```python
 | Paramters       | Required/Optional | Description                                    | Type |
 |-----------------|-------------------|------------------------------------------------|------| 
 | symbol          | required          | Symbol of the stock                            | str  |
 | quantity        | required          | Number of shares                               | str  |
-| access_token    | optional          |                                                | str  |
-| account_number  | optional          |                                                | str  |
-| duration        | required          | Time for which the order will remain in effect |      |
-|                 |                   | (Options: day,gtc,pre, post) day by default    | str  |
-| order_type      | required          | Type of order to be placed (market by default) |      |
-|                 |                   | (options: market, limit, stop, stop_limit)     | str  |
-| price           | optional          | Price for "limit" and "stop_limit" order       |      |
-|                 |                   | (options: market, limit, stop, stop_limit)     | int  |
-| stop            | optional          | Stop price in a "stop" or "stop_limit" typed   |      |
-|                 |                   | order. Required for "stop" and "stop_limit"    | int  |
-
+| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                                 | str  |
+| account_number  | optional          | Will automatically be present when you deploy to Narwhal                                                  | str  |
+| duration        | required          | Time for which the order will remain in effect (Options: day,gtc,pre, post) (day by default)          | str  |
+| order_type      | required          | Type of order to be placed (market by default) (Options: market, limit, stop, stop_limit)     | str  |
+| price           | optional          | Price for "limit" and "stop_limit" order (options: market, limit, stop, stop_limit)     | int  |
+| stop            | optional          | Stop price in a "stop" or "stop_limit" type   order. Required for "stop" and "stop_limit"    | int  |
+```python
 Example: (Previewing a buy order of order_type 'market')
 
 from kloudtrader.equities.trade import buy_preview
@@ -94,22 +89,17 @@ return type: json (Limit order type)
 Preview your sell order. This will allow you to place a <code>sell</code> order without it being sent to the market so that you can know what will it actaully look like when you place a real order
 
 <code>sell_preview(symbol,quantity,access_token,account_number,duration,order_type,price,stop)</code>
-```python
 | Paramters       | Required/Optional | Description                                    | Type |
 |-----------------|-------------------|------------------------------------------------|------| 
 | symbol          | required          | Symbol of the stock                            | str  |
 | quantity        | required          | Number of shares                               | str  |
-| access_token    | optional          |                                                | str  |
-| account_number  | optional          |                                                | str  |
-| duration        | required          | Time for which the order will remain in effect |      |
-|                 |                   | (Options: day,gtc,pre, post) day by default    | str  |
-| order_type      | required          | Type of order to be placed (market by default) |      |
-|                 |                   | (options: market, limit, stop, stop_limit)     | str  |
-| price           | optional          | Price for "limit" and "stop_limit" order       |      |
-|                 |                   | (options: market, limit, stop, stop_limit)     | int  |
-| stop            | optional          | Stop price in a "stop" or "stop_limit" typed   |      |
-|                 |                   | order. Required for "stop" and "stop_limit"    | int  |
-
+| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                               | str  |
+| account_number  | optional          | Will automatically be present when you deploy to Narwhal                                               | str  |
+| duration        | required          | Time for which the order will remain in effect (Options: day,gtc,pre, post) day by default    | str  |
+| order_type      | required          | Type of order to be placed (market by default) (options: market, limit, stop, stop_limit)     | str  |
+| price           | optional          | Price for "limit" and "stop_limit" order (options: market, limit, stop, stop_limit)     | int  |
+| stop            | optional          | Stop price in a "stop" or "stop_limit" typed order. Required for "stop" and "stop_limit"    | int  |
+```python
 Example: 
 
 from kloudtrader.equities.trade import sell_preview
@@ -147,22 +137,17 @@ return type: json (Market order type)
 Buy equities. Order placed using this API will be sent to the market and executed according to your specifications. 
 
 <code>buy(symbol,quantity,access_token,account_number,duration,order_type,price,stop)</code>
-```python
 | Paramters       | Required/Optional | Description                                    | Type |
 |-----------------|-------------------|------------------------------------------------|------| 
 | symbol          | required          | Symbol of the stock                            | str  |
 | quantity        | required          | Number of shares                               | str  |
-| access_token    | optional          |                                                | str  |
-| account_number  | optional          |                                                | str  |
-| duration        | required          | Time for which the order will remain in effect |      |
-|                 |                   | (Options: day,gtc,pre, post) day by default    | str  |
-| order_type      | required          | Type of order to be placed (market by default) |      |
-|                 |                   | (options: market, limit, stop, stop_limit)     | str  |
-| price           | optional          | Price for "limit" and "stop_limit" order       |      |
-|                 |                   | (options: market, limit, stop, stop_limit)     | int  |
-| stop            | optional          | Stop price in a "stop" or "stop_limit" typed   |      |
-|                 |                   | order. Required for "stop" and "stop_limit"    | int  |
-
+| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                        | str  |
+| account_number  | optional          | Will automatically be present when you deploy to Narwhal                                                | str  |
+| duration        | required          | Time for which the order will remain in effect (Options: day,gtc,pre, post) day by default    | str  |
+| order_type      | required          | Type of order to be placed (market by default) (options: market, limit, stop, stop_limit)     | str  |
+| price           | optional          | Price for "limit" and "stop_limit" order (options: market, limit, stop, stop_limit)     | int  |
+| stop            | optional          | Stop price in a "stop" or "stop_limit" typed order. Required for "stop" and "stop_limit"    | int  |
+```python
 Example: 
 
 from kloudtrader.equities.trade import buy
@@ -186,22 +171,17 @@ return type: json (Market order type)
 Sell equities. Order placed using this API will be sent to the market and executed according to your specifications. 
 
 <code>sell(access_token,account_number,symbol,quantity,duration,order_type,price,stop)</code>
-```python
 | Paramters       | Required/Optional | Description                                    | Type |
 |-----------------|-------------------|------------------------------------------------|------| 
 | symbol          | required          | Symbol of the stock                            | str  |
 | quantity        | required          | Number of shares                               | str  |
-| access_token    | optional          |                                                | str  |
-| account_number  | optional          |                                                | str  |
-| duration        | required          | Time for which the order will remain in effect |      |
-|                 |                   | (Options: day,gtc,pre, post) day by default    | str  |
-| order_type      | required          | Type of order to be placed (market by default) |      |
-|                 |                   | (options: market, limit, stop, stop_limit)     | str  |
-| price           | optional          | Price for "limit" and "stop_limit" order       |      |
-|                 |                   | (options: market, limit, stop, stop_limit)     | int  |
-| stop            | optional          | Stop price in a "stop" or "stop_limit" typed   |      |
-|                 |                   | order. Required for "stop" and "stop_limit"    | int  |
-
+| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                               | str  |
+| account_number  | optional          | Will automatically be present when you deploy to Narwhal                                               | str  |
+| duration        | required          | Time for which the order will remain in effect (Options: day,gtc,pre, post) day by default    | str  |
+| order_type      | required          | Type of order to be placed (market by default) (options: market, limit, stop, stop_limit)     | str  |
+| price           | optional          | Price for "limit" and "stop_limit" order (options: market, limit, stop, stop_limit)     | int  |
+| stop            | optional          | Stop price in a "stop" or "stop_limit" typed order. Required for "stop" and "stop_limit"    | int  |
+```python
 Example: 
 
 from kloudtrader.equities.trade import sell
@@ -225,21 +205,16 @@ return type: json (Market order type)
 Change an order if it is not filled yet. 
 
 <code>change_equity_order(order_id,access_token,account_number,order_type,duration,price,stop)</code>
-```python
 | Paramters       | Required/Optional | Description                                    | Type |
 |-----------------|-------------------|------------------------------------------------|------| 
 | order_id        | required          | Order Id of the order you want to change       | str  |
-| access_token    | optional          |                                                | str  |
-| account_number  | optional          |                                                | str  |
-| duration        | required          | Time for which the order will remain in effect |      |
-|                 |                   | (Options: day,gtc,pre, post) day by default    | str  |
-| order_type      | required          | Type of order to be placed (market by default) |      |
-|                 |                   | (options: market, limit, stop, stop_limit)     | str  |
-| price           | optional          | Price for "limit" and "stop_limit" order       |      |
-|                 |                   | (options: market, limit, stop, stop_limit)     | int  |
-| stop            | optional          | Stop price in a "stop" or "stop_limit" typed   |      |
-|                 |                   | order. Required for "stop" and "stop_limit"    | int  |
-
+| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                               | str  |
+| account_number  | optional          | Will automatically be present when you deploy to Narwhal                                               | str  |
+| duration        | required          | Time for which the order will remain in effect (Options: day,gtc,pre, post) day by default    | str  |
+| order_type      | required          | Type of order to be placed (market by default)  (options: market, limit, stop, stop_limit)     | str  |
+| price           | optional          | Price for "limit" and "stop_limit" order (options: market, limit, stop, stop_limit)     | int  |
+| stop            | optional          | Stop price in a "stop" or "stop_limit" typed order. Required for "stop" and "stop_limit"    | int  |
+```python
 Example: 
 
 from kloudtrader.equities.trade import change_equity_order
@@ -263,13 +238,13 @@ return type: json (Market order type)
 Cancel an order if it is not filled yet. 
 
 <code>cancel_equity_order(order_id,access_token,account_number)</code>
-```python
 | Paramters       | Required/Optional | Description                                    | Type |
 |-----------------|-------------------|------------------------------------------------|------| 
 | order_id        | required          | Order Id of the order you want to change       | str  |
-| access_token    | optional          |                                                | str  |
-| account_number  | optional          |                                                | str  |
+| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                               | str  |
+| account_number  | optional          | Will automatically be present when you deploy to Narwhal                                               | str  |
 
+```python
 Example: 
 
 from kloudtrader.equities.trade import cancel_equity_order

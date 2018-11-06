@@ -14,12 +14,12 @@ Get quotes for an individual or multiple symbols<br/>
 
 <code>quotes(symbols,access_token)</code>
 
-```python
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
 | symbols         | required          | Stock symbol or a list of symbols       | str  |
-| access_token    | optional          |                                         | str  |
+| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                        | str  |
 
+```python
 Example:
 
 from kloudtarder.equities.data import quotes
@@ -98,15 +98,14 @@ return type : json
 Get historical prices for a symbol (As back as you want to go)<br/>
 
 <code>historical_prices(symbol,start,end,interval,access_token)</code>
-```python 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
 | symbol          | required          | stock symbol/ticker                     | str  |
 | start           | required          | starting date (YYYY-MM-DD)              | str  |
 | end             | required          | end date (YYYY-MM-DD)                   | str  |
 | interval        | optional          | daily/weekly/monthly (daily by default) | str  |
-| access_token    | optional          |                                         | str  |
-
+| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                          | str  |
+```python 
 Example:
 
 from kloudtrader.equiites.data import historical_prices
@@ -147,11 +146,15 @@ return type: json
 Get the intraday market status<br/>
 
 <code>intraday_status()</code>
-
-```python
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| access_token    | optional          |                                         | str  |
+| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                          | str  |
+```python
+Example: 
+
+from kloudtrader.equities.data import intraday_status
+
+intraday_status()
 ```
 ```python
 return type : json
@@ -167,36 +170,18 @@ return type : json
    }
 }
 ```
-<!---
-***
-### Time and sales
-Get the time and sales of a given symbol<br/>
 
-<code>time_and_sales(access_token)</code>
-
-```python
-| Paramters       | Required/Optional | Description                             | Type |
-|-----------------|-------------------|-----------------------------------------|------|
-| access_token    | optional          |                                         | str  |
-```
-```python
-return type : json
-
-
-```
--->
 ***
 ### Market calendar
 Get the market calendar of a given month(Goes back till 2013)<br/>
 
 <code>market_calendar(month,year)</code>
-
-```python
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
 | month           | required          | month of the year in number             | int  |
 | year            | required          | year                                    | int  |
 
+```python
 Example:
 
 from kloudtader.equities.data import market_calendar
@@ -259,13 +244,11 @@ return type : json
 Search for securities' symbols<br/>
 
 <code>symbol_search(company_name,access_token)</code>
-
-```python
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
 | company_name    | required          | Name of the company you want symbol of  | str  |
-| access_token    | optional          |                                         | str  |
-
+| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                          | str  |
+```python
 Example:
 
 from kloudtrader.equities.data import symbol_search
@@ -312,13 +295,11 @@ return type : json
 Search for securities/companies using symbols<br/>
 
 <code>symbol_lookup(symbol,access_token)</code>
-
-```python
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
 | symbol          | required          | Symbol you want to look up              | str  |
-| access_token    | optional          |                                         | str  |
-
+| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                          | str  |
+```python
 Example:
 
 from kloudtrader.equities.data import symbol_lookup
@@ -359,13 +340,11 @@ return type : json
 Get company fundamental information<br/>
 
 <code>company_fundamentals(symbols,access_token)</code>
-
-```python
 | Paramters       | Required/Optional | Description                                                   | Type |
 |-----------------|-------------------|---------------------------------------------------------------|------|
 |  symbols        | required          | Symbol or list of symbols(seperated by a comma)               | str  |
-| access_token    | optional          |                                                               | str  |
-
+| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                                                | str  |
+```python
 Example:
 
 from kloudtrader.equities.data import company_fundamentals
@@ -469,13 +448,11 @@ return type : json
 Get the corporate calendar information for given symbol<br/>
 
 <code>corporate_calendar(symbols,access_token)</code>
-
-```python
 | Paramters       | Required/Optional | Description                                                   | Type |
 |-----------------|-------------------|---------------------------------------------------------------|------|
 | symbols         | required          | Symbol or list of symbols(seperated by a comma)               | str  |
-| access_token    | optional          |                                                               | str  |
-
+| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                                                | str  |
+```python
 Example:
 
 from kloudtrader.equities.data import corporate_calendar
@@ -532,13 +509,11 @@ return type : json
 Get company dividend information for given symbol<br/>
 
 <code>corporate_calendar(symbols,access_token)</code>
-
-```python
 | Paramters       | Required/Optional | Description                                                   | Type |
 |-----------------|-------------------|---------------------------------------------------------------|------|
 | symbols         | required          | Symbol or list of symbols(seperated by a comma)               | str  |
-| access_token    | optional          |                                                               | str  |
-
+| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                                                | str  |
+```python
 Example:
 
 from kloudtrader.equities.data import dividend_information
@@ -596,13 +571,11 @@ return type : json
 Get corporate actions information for given symbol<br/>
 
 <code>corporate_actions(symbols,access_token)</code>
-
-```python
 | Paramters       | Required/Optional | Description                                                   | Type |
 |-----------------|-------------------|---------------------------------------------------------------|------|
 | symbols         | required          | Symbol or list of symbols(seperated by a comma)               | str  |
-| access_token    | optional          |                                                               | str  |
-
+| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                                                | str  |
+```python
 Example:
 
 from kloudtrader.equities.data import corporate_actions
@@ -681,13 +654,11 @@ return type : json
 Get operation ratio information for given symbol<br/>
 
 <code>operation_ratio(symbols,access_token)</code>
-
-```python
 | Paramters       | Required/Optional | Description                                                   | Type |
 |-----------------|-------------------|---------------------------------------------------------------|------|
 | symbols         | required          | Symbol or list of symbols(seperated by a comma)               | str  |
-| access_token    | optional          |                                                               | str  |
-
+| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                                                | str  |
+```python
 Example:
 
 from kloudtrader.equities.data import operation_ratio
@@ -801,13 +772,11 @@ return type : json
 Get corporate financials information for given symbol<br/>
 
 <code>corporate_financials(symbols,access_token)</code>
-
-```python
 | Paramters       | Required/Optional | Description                                                   | Type |
 |-----------------|-------------------|---------------------------------------------------------------|------|
 | symbols         | required          | Symbol or list of symbols(seperated by a comma)               | str  |
-| access_token    | optional          |                                                               | str  |
-
+| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                                                | str  |
+```python
 Example:
 
 from kloudtrader.equities.data import corporate_financials
@@ -1041,13 +1010,11 @@ return type : json
 Get price statistics information for given symbol<br/>
 
 <code>price_statistics(symbols,access_token)</code>
-
-```python
 | Paramters       | Required/Optional | Description                                                   | Type |
 |-----------------|-------------------|---------------------------------------------------------------|------|
 | symbols         | required          | Symbol or list of symbols(seperated by a comma)               | str  |
-| access_token    | optional          |                                                               | str  |
-
+| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                                                | str  |
+```python
 Example:
 
 from kloudtrader.equities.data import price_statistics
@@ -1134,27 +1101,22 @@ process of getting the streaming live data looks like this:
 Create a live session to receive sessionid which is needed for streaming live quotes and trades<br/>
 
 <code>create_session(access_token)</code>
-
-``` python
 | Paramters       | Required/Optional | Description | Type |
 |-----------------|-------------------|---------------------------------------------------------------|------| 
-| access_token    | optional          |             | str  |
+| access_token    | optional          |Will automatically be present when you deploy to Narwhal               | str  |
  
-``` 
 > We will be using create_session() as a parameter in the live market feed apis 
 
 ***
 ### Live Quotes
-Get live quotes direct from many exchanges<br/>
+Get live quotes direct from various exchanges<br/>
 
 <code>live_quotes(symbol, sessionid)</code>
-
-``` python
 | Paramters       | Required/Optional | Description                                    | Type |
 |-----------------|-------------------|------------------------------------------------|------| 
 | symbols         | required          | Symbol or list of symbols(seperated by a comma)| str  |
 | sessionid       | required          | create_session()                               | str  |
-
+``` python
 Example:
 
 from kloudtrader.equities.data import create_session,live_quotes
@@ -1267,16 +1229,15 @@ return type : json
 ```
 ***
 ### Live Trades
-Get live trades direct from many exchanges<br/>
+Get live trades direct from various exchanges<br/>
 
 <code>live_trades(symbol, sessionid)</code>
-
-``` python
 | Paramters       | Required/Optional | Description                                    | Type |
 |-----------------|-------------------|------------------------------------------------|------| 
 | symbols         | required          | Symbol or list of symbols(seperated by a comma)| str  |
 | sessionid       | required          | create_session()                               | str  |
 
+``` python
 Example:
 
 from kloudtrader.equities.data import create_session,live_trades
@@ -1375,7 +1336,7 @@ return type : json
 ## Exchanges' codes
 These codes are returned in the <code>exch</code> field of all market data APIs. Please use this table for reference to represent the exchange as text.
 
-```
+
 | ID | Name of Exhange                              |
 |----|----------------------------------------------|
 | A  | NYSE MKT                                     |
@@ -1400,4 +1361,3 @@ These codes are returned in the <code>exch</code> field of all market data APIs.
 | X  | NASDAQ OMX PSX                               |
 | Y  | BATS Y-Exchange                              |
 | Z  | BATS                                         |
-```
