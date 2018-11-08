@@ -94,10 +94,10 @@ return type : json
 }
 ```
 
-### Historical Prices
-Get historical prices for a symbol (As back as you want to go)<br/>
+### Historical OHLCV Data
+Get OHLCV(Open-High-Low-Close-Volume) data for a symbol (As back as you want to go)<br/>
 
-<code>historical_prices(symbol,start,end,interval,access_token)</code>
+<code>OHLCV(symbol,start,end,interval,access_token)</code>
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
 | symbol          | required          | stock symbol/ticker                     | str  |
@@ -110,7 +110,7 @@ Example:
 
 from kloudtrader.equiites.data import historical_prices
 
-historical_prices('AAPL','2013-01-01','2018-01-01','daily')
+historical_prices('AAPL','2013-01-01','2018-01-01')
 ```
 ```python
 return type: json 
@@ -141,6 +141,219 @@ return type: json
    }
 }
 ```
+
+***
+### Open Prices
+Get historical Open Prices for a symbol (As back as you want to go)<br>
+
+<code>open_prices(symbol,start,end,interval,access_token)</code>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| symbol          | required          | stock symbol/ticker                     | str  |
+| start           | required          | starting date (YYYY-MM-DD)              | str  |
+| end             | required          | end date (YYYY-MM-DD)                   | str  |
+| interval        | optional          | daily/weekly/monthly (daily by default) | str  |
+| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                          | str  |
+```python 
+Example:
+
+from kloudtrader.equiites.data import open_prices
+
+open_prices('AAPL','2013-01-01','2018-01-01')
+```
+```python
+return type: json 
+
+[  
+   {  
+      'date':'2013-01-02',
+      'open':79.117143
+   },
+   .
+   .
+   .
+   {  
+      'date':'2017-12-28',
+      'open':171.0
+   }
+   , 
+   {  
+      'date':'2017-12-29',
+      'open':170.52
+   }
+]
+```
+
+***
+### High Prices
+Get historical High Prices for a symbol (As back as you want to go)<br>
+
+<code>high_prices(symbol,start,end,interval,access_token)</code>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| symbol          | required          | stock symbol/ticker                     | str  |
+| start           | required          | starting date (YYYY-MM-DD)              | str  |
+| end             | required          | end date (YYYY-MM-DD)                   | str  |
+| interval        | optional          | daily/weekly/monthly (daily by default) | str  |
+| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                          | str  |
+```python 
+Example:
+
+from kloudtrader.equiites.data import high_prices
+
+high_prices('AAPL','2013-01-01','2018-01-01')
+```
+```python
+return type: json 
+
+[[  
+   {  
+      'date':'2013-01-02',
+      'high':79.285714
+   },
+   {  
+      'date':'2017-12-28',
+      'high':171.85
+   },
+   {  
+      'date':'2017-12-29',
+      'high':170.59
+   }
+]
+```
+
+***
+### Low Prices
+Get historical Low Prices for a symbol (As back as you want to go)<br>
+
+<code>low_prices(symbol,start,end,interval,access_token)</code>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| symbol          | required          | stock symbol/ticker                     | str  |
+| start           | required          | starting date (YYYY-MM-DD)              | str  |
+| end             | required          | end date (YYYY-MM-DD)                   | str  |
+| interval        | optional          | daily/weekly/monthly (daily by default) | str  |
+| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                          | str  |
+```python 
+Example:
+
+from kloudtrader.equiites.data import low_prices
+
+low_prices('AAPL','2013-01-01','2018-01-01')
+```
+```python
+return type: json 
+
+[  
+   {  
+      'date':'2013-01-02',
+      'low':77.375714
+   },
+   .
+   .
+   .
+   {  
+      'date':'2017-12-28',
+      'low':170.48
+   },
+   {  
+      'date':'2017-12-29',
+      'low':169.22
+   }
+]
+```
+
+
+***
+### Close Prices
+Get historical Close Prices for a symbol (As back as you want to go)<br>
+
+<code>close_prices(symbol,start,end,interval,access_token)</code>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| symbol          | required          | stock symbol/ticker                     | str  |
+| start           | required          | starting date (YYYY-MM-DD)              | str  |
+| end             | required          | end date (YYYY-MM-DD)                   | str  |
+| interval        | optional          | daily/weekly/monthly (daily by default) | str  |
+| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                          | str  |
+```python 
+Example:
+
+from kloudtrader.equiites.data import close_prices
+
+close_prices('AAPL','2013-01-01','2018-01-01')
+```
+```python
+return type: json 
+
+[  
+   {  
+      'date':'2013-01-02',
+      'close':78.432857
+   },
+   .
+   .
+   .
+
+   {  
+      'date':'2017-12-28',
+      'close':171.08
+   },
+   {  
+      'date':'2017-12-29',
+      'close':169.23
+   }
+]
+```
+
+***
+### Volume
+Get historical Voulme for a symbol (As back as you want to go)<br>
+
+<code>volume(symbol,start,end,interval,access_token)</code>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| symbol          | required          | stock symbol/ticker                     | str  |
+| start           | required          | starting date (YYYY-MM-DD)              | str  |
+| end             | required          | end date (YYYY-MM-DD)                   | str  |
+| interval        | optional          | daily/weekly/monthly (daily by default) | str  |
+| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                          | str  |
+```python 
+Example:
+
+from kloudtrader.equiites.data import volume
+
+volume('AAPL','2013-01-01','2018-01-01')
+```
+```python
+return type: json 
+
+[  
+   {  
+      'date':'2013-01-02',
+      'volume':140124870
+   },
+   {  
+      'date':'2017-12-28',
+      'volume':16480187
+   },
+   .
+   .
+   .
+   {  
+      'date':'2017-12-29',
+      'volume':25999922
+   }
+]
+```
+
+
+
 ***
 ### Intraday Status
 Get the intraday market status<br/>

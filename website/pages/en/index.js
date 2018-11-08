@@ -82,7 +82,7 @@ class HomeSplash extends React.Component {
           <ProjectTitle />
           <PromoSection>
             <Button href="/docs/intro">Get Started</Button>
-            <Button href={docUrl('doc2.html', language)}>Python Package Index</Button>
+            <Button href="">Python Package Index</Button>
             <Button href="https://github.com/KloudTrader/kloudtrader" target="_blank">Github</Button>
             
           </PromoSection>
