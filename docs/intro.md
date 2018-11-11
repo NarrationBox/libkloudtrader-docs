@@ -26,7 +26,8 @@ pip install git+https://github.com/KloudTrader/kloudtrader.git
 ## Deployment on Narwhal
 #### Steps to deploy your trading algorithm on Narwhal
 
-1. Add your card. Don't worry you are not charged right away.
+1. Add your card. Don't worry you are not charged right away.<br>
+![Adding Card]("website/static/img/add_card.png" "Adding Card")
 2. Create Runtime. (We only support python runtimes as of now. Many more ilke R, Julia, Excel coming soon!)
 3. Link your Tradier account or signup if yo are not a Tradier user. it generally takes 1-2 business days to open account with Tradier.
 4. Copy the remote-link from your runtime card.
@@ -34,11 +35,11 @@ pip install git+https://github.com/KloudTrader/kloudtrader.git
 6. git remote add "your remote-link"
 7. mkdir "my-algorithm"
 8. cd "my-algorithm"
-10. pipenv install -e git+https://github.com/KloudTrader/kloudtrader.git
-11. pipenv shell
-12. Code your trading strategy using kloudtrader
-13. git add -A
-14. git commit -m "Hope this is alpha!"
-15. git push -u narwhal master
+9.  pipenv install -e git+https://github.com/KloudTrader/kloudtrader.git
+10. pipenv shell
+11. Code your trading strategy using kloudtrader
+12. git add -A
+13. git commit -m "Hope this is alpha!"
+14. git push -u narwhal master
     
 >Note: Your access token will expire after 24 hours. In order to allow your deployed algorithm to trade seemlessly, please manually link your tradier account after 24 hours. Don't worry this is just in Beta Version and will be automated soon!
