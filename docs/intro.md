@@ -33,8 +33,11 @@ In Narwhal, a Runtime is a basic computational unit that runs your strategy/algo
 It is extremely easy to create a Runtime. All you need to do is:
 * Select a location for your runtime.
 * Select a size for your runtime. <br>
-* Enter your SSH/RSA public key. We ask for your RSA public key only once(when create your first runtime). Your public SSH/RSA key is needed so that we can create a secure connection between you and your Runtime and is only accessible by You, the owner.<br>
-  > Where is my SSH/RSA public key?<br>
+* Enter your SSH/RSA public key.
+ 
+  >We ask for your RSA public key only once(when create your first runtime). Your public SSH/RSA key is needed so that we can create a secure connection between you and your Runtime and is only accessible by You, the owner.<br>
+  >
+   > Where is my SSH/RSA public key?<br>
   >* [Find SSH/RSA Public key on a Unix based machine(MAC OSX + Linux)](https://stackoverflow.com/questions/3828164/how-do-i-access-my-ssh-public-key)
   >* [Find SSH/RSA Public key on a Windows machine](https://www.codeenigma.com/host/faq/how-do-i-create-ssh-public-key-windows-pc)<br>
 * Enter a name for your runtime. It can be whatever you want it to be. <br>
