@@ -15,9 +15,8 @@ kloudtrader is a python based library developed and maintained by [KloudTrader](
 
 #### Using pipenv 
 ```python
-pipenv install -e git+https://github.com/KloudTrader/kloudtrader.git
+pipenv install -e git+https://github.com/KloudTrader/kloudtrader.git#egg=kloudtrader
 ```
-
 
 ## Deployment on Narwhal
 
@@ -25,6 +24,8 @@ pipenv install -e git+https://github.com/KloudTrader/kloudtrader.git
 ### Add your card
 Don't worry you are not charged right away.<br><br>
 <img src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/add_card.png" widht="100" alt="Narwhal add card">
+<br>
+<img src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/add_card2.png" widht="100" alt="Narwhal add card">
 ***
 ### Creating a Runtime
 In Narwhal, a Runtime is a basic computational unit that runs your strategy/algorithm. The algorithm running on your Runtime is totally your property and no other Narwhal user or KloudTrader employee can view it. Currently we only support Python-3 runtimes which means you can only deploy algorithms written in Python but we will be introducing R, Julia, Excel and many more types of Runtimes very soon, thus kloudtrader library's wrappers for respective languages will also be available soon.<br><br>
@@ -43,7 +44,9 @@ It is extremely easy to create a Runtime. All you need to do is:
 
 After you have created a runtime, you can view your runtime on the dashboard.<br><br>
 <img align="left" src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/after_runtime1.jpg" />
+
 <br>
+
 <img align="left" src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/after_runtime2.jpg" />
 ***
 ### Linking your trading account
@@ -52,7 +55,7 @@ Narwhal provides flat-rate brokerage via <a href="https://tradier.com/" target="
 Linking your Tradier account or Signing up if you are not a Tradier user is pretty easy. It generally takes 1-2 business days to open account with Tradier.<br><br>
 <img src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/link-tradier.gif" />
 ***
-### Starting the workflow
+### The workflow
 Now we will look at your workflow from after creating a Runtime till deploying your algorithm to your Runtime. All it takes is, are a few commands to deploy your "alpha".
 
 > The following steps require <a href="https://git-scm.com/" target="blank">Git</a>
@@ -63,7 +66,7 @@ Now we will look at your workflow from after creating a Runtime till deploying y
 ```bash
 mkdir my-algorithm
 ```
-### Enter into your directory 'my-algorithm'
+#### Enter into your directory 'my-algorithm'
 ```bash
 cd my-algorithm
 ```
@@ -80,12 +83,25 @@ Example: git remote add narwhal ssh://git@runtimes.narwhal.kloudtrader.com:10022
 <img height="500" src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/copy-remote.png"/>
 
 #### Managing Dependencies
-1.  pipenv install -e git+https://github.com/KloudTrader/kloudtrader.git
-2.   pipenv shell
-3.  Code your trading strategy using kloudtrader
-4.  git add -A
-5.  git commit -m "Hope this is alpha!"
-6.  git push -u narwhal master
+Narwhal's Python3 Runtime uses <a href="https://pipenv.readthedocs.io/en/latest/">Pipenv</a> to manage the dependencies of your algorithm. 
+> To install and get started with Pipenv, please refer it's <a href="https://pipenv.readthedocs.io/en/latest/">official webiste</a>. Pipenv is pretty easy to install and much easier to use.
+#### You can install kloudtrader library and other libraries of your choice by typing:
+```python
+pipenv install -e git+https://github.com/KloudTrader/kloudtrader.git#egg=kloudtrader
+pipenv install pandas, numpy
+```
+#### Enable your virtual environment so that you can start writing your algorithm
+```python
+pipenv shell
+```
+#### The Algorithm
+> *Important:* The algorithm you want to deploy should be in a file called **main.py**
+This is what the imports of algorithm written with kloudtrader library look like
+<img >
+1.  Code your trading strategy using kloudtrader
+2.  git add -A
+3.  git commit -m "Hope this is alpha!"
+4.  git push -u narwhal master
     
 
 
