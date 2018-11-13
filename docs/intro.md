@@ -52,19 +52,19 @@ Linking your Tradier account or Signing up if you are not a Tradier user is pret
 <img src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/link-tradier.gif" />
 ***
 ### Adding the remote
-Now you can copy the remote-link form your runtime card
-<img src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/copy-remote.gif"/>
-1. Copy the remote-link from your runtime card.
-2. Open a terminal on your computer.
-3. git remote add "your remote-link"
-4. mkdir "my-algorithm"
-5. cd "my-algorithm"
-6.  pipenv install -e git+https://github.com/KloudTrader/kloudtrader.git
-7.   pipenv shell
-8.  Code your trading strategy using kloudtrader
-9.  git add -A
-10. git commit -m "Hope this is alpha!"
-11. git push -u narwhal master
+Now you can copy the remote-link form your runtime card<br><br>
+<img src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/copy-remote.png"/>
+
+1. Open a terminal on your computer.
+2. git remote add "your remote-link"
+3. mkdir "my-algorithm"
+4. cd "my-algorithm"
+5.  pipenv install -e git+https://github.com/KloudTrader/kloudtrader.git
+6.   pipenv shell
+7.  Code your trading strategy using kloudtrader
+8.  git add -A
+9.  git commit -m "Hope this is alpha!"
+10. git push -u narwhal master
     
 
 
