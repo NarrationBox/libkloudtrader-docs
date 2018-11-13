@@ -132,11 +132,11 @@ git add -A
 ```bash
 git commit -m "hope this is alpha!"
 ```
-
+> Isn't that what everyone is hoping for?! 😄 📈 📊 📉 😄 
 #### And finally, Deploy
 ```bash
 git push -u narwhal master
 ``` 
- 
-> Note: Your access token will expire after 24 hours. In order to allow your deployed algorithm to trade seemlessly, please manually link your tradier account after 24 hours. Don't worry this is just in Beta Version and will be automated soon!
-        
+<img src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/deploy.png"/> 
+***
+> Note: Your access token will expire after 24 hours. In order to allow your deployed algorithm to trade seemlessly, please manually link your tradier account after 24 hours. Don't worry this is just in Beta Version and will be automated soon!        
