@@ -43,6 +43,7 @@ It is extremely easy to create a Runtime. All you need to do is:
 
 After you have created a runtime, you can view your runtime on the dashboard.<br><br>
 <img align="left" src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/after_runtime1.jpg" />
+<br>
 <img align="left" src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/after_runtime2.jpg" />
 ***
 ### Linking your trading account
@@ -51,20 +52,40 @@ Narwhal provides flat-rate brokerage via <a href="https://tradier.com/" target="
 Linking your Tradier account or Signing up if you are not a Tradier user is pretty easy. It generally takes 1-2 business days to open account with Tradier.<br><br>
 <img src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/link-tradier.gif" />
 ***
-### Adding the remote
-Now you can copy the remote-link form your runtime card<br><br>
-<img src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/copy-remote.png"/>
+### Starting the workflow
+Now we will look at your workflow from after creating a Runtime till deploying your algorithm to your Runtime. All it takes is, are a few commands to deploy your "alpha".
 
-1. Open a terminal on your computer.
-2. git remote add "your remote-link"
-3. mkdir "my-algorithm"
-4. cd "my-algorithm"
-5.  pipenv install -e git+https://github.com/KloudTrader/kloudtrader.git
-6.   pipenv shell
-7.  Code your trading strategy using kloudtrader
-8.  git add -A
-9.  git commit -m "Hope this is alpha!"
-10. git push -u narwhal master
+> The following steps require <a href="https://git-scm.com/" target="blank">Git</a>
+<br>
+> You have to type the commands in the order they are described.
+#### Make a directory where you will be working/coding your trading algorithm.
+  
+```bash
+mkdir my-algorithm
+```
+### Enter into your directory 'my-algorithm'
+```bash
+cd my-algorithm
+```
+#### Initializing git
+```bash
+git init
+```
+#### Add the remote-link of your Runtime. You can copy the remote-link by clicking on the Left-most button on the lower corner of your Runtime card.
+```bash
+git remote add narwhal "you remote-link here"
+
+Example: git remote add narwhal ssh://git@runtimes.narwhal.kloudtrader.com:10022/15/proud-snowflake-s9sx.git
+```
+<img height="500" src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/copy-remote.png"/>
+
+#### Managing Dependencies
+1.  pipenv install -e git+https://github.com/KloudTrader/kloudtrader.git
+2.   pipenv shell
+3.  Code your trading strategy using kloudtrader
+4.  git add -A
+5.  git commit -m "Hope this is alpha!"
+6.  git push -u narwhal master
     
 
 
