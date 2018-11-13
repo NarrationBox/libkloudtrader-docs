@@ -94,15 +94,32 @@ pipenv install pandas, numpy
 ```python
 pipenv shell
 ```
-#### The Algorithm
-> *Important:* The algorithm you want to deploy should be in a file called **main.py**
-This is what the imports of algorithm written with kloudtrader library look like
-<img >
-1.  Code your trading strategy using kloudtrader
-2.  git add -A
-3.  git commit -m "Hope this is alpha!"
-4.  git push -u narwhal master
-    
+#### Your Algorithm
+> #### Important
+> 
+> The algorithm you want to deploy should be in a file called **main.py**
+> 
+> Your algorithm must have these 3 lines of code:
+> * from os import environ
+> * ACCESS_TOKEN=environ['ACCESS_TOKEN']
+> * ACCESS_TOKEN=environ['ACCOUNT_NUMBER']
+>
+> These lines of code help Narwhal to access your access token and account number from the Narwhal Environment so that you don't have to explicitly pass them with each API call. 
+
+This is what the imports of algorithm written with kloudtrader library shall look like:
+
+<img src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/mainpy.png"/>
+#### Directory Structure
+You directory structure for a Python3 Runtime should look like:
+```
+/my-algorithm
+   |-Pipfile
+   |-Pipfile.lock
+   |-main.py
+```
+***
+### Deploying your algorithm
+
 
 
 >Note: Your access token will expire after 24 hours. In order to allow your deployed algorithm to trade seemlessly, please manually link your tradier account after 24 hours. Don't worry this is just in Beta Version and will be automated soon!
