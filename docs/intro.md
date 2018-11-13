@@ -23,8 +23,7 @@ pipenv install -e git+https://github.com/KloudTrader/kloudtrader.git
 #### Steps to deploy your trading algorithm on Narwhal
 #### After you have signed up and logged in,
 1. Add your card. Don't worry you are not charged right away.<br><br>
-
-![Narwhal Add Card](https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/add_card.png)
+<img src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/add_card.png" widht="75px" alt="Narwhal add card">
 
 1. Create Runtime. (We only support python runtimes as of now. Many more ilke R, Julia, Excel coming soon!)
 2. Link your Tradier account or signup if yo are not a Tradier user. it generally takes 1-2 business days to open account with Tradier.
