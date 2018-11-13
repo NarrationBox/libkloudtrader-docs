@@ -27,7 +27,7 @@ Don't worry you are not charged right away.<br><br>
 <img src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/add_card.png" widht="100" alt="Narwhal add card">
 ***
 ### Creating a Runtime
-In Narwhal, a Runtime is a basic computational unit that runs your strategy/algorithm. The algorithm running on your Runtime is totally your property and no other Narwhal user or KloudTrader employee can view it. Currently we only support Python-3 runtimes which means you can only deploy algorithms written in Python but we will be introducing R, Julia, Excel and many more types of Runtimes very soon, thus kloudtrader library's wrappers for respective langaugaes will also be available soon.<br><br>
+In Narwhal, a Runtime is a basic computational unit that runs your strategy/algorithm. The algorithm running on your Runtime is totally your property and no other Narwhal user or KloudTrader employee can view it. Currently we only support Python-3 runtimes which means you can only deploy algorithms written in Python but we will be introducing R, Julia, Excel and many more types of Runtimes very soon, thus kloudtrader library's wrappers for respective languages will also be available soon.<br><br>
 <img src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/create_runtime1.png" /> <br>
 It is extremely easy to create a Runtime. All you need to do is:
 * Select a location for your runtime.
@@ -39,22 +39,29 @@ It is extremely easy to create a Runtime. All you need to do is:
 * Enter a name for your runtime. It can be whatever you want it to be. <br>
 #### And you are good to go.
 <img src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/create_runtime2.png" /> 
+
+
+After you have created a runtime, you can view your runtime on the dashboard.<br><br>
+<img align="left" src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/after_runtime1.jpg" />
+<img align="left" src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/after_runtime2.jpg" />
+
 ***
 ### Linking your trading account
-Narwhal provides flat-rate brokerage via <a href="https://tradier.com/" target="blank">Tradier Brokerage Inc.</a><br>
-After you have created a runtime, you can view your runtime on the dashboard.
-1. Link your Tradier account or signup if yo are not a Tradier user. it generally takes 1-2 business days to open account with Tradier.
-2. Copy the remote-link from your runtime card.
-3. Open a terminal on your computer.
-4. git remote add "your remote-link"
-5. mkdir "my-algorithm"
-6. cd "my-algorithm"
-7.  pipenv install -e git+https://github.com/KloudTrader/kloudtrader.git
-8.   pipenv shell
-9.  Code your trading strategy using kloudtrader
-10. git add -A
-11. git commit -m "Hope this is alpha!"
-12. git push -u narwhal master
+Now that you have created a created a runtime you shal link Brokerage to your Narwhal Account. 
+Narwhal provides flat-rate brokerage via <a href="https://tradier.com/" target="blank">Tradier Brokerage Inc.</a>
+Linking your Tradier account or Signing up if you are not a Tradier user is pretty easy. It generally takes 1-2 business days to open account with Tradier.
+![]
+1. Copy the remote-link from your runtime card.
+2. Open a terminal on your computer.
+3. git remote add "your remote-link"
+4. mkdir "my-algorithm"
+5. cd "my-algorithm"
+6.  pipenv install -e git+https://github.com/KloudTrader/kloudtrader.git
+7.   pipenv shell
+8.  Code your trading strategy using kloudtrader
+9.  git add -A
+10. git commit -m "Hope this is alpha!"
+11. git push -u narwhal master
     
 
 
