@@ -24,20 +24,21 @@ pipenv install -e git+https://github.com/KloudTrader/kloudtrader.git
 #### After you have signed up and logged in,
 1. Add your card. Don't worry you are not charged right away.<br><br>
 <img src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/add_card.png" widht="75px" alt="Narwhal add card">
-
-1. Create Runtime. (We only support python runtimes as of now. Many more ilke R, Julia, Excel coming soon!)
-2. Link your Tradier account or signup if yo are not a Tradier user. it generally takes 1-2 business days to open account with Tradier.
-3. Copy the remote-link from your runtime card.
-4. Open a terminal on your computer.
-5. git remote add "your remote-link"
-6. mkdir "my-algorithm"
-7. cd "my-algorithm"
-8.  pipenv install -e git+https://github.com/KloudTrader/kloudtrader.git
-9.  pipenv shell
-10. Code your trading strategy using kloudtrader
-11. git add -A
-12. git commit -m "Hope this is alpha!"
-13. git push -u narwhal master
+2. Create Runtime. (We only support python runtimes as of now. Many more ilke R, Julia, Excel coming soon!)
+<img src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/create_runtime1.png" widht="75px" alt="Narwhal add card">
+<img src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/create_runtime2.png" widht="75px" alt="Narwhal add card">
+3. Link your Tradier account or signup if yo are not a Tradier user. it generally takes 1-2 business days to open account with Tradier.
+4. Copy the remote-link from your runtime card.
+5. Open a terminal on your computer.
+6. git remote add "your remote-link"
+7. mkdir "my-algorithm"
+9. cd "my-algorithm"
+10. pipenv install -e git+https://github.com/KloudTrader/kloudtrader.git
+11.  pipenv shell
+12. Code your trading strategy using kloudtrader
+13. git add -A
+14. git commit -m "Hope this is alpha!"
+15. git push -u narwhal master
     
 
 
