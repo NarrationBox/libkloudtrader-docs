@@ -44,13 +44,16 @@ It is extremely easy to create a Runtime. All you need to do is:
 After you have created a runtime, you can view your runtime on the dashboard.<br><br>
 <img align="left" src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/after_runtime1.jpg" />
 <img align="left" src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/after_runtime2.jpg" />
-
 ***
 ### Linking your trading account
 Now that you have created a created a runtime you shal link Brokerage to your Narwhal Account. 
 Narwhal provides flat-rate brokerage via <a href="https://tradier.com/" target="blank">Tradier Brokerage Inc.</a>
-Linking your Tradier account or Signing up if you are not a Tradier user is pretty easy. It generally takes 1-2 business days to open account with Tradier.
-![]
+Linking your Tradier account or Signing up if you are not a Tradier user is pretty easy. It generally takes 1-2 business days to open account with Tradier.<br><br>
+<img src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/link-tradier.gif" />
+***
+### Adding the remote
+Now you can copy the remote-link form your runtime card
+<img src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/copy-remote.gif"/>
 1. Copy the remote-link from your runtime card.
 2. Open a terminal on your computer.
 3. git remote add "your remote-link"
