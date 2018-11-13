@@ -15,30 +15,128 @@ kloudtrader is a python based library developed and maintained by [KloudTrader](
 
 #### Using pipenv 
 ```python
-pipenv install -e git+https://github.com/KloudTrader/kloudtrader.git
-```
-
-#### Using pip
-```python
-pip install git+https://github.com/KloudTrader/kloudtrader.git
+pipenv install -e git+https://github.com/KloudTrader/kloudtrader.git#egg=kloudtrader
 ```
 
 ## Deployment on Narwhal
-#### Steps to deploy your trading algorithm on Narwhal
 
-1. Add your card. Don't worry you are not charged right away.
-2. Create Runtime. (We only support python runtimes as of now. Many more ilke R, Julia, Excel coming soon!)
-3. Link your Tradier account or signup if yo are not a Tradier user. it generally takes 1-2 business days to open account with Tradier.
-4. Copy the remote-link from your runtime card.
-5. Open a terminal on your computer.
-6. git remote add "your remote-link"
-7. mkdir "my-algorithm"
-8. cd "my-algorithm"
-10. pipenv install -e git+https://github.com/KloudTrader/kloudtrader.git
-11. pipenv shell
-12. Code your trading strategy using kloudtrader
-13. git add -A
-14. git commit -m "Hope this is alpha!"
-15. git push -u narwhal master
-    
->Note: Your access token will expire after 24 hours. In order to allow your deployed algorithm to trade seemlessly, please manually link your tradier account after 24 hours. Don't worry this is just in Beta Version and will be automated soon!
+
+### Add your card
+Don't worry you are not charged right away.<br><br>
+<img src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/add_card.png" widht="100" alt="Narwhal add card">
+<br>
+<img src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/add_card2.png" widht="100" alt="Narwhal add card">
+***
+### Creating a Runtime
+In Narwhal, a Runtime is a basic computational unit that runs your strategy/algorithm. The algorithm running on your Runtime is totally your property and no other Narwhal user or KloudTrader employee can view it. Currently we only support Python-3 runtimes which means you can only deploy algorithms written in Python but we will be introducing R, Julia, Excel and many more types of Runtimes very soon, thus kloudtrader library's wrappers for respective languages will also be available soon.<br><br>
+<img src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/create_runtime1.png" /> <br>
+It is extremely easy to create a Runtime. All you need to do is:
+* Select a location for your runtime.
+* Select a size for your runtime. <br>
+* Enter your SSH/RSA public key. We ask for your RSA public key only once(when create your first runtime). Your public SSH/RSA key is needed so that we can create a secure connection between you and your Runtime and is only accessible by You, the owner.<br>
+  > Where is my SSH/RSA public key?<br>
+  >* [Find SSH/RSA Public key on a Unix based machine(MAC OSX + Linux)](https://stackoverflow.com/questions/3828164/how-do-i-access-my-ssh-public-key)
+  >* [Find SSH/RSA Public key on a Windows machine](https://www.codeenigma.com/host/faq/how-do-i-create-ssh-public-key-windows-pc)<br>
+* Enter a name for your runtime. It can be whatever you want it to be. <br>
+#### And you are good to go.
+<img src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/create_runtime2.png" /> 
+
+
+After you have created a runtime, you can view your runtime on the dashboard.<br><br>
+<img align="left" src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/after_runtime1.jpg" />
+
+<br>
+
+<img align="left" src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/after_runtime2.jpg" />
+***
+### Linking your trading account
+Now that you have created a created a runtime you shal link Brokerage to your Narwhal Account. 
+Narwhal provides flat-rate brokerage via <a href="https://tradier.com/" target="blank">Tradier Brokerage Inc.</a>
+Linking your Tradier account or Signing up if you are not a Tradier user is pretty easy. It generally takes 1-2 business days to open account with Tradier.<br><br>
+<img src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/link-tradier.gif" />
+***
+### The workflow
+Now we will look at your workflow from after creating a Runtime till deploying your algorithm to your Runtime. All it takes is, are a few commands to deploy your "alpha".
+
+> The following steps require <a href="https://git-scm.com/" target="blank">Git</a>
+<br>
+> You have to type the commands in the order they are described.
+#### Make a directory where you will be working/coding your trading algorithm.
+  
+```bash
+mkdir my-algorithm
+```
+#### Enter into your directory 'my-algorithm'
+```bash
+cd my-algorithm
+```
+#### Initializing git
+```bash
+git init
+```
+#### Add the remote-link of your Runtime. You can copy the remote-link by clicking on the Left-most button on the lower corner of your Runtime card.
+```bash
+git remote add narwhal "you remote-link here"
+
+Example: git remote add narwhal ssh://git@runtimes.narwhal.kloudtrader.com:10022/15/proud-snowflake-s9sx.git
+```
+<img height="500" src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/copy-remote.png"/>
+
+#### Managing Dependencies
+Narwhal's Python3 Runtime uses <a href="https://pipenv.readthedocs.io/en/latest/">Pipenv</a> to manage the dependencies of your algorithm. 
+> To install and get started with Pipenv, please refer it's <a href="https://pipenv.readthedocs.io/en/latest/">official webiste</a>. Pipenv is pretty easy to install and much easier to use.
+#### You can install kloudtrader library and other libraries of your choice by typing:
+```python
+pipenv install -e git+https://github.com/KloudTrader/kloudtrader.git#egg=kloudtrader
+pipenv install pandas, numpy
+```
+#### Enable your virtual environment so that you can start writing your algorithm
+```python
+pipenv shell
+```
+<img src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/workflow.png"/>
+
+#### Your Algorithm
+> #### Important
+> 
+> The algorithm you want to deploy should be in a file called **main.py**
+> 
+> Your algorithm must have these 3 lines of code:
+> * from os import environ
+> * ACCESS_TOKEN=environ['ACCESS_TOKEN']
+> * ACCESS_TOKEN=environ['ACCOUNT_NUMBER']
+>
+> These lines of code help Narwhal to access your access token and account number from the Narwhal Environment so that you don't have to explicitly pass them with each API call. 
+
+This is what the imports of algorithm written with kloudtrader library shall look like:
+
+<img src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/mainpy.png"/>
+#### Directory Structure
+You directory structure for a Python3 Runtime should look like:<br><br>
+<img src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/structure.png"/>
+```
+/my-algorithm
+   |-main.py
+   |-Pipfile.lock
+   |-Pipfile
+```
+***
+### Deploying your algorithm
+Deploying your algorithm only takes 3 steps and commands.
+
+#### Add your files
+```bash
+git add -A
+```
+#### Commit your files
+```bash
+git commit -m "hope this is alpha!"
+```
+> Isn't that what everyone is hoping for?! 😄 📈 📊 📉 😄 
+#### And finally, Deploy
+```bash
+git push -u narwhal master
+``` 
+<img src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/deploy.png"/> 
+***
+> Note: Your access token will expire after 24 hours. In order to allow your deployed algorithm to trade seemlessly, please manually link your tradier account after 24 hours. Don't worry this is just in Beta Version and will be automated soon!        
