@@ -94,6 +94,8 @@ pipenv install pandas, numpy
 ```python
 pipenv shell
 ```
+<img src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/workflow.png"/>
+
 #### Your Algorithm
 > #### Important
 > 
@@ -110,17 +112,31 @@ This is what the imports of algorithm written with kloudtrader library shall loo
 
 <img src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/mainpy.png"/>
 #### Directory Structure
-You directory structure for a Python3 Runtime should look like:
+You directory structure for a Python3 Runtime should look like:<br><br>
+<img src="https://raw.githubusercontent.com/KloudTrader/kloudtrader-docs/master/website/static/img/structure.png"/>
 ```
 /my-algorithm
-   |-Pipfile
-   |-Pipfile.lock
    |-main.py
+   |-Pipfile.lock
+   |-Pipfile
 ```
 ***
 ### Deploying your algorithm
+Deploying your algorithm only takes 3 steps and commands.
 
+#### Add your files
+```bash
+git add -A
+```
+#### Commit your files
+```bash
+git commit -m "hope this is alpha!"
+```
 
-
->Note: Your access token will expire after 24 hours. In order to allow your deployed algorithm to trade seemlessly, please manually link your tradier account after 24 hours. Don't worry this is just in Beta Version and will be automated soon!
+#### And finally, Deploy
+```bash
+git push -u narwhal master
+``` 
+ 
+> Note: Your access token will expire after 24 hours. In order to allow your deployed algorithm to trade seemlessly, please manually link your tradier account after 24 hours. Don't worry this is just in Beta Version and will be automated soon!
         
