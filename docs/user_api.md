@@ -50,7 +50,7 @@ return type : json
 ```
 ***
 ### Account Number
-Get your account number or list of account numbers accosiated with your account<br/>
+Get your account number or list of account numbers accosiated with your user profile<br/>
 
 <code>user_account_number(access_token)</code>
 | Paramters       | Required/Optional | Description                                    | Type |
