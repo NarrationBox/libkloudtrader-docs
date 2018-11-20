@@ -5,7 +5,15 @@ sidebar_label: Trading
 ---
 
 ## Use Trading APIs to buy,sell, preview order and much more
-
+> #### Important
+> 
+> The algorithm you want to deploy should be in a file called **main.py**
+> 
+> Your algorithm must have these imports:
+> 
+> **from kloudtrader import ACCESS_TOKEN, ACCOUNT_NUMBER**
+> 
+> This will help Narwhal to access your access token and account number from the Narwhal Environment so that you don't have to explicitly pass them with each API call. Narwhal would not be able to load your access token and account number from the Narwhal Environment if you don't link your tradier account. So the best practice is to link your tradier account before deploying your Trading Algorithm.
 
 # Module
 <code>kloudtrader.equities.trade</code>
