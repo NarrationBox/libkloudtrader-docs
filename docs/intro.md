@@ -35,7 +35,7 @@ It is extremely easy to create a Runtime. All you need to do is:
 * Select a size for your runtime. <br>
 * Enter your SSH/RSA public key.
  
-  >We ask for your RSA public key only once(when create your first runtime). Your public SSH/RSA key is needed so that we can create a secure connection between you and your Runtime and is only accessible by You, the owner.<br>
+  >We ask for your RSA public key only once(when you create your first runtime). Your public SSH/RSA key is needed so that we can create a secure connection between you and your Runtime and is only accessible by You, the owner.<br>
   >
    > Where is my SSH/RSA public key?<br>
   >* [Find SSH/RSA Public key on a Unix based machine(MAC OSX + Linux)](https://stackoverflow.com/questions/3828164/how-do-i-access-my-ssh-public-key)
@@ -104,12 +104,11 @@ pipenv shell
 > 
 > The algorithm you want to deploy should be in a file called **main.py**
 > 
-> Your algorithm must have these 3 lines of code:
-> * from os import environ
-> * ACCESS_TOKEN=environ['ACCESS_TOKEN']
-> * ACCESS_TOKEN=environ['ACCOUNT_NUMBER']
->
-> These lines of code help Narwhal to access your access token and account number from the Narwhal Environment so that you don't have to explicitly pass them with each API call. 
+> Your algorithm must have these imports:
+> 
+> **from kloudtrader import ACCESS_TOKEN, ACCOUNT_NUMBER**
+> 
+> This will help Narwhal to access your access token and account number from the Narwhal Environment so that you don't have to explicitly pass them with each API call. Narwhal would not be able to load your access token and account number from the Narwhal Environment if you don't link your tradier account. So the best practice is to link your tradier account before deploying your Trading Algorithm.
 
 This is what the imports of algorithm written with kloudtrader library shall look like:
 

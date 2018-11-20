@@ -5,7 +5,15 @@ sidebar_label: User
 ---
 
 ## You can use User APIs to receive any kind information about your account
-
+> #### Important
+> 
+> The algorithm you want to deploy should be in a file called **main.py**
+> 
+> Your algorithm must have these imports:
+> 
+> **from kloudtrader import ACCESS_TOKEN, ACCOUNT_NUMBER**
+> 
+> This will help Narwhal to access your access token and account number from the Narwhal Environment so that you don't have to explicitly pass them with each API call. Narwhal would not be able to load your access token and account number from the Narwhal Environment if you don't link your tradier account. So the best practice is to link your tradier account before deploying your Trading Algorithm.
 
 # Module
 <code>kloudtrader.user</code>
@@ -50,7 +58,7 @@ return type : json
 ```
 ***
 ### Account Number
-Get your account number or list of account numbers accosiated with your account<br/>
+Get your account number or list of account numbers accosiated with your user profile<br/>
 
 <code>user_account_number(access_token)</code>
 | Paramters       | Required/Optional | Description                                    | Type |
