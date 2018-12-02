@@ -30,8 +30,8 @@ Preview your buy order. This will allow you to place a <code>buy</code> order wi
 | account_number  | optional          | Will automatically be present when you deploy to Narwhal                                                  | str  |
 | duration        | required          | Time for which the order will remain in effect (Options: day,gtc,pre, post) (day by default)          | str  |
 | order_type      | required          | Type of order to be placed (market by default) (Options: market, limit, stop, stop_limit)     | str  |
-| price           | optional          | Price for "limit" and "stop_limit" order (options: market, limit, stop, stop_limit)     | int  |
-| stop            | optional          | Stop price in a "stop" or "stop_limit" type   order. Required for "stop" and "stop_limit"    | int  |
+| price           | optional (required for "limit", "stop_limit")        | The desired order limit price for "limit" and "stop_limit" orders     | int  |
+| stop            | optional (required for "stop" and "stop_limit")        | The stop price in a "stop" or "stop_limit" typed order    | int  |
 ```python
 Example: (Previewing a buy order of order_type 'market')
 
@@ -101,12 +101,12 @@ Preview your sell order. This will allow you to place a <code>sell</code> order 
 |-----------------|-------------------|------------------------------------------------|------| 
 | symbol          | required          | Symbol of the stock                            | str  |
 | quantity        | required          | Number of shares                               | str  |
-| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                               | str  |
-| account_number  | optional          | Will automatically be present when you deploy to Narwhal                                               | str  |
-| duration        | required          | Time for which the order will remain in effect (Options: day,gtc,pre, post) day by default    | str  |
-| order_type      | required          | Type of order to be placed (market by default) (options: market, limit, stop, stop_limit)     | str  |
-| price           | optional          | Price for "limit" and "stop_limit" order (options: market, limit, stop, stop_limit)     | int  |
-| stop            | optional          | Stop price in a "stop" or "stop_limit" typed order. Required for "stop" and "stop_limit"    | int  |
+| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                                 | str  |
+| account_number  | optional          | Will automatically be present when you deploy to Narwhal                                                  | str  |
+| duration        | required          | Time for which the order will remain in effect (Options: day,gtc,pre, post) (day by default)          | str  |
+| order_type      | required          | Type of order to be placed (market by default) (Options: market, limit, stop, stop_limit)     | str  |
+| price           | optional (required for "limit", "stop_limit")        | The desired order limit price for "limit" and "stop_limit" orders     | int  |
+| stop            | optional (required for "stop" and "stop_limit")        | The stop price in a "stop" or "stop_limit" typed order    | int  |
 ```python
 Example: 
 
@@ -149,12 +149,12 @@ Buy equities. Order placed using this API will be sent to the market and execute
 |-----------------|-------------------|------------------------------------------------|------| 
 | symbol          | required          | Symbol of the stock                            | str  |
 | quantity        | required          | Number of shares                               | str  |
-| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                        | str  |
-| account_number  | optional          | Will automatically be present when you deploy to Narwhal                                                | str  |
-| duration        | required          | Time for which the order will remain in effect (Options: day,gtc,pre, post) day by default    | str  |
-| order_type      | required          | Type of order to be placed (market by default) (options: market, limit, stop, stop_limit)     | str  |
-| price           | optional          | Price for "limit" and "stop_limit" order (options: market, limit, stop, stop_limit)     | int  |
-| stop            | optional          | Stop price in a "stop" or "stop_limit" typed order. Required for "stop" and "stop_limit"    | int  |
+| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                                 | str  |
+| account_number  | optional          | Will automatically be present when you deploy to Narwhal                                                  | str  |
+| duration        | required          | Time for which the order will remain in effect (Options: day,gtc,pre, post) (day by default)          | str  |
+| order_type      | required          | Type of order to be placed (market by default) (Options: market, limit, stop, stop_limit)     | str  |
+| price           | optional (required for "limit", "stop_limit")        | The desired order limit price for "limit" and "stop_limit" orders     | int  |
+| stop            | optional (required for "stop" and "stop_limit")        | The stop price in a "stop" or "stop_limit" typed order    | int  |
 ```python
 Example: 
 
@@ -183,12 +183,12 @@ Sell equities. Order placed using this API will be sent to the market and execut
 |-----------------|-------------------|------------------------------------------------|------| 
 | symbol          | required          | Symbol of the stock                            | str  |
 | quantity        | required          | Number of shares                               | str  |
-| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                               | str  |
-| account_number  | optional          | Will automatically be present when you deploy to Narwhal                                               | str  |
-| duration        | required          | Time for which the order will remain in effect (Options: day,gtc,pre, post) day by default    | str  |
-| order_type      | required          | Type of order to be placed (market by default) (options: market, limit, stop, stop_limit)     | str  |
-| price           | optional          | Price for "limit" and "stop_limit" order (options: market, limit, stop, stop_limit)     | int  |
-| stop            | optional          | Stop price in a "stop" or "stop_limit" typed order. Required for "stop" and "stop_limit"    | int  |
+| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                                 | str  |
+| account_number  | optional          | Will automatically be present when you deploy to Narwhal                                                  | str  |
+| duration        | required          | Time for which the order will remain in effect (Options: day,gtc,pre, post) (day by default)          | str  |
+| order_type      | required          | Type of order to be placed (market by default) (Options: market, limit, stop, stop_limit)     | str  |
+| price           | optional (required for "limit", "stop_limit")        | The desired order limit price for "limit" and "stop_limit" orders     | int  |
+| stop            | optional (required for "stop" and "stop_limit")        | The stop price in a "stop" or "stop_limit" typed order    | int  |
 ```python
 Example: 
 
@@ -220,8 +220,8 @@ Change an order if it is not filled yet.
 | account_number  | optional          | Will automatically be present when you deploy to Narwhal                                               | str  |
 | duration        | required          | Time for which the order will remain in effect (Options: day,gtc,pre, post) day by default    | str  |
 | order_type      | required          | Type of order to be placed (market by default)  (options: market, limit, stop, stop_limit)     | str  |
-| price           | optional          | Price for "limit" and "stop_limit" order (options: market, limit, stop, stop_limit)     | int  |
-| stop            | optional          | Stop price in a "stop" or "stop_limit" typed order. Required for "stop" and "stop_limit"    | int  |
+| price           | optional (required for "limit", "stop_limit")        | The desired order limit price for "limit" and "stop_limit" orders     | int  |
+| stop            | optional (required for "stop" and "stop_limit")        | The stop price in a "stop" or "stop_limit" typed order    | int  |
 ```python
 Example: 
 
