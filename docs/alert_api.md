@@ -53,7 +53,7 @@ if particular_condition is met:
 Returns: Email alert Created!
 ```
 *** 
-### Both sma and email alerts
+### Both sms and email alerts
 <code>sms_and_email(number,email_id,message)</code> 
 | Paramters    | Required/Optional | Description                           | Type |
 |--------------|-------------------|---------------------------------------|------|
