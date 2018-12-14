@@ -63,11 +63,11 @@ Returns: Email alert Created!
 ```python 
 Example:
 
-from kloudtrader.alert_me import email
+from kloudtrader.alert_me import sms_and_email
 
 if some_condition is met:
     message="{} is met".format(some_condition)
-    sms('123@abc.com',message)
+    sms_and_email('+16xxxxxxxxx','123@abc.com',message)
 ```
 ```python
 Returns: 
