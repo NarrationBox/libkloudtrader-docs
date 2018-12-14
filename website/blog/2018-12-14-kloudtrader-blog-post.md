@@ -21,7 +21,7 @@ Now moving on to kloudtrader's Alert System. The <b>alert_me</b> module of kloud
 </div>
 <br>
 
-[kloudtrader.alert_me](http://docs.kloudtrader.com) provides there types of API calls which basically define where you get your alerts. You can get your alerts via:
+[kloudtrader.alert_me](http://docs.kloudtrader.com) provides three types of API calls which basically define where you get your alerts. You can get your alerts via:
 * SMS <code>sms('+16xxxxxxxx','The alert you want to receive')</code>
 * Email <code>email('123@abc.com','The alert you want to receive')</code>
 * SMS and Email <code>sms_and_email('+16xxxxxxxx','123@abc.com','The alert you want to receive')</code>
@@ -62,7 +62,7 @@ python_version = "3.7"
 ```
 Now, we will create a file called <b>main.py</b> that will contain our mean-reversion strategy.
 
-Let's start by importing the packages needed for our algorithms:
+Let's start by importing the packages needed for our algorithm:
 ```python
 from kloudtrader.defaults import *
 from kloudtrader.equities.data import close_prices
@@ -72,8 +72,8 @@ import datetime
 import pandas as pd
 import talib
 ```
-After the imports are done, we are going to create a function called <b>analysis</b>. This function will take an arguement call <b>symbol</b> which is basically the symbol/ticker of the stock you want to trade. If you want to trade multiple stocks at a time, you can add more. The analysis function basically contains the following steps:
-* Get the Close prices data for the stock from the date of your preference till today. We are pulling close prices since January 1, 2018 for this examle.
+After the imports are done, we are going to create a function called <b>analysis</b>. This function will take an argument call <b>symbol</b> which is basically the symbol/ticker of the stock you want to trade. If you want to trade multiple stocks at a time, you can add more. The analysis function basically contains the following steps:
+* Get the Close prices data for the stock from the date of your preference till today. We are pulling close prices since January 1, 2018 for this example.
  ```python 
 aapl_data=close_prices(symbol,'2018-09-01',datetime.date.today())
 df=pd.DataFrame(aapl_data)
@@ -109,7 +109,7 @@ def analysis(symbol):
     return df
 ```
 Next is the trading Logic:<br>
-The trading logic will be defined in a function called <b>trade</b> which also takes symbol as an arguement. 
+The trading logic will be defined in a function called <b>trade</b> which also takes symbol as an argument. 
 * Gather the data points for today.
 ```python
 today=str(datetime.date.today())
