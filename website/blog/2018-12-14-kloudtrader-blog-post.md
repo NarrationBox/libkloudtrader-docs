@@ -29,7 +29,7 @@ Now moving on to kloudtrader's Alert System. The <b>alert_me</b> module of kloud
 For more information and documentation on how to use alert_me module please visit the [Alert section of kloudtrader docs](https://docs.kloudtrader.com/docs/alert_api). We have tried our best to make the docs extremely easy to read and understand.
 
 ## Mean Reversion Strategy
-Now let's build a Mean Reversion <b>Interday</b> strategy using python. An interday strategy is a strategy that does all the calculations based on interaday prices, thus buy and sell signals are generated over a period of days.<br>
+Now let's build a Mean Reversion <b>Interday</b> strategy using python. An interday strategy is a strategy that does all the calculations based on interday prices, thus buy and sell signals are generated over a period of days.<br>
 Mean reversion is a financial theory suggesting that asset prices and returns eventually return back to the long-run mean or average of the entire dataset. So basically a mean reversion strategy relies on any kind of moving average/mean to make trading decisions. <br>
 Let's start by installing the dependencies needed for this algorithm:<br>
 <br>
