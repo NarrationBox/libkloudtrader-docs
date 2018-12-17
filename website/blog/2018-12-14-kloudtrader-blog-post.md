@@ -38,9 +38,9 @@ Narwhal uses [pipenv](https://pipenv.readthedocs.io) for installing your algorit
 pipenv install -e git+https://github.com/KloudTrader/kloudtrader.git#egg=kloudtrader
 ```
 ```python
-pipenv install pandas ta-lib
+pipenv install pandas ta
 ```
-We will use pandas and ta-lib for the technical analysis part.<br>
+We will use [https://pandas.pydata.org/](pandas) and [ta](https://technical-analysis-library-in-python.readthedocs.io/en/latest/index.html) for the technical analysis part.<br>
 After you have successfully installed the dependencies you will see 2 files, Pipfile and Pipfile.lock in your working Directory. <br>
 <b>Pipfile</b> shall look like this:
 ```python
@@ -52,7 +52,7 @@ name = "pypi"
 [packages]
 kloudtrader = {editable = true, git = "https://github.com/KloudTrader/kloudtrader.git"}
 pandas = "*"
-ta-lib = "*"
+ta = "*"
 
 [dev-packages]
 
@@ -70,7 +70,7 @@ from kloudtrader.user import account_positions,account_balance
 from kloudtrader.alert_me import *
 import datetime
 import pandas as pd
-import talib
+import ta
 ```
 After the imports are done, we are going to create a function called <b>analysis</b>. This function will take an argument call <b>symbol</b> which is basically the symbol/ticker of the stock you want to trade. If you want to trade multiple stocks at a time, you can add more. The analysis function basically contains the following steps:
 * Get the Close prices data for the stock from the date of your preference till today. We are pulling close prices since January 1, 2018 for this example.
@@ -82,7 +82,7 @@ df=pd.DataFrame(aapl_data)
 * Calculate an Entry point for going Long/buying and another entry point for Selling the stocks. Entry point in this strategy is the price point where the algorithm shall enter the trade i.e. start trading. In this strategy we are taking -5% of price as a Long Entry point and +5% of price for Selling entry point.
 ```python 
 window=15
-df['EMA']=talib.EMA(df['close'],timeperiod=window)
+df['EMA']=ta.trend.ema_indicator(df['close'],n=window)
 df['long_entry_point']=df['EMA']-(5/100)*df['EMA']
 df['sell_entry_point']=df['EMA']+(5/100)*df['EMA']
 df=df.iloc[window:] #ignores the rows with NaN values
@@ -100,7 +100,7 @@ def analysis(symbol):
     close_data=close_prices(symbol,'2018-01-01',datetime.date.today())
     df=pd.DataFrame(close_data)
     window=15
-    df['EMA']=talib.EMA(df['close'],timeperiod=window)
+    df['EMA']=ta.trend.ema_indicator(df['close'],n=window)
     df['long_entry_point']=df['EMA']-(5/100)*df['EMA']
     df['sell_entry_point']=df['EMA']+(5/100)*df['EMA']
     df=df.iloc[window:]
@@ -187,13 +187,13 @@ from kloudtrader.user import account_positions,account_balance
 from kloudtrader.alert_me import *
 import datetime
 import pandas as pd
-import talib
+import ta
 
 def analysis(symbol):
     close_data=close_prices(symbol,'2018-01-01',datetime.date.today())
     df=pd.DataFrame(close_data)
     window=15
-    df['EMA']=talib.EMA(df['close'],timeperiod=window)
+    df['EMA']=ta.trend.ema_indicator(df['close'],n=window)
     df['long_entry_point']=df['EMA']-(5/100)*df['EMA']
     df['sell_entry_point']=df['EMA']+(5/100)*df['EMA']
     df=df.iloc[window:]
