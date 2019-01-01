@@ -97,7 +97,7 @@ class Footer extends React.Component {
             </a>
             
             <a
-              href="https://twitter.com/kloud_trader"
+              href="https://twitter.com/KloudTrader"
               target="_blank"
               rel="noreferrer noopener">
               Twitter
