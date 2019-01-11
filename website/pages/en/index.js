@@ -118,7 +118,7 @@ const Features = () => (
         title: 'Data',
       },
       {
-        content: 'Creat own alerts for both sms and email.',
+        content: 'Create customized alerts for both sms and email.',
         image: imgUrl('bell-regular.svg'),
         imageAlign: 'top',
         title: 'Customized alerts',
