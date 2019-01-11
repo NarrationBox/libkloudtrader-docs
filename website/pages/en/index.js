@@ -124,7 +124,7 @@ const Features = () => (
         title: 'Customized alerts',
       },
       {
-        content: 'Wide range of functions for financial, technical, portfolio and risk analsyis.<br> (Coming Soon)',
+        content: 'A Wide range of functions for financial, technical, portfolio and risk analsyis.<br> (Coming Soon)',
         image: imgUrl('analysis.svg'),
         imageAlign: 'top',
         title: 'Analysis functions',
