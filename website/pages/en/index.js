@@ -118,13 +118,13 @@ const Features = () => (
         title: 'Data',
       },
       {
-        content: 'Creat own alerts for both sms and email.',
+        content: 'Create customized alerts for both sms and email.',
         image: imgUrl('bell-regular.svg'),
         imageAlign: 'top',
         title: 'Customized alerts',
       },
       {
-        content: 'Wide range of functions for financial, technical, portfolio and risk analsyis.<br> (Coming Soon)',
+        content: 'A Wide range of functions for financial, technical, portfolio and risk analsyis.<br> (Coming Soon)',
         image: imgUrl('analysis.svg'),
         imageAlign: 'top',
         title: 'Analysis functions',
