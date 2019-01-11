@@ -21,8 +21,8 @@ const users = [
 ];
 
 const siteConfig = {
-  title: 'kloudtrader', 
-  tagline: "KloudTrader's in-house library designed for rapid prototyping and development of trading strategies",
+  title: 'LibKloudTrader', 
+  tagline: "KloudTrader's in-house trading framework optimized for computational finance. Connect your trading models and conquer the markets.",
   url: 'https://your-docusaurus-test-site.com', 
   baseUrl: '/', // Base URL for your project */
   // For github.io type URLs, you would set the url and baseUrl like:
@@ -30,8 +30,8 @@ const siteConfig = {
   //   baseUrl: '/test-site/',
 
   // Used for publishing and more
-  projectName: 'kloudtrader-docs',
-  organizationName: 'KloudTrader Ltd',
+  projectName: 'libkloudtrader-docs',
+  organizationName: "KloudTrader Ltd.",
   // For top-level user or org sites, the organization is still the same.
   // e.g., for the https://JoelMarcey.github.io site, it would be set like...
   //   organizationName: 'JoelMarcey'
