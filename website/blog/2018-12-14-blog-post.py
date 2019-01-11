@@ -1,10 +1,10 @@
 import talib
-from kloudtrader.defaults import ACCESS_TOKEN,ACCOUNT_NUMBER
-from kloudtrader.equities.data import *
+from libkloudtrader.defaults import ACCESS_TOKEN,ACCOUNT_NUMBER
+from libkloudtrader.equities.data import *
 import datetime
 import pandas as pd
-from kloudtrader.user import *
-from kloudtrader.alert_me import *
+from libkloudtrader.user import *
+from libkloudtrader.alert_me import *
 window=15
 
 def analysis(symbol):

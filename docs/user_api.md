@@ -11,17 +11,18 @@ sidebar_label: User
 > 
 > Your algorithm must have these imports:
 > 
-> **from kloudtrader import ACCESS_TOKEN, ACCOUNT_NUMBER**
+> **from libkloudtrader.defaults import ACCESS_TOKEN, ACCOUNT_NUMBER**
 > 
 > This will help Narwhal to access your access token and account number from the Narwhal Environment so that you don't have to explicitly pass them with each API call. Narwhal would not be able to load your access token and account number from the Narwhal Environment if you don't link your tradier account. So the best practice is to link your tradier account before deploying your Trading Algorithm.
 
+> Note: Your access token will expire after 24 hours. In order to allow your deployed algorithm to trade seemlessly, please manually link your tradier account after 24 hours. Don't worry this is just in Beta Version and will be automated soon!
 # Module
-<code>kloudtrader.user</code>
+<code>libkloudtrader.user</code>
 
 ### User profile
 Get information pertaining to your account<br/>
 
-<code>user_profle(access_token)</code>
+<code>user_profile(access_token)</code>
 | Paramters       | Required/Optional | Description                                    | Type |
 |-----------------|-------------------|------------------------------------------------|------| 
 | access_token    | optional          | Will automatically be present when you deploy to Narwhal                                               | str  |
@@ -29,7 +30,7 @@ Get information pertaining to your account<br/>
 ```python
 Example:
 
-from kloudrader.user import user_profile
+from libkloudtrader.user import user_profile
 
 user_profle()
 ```
@@ -68,7 +69,7 @@ Get your account number or list of account numbers accosiated with your user pro
 ```python
 Example:
 
-from kloudrader.user import user_account_number
+from libkloudtrader.user import user_account_number
 
 user_account_number()
 ```
@@ -88,7 +89,7 @@ Get your account balance<br/>
 ```python
 Example:
 
-from kloudrader.user import account_balance
+from libkloudtrader.user import account_balance
 
 account_balance()
 ```
@@ -142,7 +143,7 @@ Get all the postions your account holds<br/>
 ```python
 Example:
 
-from kloudrader.user import account_positions
+from libkloudtrader.user import account_positions
 
 account_positions()
 ```
@@ -174,7 +175,7 @@ Get your account's history<br/>
 ```python
 Example:
 
-from kloudrader.user import account_history
+from libkloudtrader.user import account_history
 
 account_history()
 ```
@@ -226,7 +227,7 @@ Get your account's cost basis. This includes information of all closed positions
 ```python
 Example:
 
-from kloudrader.user import account_costbasis
+from libkloudtrader.user import account_costbasis
 
 account_costbasis()
 ```
@@ -278,7 +279,7 @@ Get intraday and open/pending order information for your account<br/>
 ```python
 Example:
 
-from kloudrader.user import account_orders
+from libkloudtrader.user import account_orders
 
 account_orders()
 ```
@@ -345,7 +346,7 @@ Get detailed information for a specific order<br/>
 ```python
 Example:
 
-from kloudrader.user import account_specificorders
+from libkloudtrader.user import account_specificorders
 
 account_specificorders('1369455')
 ```

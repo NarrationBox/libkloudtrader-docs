@@ -11,12 +11,14 @@ sidebar_label: Trading
 > 
 > Your algorithm must have these imports:
 > 
-> **from kloudtrader import ACCESS_TOKEN, ACCOUNT_NUMBER**
+> **from libkloudtrader.defaults import ACCESS_TOKEN, ACCOUNT_NUMBER**
 > 
 > This will help Narwhal to access your access token and account number from the Narwhal Environment so that you don't have to explicitly pass them with each API call. Narwhal would not be able to load your access token and account number from the Narwhal Environment if you don't link your tradier account. So the best practice is to link your tradier account before deploying your Trading Algorithm.
 
+> Note: Your access token will expire after 24 hours. In order to allow your deployed algorithm to trade seemlessly, please manually link your tradier account after 24 hours. Don't worry this is just in Beta Version and will be automated soon!
+
 # Module
-<code>kloudtrader.equities.trade</code>
+<code>libkloudtrader.equities.trade</code>
 ***
 ### Buy Preview
 Preview your buy order. This will allow you to place a <code>buy</code> order without it being sent to the market so that you can know what will it actaully look like when you place a real order
@@ -35,13 +37,13 @@ Preview your buy order. This will allow you to place a <code>buy</code> order wi
 ```python
 Example: (Previewing a buy order of order_type 'market')
 
-from kloudtrader.equities.trade import buy_preview
+from libkloudtrader.equities.trade import buy_preview
 buy_preview('AAPL',2)
 
 
 Example: (Previwing a buy order of order_type 'limit')
 
-from kloudtrader.equities.trade import buy_preview
+from libkloudtrader.equities.trade import buy_preview
 buy_preview('AAPL',2,order_type='limit',price=214)
 ```
 ```python
@@ -110,7 +112,7 @@ Preview your sell order. This will allow you to place a <code>sell</code> order 
 ```python
 Example: 
 
-from kloudtrader.equities.trade import sell_preview
+from libkloudtrader.equities.trade import sell_preview
 
 sell_preview('AAPL',2)
 
@@ -158,7 +160,7 @@ Buy equities. Order placed using this API will be sent to the market and execute
 ```python
 Example: 
 
-from kloudtrader.equities.trade import buy
+from libkloudtrader.equities.trade import buy
 
 buy('AAPL',2)
 
@@ -192,7 +194,7 @@ Sell equities. Order placed using this API will be sent to the market and execut
 ```python
 Example: 
 
-from kloudtrader.equities.trade import sell
+from libkloudtrader.equities.trade import sell
 
 sell('AAPL',2)
 
@@ -225,7 +227,7 @@ Change an order if it is not filled yet.
 ```python
 Example: 
 
-from kloudtrader.equities.trade import change_equity_order
+from libkloudtrader.equities.trade import change_equity_order
 
 change_equity_order(1372964,order_type='limit',duration="gtc",price=215)
 
@@ -255,7 +257,7 @@ Cancel an order if it is not filled yet.
 ```python
 Example: 
 
-from kloudtrader.equities.trade import cancel_equity_order
+from libkloudtrader.equities.trade import cancel_equity_order
 
 cancel_equity_order(1372964)
 

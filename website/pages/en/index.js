@@ -83,7 +83,7 @@ class HomeSplash extends React.Component {
           <PromoSection>
             <Button href="/docs/intro">Get Started</Button>
             <Button href="">Python Package Index</Button>
-            <Button href="https://github.com/KloudTrader/kloudtrader" target="_blank">Github</Button>
+            <Button href="https://github.com/KloudTrader/libkloudtrader" target="_blank">Github</Button>
             
           </PromoSection>
         </div>
@@ -105,21 +105,39 @@ const Features = () => (
   <Block layout="threeColumn">
     {[
       {
-        content: 'Extremely simple to use trading APIs ',
+        content: 'Extremely simple to use trading APIs for U.S. Equity market.',
         image: imgUrl('laptop-solid.svg'),
         imageAlign: 'top',
         title: 'Simple Trading APIs',
         
       },
       {
-        content: 'kloudtrader provides all sort of data:<br> live market feed, historaical price data, company information and much more',
+        content: 'libkloudtrader provides all sort of data:<br> live market feed, historical price data, company information and much more.',
         image: imgUrl('database-solid.svg'),
         imageAlign: 'top',
         title: 'Data',
       },
       {
-        content: 'Creat own alerts for both sms and email',
+        content: 'Creat own alerts for both sms and email.',
         image: imgUrl('bell-regular.svg'),
+        imageAlign: 'top',
+        title: 'Customized alerts',
+      },
+      {
+        content: 'Wide range of functions for financial, technical, portfolio and risk analsyis.<br> (Coming Soon)',
+        image: imgUrl('analysis.svg'),
+        imageAlign: 'top',
+        title: 'Analysis functions',
+      },
+      {
+        content: 'Papertrading with virtual money upto $1 million. (Coming Soon)',
+        image: imgUrl('money-bill-solid.svg'),
+        imageAlign: 'top',
+        title: 'Paper Trading',
+      },
+      {
+        content: 'Multi Crypto-Currency Trading. <br>(Coming Soon)',
+        image: imgUrl('bitcoin-brands.svg'),
         imageAlign: 'top',
         title: 'Customized alerts',
       },

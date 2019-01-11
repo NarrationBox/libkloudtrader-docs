@@ -11,11 +11,13 @@ sidebar_label: Data
 > 
 > Your algorithm must have these imports:
 > 
-> **from kloudtrader import ACCESS_TOKEN, ACCOUNT_NUMBER**
+> **from libkloudtrader.defaults import ACCESS_TOKEN, ACCOUNT_NUMBER**
 > 
 > This will help Narwhal to access your access token and account number from the Narwhal Environment so that you don't have to explicitly pass them with each API call. Narwhal would not be able to load your access token and account number from the Narwhal Environment if you don't link your tradier account. So the best practice is to link your tradier account before deploying your Trading Algorithm.
+
+> Note: Your access token will expire after 24 hours. In order to allow your deployed algorithm to trade seemlessly, please manually link your tradier account after 24 hours. Don't worry this is just in Beta Version and will be automated soon!       
 # Module
-<code>kloudtrader.equities.data</code>
+<code>libkloudtrader.equities.data</code>
 ***
 ### Get quotes
 Get quotes for an individual or multiple symbols<br/>
@@ -116,7 +118,7 @@ Get OHLCV(Open-High-Low-Close-Volume) data for a symbol (As back as you want to 
 ```python 
 Example:
 
-from kloudtrader.equiites.data import historical_prices
+from libkloudtrader.equiites.data import historical_prices
 
 historical_prices('AAPL','2013-01-01','2018-01-01')
 ```
@@ -166,7 +168,7 @@ Get historical Open Prices for a symbol (As back as you want to go)<br>
 ```python 
 Example:
 
-from kloudtrader.equiites.data import open_prices
+from liblibkloudtrader.equiites.data import open_prices
 
 open_prices('AAPL','2013-01-01','2018-01-01')
 ```
@@ -209,7 +211,7 @@ Get historical High Prices for a symbol (As back as you want to go)<br>
 ```python 
 Example:
 
-from kloudtrader.equiites.data import high_prices
+from liblibkloudtrader.equiites.data import high_prices
 
 high_prices('AAPL','2013-01-01','2018-01-01')
 ```
@@ -248,7 +250,7 @@ Get historical Low Prices for a symbol (As back as you want to go)<br>
 ```python 
 Example:
 
-from kloudtrader.equiites.data import low_prices
+from liblibkloudtrader.equiites.data import low_prices
 
 low_prices('AAPL','2013-01-01','2018-01-01')
 ```
@@ -291,7 +293,7 @@ Get historical Close Prices for a symbol (As back as you want to go)<br>
 ```python 
 Example:
 
-from kloudtrader.equiites.data import close_prices
+from liblibkloudtrader.equiites.data import close_prices
 
 close_prices('AAPL','2013-01-01','2018-01-01')
 ```
@@ -334,7 +336,7 @@ Get historical Voulme for a symbol (As back as you want to go)<br>
 ```python 
 Example:
 
-from kloudtrader.equiites.data import volume
+from libkloudtrader.equiites.data import volume
 
 volume('AAPL','2013-01-01','2018-01-01')
 ```
@@ -373,7 +375,7 @@ Get the intraday market status<br/>
 ```python
 Example: 
 
-from kloudtrader.equities.data import intraday_status
+from libkloudtrader.equities.data import intraday_status
 
 intraday_status()
 ```
@@ -472,7 +474,7 @@ Search for securities' symbols<br/>
 ```python
 Example:
 
-from kloudtrader.equities.data import symbol_search
+from libkloudtrader.equities.data import symbol_search
 
 symbol_search('apple')
 ```
@@ -523,7 +525,7 @@ Search for securities/companies using symbols<br/>
 ```python
 Example:
 
-from kloudtrader.equities.data import symbol_lookup
+from libkloudtrader.equities.data import symbol_lookup
 
 symbol_lookup('aap')
 ```
@@ -568,7 +570,7 @@ Get company fundamental information<br/>
 ```python
 Example:
 
-from kloudtrader.equities.data import company_fundamentals
+from libkloudtrader.equities.data import company_fundamentals
 
 company_fundamentals('AAPL')
 ```
@@ -676,7 +678,7 @@ Get the corporate calendar information for given symbol<br/>
 ```python
 Example:
 
-from kloudtrader.equities.data import corporate_calendar
+from libkloudtrader.equities.data import corporate_calendar
 
 corporate_calendar('AAPL')
 ```
@@ -737,7 +739,7 @@ Get company dividend information for given symbol<br/>
 ```python
 Example:
 
-from kloudtrader.equities.data import dividend_information
+from libkloudtrader.equities.data import dividend_information
 
 dividend_information('AAPL')
 ```
@@ -799,7 +801,7 @@ Get corporate actions information for given symbol<br/>
 ```python
 Example:
 
-from kloudtrader.equities.data import corporate_actions
+from libkloudtrader.equities.data import corporate_actions
 
 corporate_actions('AAPL')
 ```
@@ -882,7 +884,7 @@ Get operation ratio information for given symbol<br/>
 ```python
 Example:
 
-from kloudtrader.equities.data import operation_ratio
+from libkloudtrader.equities.data import operation_ratio
 
 operation_ratio('AAPL')
 ```
@@ -1000,7 +1002,7 @@ Get corporate financials information for given symbol<br/>
 ```python
 Example:
 
-from kloudtrader.equities.data import corporate_financials
+from libkloudtrader.equities.data import corporate_financials
 
 corporate_financials('AAPL')
 ```
@@ -1238,7 +1240,7 @@ Get price statistics information for given symbol<br/>
 ```python
 Example:
 
-from kloudtrader.equities.data import price_statistics
+from libkloudtrader.equities.data import price_statistics
 
 price_statistics('AAPL')
 ```
@@ -1308,7 +1310,7 @@ return type : json
 ```
 ***
 ## Live Market Data
-kloudtrader provides live streaming data for both live trades happening across various exchanges and live quotes from various exchanges. you will receive the data as a flowing stream.
+libkloudtrader provides live streaming data for both live trades happening across various exchanges and live quotes from various exchanges. you will receive the data as a flowing stream.
 process of getting the streaming live data looks like this:
 
 * Create a session using the Create Session API
@@ -1340,7 +1342,7 @@ Get live quotes direct from various exchanges<br/>
 ``` python
 Example:
 
-from kloudtrader.equities.data import create_session,live_quotes
+from libkloudtrader.equities.data import create_session,live_quotes
 
 while True:
       market_quotes=live_quotes('AAPL', create_session()) 
@@ -1461,7 +1463,7 @@ Get live trades direct from various exchanges<br/>
 ``` python
 Example:
 
-from kloudtrader.equities.data import create_session,live_trades
+from libkloudtrader.equities.data import create_session,live_trades
 
 while True:
       market_trades=live_trades('AAPL', create_session()) 

@@ -3,11 +3,22 @@ id: alert_api
 title: Alerts
 sidebar_label: Alerts
 ---
-## With kloudtrader, you can create your customized alerts for both SMS and Email.
+## With libkloudtrader, you can create customized alerts for both SMS and Email.
 
+> #### Important
+> 
+> The algorithm you want to deploy should be in a file called **main.py**
+> 
+> Your algorithm must have these imports:
+> 
+> **from libkloudtrader.defaults import ACCESS_TOKEN, ACCOUNT_NUMBER**
+> 
+> This will help Narwhal to access your access token and account number from the Narwhal Environment so that you don't have to explicitly pass them with each API call. Narwhal would not be able to load your access token and account number from the Narwhal Environment if you don't link your tradier account. So the best practice is to link your tradier account before deploying your Trading Algorithm.
 
+> Note: Your access token will expire after 24 hours. In order to allow your deployed algorithm to trade seemlessly, please manually link your tradier account after 24 hours. Don't worry this is just in Beta Version and will be automated soon!
+> 
 # Module
-<code>kloudtrader.alert_me</code>
+<code>libkloudtrader.alert_me</code>
 *** 
 
 ### SMS alerts 
@@ -42,7 +53,7 @@ Returns: SMS alert Created!
 ```python 
 Example:
 
-from kloudtrader.alert_me import email
+from libkloudtrader.alert_me import email
 
 if particular_condition is met:
     message="{} is met".format(particular_condition)
@@ -63,7 +74,7 @@ Returns: Email alert Created!
 ```python 
 Example:
 
-from kloudtrader.alert_me import sms_and_email
+from libkloudtrader.alert_me import sms_and_email
 
 if some_condition is met:
     message="{} is met".format(some_condition)
