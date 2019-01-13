@@ -2,7 +2,7 @@
   "docs": {
    
     "Getting Started": ["intro"],
-    "API Reference": ["api_index","alert_api","data_api","trading_api","user_api"],
+    "API Reference": ["api_index","alert_api","data_api","trading_api","user_api","analysis_api"],
     "Tutorials":["sample_strategy"]
    
   }

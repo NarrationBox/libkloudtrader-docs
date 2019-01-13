@@ -9,7 +9,7 @@ sidebar_label: API Index
 ## [Data](/docs/data_api) - APIs for getting live, historical, company data
 ## [Trading](/docs/trading_api) - APIs for trading and placing orders
 ## [User](/docs/user_api) - APIs for Narwhal users to know evrything about their accounts and portfolios
-
+## [Analysis](/docs/analysis_api) - APIs for Technical, Portfolio, Risk analysis and quantitative modelling.
 
 > #### Important
 > 

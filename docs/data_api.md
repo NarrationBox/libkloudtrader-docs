@@ -32,7 +32,7 @@ Get quotes for an individual or multiple symbols<br/>
 ```python
 Example:
 
-from kloudtarder.equities.data import quotes
+from libkloudtarder.equities.data import quotes
 quotes('AAPL,SPY')
 ```
 ```python
@@ -114,13 +114,13 @@ Get OHLCV(Open-High-Low-Close-Volume) data for a symbol (As back as you want to 
 | start           | required          | starting date (YYYY-MM-DD)              | str  |
 | end             | required          | end date (YYYY-MM-DD)                   | str  |
 | interval        | optional          | daily/weekly/monthly (daily by default) | str  |
-| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                          | str  |
+| access_token    | optional          | Will automatically be present when you deploy to Narwhal | str  |
 ```python 
 Example:
 
-from libkloudtrader.equiites.data import historical_prices
+from libkloudtrader.equiites.data import OHLCV
 
-historical_prices('AAPL','2013-01-01','2018-01-01')
+OHLCV('AAPL','2013-01-01','2018-01-01')
 ```
 ```python
 return type: json 
