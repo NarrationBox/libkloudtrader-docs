@@ -11,22 +11,22 @@ sidebar_label: Analysis
 > 
 > Your algorithm must have these imports:
 > 
-> **from libkloudtrader.defaults import ACCESS_TOKEN, ACCOUNT_NUMBER**
+> <b>from libkloudtrader.defaults import * </b>
 > 
 > This will help Narwhal to access your access token and account number from the Narwhal Environment so that you don't have to explicitly pass them with each API call. Narwhal would not be able to load your access token and account number from the Narwhal Environment if you don't link your tradier account. So the best practice is to link your tradier account before deploying your Trading Algorithm.
 
 > Note: Your access token will expire after 24 hours. In order to allow your deployed algorithm to trade seemlessly, please manually link your tradier account after 24 hours. Don't worry this is just in Beta Version and will be automated soon!       
 ### Analysis API Index
 #### libkloudtrader provides various analysis APIs. The list below consists of the APIs that are currently implemented and the ones that are coming soon!
-| Analysis Functions (A-Z)|Status 
+| Analysis Functions|Status 
 | -------------     |:-------------:|
-| Accumulation/Distribution Index| ✅ 
-| Absolute Price Oscillator| ✅ 
+| [Accumulation/Distribution Index](#accumulation-distribution-index)| ✅ 
+| [Absolute Price Oscillator](#absolute-price-oscillator)| ✅ 
 | Advance Decline Line| 🔜
 | Advance Decline Ratio| 🔜
-| Alpha |✅ 
-| Annual Return| ✅ 
-| Annual Sharpe Ratio|✅ 
+| [Alpha](#alpha) |✅ 
+| [Annual Return](#annual-return) | ✅ 
+| [Annual Sharpe Ratio](#annual-sharpe-ratio)|✅ 
 | Annual Volatility| ✅ 
 | Arnaud Legoux Moving Average| 🔜
 | Aroon|✅ 
@@ -184,10 +184,12 @@ Developed by Marc Chaikin, the Accumulation Distribution Line is a volume-based 
 ```python
 Example:
 
-from kloudtarder.analysis import accumulation_distribution_index
-from kloudtrader.equities.data import OHLCV
+from libkloudtrader.defaults import *
+from libkloudtarder.analysis import accumulation_distribution_index
+from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
+#load data
 aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-31')['history']['day'])
 
 accumulation_distribution_index(aapl_data['high'],aapl_data['low'],aapl_data['close'],aapl_data['volume'])
@@ -196,23 +198,28 @@ accumulation_distribution_index(aapl_data['high'],aapl_data['low'],aapl_data['cl
 return type : Pandas Dataframe
 
 0               NaN
-1      3.252030e+07
-2      4.959698e+06
-3      2.035432e+06
-4      2.219792e+07
-5      8.146040e+06
-6      8.897564e+06
+1      1.519821e+06
+2     -1.513219e+07
+3      2.434469e+07
+4      5.829405e+06
+5     -7.798453e+06
+6      2.607671e+07
+7      3.445991e+07
+8      2.825995e+07
+9     -1.126491e+07
+10     3.262656e+06
             ...
-249    1.522707e+07
-250   -2.311396e+07
-251    3.982507e+06
-252   -1.426856e+06
-253    1.025702e+07
-254    3.727678e+07
-255    2.632004e+07
-256    3.347596e+07
-257    2.911781e+07
-258    1.147651e+07
+240   -3.874279e+07
+241   -6.163643e+07
+242   -2.284626e+07
+243   -2.555539e+07
+244   -6.359438e+07
+245   -1.067186e+08
+246   -1.046228e+08
+247    2.434146e+07
+248    1.012001e+08
+249    3.678827e+07
+250   -1.087315e+07
 ```
 ***
 ### Absolute Price Oscillator
@@ -231,10 +238,12 @@ Absolute Price Oscillator is a technical indicator calculating the percentage di
 ```python
 Example:
 
-from kloudtarder.analysis import absolute_price_oscillator
-from kloudtrader.equities.data import OHLCV
+from libkloudtrader.defaults import *
+from libkloudtarder.analysis import absolute_price_oscillator
+from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
+#load data
 aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-31')['history']['day'])
 
 absolute_price_oscillator(aapl_data['close'],4,9)
@@ -250,25 +259,21 @@ return type : Pandas Dataframe
 5           NaN
 6           NaN
 7           NaN
-8      0.334722
-9     -1.698611
-10    -3.473056
-11    -4.962222
-12    -3.864444
-13    -1.796111
-14     0.976944
-15     2.807778
-16     4.387500
-17     4.363889
-18     2.678056
-19     1.762778
-20     0.827500
+8      1.040833
+9      1.069167
+10     1.508333
         ...
-254    2.469444
-255    2.129722
-256    4.135556
-257    4.622500
-258    4.882222
+240   -3.513333
+241   -2.365833
+242   -1.943333
+243   -2.921667
+244   -3.788611
+245   -4.994444
+246   -7.382222
+247   -6.986667
+248   -5.512222
+249   -3.109444
+250    0.306944
 ```
 ***
 ### Alpha
@@ -287,19 +292,21 @@ Alpha is a measure of the active return on an investment, the performance of tha
 ```python
 Example:
 
-from kloudtarder.analysis import alpha
-from kloudtrader.equities.data import OHLCV
+from libkloudtrader.defaults import *
+from libkloudtarder.analysis import alpha
+from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
+#load data
 aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-31')['history']['day'])
 spy_data=pd.DataFrame(OHLCV('SPY','2018-01-01','2019-01-31')['history']['day'])
 
 alpha(aapl_data['close'],spy['close'])
 ```
 ```python
-return type : Int
+return type : float
 
--17.984671751710962
+2.589179508866167
 ```
 
 ***
@@ -307,29 +314,647 @@ return type : Int
 Annual return is the return an investment provides over a period of time, expressed as a time-weighted annual percentage.<br><br>
 <a href="https://www.investopedia.com/terms/a/annual-return.asp" target="_blank">Learn More</a>
 
-<code>alpha(close,benchmark_close)</code>
+<code>annual_return(close)</code>
+
+> Note: annual_return() only takes a dataframe with 1 year data i.e. dataframe less than 257 trading days and greater 250 days because an average trading year has 250-257 days approximately. To calculate return on n number of trading days use <a href="#Return">returns()</a>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| close           | required         | Close prices data for a year i.e. trading days<257 and trading days>250      | Pandas dataframe  |
-| benchmark_close   | reqired          | Close prices data of market or benchmark like SPY, etc | Pandas dataframe |
+| close           | required         | Close prices data for a year i.e. trading days<257 and trading days>250 | Pandas dataframe  |
 
 
 
 ```python
 Example:
 
-from kloudtarder.analysis import alpha
-from kloudtrader.equities.data import OHLCV
+from libkloudtrader.defaults import *
+from libkloudtarder.analysis import annual_return
+from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-31')['history']['day'])
-spy_data=pd.DataFrame(OHLCV('SPY','2018-01-01','2019-01-31')['history']['day'])
+#load data
+aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
-alpha(aapl_data['close'],spy['close'])
+annual_return(aapl_data['close'])
 ```
 ```python
-return type : Int
+return type : float (%age)
 
--17.984671751710962
+-4.73523664720293
+```
+***
+### Annual Sharpe Ratio
+The Sharpe ratio is simply the return per unit of risk (represented by variance). The higher the Sharpe ratio, the better the combined performance of "risk" and return.
+Using an annual/annualized Sharpe Ratio is useful for comparison of multiple return streams. The annualized Sharpe ratio is computed by dividing the annualized mean monthly excess return by the annualized monthly standard deviation of excess return.
+<br><br>
+<a href="https://www.quantinsti.com/blog/sharpe-ratio-applications-algorithmic-trading" target="_blank">Learn More</a>
+
+<code>annual_sharpe_ratio(close)</code>
+
+> Note: annual_sharpe_ratio() only takes a dataframe with 1 year data i.e. dataframe less than 257 trading days and greater 250 days because an average trading year has 250-257 days approximately. To calculate sharpe_ratio on n number of trading days use <a href="#sharpe_ratio">sharpe_ratio()</a>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| close           | required         | Close prices data for a year i.e. trading days<257 and trading days>250 | Pandas dataframe  |
+
+
+
+```python
+Example:
+
+from libkloudtrader.defaults import *
+from libkloudtarder.analysis import annual_sharpe_ratio
+from libkloudtrader.equities.data import OHLCV
+import pandas as pd
+
+#load data
+aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+
+annual_sharpe_ratio(aapl_data['close'])
+```
+```python
+return type : float
+
+-0.16537924137238377
+```
+***
+### Aroon
+The Aroon indicator is used to help traders know when a market is uptrending, downtrending, or is in a range-bound, trendless market.
+<br><br>
+<a href="https://commodity.com/technical-analysis/aroon/" target="_blank">Learn More</a>
+
+<code>aroon(high,low,n)</code>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| high          | required         | High prices data| Pandas dataframe  |
+| low          | required         | Low prices data| Pandas dataframe  |
+| n         | required         | timeperiod/number of days| Int  |
+
+
+
+```python
+Example:
+
+from libkloudtrader.defaults import *
+from libkloudtarder.analysis import aroon
+from libkloudtrader.equities.data import OHLCV
+import pandas as pd
+
+#load data
+aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+
+aroon(aapl_data['high'],aapl_data['low'],4)
+```
+```python
+returns: arronup, aroondown, aroon_oscillator
+return type : Pandas DataFrame
+
+        aroondown  aroonup  aroon_oscillator
+0          NaN      NaN               NaN
+1          NaN      NaN               NaN
+2          NaN      NaN               NaN
+3          NaN      NaN               NaN
+4          0.0    100.0             100.0
+5          0.0     75.0              75.0
+6          0.0     50.0              50.0
+7          0.0     25.0              25.0
+8        100.0      0.0            -100.0
+9         75.0      0.0             -75.0
+10       100.0     25.0             -75.0
+                ...
+240        0.0     50.0              50.0
+241      100.0     25.0             -75.0
+242       75.0      0.0             -75.0
+243      100.0     25.0             -75.0
+244      100.0      0.0            -100.0
+245      100.0     25.0             -75.0
+246      100.0      0.0            -100.0
+247       75.0      0.0             -75.0
+248       50.0      0.0             -50.0
+249       25.0    100.0              75.0
+250        0.0     75.0              75.0
+```
+***
+### Average Directional Movement Index
+The Average Directional Index (ADX) was developed by J. Welles Wilder to evaluate the strength of a trend and to define a period of sideway trading. For better results from the signals generated by technical analysis, many traders use ADX to determine whether the market is trending or trading (moving sideways) and adjust their indicators' settings to the current market condition.
+<br><br>
+<a href="https://www.marketvolume.com/technicalanalysis/adx.asp/" target="_blank">Learn More</a>
+
+<code>average_directional_movement_index(high,low,close,n)</code>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| high          | required         | High prices data| Pandas dataframe  |
+| low          | required         | Low prices data| Pandas dataframe  |
+| close         | required         | Close prices data| Pandas dataframe  |
+| n         | required         | timeperiod/number of days| Int  |
+
+
+
+```python
+Example:
+
+from libkloudtrader.defaults import *
+from libkloudtarder.analysis import average_directional_movement_index
+from libkloudtrader.equities.data import OHLCV
+import pandas as pd
+
+#load data
+aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+
+average_directional_moving_index(aapl_data['high'],aapl_data['low'],aapl_data['close'],4)
+```
+```python
+return type : Pandas DataFrame
+
+0            NaN
+1            NaN
+2            NaN
+3            NaN
+4            NaN
+5            NaN
+6            NaN
+7      71.495363
+8      69.917531
+9      67.628396
+10     68.153175
+11     60.730823
+12     49.259490
+13     42.728528
+14     45.091676
+        ...
+240    32.017729
+241    32.156497
+242    27.717607
+243    36.589518
+244    45.137380
+245    54.612348
+246    61.858012
+247    52.131699
+248    42.735035
+249    32.778837
+250    31.301982
+```
+***
+### Average Directional Movement Index Rating
+ADXR stands for Average Directional Movement Index Rating. ADXR is a component of the Directional Movement System developed by Welles Wilder. This system attempts to measure the strength of a price movement in positive and negative directions, as well as the overall strength of the trend. The Average Directional Movement Rating quantifies the change of momentum in the ADX (Average Directional Index).
+<br><br>
+<a href="https://www.marketvolume.com/technicalanalysis/adxr.asp" target="_blank">Learn More</a>
+
+<code>average_directional_movement_index_rating(high,low,close,n)</code>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| high          | required         | High prices data| Pandas dataframe  |
+| low          | required         | Low prices data| Pandas dataframe  |
+| close         | required         | Close prices data| Pandas dataframe  |
+| n         | required         | timeperiod/number of days| Int  |
+
+
+
+```python
+Example:
+
+from libkloudtrader.defaults import *
+from libkloudtarder.analysis import average_directional_movement_index_rating
+from libkloudtrader.equities.data import OHLCV
+import pandas as pd
+
+#load data
+aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+
+average_directional_moving_index_rating(aapl_data['high'],aapl_data['low'],aapl_data['close'],4)
+```
+```python
+return type : Pandas DataFrame
+
+0            NaN
+1            NaN
+2            NaN
+3            NaN
+4            NaN
+5            NaN
+6            NaN
+7            NaN
+8            NaN
+9            NaN
+10     69.824269
+11     65.324177
+12     58.443943
+13     55.440852
+14     52.911250
+15     48.770118
+16     46.700538
+        ...
+240    26.548196
+241    29.908893
+242    30.157933
+243    34.303623
+244    38.646939
+245    41.164978
+246    49.223765
+247    48.634540
+248    48.673691
+249    47.318424
+250    41.716840
+```
+***
+### Average Price
+The Average Price is the average of the open + high + low + close of a bar. It can be used to smooth an indicator that normally takes just the closing price as input.
+<br><br>
+<a href="https://www.fmlabs.com/reference/default.htm?url=AvgPrices.htm" target="_blank">Learn More</a>
+
+<code>average_price(open,high,low,close)</code>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| open         | required         | OPen prices data| Pandas dataframe  |
+| high          | required         | High prices data| Pandas dataframe  |
+| low          | required         | Low prices data| Pandas dataframe  |
+| close         | required         | Close prices data| Pandas dataframe  |
+
+
+
+
+```python
+Example:
+
+from libkloudtrader.defaults import *
+from libkloudtarder.analysis import average_price
+from libkloudtrader.equities.data import OHLCV
+import pandas as pd
+
+#load data
+aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+
+average_price(aapl_data['open'],aapl_data['high'],aapl_data['low'],aapl_data['close'])
+```
+```python
+return type : Pandas DataFrame
+
+0      179.557500
+1      183.165000
+2      184.884900
+3      186.067500
+4      187.677500
+5      188.117500
+6      187.075000
+7      187.987500
+8      179.077500
+9      179.920000
+10     177.995000
+        ...
+240    143.980000
+241    141.652500
+242    142.625025
+243    137.965000
+244    132.417500
+245    129.165000
+246    124.980000
+247    130.077500
+248    132.905000
+249    134.165000
+250    132.532500
+```
+***
+### Average True Range
+The ATR is a Welles Wilder style moving average of the True Range. The ATR is a measure of volatility. High ATR values indicate high volatility, and low values indicate low volatility, often seen when the price is flat. 
+<br><br>
+<a href="https://www.fmlabs.com/reference/default.htm?url=ATR.htm" target="_blank">Learn More</a>
+
+<code>average_true_range(high, low, close, n)</code>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| high          | required         | High prices data| Pandas dataframe  |
+| low          | required         | Low prices data| Pandas dataframe  |
+| close         | required         | Close prices data| Pandas dataframe  |
+| n         | required         | timeperiod/number of days| Int  |
+
+
+
+
+
+```python
+Example:
+
+from libkloudtrader.defaults import *
+from libkloudtarder.analysis import average_true_range
+from libkloudtrader.equities.data import OHLCV
+import pandas as pd
+
+#load data
+aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+
+average_true_range(aapl_data['high'],aapl_data['low'],aapl_data['close'],4)
+```
+```python
+return type : Pandas DataFrame
+
+0           NaN
+1           NaN
+2           NaN
+3           NaN
+4      2.675100
+5      2.431325
+6      2.388494
+7      2.046370
+8      4.127278
+9      4.022958
+10     3.897219
+        ...
+240    3.960521
+241    4.595391
+242    4.971518
+243    6.831139
+244    6.515854
+245    7.756891
+246    7.497668
+247    8.168251
+248    7.456188
+249    6.522141
+250    6.064106
+```
+***
+### Awesome Oscilator
+The Awesome Oscillator is an indicator used to measure market momentum. AO calculates the difference of a 34 Period and 5 Period Simple Moving Averages. The Simple Moving Averages that are used are not calculated using closing price but rather each bar’s midpoints. AO is generally used to affirm trends or to anticipate possible reversals. 
+<br><br>
+<a href="https://www.ifcmarkets.co.in/en/ntx-indicators/awesome-oscillator" target="_blank">Learn More</a>
+
+<code>awesome_oscillator(high,low,short_period,long_period)</code>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| high          | required         | High prices data| Pandas dataframe  |
+| low          | required         | Low prices data| Pandas dataframe  |
+
+
+```python
+Example:
+
+from libkloudtrader.defaults import *
+from libkloudtarder.analysis import awesome_oscillator
+from libkloudtrader.equities.data import OHLCV
+import pandas as pd
+
+#load data
+aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+
+awesome_oscillator(aapl_data['high'],aapl_data['low'],4,9)
+```
+```python
+return type : Pandas DataFrame
+
+0            NaN
+1            NaN
+2            NaN
+3            NaN
+4            NaN
+5            NaN
+6            NaN
+7            NaN
+8            NaN
+9            NaN
+10           NaN
+        ...
+240     1.211454
+241     1.478572
+242     1.587463
+243     0.490403
+244    -1.271450
+245    -3.647627
+246    -5.965480
+247    -7.977019
+248    -8.747460
+249    -7.981872
+250    -6.868254
+```
+***
+### Awesome Oscilator
+The Awesome Oscillator is an indicator used to measure market momentum. AO calculates the difference of a 34 Period and 5 Period Simple Moving Averages. The Simple Moving Averages that are used are not calculated using closing price but rather each bar’s midpoints. AO is generally used to affirm trends or to anticipate possible reversals. 
+<br><br>
+<a href="https://www.ifcmarkets.co.in/en/ntx-indicators/awesome-oscillator" target="_blank">Learn More</a>
+
+<code>awesome_oscillator(high,low)</code>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| high          | required         | High prices data| Pandas dataframe  |
+| low          | required         | Low prices data| Pandas dataframe  |
+
+
+```python
+Example:
+
+from libkloudtrader.defaults import *
+from libkloudtarder.analysis import awesome_oscillator
+from libkloudtrader.equities.data import OHLCV
+import pandas as pd
+
+#load data
+aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+
+awesome_oscillator(aapl_data['high'],aapl_data['low'])
+```
+```python
+return type : Pandas DataFrame
+
+0            NaN
+1            NaN
+2            NaN
+3            NaN
+4            NaN
+5            NaN
+6            NaN
+7            NaN
+8            NaN
+9            NaN
+10           NaN
+        ...
+240   -20.128684
+241   -18.865919
+242   -18.172625
+243   -18.172772
+244   -18.884066
+245   -19.609007
+246   -21.124478
+247   -22.471331
+248   -22.977066
+249   -21.924007
+250   -19.633272
+```
+***
+### Balance of Power
+Balance Of Power (BOP) is an indicator that measures the market strength by assessing the strength of total buyers against that of total sellers and their ability to drive the price to extreme ends.
+<br><br>
+
+<code>balance_of_power(open, high, low, close)</code>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| open        | required         | Open prices data| Pandas dataframe  |
+| high          | required         | High prices data| Pandas dataframe  |
+| low          | required         | Low prices data| Pandas dataframe  |
+| close         | required         | Close prices data| Pandas dataframe  |
+
+
+```python
+Example:
+
+from libkloudtrader.defaults import *
+from libkloudtarder.analysis import balance_of_power
+from libkloudtrader.equities.data import OHLCV
+import pandas as pd
+
+#load data
+aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+
+balance_of_power(aapl_data['open'],aapl_data['high'],aapl_data['low'],aapl_data['close'])
+```
+```python
+return type : Pandas DataFrame
+
+0      0.690789
+1     -0.115830
+2      0.352518
+3      0.672414
+4      0.000000
+5     -0.133333
+6      0.869231
+7      0.690967
+8      0.532164
+9     -0.526154
+10     0.705742
+        ...
+240   -0.926316
+241   -0.268683
+242    0.219745
+243   -0.611244
+244   -0.524229
+245   -0.718640
+246   -0.266129
+247    0.843958
+248    0.046269
+249   -0.319899
+250   -0.274306
+```
+***
+### Beta
+Beta is a measure of the volatility, or systematic risk, of a security or a portfolio in comparison to the entire market or a benchmark. Beta is used in the capital asset pricing model (CAPM), which calculates the expected return of an asset based on its beta and expected market returns. Beta is also known as the beta coefficient.
+
+<code>beta(close,benchmark_close)</code>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| close         | required         | Close prices data| Pandas dataframe  |
+| benchmark_close   | reqired          | Close prices data of market or benchmark like SPY, etc | Pandas dataframe |
+
+
+```python
+Example:
+
+from libkloudtrader.defaults import *
+from libkloudtarder.analysis import beta
+from libkloudtrader.equities.data import OHLCV
+import pandas as pd
+
+#load data
+aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+
+beta(aapl_data['open'],spy_data['close'])
+```
+```python
+return type : float
+
+0.4526075135378216
+```
+***
+### Bollinger Bands
+Bollinger Bands consist of three lines. The middle band is a simple moving average (generally 20 periods) of the typical price (TP). The upper and lower bands are F standard deviations (generally 2) above and below the middle band. The bands widen and narrow when the volatility of the price is higher or lower, respectively.
+Bollinger Bands do not, in themselves, generate buy or sell signals; they are an indicator of overbought or oversold conditions. When the price is near the upper or lower band it indicates that a reversal may be imminent. The middle band becomes a support or resistance level. The upper and lower bands can also be interpreted as price targets. When the price bounces off of the lower band and crosses the middle band, then the upper band becomes the price target.
+<br><br>
+<a href="https://www.investopedia.com/terms/b/bollingerbands.asp" target="_blank">Learn More</a>
+
+<code>bollinger_bands(close,n)</code>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| close         | required         | Close prices data| Pandas dataframe  |
+| n   | reqired          | timeperiod/number of days | Pandas dataframe |
+
+
+```python
+Example:
+
+from libkloudtrader.defaults import *
+from libkloudtarder.analysis import bollinger_bands
+from libkloudtrader.equities.data import OHLCV
+import pandas as pd
+
+#load data
+aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+
+bollinger_bands(aapl_data['close'],20)
+```
+```python
+returns: upperband,middleband,lowerband
+return type : Pandas DataFrame
+
+        upperband    middleband   lowerband
+0           NaN         NaN         NaN
+1           NaN         NaN         NaN
+2           NaN         NaN         NaN
+3           NaN         NaN         NaN
+4           NaN         NaN         NaN
+5           NaN         NaN         NaN
+6           NaN         NaN         NaN
+7           NaN         NaN         NaN
+8           NaN         NaN         NaN
+9           NaN         NaN         NaN
+10          NaN         NaN         NaN
+                        ...
+240     191.579846    176.6630  161.746154
+241     189.566979    175.2895  161.012021
+242     186.031060    173.9165  161.801940
+243     184.748400    172.6680  160.587600
+244     185.383678    171.6605  157.937322
+245     186.603458    170.3580  154.112542
+246     188.252671    169.0850  149.917329
+247     187.875175    168.2125  148.549825
+248     187.437157    167.3080  147.178843
+249     185.730965    166.0725  146.414035
+250     183.936049    164.9820  146.027951
+```
+***
+### CAGR (Compounded Annual Growth Rate)
+The compound annual growth rate (CAGR) is the rate of return that would be required for an investment to grow from its beginning balance to its ending balance assuming the profits were reinvested at the end of each year of the investment’s lifespan.
+<br><br>
+<a href="https://www.investopedia.com/terms/c/cagr.asp" target="_blank">Learn More</a>
+
+<code>cagr(start_value,end_value,period_in_years)</code>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| start_value        | required         | Starting value of the investment  |
+| end_value       | required         | End value of the investment  |
+| period_in_years      | required         | Life of investment(in years)  |
+
+```python
+Example:
+
+from libkloudtrader.defaults import *
+from libkloudtarder.analysis import cagr
+from libkloudtrader.equities.data import OHLCV
+import pandas as pd
+
+#load data
+aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+
+cagr(100000,136009,2)
+```
+```python
+return type : Float (%age)
+
+16.622896551234746
 ```
