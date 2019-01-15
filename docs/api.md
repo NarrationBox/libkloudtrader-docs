@@ -9,7 +9,7 @@ sidebar_label: API Index
 ## [Data](/docs/data_api) - APIs for getting live, historical, company data
 ## [Trading](/docs/trading_api) - APIs for trading and placing orders
 ## [User](/docs/user_api) - APIs for Narwhal users to know evrything about their accounts and portfolios
-
+## [Analysis](/docs/analysis_api) - APIs for Technical, Portfolio, Risk analysis and quantitative modelling.
 
 > #### Important
 > 
@@ -17,7 +17,7 @@ sidebar_label: API Index
 > 
 > Your algorithm must have these imports:
 > 
-> **from libkloudtrader.defaults import ACCESS_TOKEN, ACCOUNT_NUMBER**
+> <b>from libkloudtrader.defaults import * </b>
 > 
 > This will help Narwhal to access your access token and account number from the Narwhal Environment so that you don't have to explicitly pass them with each API call. Narwhal would not be able to load your access token and account number from the Narwhal Environment if you don't link your tradier account. So the best practice is to link your tradier account before deploying your Trading Algorithm.
 

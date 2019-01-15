@@ -136,10 +136,10 @@ const Features = () => (
         title: 'Paper Trading',
       },
       {
-        content: 'Multi Crypto-Currency Trading. <br>(Coming Soon)',
+        content: 'Multi Crypto-Currency Trading and Data APIs. <br>(Coming Soon)',
         image: imgUrl('bitcoin-brands.svg'),
         imageAlign: 'top',
-        title: 'Customized alerts',
+        title: 'Crypto-Currency Trading',
       },
       /*
       {

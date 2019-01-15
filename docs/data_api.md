@@ -32,7 +32,7 @@ Get quotes for an individual or multiple symbols<br/>
 ```python
 Example:
 
-from kloudtarder.equities.data import quotes
+from libkloudtarder.equities.data import quotes
 quotes('AAPL,SPY')
 ```
 ```python
@@ -114,13 +114,14 @@ Get OHLCV(Open-High-Low-Close-Volume) data for a symbol (As back as you want to 
 | start           | required          | starting date (YYYY-MM-DD)              | str  |
 | end             | required          | end date (YYYY-MM-DD)                   | str  |
 | interval        | optional          | daily/weekly/monthly (daily by default) | str  |
-| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                          | str  |
+| access_token    | optional          | Will automatically be present when you deploy to Narwhal | str  |
 ```python 
 Example:
 
-from libkloudtrader.equiites.data import historical_prices
+from libkloudtrader.defaults import *
+from libkloudtrader.equiites.data import OHLCV
 
-historical_prices('AAPL','2013-01-01','2018-01-01')
+OHLCV('AAPL','2013-01-01','2018-01-01')
 ```
 ```python
 return type: json 
@@ -168,6 +169,7 @@ Get historical Open Prices for a symbol (As back as you want to go)<br>
 ```python 
 Example:
 
+from libkloudtrader.defaults import *
 from liblibkloudtrader.equiites.data import open_prices
 
 open_prices('AAPL','2013-01-01','2018-01-01')
@@ -211,6 +213,7 @@ Get historical High Prices for a symbol (As back as you want to go)<br>
 ```python 
 Example:
 
+from libkloudtrader.defaults import *
 from liblibkloudtrader.equiites.data import high_prices
 
 high_prices('AAPL','2013-01-01','2018-01-01')
@@ -250,6 +253,7 @@ Get historical Low Prices for a symbol (As back as you want to go)<br>
 ```python 
 Example:
 
+from libkloudtrader.defaults import *
 from liblibkloudtrader.equiites.data import low_prices
 
 low_prices('AAPL','2013-01-01','2018-01-01')
@@ -293,6 +297,7 @@ Get historical Close Prices for a symbol (As back as you want to go)<br>
 ```python 
 Example:
 
+from libkloudtrader.defaults import *
 from liblibkloudtrader.equiites.data import close_prices
 
 close_prices('AAPL','2013-01-01','2018-01-01')
@@ -336,6 +341,7 @@ Get historical Voulme for a symbol (As back as you want to go)<br>
 ```python 
 Example:
 
+from libkloudtrader.defaults import *
 from libkloudtrader.equiites.data import volume
 
 volume('AAPL','2013-01-01','2018-01-01')
@@ -375,6 +381,7 @@ Get the intraday market status<br/>
 ```python
 Example: 
 
+from libkloudtrader.defaults import *
 from libkloudtrader.equities.data import intraday_status
 
 intraday_status()
@@ -407,6 +414,7 @@ Get the market calendar of a given month(Goes back till 2013)<br/>
 ```python
 Example:
 
+from libkloudtrader.defaults import *
 from kloudtader.equities.data import market_calendar
 
 market_calendar(9,2016)
@@ -474,6 +482,7 @@ Search for securities' symbols<br/>
 ```python
 Example:
 
+from libkloudtrader.defaults import *
 from libkloudtrader.equities.data import symbol_search
 
 symbol_search('apple')
@@ -525,6 +534,7 @@ Search for securities/companies using symbols<br/>
 ```python
 Example:
 
+from libkloudtrader.defaults import *
 from libkloudtrader.equities.data import symbol_lookup
 
 symbol_lookup('aap')
@@ -570,6 +580,7 @@ Get company fundamental information<br/>
 ```python
 Example:
 
+from libkloudtrader.defaults import *
 from libkloudtrader.equities.data import company_fundamentals
 
 company_fundamentals('AAPL')
@@ -678,6 +689,7 @@ Get the corporate calendar information for given symbol<br/>
 ```python
 Example:
 
+from libkloudtrader.defaults import *
 from libkloudtrader.equities.data import corporate_calendar
 
 corporate_calendar('AAPL')
@@ -739,6 +751,7 @@ Get company dividend information for given symbol<br/>
 ```python
 Example:
 
+from libkloudtrader.defaults import *
 from libkloudtrader.equities.data import dividend_information
 
 dividend_information('AAPL')
@@ -801,6 +814,7 @@ Get corporate actions information for given symbol<br/>
 ```python
 Example:
 
+from libkloudtrader.defaults import *
 from libkloudtrader.equities.data import corporate_actions
 
 corporate_actions('AAPL')
@@ -884,6 +898,7 @@ Get operation ratio information for given symbol<br/>
 ```python
 Example:
 
+from libkloudtrader.defaults import *
 from libkloudtrader.equities.data import operation_ratio
 
 operation_ratio('AAPL')
@@ -1002,6 +1017,7 @@ Get corporate financials information for given symbol<br/>
 ```python
 Example:
 
+from libkloudtrader.defaults import *
 from libkloudtrader.equities.data import corporate_financials
 
 corporate_financials('AAPL')
@@ -1240,6 +1256,7 @@ Get price statistics information for given symbol<br/>
 ```python
 Example:
 
+from libkloudtrader.defaults import *
 from libkloudtrader.equities.data import price_statistics
 
 price_statistics('AAPL')
@@ -1342,6 +1359,7 @@ Get live quotes direct from various exchanges<br/>
 ``` python
 Example:
 
+from libkloudtrader.defaults import *
 from libkloudtrader.equities.data import create_session,live_quotes
 
 while True:
@@ -1463,6 +1481,7 @@ Get live trades direct from various exchanges<br/>
 ``` python
 Example:
 
+from libkloudtrader.defaults import *
 from libkloudtrader.equities.data import create_session,live_trades
 
 while True:
