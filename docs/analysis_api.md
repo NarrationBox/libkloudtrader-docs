@@ -1864,6 +1864,7 @@ ema(aapl_data['close'], 7)
 ```
 ```python 
 return type : Pandas DataFrame
+
 0               NaN
 1               NaN
 2               NaN
@@ -1886,5 +1887,269 @@ return type : Pandas DataFrame
 247   -2.369739e-07
 248   -1.812056e-07
 249   -1.449995e-07
-250   -6.321794e-08
+250   -6.321794e-08 
+```
+***
+### Force Index
+The Force Index is an indicator that uses price and volume to assess the power behind a move or identify possible turning points developed by Alexander Elder. According to Elder, there are three essential elements to a stock's price movement: direction, extent and volume. The Force Index combines all three as an oscillator that fluctuates in positive and negative territory as the balance of power shifts. The Force Index can be used to reinforce the overall trend, identify playable corrections or foreshadow reversals with divergences.
+<br><br>
+<a href="https://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:force_index" target="_blank">Learn More</a>
+
+<code>force_index(close,volume,n)</code>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| close           | required          | Close Prices Data                      |Pandas Dataframe|
+| volume           | required          | Volume Data                      |Pandas Dataframe|
+| n               | required          | Timeperiod/ number of days           |Int |
+
+
+
+```python
+Example:
+
+from libkloudtrader.defaults import *
+from libkloudtarder.analysis import force_index
+from libkloudtrader.equities.data import OHLCV
+import pandas as pd
+
+#load data
+aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+
+force_index(aapl_data['close'], aapl_data['volume'],7)
+```
+```python 
+return type : Pandas DataFrame
+
+0               NaN
+1               NaN
+2               NaN
+3               NaN
+4               NaN
+5               NaN
+6               NaN
+7     -2.080238e+07
+8     -1.992512e+07
+9      2.253507e+07
+10     4.397995e+07
+           ...
+240    7.180812e+06
+241   -1.282294e+07
+242    2.042507e+07
+243    1.130445e+08
+244   -2.063973e+08
+245   -1.104344e+09
+246   -1.271463e+08
+247   -1.485731e+08
+248   -6.877902e+07
+249   -8.314708e+07
+250    4.424966e+07
+```
+***
+### Hilbert Transform - Dominant Cycle Period
+
+<a href="https://books.google.co.in/books?id=_KjOT1b9bfUC&printsec=frontcover#v=onepage&q&f=false" target="_blank">Learn More</a>
+
+<code>hilbert_transform_dom_cyc_per(close)</code>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| close           | required          | Close Prices Data                      |Pandas Dataframe|
+
+
+```python
+Example:
+
+from libkloudtrader.defaults import *
+from libkloudtarder.analysis import hilbert_transform_dom_cyc_per
+from libkloudtrader.equities.data import OHLCV
+import pandas as pd
+
+#load data
+aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+
+hilbert_transform_dom_cyc_per(aapl_data['close'])
+```
+```python 
+return type : Pandas DataFrame
+
+0          NaN
+1          NaN
+2          NaN
+3          NaN
+4          NaN
+5          NaN
+6          NaN
+7          NaN
+8          NaN
+9          NaN
+10         NaN
+           ...
+240    33.336852
+241    31.890946
+242    30.340229
+243    28.709012
+244    27.062946
+245    25.526817
+246    24.295141
+247    23.350891
+248    22.695126
+249    22.273510
+250    22.070809
+```
+***
+### Hilbert Transform - Dominant Cycle Phase
+
+<a href="https://books.google.co.in/books?id=_KjOT1b9bfUC&printsec=frontcover#v=onepage&q&f=false" target="_blank">Learn More</a>
+
+<code>hilbert_transform_dom_cyc_phase(close)</code>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| close           | required          | Close Prices Data                      |Pandas Dataframe|
+
+
+```python
+Example:
+
+from libkloudtrader.defaults import *
+from libkloudtarder.analysis import hilbert_transform_dom_cyc_phase
+from libkloudtrader.equities.data import OHLCV
+import pandas as pd
+
+#load data
+aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+
+hilbert_transform_dom_cyc_phase(aapl_data['close'])
+```
+```python 
+return type : Pandas DataFrame
+
+0          NaN
+1          NaN
+2          NaN
+3          NaN
+4          NaN
+5          NaN
+6          NaN
+7          NaN
+8          NaN
+9          NaN
+10         NaN
+           ...
+240    19.561229
+241    23.836128
+242    25.580045
+243    26.905135
+244    17.512746
+245     3.211247
+246   -15.042917
+247   -19.351484
+248   -15.028136
+249    -4.230537
+250     4.311873
+```
+***
+### Hilbert Transform - Instantaneous Trendline
+
+<a href="https://books.google.co.in/books?id=_KjOT1b9bfUC&printsec=frontcover#v=onepage&q&f=false" target="_blank">Learn More</a>
+
+<code>hilbert_transform_inst_trendline(close)</code>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| close           | required          | Close Prices Data                      |Pandas Dataframe|
+
+
+```python
+Example:
+
+from libkloudtrader.defaults import *
+from libkloudtarder.analysis import hilbert_transform_inst_trendline
+from libkloudtrader.equities.data import OHLCV
+import pandas as pd
+
+#load data
+aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+
+hilbert_transform_inst_trendline(aapl_data['close'])
+```
+```python 
+return type : Pandas DataFrame
+
+0          NaN
+1          NaN
+2          NaN
+3          NaN
+4          NaN
+5          NaN
+6          NaN
+7          NaN
+8          NaN
+9          NaN
+10         NaN
+           ...
+240    190.837872
+241    188.391493
+242    185.375011
+243    182.635948
+244    179.451931
+245    176.557688
+246    173.580756
+247    171.152430
+248    169.462166
+249    168.155874
+250    167.216551
+```
+***
+### Hilbert Transform - Phasor Components
+
+<a href="https://books.google.co.in/books?id=_KjOT1b9bfUC&printsec=frontcover#v=onepage&q&f=false" target="_blank">Learn More</a>
+
+<code>hilbert_transform_phasor_components(close)</code>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| close           | required          | Close Prices Data                      |Pandas Dataframe|
+
+
+```python
+Example:
+
+from libkloudtrader.defaults import *
+from libkloudtarder.analysis import hilbert_transform_phasor_components
+from libkloudtrader.equities.data import OHLCV
+import pandas as pd
+
+#load data
+aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+
+hilbert_transform_phasor_components(aapl_data['close'])
+```
+```python 
+return type : Pandas DataFrame
+
+0          NaN
+1          NaN
+2          NaN
+3          NaN
+4          NaN
+5          NaN
+6          NaN
+7          NaN
+8          NaN
+9          NaN
+10         NaN
+           ...
+240    190.837872
+241    188.391493
+242    185.375011
+243    182.635948
+244    179.451931
+245    176.557688
+246    173.580756
+247    171.152430
+248    169.462166
+249    168.155874
+250    167.216551
 ```
