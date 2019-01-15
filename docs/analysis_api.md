@@ -22,7 +22,7 @@ sidebar_label: Analysis
 | -------------     |:-------------:|
 | [Accumulation/Distribution Index](#accumulation-distribution-index)| ✅ 
 | [Absolute Price Oscillator](#absolute-price-oscillator)| ✅ 
-| Advance Decline Line| 🔜
+| Advance Decline Line| 🔜   
 | Advance Decline Ratio| 🔜
 | [Alpha](#alpha) |✅ 
 | [Annual Return](#annual-return) | ✅ 
@@ -376,6 +376,40 @@ annual_sharpe_ratio(aapl_data['close'])
 return type : float
 
 -0.16537924137238377
+```
+***
+### Annual Volatility
+Volatility is a statistical measure of the dispersion of returns for a given security or market index. Volatility can either be measured by using the standard deviation or variance between returns from that same security or market index. Commonly, the higher the volatility, the riskier the security. Annual volatility is volatility over an year.
+<br><br>
+<a href="https://www.investopedia.com/terms/v/volatility.asp" target="_blank">Learn More</a>
+
+<code>annual_volatility(close)</code>
+
+> Note: annual_volatility() only takes a dataframe with 1 year data i.e. dataframe less than 257 trading days and greater 250 days because an average trading year has 250-257 days approximately. To calculate volaitlity on n number of trading days use <a href="#sharpe_ratio">volatility()</a>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| close           | required         | Close prices data for a year i.e. trading days<257 and trading days>250 | Pandas dataframe  |
+
+
+
+```python
+Example:
+
+from libkloudtrader.defaults import *
+from libkloudtarder.analysis import annual_volatility
+from libkloudtrader.equities.data import OHLCV
+import pandas as pd
+
+#load data
+aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+
+annual_volatility(aapl_data['close'])
+```
+```python
+return type : float
+
+28.63259383649376
 ```
 ***
 ### Aroon
@@ -1453,13 +1487,14 @@ return type : Pandas DataFrame
 248   -0.651094
 249    0.051220
 250    0.961883
-``` ***
-### Daily Log Returns
-Get daily log returns of a trading strategy or a stock.
+``` 
+***
+### Daily Volatility
+Get daily volatility of trading strategy or stock prices.
 <br><br>
-<a href="https://quantivity.wordpress.com/2011/02/21/why-log-returns/" target="_blank">Learn More</a>
+<a href="https://www.investopedia.com/terms/v/volatility.asp/" target="_blank">Learn More</a>
 
-<code>daily_log_returns(close)</code>
+<code>daily_volatility(close)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
@@ -1471,39 +1506,185 @@ Get daily log returns of a trading strategy or a stock.
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import daily_log_returns
+from libkloudtarder.analysis import daily_volatility
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
 #load data
 aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
-daily_log_returns(aapl_data['close'])
+daily_volatility(aapl_data['close'])
+```
+```python
+return type : Float
+
+1.8072732975767518
+```
+***
+### Detrended Price Oscillator
+The detrended price oscillator (DPO) is an indicator in technical analysis that attempts to eliminate the long-term trends in prices by using a displaced moving average so it does not react to the most current price action. This allows the indicator to show intermediate overbought and oversold levels effectively.
+<br><br>
+<a href="https://en.wikipedia.org/wiki/Detrended_price_oscillator/" target="_blank">Learn More</a>
+
+<code>detrended_price_oscillator(close,n)</code>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| close           | required          | Close Prices Data                      |Pandas Dataframe|
+| n                | required          | Time period/number of days            |Int|
+
+
+
+```python
+Example:
+
+from libkloudtrader.defaults import *
+from libkloudtarder.analysis import detrended_price_oscillator
+from libkloudtrader.equities.data import OHLCV
+import pandas as pd
+
+#load data
+aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+
+detrended_price_oscillator(aapl_data['close'],5)
 ```
 ```python
 return type : Pandas DataFrame
 
-0           NaN
-1     -0.017417
-2      0.463420
-3      1.132098
-4     -0.372120
-5     -0.011472
-6     -0.022948
-7      0.566412
-8      1.027338
-9     -0.509512
-10     1.638135
+0        NaN
+1        NaN
+2        NaN
+3        NaN
+4     -1.144
+5     -0.758
+6      0.800
+7     -0.300
+8     -0.738
+9     -1.146
+10    -1.110
         ...
-240   -3.252077
-241   -0.934983
-242    1.290888
-243   -3.168848
-244   -2.555849
-245   -3.967226
-246   -2.621470
-247    6.805257
-248   -0.651094
-249    0.051220
-250    0.961883
+240   -0.122
+241    1.480
+242    3.842
+243    0.014
+244    1.298
+245    6.378
+246    4.620
+247    2.340
+248   -2.812
+249   -6.592
+250    2.346
+```
+***
+### Directional Movememnt Index
+The Directional Movement Index (DMI) assists in determining if a security is trending and attempts to measure the strength of the trend. The DMI disregards the direction of the security. It only attempts to determine if there is a trend and that trends strength.
+<br><br>
+<a href="https://www.danielstrading.com/education/technical-analysis-learning-center/directional-movement-index" target="_blank">Learn More</a>
+
+<code>directional_movement_index(high, low, close, n)</code>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| high           | required          | High Prices Data                      |Pandas Dataframe|
+| low           | required          | Low Prices Data                      |Pandas Dataframe|
+| close           | required          | Close Prices Data                      |Pandas Dataframe|
+| n                | required          | Time period/number of days            |Int|
+
+
+
+```python
+Example:
+
+from libkloudtrader.defaults import *
+from libkloudtarder.analysis import directional_movement_index
+from libkloudtrader.equities.data import OHLCV
+import pandas as pd
+
+#load data
+aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+
+directional_movement_index(aapl_data['high'],aapl_data['low'],aapl_data['close'],5)
+```
+```python
+return type : Pandas DataFrame
+
+0            NaN
+1            NaN
+2            NaN
+3            NaN
+4            NaN
+5      74.206349
+6      54.560458
+7      67.742880
+8      79.466559
+9      86.245089
+10     52.972606
+        ...
+240    55.074842
+241    63.602429
+242    63.602429
+243    77.482910
+244    83.207269
+245    88.618262
+246    90.639645
+247    34.747986
+248    34.747986
+249    18.082128
+250     9.924722
+```
+***
+### Donchain Channel 
+A Donchian Channel is an indicator formed by upper and lower bands around the price bars. The upper band marks the highest price of an issue for n periods while the lower band marks the lowest price for n periods. The area between the upper and lower bands represents the Donchian Channel.
+<br><br>
+<a href="https://www.investopedia.com/terms/d/donchianchannels.asp" target="_blank">Learn More</a>
+
+<code>donchian_channel(close,n)</code>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| close           | required          | Close Prices Data                      |Pandas Dataframe|
+| n                | required          | Time period/number of days            |Int|
+
+
+
+```python
+Example:
+
+from libkloudtrader.defaults import *
+from libkloudtarder.analysis import donchian_channel
+from libkloudtrader.equities.data import OHLCV
+import pandas as pd
+
+#load data
+aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+
+donchian_channel(aapl_data['close'],5)
+```
+```python 
+return type : Pandas DataFrame 
+
+         dc_high_band  dc_high_band_indicator  dc_low_band  dc_low_band_indicator
+0             NaN                     0.0          NaN                    0.0
+1             NaN                     0.0          NaN                    0.0
+2             NaN                     0.0          NaN                    0.0
+3             NaN                     0.0          NaN                    0.0
+4          175.00                     0.0       172.23                    0.0
+5          175.00                     0.0       172.23                    0.0
+6          175.00                     0.0       173.03                    0.0
+7          175.28                     1.0       174.29                    0.0
+8          177.09                     1.0       174.29                    0.0
+9          177.09                     0.0       174.29                    0.0
+10         179.10                     1.0       174.29                    0.0
+                                      ...
+240        170.95                     0.0       165.48                    1.0
+241        170.95                     0.0       163.94                    1.0
+242        170.95                     0.0       163.94                    0.0
+243        170.95                     0.0       160.89                    1.0
+244        166.07                     0.0       156.83                    1.0
+245        166.07                     0.0       150.73                    1.0
+246        166.07                     0.0       146.83                    1.0
+247        160.89                     0.0       146.83                    0.0
+248        157.17                     0.0       146.83                    0.0
+249        157.17                     0.0       146.83                    0.0
+250        157.74                     1.0       146.83                    0.0
 ```
