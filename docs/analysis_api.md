@@ -1062,8 +1062,8 @@ Developed by Marc Chaikin, the Chaikin Oscillator measures the momentum of the A
 | low            | required          | Low Prices Data                        |Pandas Dataframe|
 | close            | required          | Close Prices Data                        |Pandas Dataframe|
 | volume           | required          | Volume Data                        |Pandas Dataframe|
-| short_period      | required          | Short Period/Fast Period. 3 by default.          |Int|
-| long_period      | required          | Long Period/Slow Period. 10 by default.          |Int|
+| short_period      | optional          | Short Period/Fast Period. 3 by default.          |Int|
+| long_period      | optional          | Long Period/Slow Period. 10 by default.          |Int|
 
 ```python
 Example:
@@ -1661,8 +1661,9 @@ aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day']
 donchian_channel(aapl_data['close'],5)
 ```
 ```python 
+returns: dc_high_band, dc_high_band_indicator, dc_low_band, dc_low_band_indicator
 return type : Pandas DataFrame 
-
+ 
          dc_high_band  dc_high_band_indicator  dc_low_band  dc_low_band_indicator
 0             NaN                     0.0          NaN                    0.0
 1             NaN                     0.0          NaN                    0.0
@@ -1687,4 +1688,203 @@ return type : Pandas DataFrame
 248        157.17                     0.0       146.83                    0.0
 249        157.17                     0.0       146.83                    0.0
 250        157.74                     1.0       146.83                    0.0
+```
+***
+### Double EMA
+The Double Exponential Moving Average (DEMA) indicator was introduced in January 1994 by Patrick G. Mulloy. It attempts to remove the inherent lag associated to Moving Averages by placing more weight on recent values. The name suggests this is achieved by applying a double exponential smoothing which is not the case. The name double comes from the fact that the value of an EMA (Exponential Moving Average) is doubled.
+<br><br>
+<a href="https://en.wikipedia.org/wiki/Double_exponential_moving_average" target="_blank">Learn More</a>
+
+<code>double_ema(close,n)</code>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| close           | required          | Close Prices Data                      |Pandas Dataframe|
+| n                | required          | Time period/number of days            |Int|
+
+
+
+```python
+Example:
+
+from libkloudtrader.defaults import *
+from libkloudtarder.analysis import double_ema
+from libkloudtrader.equities.data import OHLCV
+import pandas as pd
+
+#load data
+aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+
+double_ema(aapl_data['close'],5)
+```
+```python 
+return type : Pandas DataFrame 
+ 
+0             NaN
+1             NaN
+2             NaN
+3             NaN
+4             NaN
+5             NaN
+6             NaN
+7             NaN
+8      176.416830
+9      176.546476
+10     178.181155
+           ...
+240    166.747925
+241    164.681302
+242    164.863769
+243    162.201113
+244    158.616476
+245    153.435918
+246    148.666123
+247    152.086645
+248    153.605028
+249    154.607084
+250    156.071655
+```
+***
+### Downside Risk
+Downside risk is the financial risk associated with losses. That is, it is the risk of the actual return being below the expected return, or the uncertainty about the magnitude of that difference.
+<br><br>
+<a href="https://en.wikipedia.org/wiki/Downside_risk" target="_blank">Learn More</a>
+
+<code>downside_risk(close,required_return=0)</code>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| close           | required          | Close Prices Data                      |Pandas Dataframe|
+| required_return | optional          | Required Return. 0 by default           |Int/Float|
+
+
+
+```python
+Example:
+
+from libkloudtrader.defaults import *
+from libkloudtarder.analysis import downside_risk
+from libkloudtrader.equities.data import OHLCV
+import pandas as pd
+
+#load data
+aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+
+downside_risk(aapl_data['close'])
+```
+```python 
+return type : Float
+ 
+20.749425627440665
+```
+***
+### Ease of Movement
+The Ease of Movement technical indicator shows the relationship between price and volume. Often times, traders use this indicator when assessing the strength of an underlying trend.
+<br><br>
+<a href="https://www.investopedia.com/terms/e/easeofmovement.asp" target="_blank">Learn More</a>
+
+<code>ease_of_movement(high, low, close, volume, n)</code>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| high           | required          | High Prices Data                      |Pandas Dataframe|
+| low          | required          | Low Prices Data                      |Pandas Dataframe|
+| close           | required          | Close Prices Data                      |Pandas Dataframe|
+| volume           | required          | Volume Data                      |Pandas Dataframe|
+| n               | required          | Timeperiod/ number of days           |Int |
+
+
+
+```python
+Example:
+
+from libkloudtrader.defaults import *
+from libkloudtarder.analysis import ease_of_movement
+from libkloudtrader.equities.data import OHLCV
+import pandas as pd
+
+#load data
+aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+
+ease_of_movement(aapl_data['high'], aapl_data['low'], aapl_data['close'], aapl_data['volume'], 7)
+```
+```python 
+return type : Pandas DataFrame
+0               NaN
+1               NaN
+2               NaN
+3               NaN
+4               NaN
+5               NaN
+6               NaN
+7      5.326876e-08
+8      3.681215e-08
+9      6.084697e-08
+10     3.023945e-08 
+           ...
+240   -1.878136e-07
+241   -1.202826e-07
+242   -8.951391e-08
+243   -8.207138e-08
+244   -1.894941e-07
+245   -2.632130e-07
+246   -3.631737e-07
+247   -2.369739e-07
+248   -1.812056e-07
+249   -1.449995e-07
+250   -6.321794e-08
+```
+***
+### Exponential Moving Average(EMA)
+An exponential moving average (EMA) is a type of moving average (MA) that places a greater weight and significance on the most recent data points. The exponential moving average is also referred to as the exponentially weighted moving average. 
+<br><br>
+<a href="https://www.investopedia.com/terms/e/ema.asp" target="_blank">Learn More</a>
+
+<code>ema(close,n)</code>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| close           | required          | Close Prices Data                      |Pandas Dataframe|
+| n               | required          | Timeperiod/ number of days           |Int |
+
+
+
+```python
+Example:
+
+from libkloudtrader.defaults import *
+from libkloudtarder.analysis import ema
+from libkloudtrader.equities.data import OHLCV
+import pandas as pd
+
+#load data
+aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+
+ema(aapl_data['close'], 7)
+```
+```python 
+return type : Pandas DataFrame
+0               NaN
+1               NaN
+2               NaN
+3               NaN
+4               NaN
+5               NaN
+6               NaN
+7      5.326876e-08
+8      3.681215e-08
+9      6.084697e-08
+10     3.023945e-08
+           ...
+240   -1.878136e-07
+241   -1.202826e-07
+242   -8.951391e-08
+243   -8.207138e-08
+244   -1.894941e-07
+245   -2.632130e-07
+246   -3.631737e-07
+247   -2.369739e-07
+248   -1.812056e-07
+249   -1.449995e-07
+250   -6.321794e-08
 ```
