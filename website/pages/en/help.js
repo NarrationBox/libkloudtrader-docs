@@ -30,7 +30,7 @@ class Help extends React.Component {
         title: 'Browse Docs',
       },
       {
-        content: 'Ask questions about the documentation and project.<br>Join our <a href="https://join.slack.com/t/kloudtradercommunity/shared_invite/enQtNDY1MDY0ODAyNTE4LWNmNDdiZWVhODliODM2ZjRhOTVhNzQ0ZDY2ZmU0NGMyYWMwZDJjNGY0OTRkYzQ0ZjQ0Zjk1ZTNiNmQxM2ViMWY" target="_blank">slack</a> <br>or<br>Open an issue on  <a href="https://github.com/KloudTrader/kloudtrader/issues/new" target="_blank">Github</a>',
+        content: 'Ask questions about the documentation and project. Join our <a href="https://join.slack.com/t/kloudtradercommunity/shared_invite/enQtNDY1MDY0ODAyNTE4LWNmNDdiZWVhODliODM2ZjRhOTVhNzQ0ZDY2ZmU0NGMyYWMwZDJjNGY0OTRkYzQ0ZjQ0Zjk1ZTNiNmQxM2ViMWY" target="_blank">slack</a> or open an issue on  <a href="https://github.com/KloudTrader/kloudtrader/issues/new" target="_blank">Github</a>',
         title: 'Join the community',
       },
       {
