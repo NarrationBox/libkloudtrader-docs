@@ -66,7 +66,7 @@ Now, we will create a file called <b>main.py</b> that will contain our mean-reve
 Let's start by importing the packages needed for our algorithm:
 ```python
 from libkloudtrader.defaults import *
-from libkloudtrader.equities.data import close_prices
+from libkloudtrader.equities.data import close_prices,intraday_status
 from libkloudtrader.user import account_positions,account_balance
 from libkloudtrader.alert_me import *
 from libkloudtrader.analysis import ema
@@ -184,7 +184,7 @@ Finally, your <b>main.py</b> that contains a mean-reversion trading strategy sha
 ```python
 #Mean Reversion Strategy in Python
 from libkloudtrader.defaults import *
-from libkloudtrader.equities.data import close_prices
+from libkloudtrader.equities.data import close_prices,intraday_status
 from libkloudtrader.user import account_positions,account_balance
 from libkloudtrader.alert_me import *
 import datetime
