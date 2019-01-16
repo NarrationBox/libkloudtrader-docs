@@ -183,7 +183,7 @@ Developed by Marc Chaikin, the Accumulation Distribution Line is a volume-based 
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import accumulation_distribution_index
+from libkloudtrader.analysis import accumulation_distribution_index
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -237,7 +237,7 @@ Absolute Price Oscillator is a technical indicator calculating the percentage di
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import absolute_price_oscillator
+from libkloudtrader.analysis import absolute_price_oscillator
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -291,7 +291,7 @@ Alpha is a measure of the active return on an investment, the performance of tha
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import alpha
+from libkloudtrader.analysis import alpha
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -326,7 +326,7 @@ Annual return is the return an investment provides over a period of time, expres
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import annual_return
+from libkloudtrader.analysis import annual_return
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -361,7 +361,7 @@ Using an annual/annualized Sharpe Ratio is useful for comparison of multiple ret
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import annual_sharpe_ratio
+from libkloudtrader.analysis import annual_sharpe_ratio
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -395,7 +395,7 @@ Volatility is a statistical measure of the dispersion of returns for a given sec
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import annual_volatility
+from libkloudtrader.analysis import annual_volatility
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -429,7 +429,7 @@ The Aroon indicator is used to help traders know when a market is uptrending, do
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import aroon
+from libkloudtrader.analysis import aroon
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -488,7 +488,7 @@ The Average Directional Index (ADX) was developed by J. Welles Wilder to evaluat
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import average_directional_movement_index
+from libkloudtrader.analysis import average_directional_movement_index
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -549,7 +549,7 @@ ADXR stands for Average Directional Movement Index Rating. ADXR is a component o
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import average_directional_movement_index_rating
+from libkloudtrader.analysis import average_directional_movement_index_rating
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -613,7 +613,7 @@ The Average Price is the average of the open + high + low + close of a bar. It c
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import average_price
+from libkloudtrader.analysis import average_price
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -672,7 +672,7 @@ The ATR is a Welles Wilder style moving average of the True Range. The ATR is a 
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import average_true_range
+from libkloudtrader.analysis import average_true_range
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -726,7 +726,7 @@ The Awesome Oscillator is an indicator used to measure market momentum. AO calcu
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import awesome_oscillator
+from libkloudtrader.analysis import awesome_oscillator
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -780,7 +780,7 @@ The Awesome Oscillator is an indicator used to measure market momentum. AO calcu
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import awesome_oscillator
+from libkloudtrader.analysis import awesome_oscillator
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -835,7 +835,7 @@ Balance Of Power (BOP) is an indicator that measures the market strength by asse
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import balance_of_power
+from libkloudtrader.analysis import balance_of_power
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -887,7 +887,7 @@ Beta is a measure of the volatility, or systematic risk, of a security or a port
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import beta
+from libkloudtrader.analysis import beta
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -920,7 +920,7 @@ Bollinger Bands do not, in themselves, generate buy or sell signals; they are an
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import bollinger_bands
+from libkloudtrader.analysis import bollinger_bands
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -976,7 +976,7 @@ The compound annual growth rate (CAGR) is the rate of return that would be requi
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import cagr
+from libkloudtrader.analysis import cagr
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -1010,7 +1010,7 @@ Developed by Marc Chaikin, Chaikin Money Flow measures the amount of Money Flow 
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import chaikin_money_flow
+from libkloudtrader.analysis import chaikin_money_flow
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -1067,7 +1067,7 @@ Developed by Marc Chaikin, the Chaikin Oscillator measures the momentum of the A
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import chaikin_oscillator
+from libkloudtrader.analysis import chaikin_oscillator
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -1123,7 +1123,7 @@ The Chande momentum oscillator is a technical momentum indicator invented by Tus
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import chande_momentum_oscillator
+from libkloudtrader.analysis import chande_momentum_oscillator
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -1179,7 +1179,7 @@ The Commodity Channel Index​ (CCI) is a momentum-based technical trading tool 
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import commodity_channel_index
+from libkloudtrader.analysis import commodity_channel_index
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -1234,7 +1234,7 @@ The indicator is trend following in nature. Given it’s mathematically calculat
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import coppock_curve
+from libkloudtrader.analysis import coppock_curve
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -1290,7 +1290,7 @@ The correlation coefficient is a statistical measure that calculates the strengt
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import correlation_coefficient
+from libkloudtrader.analysis import correlation_coefficient
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -1344,7 +1344,7 @@ A cumulative return is the aggregate amount an investment has gained or lost ove
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import cumulative_returns
+from libkloudtrader.analysis import cumulative_returns
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -1396,7 +1396,7 @@ Get daily returns of a trading strategy or a stock.
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import daily_returns
+from libkloudtrader.analysis import daily_returns
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -1450,7 +1450,7 @@ Get daily log returns of a trading strategy or a stock.
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import daily_log_returns
+from libkloudtrader.analysis import daily_log_returns
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -1504,7 +1504,7 @@ Get daily volatility of trading strategy or stock prices.
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import daily_volatility
+from libkloudtrader.analysis import daily_volatility
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -1537,7 +1537,7 @@ The detrended price oscillator (DPO) is an indicator in technical analysis that 
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import detrended_price_oscillator
+from libkloudtrader.analysis import detrended_price_oscillator
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -1594,7 +1594,7 @@ The Directional Movement Index (DMI) assists in determining if a security is tre
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import directional_movement_index
+from libkloudtrader.analysis import directional_movement_index
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -1649,7 +1649,7 @@ A Donchian Channel is an indicator formed by upper and lower bands around the pr
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import donchian_channel
+from libkloudtrader.analysis import donchian_channel
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -1706,7 +1706,7 @@ The Double Exponential Moving Average (DEMA) indicator was introduced in January
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import double_ema
+from libkloudtrader.analysis import double_ema
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -1761,7 +1761,7 @@ Downside risk is the financial risk associated with losses. That is, it is the r
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import downside_risk
+from libkloudtrader.analysis import downside_risk
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -1797,7 +1797,7 @@ The Ease of Movement technical indicator shows the relationship between price an
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import ease_of_movement
+from libkloudtrader.analysis import ease_of_movement
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -1851,7 +1851,7 @@ An exponential moving average (EMA) is a type of moving average (MA) that places
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import ema
+from libkloudtrader.analysis import ema
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -1907,7 +1907,7 @@ The Force Index is an indicator that uses price and volume to assess the power b
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import force_index
+from libkloudtrader.analysis import force_index
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -1959,7 +1959,7 @@ return type : Pandas DataFrame
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import hilbert_transform_dom_cyc_per
+from libkloudtrader.analysis import hilbert_transform_dom_cyc_per
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -2011,7 +2011,7 @@ return type : Pandas DataFrame
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import hilbert_transform_dom_cyc_phase
+from libkloudtrader.analysis import hilbert_transform_dom_cyc_phase
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -2063,7 +2063,7 @@ return type : Pandas DataFrame
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import hilbert_transform_inst_trendline
+from libkloudtrader.analysis import hilbert_transform_inst_trendline
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -2115,7 +2115,7 @@ return type : Pandas DataFrame
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import hilbert_transform_phasor_components
+from libkloudtrader.analysis import hilbert_transform_phasor_components
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -2169,7 +2169,7 @@ return type : Pandas DataFrame
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import hilbert_transform_sine_wave
+from libkloudtrader.analysis import hilbert_transform_sine_wave
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -2222,7 +2222,7 @@ return type : Pandas DataFrame
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import hilbert_transform_trend_vs_cycle_mode
+from libkloudtrader.analysis import hilbert_transform_trend_vs_cycle_mode
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -2276,7 +2276,7 @@ Hull Moving Average, developed by Alan Hull is an extremely useful indicator to 
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import hull_moving_average
+from libkloudtrader.analysis import hull_moving_average
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -2334,7 +2334,7 @@ The Ichimoku Cloud, also known as Ichimoku Kinko Hyo, is a versatile indicator t
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import ichimoku_cloud
+from libkloudtrader.analysis import ichimoku_cloud
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -2392,7 +2392,7 @@ The information ratio (IR) is a measure of portfolio returns above the returns o
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import information_ratio
+from libkloudtrader.analysis import information_ratio
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -2427,7 +2427,7 @@ Developed by Perry Kaufman, Kaufman's Adaptive Moving Average (KAMA) is a moving
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import kaufman_adaptive_moving_average
+from libkloudtrader.analysis import kaufman_adaptive_moving_average
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -2484,7 +2484,7 @@ Keltner Channels are a popular technical indicator that traders use to help asse
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import keltner_channels
+from libkloudtrader.analysis import keltner_channels
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -2549,7 +2549,7 @@ Developed by Martin Pring, Know Sure Thing (KST) is a momentum oscillator based 
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import know_sure_thing
+from libkloudtrader.analysis import know_sure_thing
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -2603,7 +2603,7 @@ kurtosis is a statistical measure that is used to describe the distribution. Whe
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import kurtosis
+from libkloudtrader.analysis import kurtosis
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -2635,7 +2635,7 @@ return type : Float
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import linear_regression
+from libkloudtrader.analysis import linear_regression
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -2689,7 +2689,7 @@ return type : Pandas DataFrame
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import linear_regression_angle
+from libkloudtrader.analysis import linear_regression_angle
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -2743,7 +2743,7 @@ return type : Pandas DataFrame
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import linear_regression_intercept
+from libkloudtrader.analysis import linear_regression_intercept
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -2797,7 +2797,7 @@ return type : Pandas DataFrame
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import linear_regression_slope
+from libkloudtrader.analysis import linear_regression_slope
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -2854,7 +2854,7 @@ The Moving Average Convergence Divergence (MACD) is a trend-following momentum i
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import macd
+from libkloudtrader.analysis import macd
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -2913,7 +2913,7 @@ Mass index is a form of technical analysis that examines the range between high 
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import mass_index
+from libkloudtrader.analysis import mass_index
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -2967,7 +2967,7 @@ MidPoint over period is simply moving average of the sum of highest and lowest v
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import midpoint_over_period
+from libkloudtrader.analysis import midpoint_over_period
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -3022,7 +3022,7 @@ MidPoint price over period is simply moving average of the sum of highest high a
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import midpoint_price_over_period
+from libkloudtrader.analysis import midpoint_price_over_period
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -3080,7 +3080,7 @@ Minus Directional Indicator or Negative Directional Indicator is a negative dire
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import minus_directional_indicator
+from libkloudtrader.analysis import minus_directional_indicator
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -3135,7 +3135,7 @@ return type : Pandas DataFrame
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import minus_directional_movement
+from libkloudtrader.analysis import minus_directional_movement
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -3190,7 +3190,7 @@ The Median Price indicator is simply the midpoint of each day's price. The Typic
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import median_price
+from libkloudtrader.analysis import median_price
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -3245,7 +3245,7 @@ The Momentum indicator measures the amount that a security's price has changed o
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import momentum
+from libkloudtrader.analysis import momentum
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -3300,7 +3300,7 @@ The Money Flow Index (MFI) is a technical oscillator used for identifying overbo
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import money_flow_index
+from libkloudtrader.analysis import money_flow_index
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -3353,7 +3353,7 @@ A moving average (MA) is a widely used indicator in technical analysis that help
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import ma
+from libkloudtrader.analysis import ma
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -3403,7 +3403,7 @@ return type : Pandas DataFrame
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import moving_volatility
+from libkloudtrader.analysis import moving_volatility
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -3456,7 +3456,7 @@ The Negative Volume Index (NVI) is a cumulative indicator that uses the change i
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import negative_volume_index
+from libkloudtrader.analysis import negative_volume_index
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -3512,7 +3512,7 @@ Because Normalized Average True Range is normalized, it can be more useful than 
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import normalized_average_true_range
+from libkloudtrader.analysis import normalized_average_true_range
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -3565,7 +3565,7 @@ On-balance volume (OBV) is a momentum indicator that uses volume flow to predict
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import on_balance_volume
+from libkloudtrader.analysis import on_balance_volume
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -3620,7 +3620,7 @@ The Omega ratio is a risk-return performance measure of an investment asset, por
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import omega_ratio
+from libkloudtrader.analysis import omega_ratio
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -3653,7 +3653,7 @@ The parabolic SAR is a technical indicator used to determine the price direction
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import parabolic_sar
+from libkloudtrader.analysis import parabolic_sar
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -3708,7 +3708,7 @@ The Percentage Price Oscillator (PPO) is a momentum oscillator that measures the
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import percentage_price_oscillator
+from libkloudtrader.analysis import percentage_price_oscillator
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -3765,7 +3765,7 @@ The Plus or Positive Directional Indicator (+DI) is a component of the Average D
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import plus_directional_indicator
+from libkloudtrader.analysis import plus_directional_indicator
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -3819,7 +3819,7 @@ return type : Pandas DataFrame
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import plus_directional_movement
+from libkloudtrader.analysis import plus_directional_movement
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -3875,7 +3875,7 @@ The Rate-of-Change (ROC) indicator, which is also referred to as simply Momentum
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import rate_of_change
+from libkloudtrader.analysis import rate_of_change
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -3931,7 +3931,7 @@ The relative strength index (RSI) is a momentum indicator that measures the magn
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import relative_strength_index
+from libkloudtrader.analysis import relative_strength_index
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -3984,7 +3984,7 @@ Get return for any number of trading days. Daily Returns*Number of trading days.
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import returns
+from libkloudtrader.analysis import returns
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -4017,7 +4017,7 @@ The Sharpe ratio was developed by Nobel laureate William F. Sharpe, and is used 
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import sharpe_ratio
+from libkloudtrader.analysis import sharpe_ratio
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -4049,7 +4049,7 @@ Skewness is the degree of distortion from the symmetrical bell curve, or normal 
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import skewness
+from libkloudtrader.analysis import skewness
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -4082,7 +4082,7 @@ The Sortino ratio improves upon the Sharpe ratio by isolating downside volatilit
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import skewness
+from libkloudtrader.analysis import skewness
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -4115,7 +4115,7 @@ The standard deviation is a statistic that measures the dispersion of a dataset 
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import standard_deviation
+from libkloudtrader.analysis import standard_deviation
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -4173,7 +4173,7 @@ of a security to the range of its prices over a certain period of time. The sens
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import stochastic_oscillator
+from libkloudtrader.analysis import stochastic_oscillator
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -4230,7 +4230,7 @@ The StochRSI is an indicator used in technical analysis that ranges between zero
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import stochastic_rsi
+from libkloudtrader.analysis import stochastic_rsi
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -4285,7 +4285,7 @@ Tail Ratio is the Ratio between the 95th and (absolute) 5th percentile of the da
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import tail_ratio
+from libkloudtrader.analysis import tail_ratio
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -4317,7 +4317,7 @@ The Time Series Forecast indicator displays the statistical trend of a security'
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import time_series_forecast
+from libkloudtrader.analysis import time_series_forecast
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -4371,7 +4371,7 @@ TRIX is a momentum oscillator that displays the percent rate of change of a trip
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import trix
+from libkloudtrader.analysis import trix
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -4425,7 +4425,7 @@ The triangular moving average (also known as the TMA) is similar to other moving
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import triangular_ma
+from libkloudtrader.analysis import triangular_ma
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -4479,7 +4479,7 @@ The triple exponential moving average, or TEMA, was developed by Patrick Mulloy 
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import triple_ema
+from libkloudtrader.analysis import triple_ema
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -4533,7 +4533,7 @@ The True Range function is used in the calculation of many indicators, most nota
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import true_range
+from libkloudtrader.analysis import true_range
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -4587,7 +4587,7 @@ The true strength index is a technical momentum indicator that helps traders ide
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import true_range
+from libkloudtrader.analysis import true_range
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -4642,7 +4642,7 @@ The Typical Price is the average of the high + low + close of a bar. It is used 
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import typical_price
+from libkloudtrader.analysis import typical_price
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -4700,7 +4700,7 @@ The Ultimate Oscillator is a technical indicator that was developed by Larry Wil
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import ultimate_oscillator
+from libkloudtrader.analysis import ultimate_oscillator
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -4755,7 +4755,7 @@ Value at risk (VaR) is a measure of the risk of loss for investments. It estimat
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import value_at_risk
+from libkloudtrader.analysis import value_at_risk
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -4792,7 +4792,7 @@ Variance is a measurement of the spread between numbers in a data set. The varia
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import variance
+from libkloudtrader.analysis import variance
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -4843,7 +4843,7 @@ Get volatility for any number of trading days.
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import volatility
+from libkloudtrader.analysis import volatility
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -4875,7 +4875,7 @@ The volume price trend (VPT) indicator helps determine a security’s price dire
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import volume_price_trend
+from libkloudtrader.analysis import volume_price_trend
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -4930,7 +4930,7 @@ the volume-adjusted moving average indicator (sometimes  called Equivolume chart
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import volume_adjusted_moving_average
+from libkloudtrader.analysis import volume_adjusted_moving_average
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -4986,7 +4986,7 @@ Developed by Etienne Botes and Douglas Siepman, the Vortex Indicator consists of
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import vortex_indicator
+from libkloudtrader.analysis import vortex_indicator
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -5044,7 +5044,7 @@ Volume-Weighted Average Price (VWAP) is exactly what it sounds like: the average
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import vwap
+from libkloudtrader.analysis import vwap
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -5099,7 +5099,7 @@ The Weighted Close is the average of the high, low and close of a bar, but the c
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import weighted_close_price
+from libkloudtrader.analysis import weighted_close_price
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -5154,7 +5154,7 @@ Developed by Larry Williams, Williams %R is a momentum indicator that is the inv
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import williams_r
+from libkloudtrader.analysis import williams_r
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
@@ -5207,7 +5207,7 @@ The Weighted Moving Average calculates a weight for each value in the series. Th
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtarder.analysis import wma
+from libkloudtrader.analysis import wma
 from libkloudtrader.equities.data import OHLCV
 import pandas as pd
 
