@@ -22,7 +22,7 @@ const users = [
 
 const siteConfig = {
   title: 'LibKloudTrader', 
-  tagline: "KloudTrader's in-house trading framework optimized for computational finance. Connect your trading models and conquer the markets.",
+  tagline: "KloudTrader's in-house trading framework optimized for computational finance and algorithmic trading. Connect your trading models and conquer the markets.",
   url: 'https://your-docusaurus-test-site.com', 
   baseUrl: '/', // Base URL for your project */
   // For github.io type URLs, you would set the url and baseUrl like:
