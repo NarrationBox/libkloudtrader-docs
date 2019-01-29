@@ -43,6 +43,7 @@ buy_preview('AAPL',2)
 
 Example: (Previwing a buy order of order_type 'limit')
 
+from libkloudtrader.defaults import *
 from libkloudtrader.equities.trade import buy_preview
 buy_preview('AAPL',2,order_type='limit',price=214)
 ```
@@ -95,6 +96,32 @@ return type: json (Limit order type)
 ```
 
 ***
+### Buy to Cover Preview
+Preview your buy to cover order. This will allow you to place a <code>buy_to_cover</code> order without it being sent to the market so that you can know what will it actaully look like when you place a real order.
+Buy to cover order cannot be placed for long and zero position.
+
+<code>buy_to_cover_preview(symbol,quantity,access_token,account_number,duration,order_type,price,stop)</code>
+| Paramters       | Required/Optional | Description                                    | Type |
+|-----------------|-------------------|------------------------------------------------|------| 
+| symbol          | required          | Symbol of the stock                            | str  |
+| quantity        | required          | Number of shares                               | str  |
+| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                                 | str  |
+| account_number  | optional          | Will automatically be present when you deploy to Narwhal                                                  | str  |
+| duration        | required          | Time for which the order will remain in effect (Options: day,gtc,pre, post) (day by default)          | str  |
+| order_type      | required          | Type of order to be placed (market by default) (Options: market, limit, stop, stop_limit)     | str  |
+| price           | optional (required for "limit", "stop_limit")        | The desired order limit price for "limit" and "stop_limit" orders     | int  |
+| stop            | optional (required for "stop" and "stop_limit")        | The stop price in a "stop" or "stop_limit" typed order    | int  |
+```python
+Example: 
+
+from libkloudtrader.defaults import *
+from libkloudtrader.equities.trade import buy_to_cover_preview
+
+buy_to_cover_preview('SQ',1)
+
+```
+
+***
 ### Sell Preview
 Preview your sell order. This will allow you to place a <code>sell</code> order without it being sent to the market so that you can know what will it actaully look like when you place a real order
 
@@ -112,6 +139,7 @@ Preview your sell order. This will allow you to place a <code>sell</code> order 
 ```python
 Example: 
 
+from libkloudtrader.defaults import *
 from libkloudtrader.equities.trade import sell_preview
 
 sell_preview('AAPL',2)
@@ -143,6 +171,56 @@ return type: json (Market order type)
 ```
 
 ***
+### Sell Short Preview
+Preview your sell short order. This will allow you to place a <code>sell_short</code> order without it being sent to the market so that you can know what will it actaully look like when you place a real order.
+Sell short order cannot be placed for long position or if there are pending Buy orders.
+
+<code>sell_preview(symbol,quantity,access_token,account_number,duration,order_type,price,stop)</code>
+| Paramters       | Required/Optional | Description                                    | Type |
+|-----------------|-------------------|------------------------------------------------|------| 
+| symbol          | required          | Symbol of the stock                            | str  |
+| quantity        | required          | Number of shares                               | str  |
+| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                                 | str  |
+| account_number  | optional          | Will automatically be present when you deploy to Narwhal                                                  | str  |
+| duration        | required          | Time for which the order will remain in effect (Options: day,gtc,pre, post) (day by default)          | str  |
+| order_type      | required          | Type of order to be placed (market by default) (Options: market, limit, stop, stop_limit)     | str  |
+| price           | optional (required for "limit", "stop_limit")        | The desired order limit price for "limit" and "stop_limit" orders     | int  |
+| stop            | optional (required for "stop" and "stop_limit")        | The stop price in a "stop" or "stop_limit" typed order    | int  |
+```python
+Example: 
+
+from libkloudtrader.defaults import *
+from libkloudtrader.equities.trade import sell_short_preview
+
+sell_short_preview('SQ',1)
+
+```
+```python
+return type: json (Market order type)
+
+{  
+   'order':{  
+      'status':'ok',
+      'commission':0,
+      'cost':-38.11,
+      'fees':0,
+      'symbol':'SQ',
+      'quantity':1,
+      'side':'sell_short',
+      'type':'market',
+      'duration':'day',
+      'result':True,
+      'order_cost':-76.22,
+      'margin_change':38.11,
+      'request_date':'2019-01-29T10:30:21.791',
+      'extended_hours':False,
+      'class':'equity',
+      'strategy':'equity'
+   }
+}
+```
+
+***
 ### Buy
 Buy equities. Order placed using this API will be sent to the market and executed according to your specifications. 
 
@@ -160,6 +238,7 @@ Buy equities. Order placed using this API will be sent to the market and execute
 ```python
 Example: 
 
+from libkloudtrader.defaults import *
 from libkloudtrader.equities.trade import buy
 
 buy('AAPL',2)
@@ -171,6 +250,78 @@ return type: json (Market order type)
 {  
    'order':{  
       'id':237619,
+      'status':'ok',
+      'partner_id':'***...***'
+   }
+}
+```
+***
+
+
+### Buy to cover
+Buy to cover short positions. Order placed using this API will be sent to the market and executed according to your specifications. 
+
+<code>buy_to_cover(symbol,quantity,access_token,account_number,duration,order_type,price,stop)</code>
+| Paramters       | Required/Optional | Description                                    | Type |
+|-----------------|-------------------|------------------------------------------------|------| 
+| symbol          | required          | Symbol of the stock                            | str  |
+| quantity        | required          | Number of shares                               | str  |
+| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                                 | str  |
+| account_number  | optional          | Will automatically be present when you deploy to Narwhal                                                  | str  |
+| duration        | required          | Time for which the order will remain in effect (Options: day,gtc,pre, post) (day by default)          | str  |
+| order_type      | required          | Type of order to be placed (market by default) (Options: market, limit, stop, stop_limit)     | str  |
+| price           | optional (required for "limit", "stop_limit")        | The desired order limit price for "limit" and "stop_limit" orders     | int  |
+| stop            | optional (required for "stop" and "stop_limit")        | The stop price in a "stop" or "stop_limit" typed order    | int  |
+```python
+Example: 
+
+from libkloudtrader.defaults import *
+from libkloudtrader.equities.trade import buy_to_cover
+
+buy_to_cover('AAPL',2)
+
+```
+```python
+return type: json (Market order type)
+
+{  
+   'order':{  
+      'id':237620 ,
+      'status':'ok',
+      'partner_id':'***...***'
+   }
+}
+```
+***
+### Sell Short
+Sell short equities(equities you don't own yet). Order placed using this API will be sent to the market and executed according to your specifications. 
+
+<code>sell_short(access_token,account_number,symbol,quantity,duration,order_type,price,stop)</code>
+| Paramters       | Required/Optional | Description                                    | Type |
+|-----------------|-------------------|------------------------------------------------|------| 
+| symbol          | required          | Symbol of the stock                            | str  |
+| quantity        | required          | Number of shares                               | str  |
+| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                                 | str  |
+| account_number  | optional          | Will automatically be present when you deploy to Narwhal                                                  | str  |
+| duration        | required          | Time for which the order will remain in effect (Options: day,gtc,pre, post) (day by default)          | str  |
+| order_type      | required          | Type of order to be placed (market by default) (Options: market, limit, stop, stop_limit)     | str  |
+| price           | optional (required for "limit", "stop_limit")        | The desired order limit price for "limit" and "stop_limit" orders     | int  |
+| stop            | optional (required for "stop" and "stop_limit")        | The stop price in a "stop" or "stop_limit" typed order    | int  |
+```python
+Example: 
+
+from libkloudtrader.defaults import *
+from libkloudtrader.equities.trade import sell
+
+sell_short('AAPL',2)
+
+```
+```python
+return type: json (Market order type)
+
+{  
+   'order':{  
+      'id':237624,
       'status':'ok',
       'partner_id':'***...***'
    }
@@ -194,6 +345,7 @@ Sell equities. Order placed using this API will be sent to the market and execut
 ```python
 Example: 
 
+from libkloudtrader.defaults import *
 from libkloudtrader.equities.trade import sell
 
 sell('AAPL',2)
@@ -227,6 +379,7 @@ Change an order if it is not filled yet.
 ```python
 Example: 
 
+from libkloudtrader.defaults import *
 from libkloudtrader.equities.trade import change_equity_order
 
 change_equity_order(1372964,order_type='limit',duration="gtc",price=215)
@@ -257,6 +410,7 @@ Cancel an order if it is not filled yet.
 ```python
 Example: 
 
+from libkloudtrader.defaults import *
 from libkloudtrader.equities.trade import cancel_equity_order
 
 cancel_equity_order(1372964)
