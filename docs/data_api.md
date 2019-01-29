@@ -575,7 +575,7 @@ return type: json
 ```
 
 ***
-### Companie Listed on Nasdaq, NYSE and AMEX
+### Companies Listed on Nasdaq, NYSE and AMEX
 Get Companies listed on <b>Nasdaq, NYSE, AMEX</b>, their symbols, last prices, market-cap and other information about them.
 
 <code>list_of_companies(exchange='all')</code>
