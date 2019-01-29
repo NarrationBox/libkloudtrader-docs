@@ -119,7 +119,7 @@ Get OHLCV(Open-High-Low-Close-Volume) data for a symbol (As back as you want to 
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtrader.equiites.data import OHLCV
+from libkloudtrader.equities.data import OHLCV
 
 OHLCV('AAPL','2013-01-01','2018-01-01')
 ```
@@ -170,7 +170,7 @@ Get historical Open Prices for a symbol (As back as you want to go)<br>
 Example:
 
 from libkloudtrader.defaults import *
-from liblibkloudtrader.equiites.data import open_prices
+from liblibkloudtrader.equities.data import open_prices
 
 open_prices('AAPL','2013-01-01','2018-01-01')
 ```
@@ -214,7 +214,7 @@ Get historical High Prices for a symbol (As back as you want to go)<br>
 Example:
 
 from libkloudtrader.defaults import *
-from liblibkloudtrader.equiites.data import high_prices
+from liblibkloudtrader.equities.data import high_prices
 
 high_prices('AAPL','2013-01-01','2018-01-01')
 ```
@@ -254,7 +254,7 @@ Get historical Low Prices for a symbol (As back as you want to go)<br>
 Example:
 
 from libkloudtrader.defaults import *
-from liblibkloudtrader.equiites.data import low_prices
+from liblibkloudtrader.equities.data import low_prices
 
 low_prices('AAPL','2013-01-01','2018-01-01')
 ```
@@ -298,7 +298,7 @@ Get historical Close Prices for a symbol (As back as you want to go)<br>
 Example:
 
 from libkloudtrader.defaults import *
-from liblibkloudtrader.equiites.data import close_prices
+from liblibkloudtrader.equities.data import close_prices
 
 close_prices('AAPL','2013-01-01','2018-01-01')
 ```
@@ -342,7 +342,7 @@ Get historical Voulme for a symbol (As back as you want to go)<br>
 Example:
 
 from libkloudtrader.defaults import *
-from libkloudtrader.equiites.data import volume
+from libkloudtrader.equities.data import volume
 
 volume('AAPL','2013-01-01','2018-01-01')
 ```
@@ -368,6 +368,265 @@ return type: json
 ]
 ```
 
+***
+### Tick Data
+Get tick data till last second for today/last trading day or tick data for a particular time.<br>
+
+<code>tick_data(symbol,start=None,end=None,data_filter='all',access_token=ACCESS_TOKEN)</code>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| symbol          | required          | stock symbol/ticker                     | str  |
+| start           | optional         | starting date and time(YYYY-MM-DD HH:MM). None by default. Can go only upto 1 week in past.             | str  |
+| end             | required          | end date and time(YYYY-MM-DD HH:MM). None by default. Can go only upto 1 week in past.                    | str  |
+| data_filter        | optional          | 'open' for data points within open market hours only. 'all' for all available data points. 'all' by default. | str  |
+| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                          | str  |
+```python 
+Example:
+
+from libkloudtrader.defaults import *
+from libkloudtrader.equities.data import tick_data
+
+tick_data('AAPL',start='2019-01-23 12:30',end='2019-01-23 12:40',data_filter='open')
+```
+```python
+return type: json 
+
+[  
+   {  
+      'price':152.25,
+      'time':'2019-01-23T12:30:00',
+      'timestamp':1548264600,
+      'volume':200
+   },
+   {  
+      'price':152.24,
+      'time':'2019-01-23T12:30:00',
+      'timestamp':1548264600,
+      'volume':100
+   },
+   .
+   .
+   .
+   {  
+      'price':152.3,
+      'time':'2019-01-23T12:39:59',
+      'timestamp':1548265199,
+      'volume':400
+   },
+   {  
+      'price':152.29,
+      'time':'2019-01-23T12:39:59',
+      'timestamp':1548265199,
+      'volume':100
+   }
+]
+```
+
+***
+### 5 minute bar data
+Get 5 minute bar data<b>(OHLCV+VWAP)</b> for today/last trading day or 5 minute bar data for a particular time.
+
+<code>min5_bar_data(symbol,start=None,end=None,data_filter='all',access_token=ACCESS_TOKEN)</code>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| symbol          | required          | stock symbol/ticker                     | str  |
+| start           | optional         | starting date and time(YYYY-MM-DD HH:MM). None by default. Can go only upto 1 week in past.             | str  |
+| end             | required          | end date and time(YYYY-MM-DD HH:MM). None by default. Can go only upto 1 week in past.                    | str  |
+| data_filter        | optional          | 'open' for data points within open market hours only. 'all' for all available data points. 'all' by default. | str  |
+| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                          | str  |
+```python 
+Example:
+
+from libkloudtrader.defaults import *
+from libkloudtrader.equities.data import min5_bar_data
+
+min5_bar_data('AAPL',start="2019-01-25 12:00",end="2019-01-25 16:00")
+```
+```python
+return type: json 
+
+[  
+   {  
+      'time':'2019-01-25T12:00:00',
+      'timestamp':1548435600,
+      'price':156.98000000000002,
+      'open':157.01,
+      'high':157.05,
+      'low':156.91,
+      'close':156.91,
+      'volume':212064,
+      'vwap':156.97012
+   },
+   {  
+      'time':'2019-01-25T12:05:00',
+      'timestamp':1548435900,
+      'price':156.89499999999998,
+      'open':156.91,
+      'high':156.97,
+      'low':156.82,
+      'close':156.83,
+      'volume':144491,
+      'vwap':156.9039
+   },
+   .
+   .
+   .
+   {  
+      'time':'2019-01-25T15:55:00',
+      'timestamp':1548449700,
+      'price':157.74,
+      'open':157.7261,
+      'high':158.02,
+      'low':157.46,
+      'close':157.72,
+      'volume':1431087,
+      'vwap':157.63819
+   },
+   {  
+      'time':'2019-01-25T16:00:00',
+      'timestamp':1548450000,
+      'price':157.3262,
+      'open':157.76,
+      'high':157.84,
+      'low':156.8124,
+      'close':157.72,
+      'volume':1792116,
+      'vwap':157.75908
+   }
+]
+```
+
+***
+### 15 minute bar data
+Get 15 minute bar data<b>(OHLCV+VWAP)</b> for today/last trading day or 5 minute bar data for a particular time.
+
+<code>min15_bar_data(symbol,start=None,end=None,data_filter='all',access_token=ACCESS_TOKEN)</code>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| symbol          | required          | stock symbol/ticker                     | str  |
+| start           | optional         | starting date and time(YYYY-MM-DD HH:MM). None by default. Can go only upto 1 week in past.             | str  |
+| end             | required          | end date and time(YYYY-MM-DD HH:MM). None by default. Can go only upto 1 week in past.                    | str  |
+| data_filter        | optional          | 'open' for data points within open market hours only. 'all' for all available data points. 'all' by default. | str  |
+| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                          | str  |
+```python 
+Example:
+
+from libkloudtrader.defaults import *
+from libkloudtrader.equities.data import min15_bar_data
+
+min15_bar_data('AAPL',start="2019-01-25 12:00",end="2019-01-25 16:00")
+```
+```python
+return type: json 
+
+[  
+   {  
+      'time':'2019-01-25T12:00:00',
+      'timestamp':1548435600,
+      'price':156.82,
+      'open':157.01,
+      'high':157.05,
+      'low':156.59,
+      'close':156.666,
+      'volume':552439,
+      'vwap':156.86707
+   },
+   {  
+      'time':'2019-01-25T12:15:00',
+      'timestamp':1548436500,
+      'price':156.815,
+      'open':156.68,
+      'high':157.02,
+      'low':156.61,
+      'close':156.94,
+      'volume':474270,
+      'vwap':156.81637
+   },
+   .
+   .
+   .
+    {  
+      'time':'2019-01-25T15:45:00',
+      'timestamp':1548449100,
+      'price':157.74,
+      'open':157.58,
+      'high':158.02,
+      'low':157.46,
+      'close':157.72,
+      'volume':2321821,
+      'vwap':157.64307
+   },
+   {  
+      'time':'2019-01-25T16:00:00',
+      'timestamp':1548450000,
+      'price':157.3262,
+      'open':157.76,
+      'high':157.84,
+      'low':156.8124,
+      'close':157.66,
+      'volume':1806919,
+      'vwap':157.7589
+   }
+]
+```
+
+***
+### Companie Listed on Nasdaq, NYSE and AMEX
+Get Companies listed on <b>Nasdaq, NYSE, AMEX</b>, their symbols, last prices, market-cap and other information about them.
+
+<code>list_of_companies(exchange='all')</code>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| exchange         | required          | name of exchange. 'nyse' for New York Stock Exchange. 'nasdaq' for Nasdaq. 'amex' for American Stock Exchange. 'all' for all 3 of them. all by default.                    | str  |
+
+```python 
+Example:
+
+from libkloudtrader.defaults import *
+from libkloudtrader.equities.data import list_of_companies
+
+list_of_companies()
+list_of_companies('nyse')
+```
+```python
+return type: pandas dataframe
+
+      Symbol                                         Name  ...                 Sector                                           industry
+0        DDD                       3D Systems Corporation  ...             Technology            Computer Software: Prepackaged Software
+1        MMM                                   3M Company  ...            Health Care                         Medical/Dental Instruments
+2       WBAI                              500.com Limited  ...      Consumer Services              Services-Misc. Amusement & Recreation
+3       WUBA                                  58.com Inc.  ...             Technology    Computer Software: Programming, Data Processing
+4       EGHT                                      8x8 Inc  ...             Technology                                       EDP Services
+5        AHC                        A.H. Belo Corporation  ...      Consumer Services                               Newspapers/Magazines
+...      ...                                          ...  ...                    ...                                                ...
+6869     WYY                        WidePoint Corporation  ...             Technology                                       EDP Services
+6870     WTT                Wireless Telecom Group,  Inc.  ...          Capital Goods                                Electrical Products
+6871    XTNT                 Xtant Medical Holdings, Inc.  ...            Health Care  Biotechnology: Biological Products (No Diagnos...
+6872    YUMA                            Yuma Energy, Inc.  ...                 Energy                               Oil & Gas Production
+6873    ZDGE                                  Zedge, Inc.  ...             Technology            Computer Software: Prepackaged Software
+6874     ZOM               Zomedica Pharmaceuticals Corp.  ...            Health Care                              Major Pharmaceuticals
+
+return type: pandas dataframe
+
+     Symbol                                               Name  ...                 Sector                                         industry
+0       DDD                             3D Systems Corporation  ...             Technology          Computer Software: Prepackaged Software
+1       MMM                                         3M Company  ...            Health Care                       Medical/Dental Instruments
+2      WBAI                                    500.com Limited  ...      Consumer Services            Services-Misc. Amusement & Recreation
+3      WUBA                                        58.com Inc.  ...             Technology  Computer Software: Programming, Data Processing
+4      EGHT                                            8x8 Inc  ...             Technology                                     EDP Services
+5       AHC                              A.H. Belo Corporation  ...      Consumer Services                             Newspapers/Magazines
+...     ...                                                ...  ...                    ...                                              ...
+3110   ZB^H                          Zions Bancorporation N.A.  ...                    NaN                                              NaN
+3111    ZBK                          Zions Bancorporation N.A.  ...                Finance                                      Major Banks
+3112    ZTS                                        Zoetis Inc.  ...            Health Care                            Major Pharmaceuticals
+3113    ZTO                          ZTO Express (Cayman) Inc.  ...         Transportation                Trucking Freight/Courier Services
+3114    ZUO                                        Zuora, Inc.  ...             Technology          Computer Software: Prepackaged Software
+3115   ZYME                                     Zymeworks Inc.  ...            Health Care                            Major Pharmaceuticals
+```
 
 
 ***
