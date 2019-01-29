@@ -32,6 +32,7 @@ Get quotes for an individual or multiple symbols<br/>
 ```python
 Example:
 
+from libkloudtrader.defaults import *
 from libkloudtarder.equities.data import quotes
 quotes('AAPL,SPY')
 ```

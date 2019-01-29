@@ -43,6 +43,7 @@ buy_preview('AAPL',2)
 
 Example: (Previwing a buy order of order_type 'limit')
 
+from libkloudtrader.defaults import *
 from libkloudtrader.equities.trade import buy_preview
 buy_preview('AAPL',2,order_type='limit',price=214)
 ```
@@ -113,6 +114,7 @@ Buy to cover order cannot be placed for long and zero position.
 ```python
 Example: 
 
+from libkloudtrader.defaults import *
 from libkloudtrader.equities.trade import buy_to_cover_preview
 
 buy_to_cover_preview('SQ',1)
@@ -137,6 +139,7 @@ Preview your sell order. This will allow you to place a <code>sell</code> order 
 ```python
 Example: 
 
+from libkloudtrader.defaults import *
 from libkloudtrader.equities.trade import sell_preview
 
 sell_preview('AAPL',2)
@@ -186,6 +189,7 @@ Sell short order cannot be placed for long position or if there are pending Buy 
 ```python
 Example: 
 
+from libkloudtrader.defaults import *
 from libkloudtrader.equities.trade import sell_short_preview
 
 sell_short_preview('SQ',1)
@@ -234,6 +238,7 @@ Buy equities. Order placed using this API will be sent to the market and execute
 ```python
 Example: 
 
+from libkloudtrader.defaults import *
 from libkloudtrader.equities.trade import buy
 
 buy('AAPL',2)
@@ -270,6 +275,7 @@ Buy to cover short positions. Order placed using this API will be sent to the ma
 ```python
 Example: 
 
+from libkloudtrader.defaults import *
 from libkloudtrader.equities.trade import buy_to_cover
 
 buy_to_cover('AAPL',2)
@@ -304,6 +310,7 @@ Sell short equities(equities you don't own yet). Order placed using this API wil
 ```python
 Example: 
 
+from libkloudtrader.defaults import *
 from libkloudtrader.equities.trade import sell
 
 sell_short('AAPL',2)
@@ -338,6 +345,7 @@ Sell equities. Order placed using this API will be sent to the market and execut
 ```python
 Example: 
 
+from libkloudtrader.defaults import *
 from libkloudtrader.equities.trade import sell
 
 sell('AAPL',2)
@@ -371,6 +379,7 @@ Change an order if it is not filled yet.
 ```python
 Example: 
 
+from libkloudtrader.defaults import *
 from libkloudtrader.equities.trade import change_equity_order
 
 change_equity_order(1372964,order_type='limit',duration="gtc",price=215)
@@ -401,6 +410,7 @@ Cancel an order if it is not filled yet.
 ```python
 Example: 
 
+from libkloudtrader.defaults import *
 from libkloudtrader.equities.trade import cancel_equity_order
 
 cancel_equity_order(1372964)
