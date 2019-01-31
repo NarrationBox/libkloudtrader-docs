@@ -238,6 +238,9 @@ Many more features like Papertrading, trading for other asset classes like Crypt
 <br>
 <center><h3>Happy Algo Trading!!</h3></center>
 <br>
+
+*This article is not intended to provide investment advice. This article is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory or other services by KloudTrader. KloudTrader makes no guarantees as to accuracy or completeness of the views expressed in this article. The views are subject to change and may have become unreliable for various reasons, including changes in market conditions or economic circumstances. All investments involve risk, including loss of principal. You should consult with an investment professional before making any investment decisions.*
+
 <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <a href="https://twitter.com/KloudTrader?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @KloudTrader</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
