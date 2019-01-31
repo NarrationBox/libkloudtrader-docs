@@ -11,10 +11,14 @@ It is 2019 and Facebook is [integrating its services into a single unified backe
 Android Lollipop (5.0+) and above has a feature known as “User Profiles”, designed to support multi-user sharing of devices and isolating workplace and personal systems. On a 2017 Android flagship device, switching profiles can usually be done in under 3 seconds. We will be using this feature to isolate WhatsApp.
 
 <p align="center">
-<img width="600" height="200" src="https://raw.githubusercontent.com/KloudTrader/libkloudtrader-docs/master/website/static/img/whatsapp-security1.png">
+<img width="600" height="550" src="https://raw.githubusercontent.com/KloudTrader/libkloudtrader-docs/master/website/static/img/whatsapp-security1.jpeg">
 </p>
 
-*This article is not intended to provide investment advice. This article is provided for informational purposes only and does not constitute an offer to sell, a solicitation to buy, or a recommendation or endorsement for any security or strategy, nor does it constitute an offer to provide investment advisory or other services by KloudTrader. KloudTrader makes no guarantees as to accuracy or completeness of the views expressed in this article. The views are subject to change and may have become unreliable for various reasons, including changes in market conditions or economic circumstances. All investments involve risk, including loss of principal. You should consult with an investment professional before making any investment decisions.*
+Go to Android > Settings > System > Multiple Users and add a new user. This can also be done by clicking the user profile icon in the notification bar pull-down menu.
+
+<p align="center">
+<img width="600" height="550" src="https://raw.githubusercontent.com/KloudTrader/libkloudtrader-docs/master/website/static/img/whatsapp-security2.jpeg">
+</p>
 <br>
 
 
