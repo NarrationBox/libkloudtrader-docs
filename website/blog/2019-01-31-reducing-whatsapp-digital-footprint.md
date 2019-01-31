@@ -10,6 +10,7 @@ It is 2019 and Facebook is [integrating its services into a single unified backe
 
 Android Lollipop (5.0+) and above has a feature known as “User Profiles”, designed to support multi-user sharing of devices and isolating workplace and personal systems. On a 2017 Android flagship device, switching profiles can usually be done in under 3 seconds. We will be using this feature to isolate WhatsApp.
 
+<p align="center">
 <img width="600" height="200" src="https://raw.githubusercontent.com/KloudTrader/libkloudtrader-docs/master/website/static/img/whatsapp-security1.png">
 </p>
 
