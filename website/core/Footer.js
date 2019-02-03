@@ -40,7 +40,7 @@ class Footer extends React.Component {
             <a href={this.docUrl('api_index', this.props.language)}>
               API Reference
             </a>
-            <a href={"http://localhost:3000/blog/2018/12/14/kloudtrader-blog-post"}>
+            <a href={"https://blog.kloudtrader.com/2018/12/14/libkloudtrader-alert-system/"}>
               Tutorials
             </a>
           </div>

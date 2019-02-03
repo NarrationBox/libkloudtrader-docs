@@ -41,7 +41,7 @@ const siteConfig = {
     {doc: 'intro', label: 'Docs'},
     {doc: 'api_index', label: 'API'},
     {page: 'help', label: 'Help'},
-    {blog: true, label: 'Blog'},
+    {href:'https://blog.kloudtrader.com/',label:"Blog"}
   ],
 
   // If you have users set above, you add it here:
