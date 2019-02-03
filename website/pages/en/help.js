@@ -34,7 +34,7 @@ class Help extends React.Component {
         title: 'Join the community',
       },
       {
-        content: 'Find out what is new with this project via our <a href="/blog" target="_blank">Blog</a>',
+        content: 'Find out what is new with this project via our <a href="https://blog.kloudtrader.com/2018/12/14/libkloudtrader-alert-system/" target="_blank">Blog</a>',
         title: 'Stay up to date',
       },
     ];
