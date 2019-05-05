@@ -175,7 +175,7 @@ return type: json (Market order type)
 Preview your sell short order. This will allow you to place a <code>sell_short</code> order without it being sent to the market so that you can know what will it actaully look like when you place a real order.
 Sell short order cannot be placed for long position or if there are pending Buy orders.
 
-<code>sell_preview(symbol,quantity,access_token,account_number,duration,order_type,price,stop)</code>
+<code>sell_short_preview(symbol,quantity,access_token,account_number,duration,order_type,price,stop)</code>
 | Paramters       | Required/Optional | Description                                    | Type |
 |-----------------|-------------------|------------------------------------------------|------| 
 | symbol          | required          | Symbol of the stock                            | str  |
