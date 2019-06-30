@@ -1,6 +1,7 @@
-/* your custom css */
-
+@import url("https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Lato&display=swap");
 @media only screen and (min-device-width: 360px) and (max-device-width: 736px) {
+
 }
 
 @media only screen and (min-width: 1024px) {
@@ -15,6 +16,81 @@
 @media only screen and (min-width: 1500px) {
 }
 
+html,body{
+  font-family: 'Lato', sans-serif;
+}
+
 img{
     width:50vh;
 }
+
+  .projectTitle {
+    margin-top:10vh;
+    font-size: 5em;
+    color: white;
+    text-align: left;
+    font-family: 'Lato', sans-serif;
+  }
+ 
+  .projectTitle small{
+    color:#374549;
+    font-size: 0.4em;
+    font-weight: 700;
+    font-family: 'Lato', sans-serif;
+  }
+
+ .inner-2{
+   background-color: #B3CCBF;
+   min-height: 60vh;
+ }
+
+ .button{
+  color: #374549;
+  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+  border: solid #374549;
+  font-size: 1.7em;
+  font-weight: 600;
+ }
+.promo{
+  align-items: flex-start;
+}
+ .button:hover{
+  background-color: #374549;
+  color: white;
+  border: solid #3ba666;
+  transform: translateY(-4px);
+  box-shadow: 10px 9px 5px -2px rgba(0,0,0,0.75);
+ }
+
+ .tag{
+background-color: #212529;
+text-align: justify;
+margin-top:10vh;
+padding-top: 8vh;
+padding-bottom: 10vh;
+color: white;
+min-height: 20vh;
+
+ }
+
+ .tagline2-text{
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+ }
+
+ .kloudtrader{
+   color: #3ba666;
+ }
+
+ .features{
+   color: #374549;
+   text-align: center;
+   font-family: 'Press Start 2P', cursive;
+   font-size: 1.7em;
+ }
+
+ .mainContainer{
+   
+ }

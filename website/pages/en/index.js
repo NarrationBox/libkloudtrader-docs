@@ -50,19 +50,34 @@ const SplashContainer = props => (
     </div>
   </div>
 );
-
+//style={{textAlign: 'center',color:'white'}}
+const Tagline2 = () => (
+  <div className="tag">
+    <div className="homeContainer">
+    <div className="homeSplashFade">
+    <h1 className="tagline2-text">
+    <small><b className="kloudtrader">KloudTrader's</b> in-house trading framework optimized for <b className="kloudtrader">computational finance</b> and <b className="kloudtrader">algorithmic trading</b>.</small>
+    </h1>
+  </div>
+  </div>
+  </div>
+);
 const Logo = props => (
+  <Block>
   <div className="projectLogo">
     <img src={props.img_src} alt="Project Logo" />
   </div>
+  </Block>
 );
 
 const ProjectTitle = () => (
-  <h2 className="projectTitle">
+  <h1 className="projectTitle">
     {siteConfig.title}
-    <small>{siteConfig.tagline}</small>
-  </h2>
+  <small className="projectTagline">{siteConfig.tagline}</small>
+  </h1>
+  
 );
+
 
 const PromoSection = props => (
   <div className="section promoSection">
@@ -76,21 +91,27 @@ class HomeSplash extends React.Component {
   render() {
     const language = this.props.language || '';
     return (
+      <div className="inner-2">
       <SplashContainer>
        
         <div className="inner">
           <ProjectTitle />
-          <PromoSection>
-            <Button href="/docs/intro">Get Started</Button>
-            <Button href="">Python Package Index</Button>
-            <Button href="https://github.com/KloudTrader/libkloudtrader" target="_blank">Github</Button>
-            
+          <PromoSection className="promo">
+            <Button href="/docs/intro" className="get-started">Get Started</Button>
           </PromoSection>
+          <small>Python Client of Libkloudtrader</small>
+          
         </div>
       </SplashContainer>
+      <Tagline2>
+            
+          </Tagline2>
+      </div>
+
     );
   }
 }
+
 
 const Block = props => (
   <Container
@@ -101,46 +122,60 @@ const Block = props => (
   </Container>
 );
 
+const Featuresheading = () => (
+  <div className="features">
+    <h1>Features</h1>
+  </div>
+
+);
 const Features = () => (
+  
   <Block layout="threeColumn">
     {[
       {
-        content: 'Extremely simple to use trading APIs for U.S. Equity market.',
-        image: imgUrl('laptop-solid.svg'),
-        imageAlign: 'top',
-        title: 'Simple Trading APIs',
+        content: 'Trade U.S. Stocks and Options at a flat-rate brokerage via <a href="https://tradier.com" target="_blank">Tradier</a>. No hidden comissions for your algorithms.',
+        image: imgUrl('feature1.svg'),
+        imageAlign: 'bottom',
+        title: 'Trading APIs with Flat Rate Brokerage',
+      },
+      {
+        content: 'Trade on more than 100 crypto currency exchanges with easy to use APIs',
+        image: imgUrl('feature2.svg'),
+        imageAlign: 'bottom',
+        title: 'Ultimate Crypto Trading support',
         
       },
       {
-        content: 'libkloudtrader provides all sort of data:<br> live market feed, historical price data, company information and much more.',
-        image: imgUrl('database-solid.svg'),
-        imageAlign: 'top',
-        title: 'Data',
-      },
-      {
-        content: 'Create customized alerts for both sms and email.',
-        image: imgUrl('bell-regular.svg'),
-        imageAlign: 'top',
-        title: 'Customized alerts',
+        content: 'Clean, Precise and speedy data straight from the exchanges for all asset classes.',
+        image: imgUrl('feature3.svg'),
+        imageAlign: 'bottom',
+        title: 'Data APIs for Stocks, Options and Crypto Currencies',
       },
       {
         content: 'A Wide range of functions for financial, technical, portfolio and risk analsyis.',
-        image: imgUrl('analysis.svg'),
-        imageAlign: 'top',
+        image: imgUrl('feature5.svg'),
+        imageAlign: 'bottom',
         title: 'Analysis functions',
       },
       {
-        content: 'Papertrading with virtual money upto $1 million. (Coming Soon)',
-        image: imgUrl('money-bill-solid.svg'),
-        imageAlign: 'top',
-        title: 'Paper Trading',
+        content: 'Create customized alerts for both sms and email, so that you never miss out what are your algorithms upto.',
+        image: imgUrl('feature4.svg'),
+        imageAlign: 'bottom',
+        title: 'Customized alerts',
       },
       {
-        content: 'Multi Crypto-Currency Trading and Data APIs. <br>(Coming Soon)',
-        image: imgUrl('bitcoin-brands.svg'),
-        imageAlign: 'top',
-        title: 'Crypto-Currency Trading',
+        content: 'Switch from your backtest to your live trading algorithm with change in just few keywords.',
+        image: imgUrl('feature6.svg'),
+        imageAlign: 'bottom',
+        title: 'Backtesting',
       },
+      {
+        content: 'Deploy your trading algorithms written with LibKloudTrader on Narwhal and get rid of the Dev-Ops hassle. Just push your code and swim in the live markets.',
+        image: imgUrl('feature7.svg'),
+        imageAlign: 'bottom',
+        title: 'Hosted Deployment on <a href="https://kloudtrader.com/narwhal" target="_blank">KloudTrader Narwhal</a>',
+      },
+      
       /*
       {
         content: 'Do algorithmic trading with virtual money(coming soon)',
@@ -160,77 +195,10 @@ const Features = () => (
   </Block>
 );
 
-const FeatureCallout = () => (
-  <div
-    className="productShowcaseSection paddingBottom"
-    style={{textAlign: 'center'}}>
-  
-  </div>
-);
 
-const LearnHow = () => (
-  <Block background="light">
-    {[
-      {
-        content: 'Talk about learning how to use this',
-        image: imgUrl('docusaurus.svg'),
-        imageAlign: 'right',
-        title: 'Learn How',
-      },
-    ]}
-  </Block>
-);
 
-const TryOut = () => (
-  <Block id="try">
-    {[
-      /* {
-        content: 'Talk about trying this out',
-        image: imgUrl('docusaurus.svg'),
-        imageAlign: 'left',
-        title: 'Try it Out',
-      },*/
-    ]}
-  </Block>
-);
 
-const Description = () => (
-  <Block background="">
-    {[
-     /* {
-        content: 'This is another description of how this project is useful',
-        image: imgUrl('docusaurus.svg'),
-        imageAlign: 'right',
-        title: 'Description',
-      },*/
-    ]}
-  </Block>
-);
 
-const Showcase = props => {
-  if ((siteConfig.users || []).length === 0) {
-    return null;
-  }
-
-  const showcase = siteConfig.users.filter(user => user.pinned).map(user => (
-    <a href={user.infoLink} key={user.infoLink}>
-      <img src={user.image} alt={user.caption} title={user.caption} />
-    </a>
-  ));
-
-  return (
-    <div className="productShowcaseSection paddingBottom">
-      <h2>Who is Using This?</h2>
-      <p>This project is used by all these people</p>
-      <div className="logos">{showcase}</div>
-      <div className="more-users">
-        <a className="button" href={pageUrl('users.html', props.language)}>
-          More {siteConfig.title} Users
-        </a>
-      </div>
-    </div>
-  );
-};
 
 class Index extends React.Component {
   render() {
@@ -240,9 +208,8 @@ class Index extends React.Component {
       <div>
         <HomeSplash language={language} />
         <div className="mainContainer">
+        <Featuresheading/>
           <Features />
-          
-         
         </div>
       </div>
     );

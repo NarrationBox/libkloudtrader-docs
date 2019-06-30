@@ -1,7 +1,7 @@
 ---
-id: trading_api
-title: Trading
-sidebar_label: Trading
+id: stock_trading_api
+title: Stock Trading
+sidebar_label: Stock Trading
 ---
 
 ## Use Trading APIs to buy,sell, preview order and much more

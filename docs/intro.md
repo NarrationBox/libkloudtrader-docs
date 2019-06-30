@@ -1,7 +1,7 @@
 ---
 id: intro
-title: Getting Started
-sidebar_label: Getting Started
+title: Introduction
+sidebar_label: Introduction
 ---
 
 ## What is LibKloudTrader?

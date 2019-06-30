@@ -1,7 +1,7 @@
 ---
-id: data_api
-title: Data
-sidebar_label: Data
+id: stock_data_api
+title: Stock Data
+sidebar_label: Stock Data
 ---
 
 ## Get live trades and live quotes from various exchanges, historical data, company fundamentals and information, intraday prices and much more. (For equities)
@@ -31,7 +31,6 @@ Get quotes for an individual or multiple symbols<br/>
 
 ```python
 Example:
-
 from libkloudtrader.defaults import *
 from libkloudtarder.equities.data import quotes
 quotes('AAPL,SPY')
