@@ -58,9 +58,7 @@ class Footer extends React.Component {
               rel="noreferrer noopener">
               Stack Overflow
             </a>
-            
-            
-            
+            <a>Python Package Index</a>
             <a href="https://github.com/KloudTrader" target="_blank"
               rel="noreferrer noopener" >GitHub</a>
             <a

@@ -1,128 +1,217 @@
 ---
-id: data_api
-title: Data
-sidebar_label: Data
+id: stock_data_api
+title: Stock Data
+sidebar_label: Stock Data
 ---
 
-## Get live trades and live quotes from various exchanges, historical data, company fundamentals and information, intraday prices and much more. (For equities)
-> #### Important
-> 
-> The algorithm you want to deploy should be in a file called **main.py**
-> 
-> Your algorithm must have these imports:
-> 
-> **from libkloudtrader.defaults import ACCESS_TOKEN, ACCOUNT_NUMBER**
-> 
-> This will help Narwhal to access your access token and account number from the Narwhal Environment so that you don't have to explicitly pass them with each API call. Narwhal would not be able to load your access token and account number from the Narwhal Environment if you don't link your tradier account. So the best practice is to link your tradier account before deploying your Trading Algorithm.
+### Get live data from various exchanges, historical data, company fundamentals and information, intraday prices and much more. 
 
-> Note: Your access token will expire after 24 hours. In order to allow your deployed algorithm to trade seemlessly, please manually link your tradier account after 24 hours. Don't worry this is just in Beta Version and will be automated soon!       
+      
 # Module
-<code>libkloudtrader.equities.data</code>
+<code>libkloudtrader.stocks</code>
 ***
-### Get quotes
-Get quotes for an individual or multiple symbols<br/>
+## Price Data
 
-<code>quotes(symbols,access_token)</code>
+### Latest Price Information
+Get latest price information for an individual or multiple symbols<br/>
+
+<code>latest_price_info(symbols,brokerage,access_token,dataframe)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
 | symbols         | required          | Stock symbol or a list of symbols       | str  |
-| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                        | str  |
+| brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
+| access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+| dataframe       | optional          | True if you want data as pandas dataframe. False for JSON. False by default.   | bool  |
 
 ```python
 Example:
 
-from libkloudtrader.defaults import *
-from libkloudtarder.equities.data import quotes
-quotes('AAPL,SPY')
+import libkloudtrader.stocks as stocks
+
+stocks.latest_price_info('AAPL,MSFT')
+```
+```python
+return type : json
+
+[  
+   {  
+      'symbol':'AAPL',
+      'description':'Apple Inc',
+      'exch':'Q',
+      'type':'stock',
+      'last':204.4703,
+      'change':0.07,
+      'volume':9184837,
+      'open':203.35,
+      'high':204.54,
+      'low':202.9,
+      'close':None,
+      'bid':204.47,
+      'ask':204.48,
+      'change_percentage':0.03,
+      'average_volume':27766461,
+      'last_volume':100,
+      'trade_date':'2019-07-05 22:53:39',
+      'prevclose':204.41,
+      'week_52_high':233.47,
+      'week_52_low':142.0,
+      'bidsize':2,
+      'bidexch':'K',
+      'bid_date':'2019-07-05 22:53:39',
+      'asksize':1,
+      'askexch':'Y',
+      'ask_date':'2019-07-05 22:53:40',
+      'root_symbols':'AAPL'
+   },
+   {  
+      'symbol':'MSFT',
+      'description':'Microsoft Corp',
+      'exch':'Q',
+      'type':'stock',
+      'last':136.555,
+      'change':-0.91,
+      'volume':9255335,
+      'open':135.94,
+      'high':136.9,
+      'low':135.72,
+      'close':None,
+      'bid':136.55,
+      'ask':136.56,
+      'change_percentage':-0.66,
+      'average_volume':23423711,
+      'last_volume':100,
+      'trade_date':'2019-07-05 22:53:40',
+      'prevclose':137.46,
+      'week_52_high':138.4,
+      'week_52_low':93.96,
+      'bidsize':8,
+      'bidexch':'Z',
+      'bid_date':'2019-07-05 22:53:41',
+      'asksize':3,
+      'askexch':'Q',
+      'ask_date':'2019-07-05 22:53:41',
+      'root_symbols':'MSFT'
+   }
+]
+
+```
+### Latest Quote
+Get lastest quote entry for the given symbol from various exchanges
+
+<code>latest_quote(symbol,brokerage,access_token)</code>
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| symbol          | required          | stock symbol/ticker                     | str  |
+| brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
+| access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+
+```python 
+Example:
+
+import libkloudtrader.stocks as stocks
+
+stocks.latest_quote('AAPL')
 ```
 ```python
 return type : json
 
 {  
-   'quotes':{  
-      'quote':[  
-         {  
-            'symbol':'AAPL',
-            'description':'Apple Inc',
-            'exch':'Q',
-            'type':'stock',
-            'last':221.19,
-            'change':0.0,
-            'change_percentage':0.0,
-            'volume':5434,
-            'average_volume':30667970,
-            'last_volume':0,
-            'trade_date':1539807300000,
-            'open':None,
-            'high':None,
-            'low':None,
-            'close':None,
-            'prevclose':221.19,
-            'week_52_high':233.47,
-            'week_52_low':150.24,
-            'bid':220.65,
-            'bidsize':5,
-            'bidexch':'P',
-            'bid_date':1539850713000,
-            'ask':220.93,
-            'asksize':1,
-            'askexch':'P',
-            'ask_date':1539850749000,
-            'root_symbols':'AAPL,AAPL7'
-         },
-         {  
-            'symbol':'SPY',
-            'description':'SPDR S&P 500 ETF Trust',
-            'exch':'P',
-            'type':'etf',
-            'last':280.45,
-            'change':0.0,
-            'change_percentage':0.0,
-            'volume':20174,
-            'average_volume':62715882,
-            'last_volume':0,
-            'trade_date':1539820800000,
-            'open':None,
-            'high':None,
-            'low':None,
-            'close':None,
-            'prevclose':280.45,
-            'week_52_high':293.94,
-            'week_52_low':252.92,
-            'bid':280.26,
-            'bidsize':10,
-            'bidexch':'P',
-            'bid_date':1539851080000,
-            'ask':280.29,
-            'asksize':5,
-            'askexch':'P',
-            'ask_date':1539851076000,
-            'root_symbols':'SPY,SPY7'
-         }
-      ]
-   }
+   'type':'quote',
+   'symbol':'AAPL',
+   'bid':203.92,
+   'bidsz':5,
+   'bidexch':'K',
+   'biddate':'2019-07-06 05:29:59',
+   'ask':204.03,
+   'asksz':2,
+   'askexch':'K',
+   'askdate':'2019-07-06 05:29:59'
+}
+```
+
+### Latest Trade
+Get lastest trade for the given symbol
+
+<code>latest_trade(symbol,brokerage,access_token)</code>
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| symbol          | required          | stock symbol/ticker                     | str  |
+| brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
+| access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+
+```python 
+Example:
+
+import libkloudtrader.stocks as stocks
+
+stocks.latest_trade('AAPL')
+```
+```python
+return type : json
+
+{  
+   'type':'trade',
+   'symbol':'AAPL',
+   'exch':'Q',
+   'price':'204.23',
+   'size':'1276643',
+   'cvol':'17265518',
+   'date':'2019-07-06 01:30:00',
+   'last':'204.23'
+}
+```
+
+### Intraday Summary
+Get the intraday summary for the given symbol
+
+<code>intraday_summary(symbol,brokerage,access_token)</code>
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| symbol          | required          | stock symbol/ticker                     | str  |
+| brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
+| access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+```python 
+Example:
+
+import libkloudtrader.stocks as stocks
+
+stocks.intraday_summary('AAPL')
+```
+```python
+return type : json
+
+{  
+   'type':'summary',
+   'symbol':'AAPL',
+   'open':'203.35',
+   'high':'205.08',
+   'low':'202.9',
+   'prevClose':'204.41',
+   'close':'204.23'
 }
 ```
 
 ### Historical OHLCV Data
 Get OHLCV(Open-High-Low-Close-Volume) data for a symbol (As back as you want to go)<br/>
 
-<code>OHLCV(symbol,start,end,interval,access_token)</code>
+<code>ohlcv(symbol,start,end,data_filter,brokerage,access_token,datframe)</code>
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
 | symbol          | required          | stock symbol/ticker                     | str  |
 | start           | required          | starting date (YYYY-MM-DD)              | str  |
 | end             | required          | end date (YYYY-MM-DD)                   | str  |
 | interval        | optional          | daily/weekly/monthly (daily by default) | str  |
-| access_token    | optional          | Will automatically be present when you deploy to Narwhal | str  |
+| brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
+| access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+| dataframe       | optional          | True if you want data as pandas dataframe. False for JSON. False by default.   | bool  |
 ```python 
 Example:
 
-from libkloudtrader.defaults import *
-from libkloudtrader.equities.data import OHLCV
 
-OHLCV('AAPL','2013-01-01','2018-01-01')
+import libkloudtrader.stocks as stocks
+
+stocks.ohlcv('AAPL',start="2018-01-01",end="2019-01-01")
 ```
 ```python
 return type: json 
@@ -131,23 +220,39 @@ return type: json
    'history':{  
       'day':[  
          {  
-            'date':'2013-12-02',
-            'open':79.714286,
-            'high':80.618557,
-            'low':78.688571,
-            'close':78.747143,
-            'volume':118135885
+            'date':'2018-01-02',
+            'open':170.16,
+            'high':172.3,
+            'low':169.26,
+            'close':172.26,
+            'volume':25555934
+         },
+         {  
+            'date':'2018-01-03',
+            'open':172.53,
+            'high':174.55,
+            'low':171.96,
+            'close':172.23,
+            'volume':29517899
          },
          .
          .
          .
          {  
-            'date':'2017-12-29',
-            'open':170.52,
-            'high':170.59,
-            'low':169.22,
-            'close':169.23,
-            'volume':25999922
+            'date':'2018-12-28',
+            'open':157.5,
+            'high':158.52,
+            'low':154.55,
+            'close':156.23,
+            'volume':42291424
+         },
+         {  
+            'date':'2018-12-31',
+            'open':158.53,
+            'high':159.36,
+            'low':156.48,
+            'close':157.74,
+            'volume':35003466
          }
       ]
    }
@@ -155,225 +260,71 @@ return type: json
 ```
 
 ***
-### Open Prices
-Get historical Open Prices for a symbol (As back as you want to go)<br>
-
-<code>open_prices(symbol,start,end,interval,access_token)</code>
-
-| Paramters       | Required/Optional | Description                             | Type |
-|-----------------|-------------------|-----------------------------------------|------|
-| symbol          | required          | stock symbol/ticker                     | str  |
-| start           | required          | starting date (YYYY-MM-DD)              | str  |
-| end             | required          | end date (YYYY-MM-DD)                   | str  |
-| interval        | optional          | daily/weekly/monthly (daily by default) | str  |
-| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                          | str  |
-```python 
-Example:
-
-from libkloudtrader.defaults import *
-from liblibkloudtrader.equities.data import open_prices
-
-open_prices('AAPL','2013-01-01','2018-01-01')
-```
-```python
-return type: json 
-
-[  
-   {  
-      'date':'2013-01-02',
-      'open':79.117143
-   },
-   .
-   .
-   .
-   {  
-      'date':'2017-12-28',
-      'open':171.0
-   }
-   , 
-   {  
-      'date':'2017-12-29',
-      'open':170.52
-   }
-]
-```
-
-***
-### High Prices
-Get historical High Prices for a symbol (As back as you want to go)<br>
-
-<code>high_prices(symbol,start,end,interval,access_token)</code>
-
-| Paramters       | Required/Optional | Description                             | Type |
-|-----------------|-------------------|-----------------------------------------|------|
-| symbol          | required          | stock symbol/ticker                     | str  |
-| start           | required          | starting date (YYYY-MM-DD)              | str  |
-| end             | required          | end date (YYYY-MM-DD)                   | str  |
-| interval        | optional          | daily/weekly/monthly (daily by default) | str  |
-| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                          | str  |
-```python 
-Example:
-
-from libkloudtrader.defaults import *
-from liblibkloudtrader.equities.data import high_prices
-
-high_prices('AAPL','2013-01-01','2018-01-01')
-```
-```python
-return type: json 
-
-[[  
-   {  
-      'date':'2013-01-02',
-      'high':79.285714
-   },
-   {  
-      'date':'2017-12-28',
-      'high':171.85
-   },
-   {  
-      'date':'2017-12-29',
-      'high':170.59
-   }
-]
-```
-
-***
-### Low Prices
-Get historical Low Prices for a symbol (As back as you want to go)<br>
-
-<code>low_prices(symbol,start,end,interval,access_token)</code>
-
-| Paramters       | Required/Optional | Description                             | Type |
-|-----------------|-------------------|-----------------------------------------|------|
-| symbol          | required          | stock symbol/ticker                     | str  |
-| start           | required          | starting date (YYYY-MM-DD)              | str  |
-| end             | required          | end date (YYYY-MM-DD)                   | str  |
-| interval        | optional          | daily/weekly/monthly (daily by default) | str  |
-| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                          | str  |
-```python 
-Example:
-
-from libkloudtrader.defaults import *
-from liblibkloudtrader.equities.data import low_prices
-
-low_prices('AAPL','2013-01-01','2018-01-01')
-```
-```python
-return type: json 
-
-[  
-   {  
-      'date':'2013-01-02',
-      'low':77.375714
-   },
-   .
-   .
-   .
-   {  
-      'date':'2017-12-28',
-      'low':170.48
-   },
-   {  
-      'date':'2017-12-29',
-      'low':169.22
-   }
-]
-```
-
-
-***
-### Close Prices
-Get historical Close Prices for a symbol (As back as you want to go)<br>
-
-<code>close_prices(symbol,start,end,interval,access_token)</code>
-
-| Paramters       | Required/Optional | Description                             | Type |
-|-----------------|-------------------|-----------------------------------------|------|
-| symbol          | required          | stock symbol/ticker                     | str  |
-| start           | required          | starting date (YYYY-MM-DD)              | str  |
-| end             | required          | end date (YYYY-MM-DD)                   | str  |
-| interval        | optional          | daily/weekly/monthly (daily by default) | str  |
-| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                          | str  |
-```python 
-Example:
-
-from libkloudtrader.defaults import *
-from liblibkloudtrader.equities.data import close_prices
-
-close_prices('AAPL','2013-01-01','2018-01-01')
-```
-```python
-return type: json 
-
-[  
-   {  
-      'date':'2013-01-02',
-      'close':78.432857
-   },
-   .
-   .
-   .
-
-   {  
-      'date':'2017-12-28',
-      'close':171.08
-   },
-   {  
-      'date':'2017-12-29',
-      'close':169.23
-   }
-]
-```
-
-***
-### Volume
-Get historical Voulme for a symbol (As back as you want to go)<br>
-
-<code>volume(symbol,start,end,interval,access_token)</code>
-
-| Paramters       | Required/Optional | Description                             | Type |
-|-----------------|-------------------|-----------------------------------------|------|
-| symbol          | required          | stock symbol/ticker                     | str  |
-| start           | required          | starting date (YYYY-MM-DD)              | str  |
-| end             | required          | end date (YYYY-MM-DD)                   | str  |
-| interval        | optional          | daily/weekly/monthly (daily by default) | str  |
-| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                          | str  |
-```python 
-Example:
-
-from libkloudtrader.defaults import *
-from libkloudtrader.equities.data import volume
-
-volume('AAPL','2013-01-01','2018-01-01')
-```
-```python
-return type: json 
-
-[  
-   {  
-      'date':'2013-01-02',
-      'volume':140124870
-   },
-   {  
-      'date':'2017-12-28',
-      'volume':16480187
-   },
-   .
-   .
-   .
-   {  
-      'date':'2017-12-29',
-      'volume':25999922
-   }
-]
-```
-
-***
 ### Tick Data
-Get tick data till last second for today/last trading day or tick data for a particular time.<br>
+Get historical tick data(trades placed) for a particular period of time. Goes upto 5 days in the past.<br>
 
-<code>tick_data(symbol,start=None,end=None,data_filter='all',access_token=ACCESS_TOKEN)</code>
+<code>tick_data(symbol,start,end,data_filter,brokerage,access_token,datframe)</code>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| symbol          | required          | stock symbol/ticker                     | str  |
+| start           | optional         | starting date and time(YYYY-MM-DD HH:MM). None by default. Can go only upto 1 week in past.             | str  |
+| end             | required          | end date and time(YYYY-MM-DD HH:MM). None by default. Can go only upto 1 week in past.                    | str  |
+| data_filter        | optional          | 'open' for data points within open market hours only. 'all' for all available data points. 'open' by default. | str  |
+| brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
+| access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+| dataframe       | optional          | True if you want data as pandas dataframe. False for JSON. False by default.   | bool  |
+```python 
+Example:
+
+
+import libkloudtrader.stocks as stocks
+
+stocks.tick_data('AAPL',start="2019-07-01 09:30:00",end="2019-07-01 09:40:00")
+```
+```python
+return type: json 
+
+{  
+   'series':{  
+      'data':[  
+         {  
+            'time':'2019-07-01T13:30:00',
+            'timestamp':1561987800007,
+            'price':203.28,
+            'volume':100
+         },
+         {  
+            'time':'2019-07-01T13:30:00',
+            'timestamp':1561987800050,
+            'price':203.28,
+            'volume':175
+         },
+         .
+         .
+         .
+         {  
+            'time':'2019-07-01T13:39:59',
+            'timestamp':1561988399698,
+            'price':204.097,
+            'volume':100
+         },
+         {  
+            'time':'2019-07-01T13:39:59',
+            'timestamp':1561988399753,
+            'price':204.1001,
+            'volume':150
+         }
+      ]
+   }
+}
+```
+
+***
+### 1 minute bar data
+Get historical bar data with 1 minute interval for a given period of time. Goes upto 20 days with data points during open market. Goes upto 10 days will all data points.
+
+<code>min1_bar_data(symbol,start,end,data_filter,brokerage,access_token,datframe)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
@@ -381,54 +332,77 @@ Get tick data till last second for today/last trading day or tick data for a par
 | start           | optional         | starting date and time(YYYY-MM-DD HH:MM). None by default. Can go only upto 1 week in past.             | str  |
 | end             | required          | end date and time(YYYY-MM-DD HH:MM). None by default. Can go only upto 1 week in past.                    | str  |
 | data_filter        | optional          | 'open' for data points within open market hours only. 'all' for all available data points. 'all' by default. | str  |
-| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                          | str  |
-```python 
-Example:
+| brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
+| access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+| dataframe       | optional          | True if you want data as pandas dataframe. False for JSON. False by default.   | bool  |
 
-from libkloudtrader.defaults import *
-from libkloudtrader.equities.data import tick_data
 
-tick_data('AAPL',start='2019-01-23 12:30',end='2019-01-23 12:40',data_filter='open')
+```python
+
+import libkloudtrader.stocks as stocks
+
+stocks.min1_bar_data('AAPL',start="2019-07-01 09:30:00",end="2019-07-03 15:40:00")
 ```
 ```python
-return type: json 
-
-[  
-   {  
-      'price':152.25,
-      'time':'2019-01-23T12:30:00',
-      'timestamp':1548264600,
-      'volume':200
-   },
-   {  
-      'price':152.24,
-      'time':'2019-01-23T12:30:00',
-      'timestamp':1548264600,
-      'volume':100
-   },
-   .
-   .
-   .
-   {  
-      'price':152.3,
-      'time':'2019-01-23T12:39:59',
-      'timestamp':1548265199,
-      'volume':400
-   },
-   {  
-      'price':152.29,
-      'time':'2019-01-23T12:39:59',
-      'timestamp':1548265199,
-      'volume':100
+{  
+   'series':{  
+      'data':[  
+         {  
+            'time':'2019-07-01T09:30:00',
+            'timestamp':1561987800,
+            'price':203.25,
+            'open':203.28,
+            'high':203.8,
+            'low':202.7,
+            'close':203.71,
+            'volume':951431,
+            'vwap':203.15787
+         },
+         {  
+            'time':'2019-07-01T09:31:00',
+            'timestamp':1561987860,
+            'price':203.55545,
+            'open':203.71,
+            'high':203.77,
+            'low':203.3409,
+            'close':203.48,
+            'volume':152798,
+            'vwap':203.54317
+         },
+         .
+         .
+         .
+         {  
+            'time':'2019-07-03T15:30:00',
+            'timestamp':1562182200,
+            'price':204.26,
+            'open':204.26,
+            'high':204.26,
+            'low':204.26,
+            'close':204.26,
+            'volume':200,
+            'vwap':204.26
+         },
+         {  
+            'time':'2019-07-03T15:37:00',
+            'timestamp':1562182620,
+            'price':204.23,
+            'open':204.23,
+            'high':204.23,
+            'low':204.23,
+            'close':204.23,
+            'volume':400,
+            'vwap':204.23
+         }
+      ]
    }
-]
+}
 ```
-
 ***
 ### 5 minute bar data
-Get 5 minute bar data<b>(OHLCV+VWAP)</b> for today/last trading day or 5 minute bar data for a particular time.
+Get historical bar data with 15 minute interval for a given period of time. Goes upto 40 days with data points duing open market. Goes upto 18 days will all data points.
 
-<code>min5_bar_data(symbol,start=None,end=None,data_filter='all',access_token=ACCESS_TOKEN)</code>
+<code>min5_bar_data(symbol,start,end,data_filter,brokerage,access_token,dataframe)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
@@ -436,74 +410,80 @@ Get 5 minute bar data<b>(OHLCV+VWAP)</b> for today/last trading day or 5 minute 
 | start           | optional         | starting date and time(YYYY-MM-DD HH:MM). None by default. Can go only upto 1 week in past.             | str  |
 | end             | required          | end date and time(YYYY-MM-DD HH:MM). None by default. Can go only upto 1 week in past.                    | str  |
 | data_filter        | optional          | 'open' for data points within open market hours only. 'all' for all available data points. 'all' by default. | str  |
-| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                          | str  |
+| brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
+| access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+| dataframe       | optional          | True if you want data as pandas dataframe. False for JSON. False by default.   | bool  |
 ```python 
 Example:
 
-from libkloudtrader.defaults import *
-from libkloudtrader.equities.data import min5_bar_data
 
-min5_bar_data('AAPL',start="2019-01-25 12:00",end="2019-01-25 16:00")
+import libkloudtrader.stocks as stocks
+
+stocks.min5_bar_data('AAPL',start="2019-07-01 09:30:00",end="2019-07-03 09:40:00")
 ```
 ```python
 return type: json 
 
-[  
-   {  
-      'time':'2019-01-25T12:00:00',
-      'timestamp':1548435600,
-      'price':156.98000000000002,
-      'open':157.01,
-      'high':157.05,
-      'low':156.91,
-      'close':156.91,
-      'volume':212064,
-      'vwap':156.97012
-   },
-   {  
-      'time':'2019-01-25T12:05:00',
-      'timestamp':1548435900,
-      'price':156.89499999999998,
-      'open':156.91,
-      'high':156.97,
-      'low':156.82,
-      'close':156.83,
-      'volume':144491,
-      'vwap':156.9039
-   },
-   .
-   .
-   .
-   {  
-      'time':'2019-01-25T15:55:00',
-      'timestamp':1548449700,
-      'price':157.74,
-      'open':157.7261,
-      'high':158.02,
-      'low':157.46,
-      'close':157.72,
-      'volume':1431087,
-      'vwap':157.63819
-   },
-   {  
-      'time':'2019-01-25T16:00:00',
-      'timestamp':1548450000,
-      'price':157.3262,
-      'open':157.76,
-      'high':157.84,
-      'low':156.8124,
-      'close':157.72,
-      'volume':1792116,
-      'vwap':157.75908
+{  
+   'series':{  
+      'data':[  
+         {  
+            'time':'2019-07-01T09:30:00',
+            'timestamp':1561987800,
+            'price':203.25,
+            'open':203.28,
+            'high':203.8,
+            'low':202.7,
+            'close':203.37,
+            'volume':1619605,
+            'vwap':203.31102
+         },
+         {  
+            'time':'2019-07-01T09:35:00',
+            'timestamp':1561988100,
+            'price':203.74,
+            'open':203.38,
+            'high':204.14,
+            'low':203.34,
+            'close':204.1001,
+            'volume':926089,
+            'vwap':203.71958
+         },
+         .
+         .
+         .
+         {  
+            'time':'2019-07-03T09:35:00',
+            'timestamp':1562160900,
+            'price':203.2131,
+            'open':202.965,
+            'high':203.5,
+            'low':202.9262,
+            'close':203.4359,
+            'volume':326617,
+            'vwap':203.3028
+         },
+         {  
+            'time':'2019-07-03T09:40:00',
+            'timestamp':1562161200,
+            'price':203.355,
+            'open':203.43,
+            'high':203.48,
+            'low':203.23,
+            'close':203.34,
+            'volume':159393,
+            'vwap':203.36112
+         }
+      ]
    }
-]
+}
 ```
 
 ***
 ### 15 minute bar data
-Get 15 minute bar data<b>(OHLCV+VWAP)</b> for today/last trading day or 5 minute bar data for a particular time.
+Get historical bar data with 15 minute interval for a given period of time. Goes upto 40 days with data points duing open market. Goes upto 18 days will all data points.
 
-<code>min15_bar_data(symbol,start=None,end=None,data_filter='all',access_token=ACCESS_TOKEN)</code>
+<code>min15_bar_data(symbol,start,end,data_filter,brokerage,access_token,dataframe)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
@@ -511,14 +491,16 @@ Get 15 minute bar data<b>(OHLCV+VWAP)</b> for today/last trading day or 5 minute
 | start           | optional         | starting date and time(YYYY-MM-DD HH:MM). None by default. Can go only upto 1 week in past.             | str  |
 | end             | required          | end date and time(YYYY-MM-DD HH:MM). None by default. Can go only upto 1 week in past.                    | str  |
 | data_filter        | optional          | 'open' for data points within open market hours only. 'all' for all available data points. 'all' by default. | str  |
-| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                          | str  |
+| brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
+| access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+| dataframe       | optional          | True if you want data as pandas dataframe. False for JSON. False by default.   | bool  |
 ```python 
 Example:
 
-from libkloudtrader.defaults import *
-from libkloudtrader.equities.data import min15_bar_data
 
-min15_bar_data('AAPL',start="2019-01-25 12:00",end="2019-01-25 16:00")
+import libkloudtrader.stocks as stocks
+
+stocks.min15_bar_data('AAPL',start="2019-06-25 12:00",end="2019-07-03 16:00")
 ```
 ```python
 return type: json 
@@ -573,12 +555,69 @@ return type: json
    }
 ]
 ```
-
 ***
-### Companies Listed on Nasdaq, NYSE and AMEX
+## Stream Realtime Data
+libkloudtrader provides live streaming data for live trades happening across various exchanges, live quotes from various exchanges and the realtime intraday summary of the security.
+
+### Stream Live Quotes
+Stream live quotes direct from various exchanges.<br/>
+
+<code>stream_live_quotes(symbol,brokerage,access_token)</code>
+| Paramters       | Required/Optional | Description                                    | Type |
+|-----------------|-------------------|------------------------------------------------|------| 
+| symbols         | required          | Symbol or list of symbols(seperated by a comma)| str  |
+| brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
+| access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+``` python
+Example:
+
+import libkloudtrader.stocks as stocks
+
+for data in stream_live_quotes('AAPL,MSFT'):
+    print(data)
+``` 
+### Stream Live Trades
+Stream live trades direct from various exchanges.<br/>
+
+<code>stream_live_trades(symbol,brokerage,access_token)</code>
+| Paramters       | Required/Optional | Description                                    | Type |
+|-----------------|-------------------|------------------------------------------------|------| 
+| symbols         | required          | Symbol or list of symbols(seperated by a comma)| str  |
+| brokerage       | optional          | Your Brokerage. Will automatically be present when you deploy to Narwhal. Currently supported brokerage: 'Tradier Inc.'| str  |
+| access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal| str  |
+``` python
+Example:
+
+import libkloudtrader.stocks as stocks
+
+for data in stream_live_trades('AAPL,MSFT'):
+    print(data)
+``` 
+### Stream Live Intraday Summary
+Stream live intraday summary.<br/>
+
+<code>stream_live_summary(symbol,brokerage,access_token)</code>
+| Paramters       | Required/Optional | Description                                    | Type |
+|-----------------|-------------------|------------------------------------------------|------| 
+| symbols         | required          | Symbol or list of symbols(seperated by a comma)| str  |
+| brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal. Currently supported brokerage: 'Tradier Inc.'| str  |
+| access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal| str  |
+``` python
+Example:
+
+import libkloudtrader.stocks as stocks
+
+for data in stream_live_summary('AAPL,MSFT'):
+    print(data)
+``` 
+
+
+## Market Related Data
+***
+### Listed Companies
 Get Companies listed on <b>Nasdaq, NYSE, AMEX</b>, their symbols, last prices, market-cap and other information about them.
 
-<code>list_of_companies(exchange='all')</code>
+<code>list_of_companies(exchange)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
@@ -587,11 +626,11 @@ Get Companies listed on <b>Nasdaq, NYSE, AMEX</b>, their symbols, last prices, m
 ```python 
 Example:
 
-from libkloudtrader.defaults import *
-from libkloudtrader.equities.data import list_of_companies
 
-list_of_companies()
-list_of_companies('nyse')
+import libkloudtrader.stocks and stocks
+
+stocks.list_of_companies()
+stocks.list_of_companies('nyse')
 ```
 ```python
 return type: pandas dataframe
@@ -634,30 +673,30 @@ return type: pandas dataframe
 ### Intraday Status
 Get the intraday market status<br/>
 
-<code>intraday_status()</code>
+<code>intraday_status(brokerage,access_token)</code>
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                          | str  |
+| brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
+| access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+
 ```python
 Example: 
 
-from libkloudtrader.defaults import *
-from libkloudtrader.equities.data import intraday_status
 
-intraday_status()
+import libkloudtrader.stocks and stocks
+
+stocks.intraday_status()
 ```
 ```python
 return type : json
 
 {  
-   'clock':{  
-      'state':'closed',
-      'date':'2018-10-18',
-      'timestamp':1539849813,
-      'next_state':'premarket',
-      'next_change':'08:00',
-      'description':'Market is closed.'
-   }
+   'date':'2019-07-04',
+   'description':'Market is closed',
+   'state':'closed',
+   'timestamp':1562249720,
+   'next_change':'08:00',
+   'next_state':'premarket'
 }
 ```
 
@@ -674,59 +713,57 @@ Get the market calendar of a given month(Goes back till 2013)<br/>
 ```python
 Example:
 
-from libkloudtrader.defaults import *
-from kloudtader.equities.data import market_calendar
 
-market_calendar(9,2016)
+from libkloudtrader.stocks import stocks
+
+stocks.market_calendar(7,2019)
 ```
 ```python
 return type : json
 
 {  
-   'calendar':{  
-      'month':9,
-      'year':2016,
-      'days':{  
-         'day':[  
-            {  
-               'date':'2016-09-01',
-               'status':'open',
-               'description':'Market is open',
-               'premarket':{  
-                  'start':'08:00',
-                  'end':'09:30'
-               },
-               'open':{  
-                  'start':'09:30',
-                  'end':'16:00'
-               },
-               'postmarket':{  
-                  'start':'16:00',
-                  'end':'20:00'
-               }
+   'month':7,
+   'year':2019,
+   'days':{  
+      'day':[  
+         {  
+            'date':'2019-07-01',
+            'status':'open',
+            'description':'Market is open',
+            'premarket':{  
+               'start':'04:00',
+               'end':'09:30'
             },
-            .
-            .
-            .
-            {  
-               'date':'2016-09-30',
-               'status':'open',
-               'description':'Market is open',
-               'premarket':{  
-                  'start':'08:00',
-                  'end':'09:30'
-               },
-               'open':{  
-                  'start':'09:30',
-                  'end':'16:00'
-               },
-               'postmarket':{  
-                  'start':'16:00',
-                  'end':'20:00'
-               }
+            'open':{  
+               'start':'09:30',
+               'end':'16:00'
+            },
+            'postmarket':{  
+               'start':'16:00',
+               'end':'20:00'
             }
-         ]
-      }
+         },
+         .
+         .
+         .
+         {  
+            'date':'2019-07-31',
+            'status':'open',
+            'description':'Market is open',
+            'premarket':{  
+               'start':'04:00',
+               'end':'09:30'
+            },
+            'open':{  
+               'start':'09:30',
+               'end':'16:00'
+            },
+            'postmarket':{  
+               'start':'16:00',
+               'end':'20:00'
+            }
+         }
+      ]
    }
 }
 ```
@@ -734,18 +771,20 @@ return type : json
 ### Search symbols
 Search for securities' symbols<br/>
 
-<code>symbol_search(company_name,access_token)</code>
+<code>symbol_search(company_name,indexes,brokerage,access_token)</code>
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
 | company_name    | required          | Name of the company you want symbol of  | str  |
-| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                          | str  |
+| indexes         | optional         | True if you want to include indexes in data else False. True by default | bool  |
+| brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
+| access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 ```python
 Example:
 
-from libkloudtrader.defaults import *
-from libkloudtrader.equities.data import symbol_search
 
-symbol_search('apple')
+import libkloudtrader.stocks as stocks
+
+stocks.symbol_search('apple')
 ```
 ```python
 return type : json
@@ -784,20 +823,21 @@ return type : json
 ```
 ***
 ### Symbol lookup 
-Search for securities/companies using symbols<br/>
+Search for listed company's symbolbr/>
 
-<code>symbol_lookup(symbol,access_token)</code>
+<code>symbol_lookup(symbol,brokerage,access_token)</code>
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
 | symbol          | required          | Symbol you want to look up              | str  |
-| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                          | str  |
+| brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
+| access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 ```python
 Example:
 
-from libkloudtrader.defaults import *
-from libkloudtrader.equities.data import symbol_lookup
 
-symbol_lookup('aap')
+import libkloudtrader.stocks as stocks
+
+stocks.symbol_lookup('aap')
 ```
 ```python
 return type : json
@@ -829,27 +869,110 @@ return type : json
 }
 ```
 ***
-### Company fundamentals 
-Get company fundamental information<br/>
+### Shortable Securitites
+Get list of all securitites that can be sold short for the given broker<br/>
 
-<code>company_fundamentals(symbols,access_token)</code>
-| Paramters       | Required/Optional | Description                                                   | Type |
-|-----------------|-------------------|---------------------------------------------------------------|------|
-|  symbols        | required          | Symbol or list of symbols(seperated by a comma)               | str  |
-| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                                                | str  |
+<code>shortable_securities(brokerage,access_token)</code>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
+| access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+
+
 ```python
-Example:
 
-from libkloudtrader.defaults import *
-from libkloudtrader.equities.data import company_fundamentals
+import libkloudtrader.stocks as stocks
 
-company_fundamentals('AAPL')
+stocks.shortable_securities()
 ```
 ```python
 return type : json
 
 {
-   "item": {
+  "securities": {
+    "security": [
+      {
+        "symbol": "SCS",
+        "exchange": "N",
+        "type": "stock",
+        "description": "Steelcase Inc"
+      },
+      {
+        "symbol": "EXAS",
+        "exchange": "Q",
+        "type": "stock",
+        "description": "Exact Sciences Corp"
+      },
+      .
+      .
+      .
+      {
+        "symbol": "IBKC",
+        "exchange": "Q",
+        "type": "stock",
+        "description": "IBERIABANK Corp"
+      },
+      {
+        "symbol": "BBT",
+        "exchange": "N",
+        "type": "stock",
+        "description": "BB&T Corp"
+      }
+    ]
+  }
+}
+```
+
+### Check if Shortable
+Check if the given stock/security is shortable or not for the given broker.
+
+<code>check_if_shortable(symbol,brokerage,access_token)</code>
+
+| Paramters       | Required/Optional | Description                                                   | Type |
+|-----------------|-------------------|---------------------------------------------------------------|------|
+|  symbols        | required          | Symbol or list of symbols(seperated by a comma)               | str  |
+| brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
+| access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+
+```python 
+
+import libkloudtrader.stocks as stocks
+
+stocks.check_if_shortable('AAPL')
+```
+```python
+return type : bool
+
+True
+```
+
+## Company Related Data
+***
+### Company fundamentals 
+Get company fundamental information<br/>
+
+<code>company_fundamentals(symbols,brokerage,access_token)</code>
+
+| Paramters       | Required/Optional | Description                                                   | Type |
+|-----------------|-------------------|---------------------------------------------------------------|------|
+|  symbols        | required          | Symbol or list of symbols(seperated by a comma)               | str  |
+| brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
+| access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+
+```python
+Example:
+
+
+import libkloudtrader.stocks as stocks
+
+stocks.company_fundamentals('AAPL')
+```
+```python
+return type : json
+
+[
+   {
       "request": "AAPL",
       "type": "Symbol",
       "results": [
@@ -857,50 +980,12 @@ return type : json
             "type": "Company",
             "id": "0C00000ADA",
             "tables": {
-               "asset_classification": {
-                  "company_id": "0C00000ADA",
-                  "financial_health_grade": "A",
-                  "FinancialHealthGrade.asOfDate": "2014-10-21",
-                  "growth_grade": "A",
-                  "GrowthGrade.asOfDate": "2014-09-30",
-                  "growth_score": "0.0",
-                  "morningstar_economy_sphere_code": "3",
-                  "morningstar_industry_code": "31167138",
-                  "morningstar_industry_group_code": "31167",
-                  "morningstar_sector_code": "311",
-                  "n_a_c_e": "0.0",
-                  "n_a_i_c_s": "334220",
-                  "profitability_grade": "A",
-                  "ProfitabilityGrade.asOfDate": "2014-09-30",
-                  "s_i_c": "3571",
-                  "size_score": "175.79693",
-                  "stock_type": "3",
-                  "StockType.asOfDate": "2014-09-30",
-                  "style_box": "2",
-                  "StyleBox.asOfDate": "2014-09-30",
-                  "style_score": "148.69635",
-                  "value_score": "0.0"
-               },
-               "historical_asset_classification": {
-                  "company_id": "0C00000ADA",
-                  "as_of_date": "2014-09-30",
-                  "financial_health_grade": "A",
-                  "growth_score": "0.0",
-                  "morningstar_economy_sphere_code": "0",
-                  "morningstar_industry_code": "0",
-                  "morningstar_industry_group_code": "0",
-                  "morningstar_sector_code": "0",
-                  "profitability_grade": "C",
-                  "size_score": "175.79693",
-                  "stock_type": "0",
-                  "style_box": "0",
-                  "style_score": "148.69635",
-                  "value_score": "0.0"
-               },
                "company_profile": {
                   "company_id": "0C00000ADA",
+                  "average_employee_number": 0,
+                  "contact_email": "investor_relations@apple.com",
                   "headquarter": {
-                     "address_line1": "1 Infinite Loop",
+                     "address_line1": "One Apple Park Way",
                      "city": "Cupertino",
                      "country": "USA",
                      "fax": "+1 408 974-2483",
@@ -909,50 +994,116 @@ return type : json
                      "postal_code": "95014",
                      "province": "CA"
                   },
-                  "short_description": "Designs and develops hardware and software systems",
-                  "total_employee_number": "84400",
-                  "TotalEmployeeNumber.asOfDate": "2013-09-28"
+                  "is_head_office_same_with_registered_office_flag": false,
+                  "total_employee_number": 132000,
+                  "TotalEmployeeNumber.asOfDate": "2018-09-29"
                },
-               "long_descriptions": "Apple Inc is a California corporation established in 1977. The Company designs, manufactures, and markets mobile communication and media devices, personal computers, and portable digital music players, and sells a variety of related software, services, peripherals, networking solutions, and third-party digital content and applications. It sells its products worldwide through its retail stores, online stores, and direct sales force, as well as through third-party cellular network carriers, wholesalers, retailers, and value-added resellers. The Company's products and services include iPhone, iPad, Mac, iPod, Apple TV a portfolio of consumer and professional software applications, the iOS and OS X operating systems, iCloud and a variety of accessory, service and support offerings. It also sells and delivers digital content and applications through the iTunes Store App Store, iBookstore, and Mac App Store. In addition, the Company sells a variety of third-party iPhone, iPad, Mac and iPod compatible products, including application software, and various accessories, through its online and retail stores. It sells to consumer; small and mid-sized businesses (SMB); and education, enterprise and government customers. Its reportable operating segments consist of Americas, Europe, Japan, Greater China, Rest of Asia Pacific and Retail. The Americas segment includes both North and South America. The Europe segment includes European countries, as well as the Middle East and Africa. The Asia-Pacific segment includes Australia and Asian countries, other than Japan. The Retail segment operates Apple retail stores in 13 countries, including the U.S. Each operating segment provides similar hardware and software products and similar services. It offers its own software products, including iOS, the Company's mobile operating system; OS X, the Company's Mac operating system; and server and application software. The Company currently holds rights to patents and copyrights relating to certain aspects of its computer systems, iPhone and iPod devices, peripherals, software and services. The Company is subject to federal, state and international laws relating to the collection, use, retention, security and transfer of PII."
+               "asset_classification": {
+                  "company_id": "0C00000ADA",
+                  "c_a_n_n_a_i_c_s": 0,
+                  "financial_health_grade": "B",
+                  "FinancialHealthGrade.asOfDate": "2019-07-03",
+                  "growth_grade": "B",
+                  "GrowthGrade.asOfDate": "2019-06-28",
+                  "growth_score": 95.01898,
+                  "morningstar_economy_sphere_code": 3,
+                  "morningstar_industry_code": 31167138,
+                  "morningstar_industry_group_code": 31167,
+                  "morningstar_sector_code": 311,
+                  "n_a_c_e": 26.4,
+                  "n_a_i_c_s": 334220,
+                  "profitability_grade": "A",
+                  "ProfitabilityGrade.asOfDate": "2019-06-28",
+                  "s_i_c": 3571,
+                  "size_score": 175.79693,
+                  "stock_type": 3,
+                  "StockType.asOfDate": "2019-06-28",
+                  "style_box": 2,
+                  "StyleBox.asOfDate": "2019-06-30",
+                  "style_score": 148.69635,
+                  "value_score": 26.54572
+               },
+               "historical_asset_classification": {
+                  "company_id": "0C00000ADA",
+                  "as_of_date": "2019-07-01",
+                  "financial_health_grade": "A",
+                  "growth_score": 95.01898,
+                  "morningstar_economy_sphere_code": 3,
+                  "morningstar_industry_code": 31167138,
+                  "morningstar_industry_group_code": 31167,
+                  "morningstar_sector_code": 311,
+                  "profitability_grade": "C",
+                  "size_score": 175.79693,
+                  "stock_type": 0,
+                  "style_box": 0,
+                  "style_score": 148.69635,
+                  "value_score": 26.54572
+               },
+               "long_descriptions": "Apple designs a wide variety of consumer electronic devices, including smartphones (iPhone), tablets (iPad), PCs (Mac), smartwatches (Watch), and TV boxes (Apple TV), among others. The iPhone makes up the majority of Apple's total revenue. In addition, Apple offers its customers a variety of services such as Apple Music, iCloud, AppleCare and Apple Pay, among others. Apple's products run internally developed software and semiconductors, and the firm is well known for its integration of hardware, software and services. Apple's products are distributed online as well as through company-owned stores and third-party retailers. The company generates about 40% of its revenue from the Americas, with the remainder earned internationally."
             }
          },
+         .
+         .
+         .
          {
-            "type": "Stock",
-            "id": "0P000000GY",
-            "tables": {
-               "share_class_profile": {
-                  "share_class_id": "0P000000GY",
-                  "enterprise_value": "596512600250",
-                  "EnterpriseValue.asOfDate": "2014-09-30",
-                  "market_cap": "603277600250",
-                  "MarketCap.asOfDate": "2014-09-30",
-                  "share_class_level_shares_outstanding": "6270146470",
-                  "shares_outstanding": "5987867000",
-                  "SharesOutstanding.asOfDate": "2014-07-11"
-               }
+            "share_class_id": "0P000000GY",
+            "as_of_date": "2019-06-30",
+            "owner_id": "FS0000DYOU",
+            "owner_type": "3",
+            "currencyof_market_value": "USD",
+            "market_value": 170.0,
+            "number_of_shares": 1.0,
+            "owner_c_i_k": 0,
+            "owner_name": "GUGG Large-Cap Core 34",
+            "percentage_in_portfolio": 1.69961,
+            "percentage_ownership": 2.1734051281494e-08,
+            "share_change": 0
+            }
+         ],
+         "share_class": {
+            "company_id": "0C00000ADA",
+            "share_class_id": "0P000000GY",
+            "conversion_ratio": 1.0,
+            "currency_id": "USD",
+            "delisting_date": "1970-01-01",
+            "exchange_id": "NAS",
+            "investment_id": "E0USA002US",
+            "i_p_o_date": "1980-12-12",
+            "is_depositary_receipt": false,
+            "is_direct_invest": false,
+            "is_dividend_reinvest": false,
+            "is_primary_share": true,
+            "m_i_c": "XNAS",
+            "par_value": 1e-05,
+            "security_type": "ST00000001",
+            "share_class_status": "A",
+            "symbol": "AAPL",
+            "trading_status": false
             }
          }
-      ]
-   }
-}
+      }
+   ]}
+]
 ```
 
 ***
-### Corporate calendars
+### Corporate calendar
 Get the corporate calendar information for given symbol<br/>
 
-<code>corporate_calendar(symbols,access_token)</code>
+<code>corporate_calendar(symbols,brokerage,access_token)</code>
 | Paramters       | Required/Optional | Description                                                   | Type |
 |-----------------|-------------------|---------------------------------------------------------------|------|
-| symbols         | required          | Symbol or list of symbols(seperated by a comma)               | str  |
-| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                                                | str  |
+|  symbols        | required          | Symbol or list of symbols(seperated by a comma)               | str  |
+| brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
+| access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+
 ```python
 Example:
 
-from libkloudtrader.defaults import *
-from libkloudtrader.equities.data import corporate_calendar
 
-corporate_calendar('AAPL')
+import libkloudtrader.stocks as stocks
+
+stocks.corporate_calendar('AAPL')
 ```
 ```python
 return type : json
@@ -1003,18 +1154,19 @@ return type : json
 ### Dividend information
 Get company dividend information for given symbol<br/>
 
-<code>corporate_calendar(symbols,access_token)</code>
+<code>corporate_calendar(symbols,brokerage,access_token)</code>
 | Paramters       | Required/Optional | Description                                                   | Type |
 |-----------------|-------------------|---------------------------------------------------------------|------|
 | symbols         | required          | Symbol or list of symbols(seperated by a comma)               | str  |
-| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                                                | str  |
+| brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
+| access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 ```python
 Example:
 
-from libkloudtrader.defaults import *
-from libkloudtrader.equities.data import dividend_information
 
-dividend_information('AAPL')
+from libkloudtrader.stocks import stocks
+
+stocks.dividend_information('AAPL')
 ```
 ```python
 return type : json
@@ -1066,18 +1218,19 @@ return type : json
 ### Corporate Actions
 Get corporate actions information for given symbol<br/>
 
-<code>corporate_actions(symbols,access_token)</code>
+<code>corporate_actions(symbols,brokerage,access_token)</code>
 | Paramters       | Required/Optional | Description                                                   | Type |
 |-----------------|-------------------|---------------------------------------------------------------|------|
 | symbols         | required          | Symbol or list of symbols(seperated by a comma)               | str  |
-| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                                                | str  |
+| brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
+| access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 ```python
 Example:
 
-from libkloudtrader.defaults import *
-from libkloudtrader.equities.data import corporate_actions
 
-corporate_actions('AAPL')
+import libkloudtrader.stocks as stocks
+
+stocks.corporate_actions('AAPL')
 ```
 ```python
 return type : json
@@ -1150,18 +1303,19 @@ return type : json
 ### Operation ratio
 Get operation ratio information for given symbol<br/>
 
-<code>operation_ratio(symbols,access_token)</code>
+<code>operation_ratio(symbols,brokerage,access_token)</code>
 | Paramters       | Required/Optional | Description                                                   | Type |
 |-----------------|-------------------|---------------------------------------------------------------|------|
 | symbols         | required          | Symbol or list of symbols(seperated by a comma)               | str  |
-| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                                                | str  |
+| brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
+| access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 ```python
 Example:
 
-from libkloudtrader.defaults import *
-from libkloudtrader.equities.data import operation_ratio
 
-operation_ratio('AAPL')
+import libkloudtrader.stocks as stocks 
+
+stocks.operation_ratio('AAPL')
 ```
 ```python
 return type : json
@@ -1269,18 +1423,19 @@ return type : json
 ### Corporate financials
 Get corporate financials information for given symbol<br/>
 
-<code>corporate_financials(symbols,access_token)</code>
+<code>corporate_financials(symbols,brokerage,access_token)</code>
 | Paramters       | Required/Optional | Description                                                   | Type |
 |-----------------|-------------------|---------------------------------------------------------------|------|
 | symbols         | required          | Symbol or list of symbols(seperated by a comma)               | str  |
-| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                                                | str  |
+| brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
+| access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 ```python
 Example:
 
-from libkloudtrader.defaults import *
-from libkloudtrader.equities.data import corporate_financials
 
-corporate_financials('AAPL')
+import libkloustrader.stocks as stocks
+
+stocks.corporate_financials('AAPL')
 ```
 ```python
 return type : json
@@ -1508,18 +1663,19 @@ return type : json
 ### Price Statistics
 Get price statistics information for given symbol<br/>
 
-<code>price_statistics(symbols,access_token)</code>
+<code>price_statistics(symbols,brokerage,access_token)</code>
 | Paramters       | Required/Optional | Description                                                   | Type |
 |-----------------|-------------------|---------------------------------------------------------------|------|
 | symbols         | required          | Symbol or list of symbols(seperated by a comma)               | str  |
-| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                                                | str  |
+| brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
+| access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 ```python
 Example:
 
-from libkloudtrader.defaults import *
-from libkloudtrader.equities.data import price_statistics
 
-price_statistics('AAPL')
+import libkloudtrader.stocks as stocks
+
+stocks.price_statistics('AAPL')
 ```
 ```python
 return type : json
@@ -1585,255 +1741,6 @@ return type : json
    }
 ]
 ```
-***
-## Live Market Data
-libkloudtrader provides live streaming data for both live trades happening across various exchanges and live quotes from various exchanges. you will receive the data as a flowing stream.
-process of getting the streaming live data looks like this:
-
-* Create a session using the Create Session API
-* Pass the session as a parameter to the Live Trades or Live Quotes API
-
-
-
-
-***
-### Create Session
-Create a live session to receive sessionid which is needed for streaming live quotes and trades<br/>
-
-<code>create_session(access_token)</code>
-| Paramters       | Required/Optional | Description | Type |
-|-----------------|-------------------|---------------------------------------------------------------|------| 
-| access_token    | optional          |Will automatically be present when you deploy to Narwhal               | str  |
- 
-> We will be using create_session() as a parameter in the live market feed apis 
-
-***
-### Live Quotes
-Get live quotes direct from various exchanges<br/>
-
-<code>live_quotes(symbol, sessionid)</code>
-| Paramters       | Required/Optional | Description                                    | Type |
-|-----------------|-------------------|------------------------------------------------|------| 
-| symbols         | required          | Symbol or list of symbols(seperated by a comma)| str  |
-| sessionid       | required          | create_session()                               | str  |
-``` python
-Example:
-
-from libkloudtrader.defaults import *
-from libkloudtrader.equities.data import create_session,live_quotes
-
-while True:
-      market_quotes=live_quotes('AAPL', create_session()) 
-      print(market_quotes)
-``` 
-```python
-return type : json
-
-{  
-   'type':'quote',
-   'symbol':'AAPL',
-   'bid':216.7,
-   'bidsz':1,
-   'bidexch':'Z',
-   'biddate':'1539887869000',
-   'ask':216.73,
-   'asksz':1,
-   'askexch':'V',
-   'askdate':'1539887869000'
-}
-{  
-   'type':'quote',
-   'symbol':'AAPL',
-   'bid':216.7,
-   'bidsz':2,
-   'bidexch':'B',
-   'biddate':'1539887871000',
-   'ask':216.74,
-   'asksz':2,
-   'askexch':'Q',
-   'askdate':'1539887871000'
-}
-{  
-   'type':'quote',
-   'symbol':'AAPL',
-   'bid':216.66,
-   'bidsz':1,
-   'bidexch':'X',
-   'biddate':'1539887874000',
-   'ask':216.68,
-   'asksz':2,
-   'askexch':'Q',
-   'askdate':'1539887874000'
-}
-{  
-   'type':'quote',
-   'symbol':'AAPL',
-   'bid':216.67,
-   'bidsz':4,
-   'bidexch':'Q',
-   'biddate':'1539887875000',
-   'ask':216.7,
-   'asksz':2,
-   'askexch':'Q',
-   'askdate':'1539887876000'
-}
-{  
-   'type':'quote',
-   'symbol':'AAPL',
-   'bid':216.67,
-   'bidsz':2,
-   'bidexch':'Y',
-   'biddate':'1539887878000',
-   'ask':216.69,
-   'asksz':2,
-   'askexch':'C',
-   'askdate':'1539887878000'
-}
-{  
-   'type':'quote',
-   'symbol':'AAPL',
-   'bid':216.65,
-   'bidsz':1,
-   'bidexch':'Q',
-   'biddate':'1539887880000',
-   'ask':216.67,
-   'asksz':1,
-   'askexch':'V',
-   'askdate':'1539887880000'
-}
-{  
-   'type':'quote',
-   'symbol':'AAPL',
-   'bid':216.64,
-   'bidsz':2,
-   'bidexch':'Z',
-   'biddate':'1539887881000',
-   'ask':216.66,
-   'asksz':1,
-   'askexch':'V',
-   'askdate':'1539887883000'
-}
-{  
-   'type':'quote',
-   'symbol':'AAPL',
-   'bid':216.68,
-   'bidsz':6,
-   'bidexch':'Q',
-   'biddate':'1539887886000',
-   'ask':216.7,
-   'asksz':1,
-   'askexch':'Q',
-   'askdate':'1539887886000'
-}
-
-
-```
-***
-### Live Trades
-Get live trades direct from various exchanges<br/>
-
-<code>live_trades(symbol, sessionid)</code>
-| Paramters       | Required/Optional | Description                                    | Type |
-|-----------------|-------------------|------------------------------------------------|------| 
-| symbols         | required          | Symbol or list of symbols(seperated by a comma)| str  |
-| sessionid       | required          | create_session()                               | str  |
-
-``` python
-Example:
-
-from libkloudtrader.defaults import *
-from libkloudtrader.equities.data import create_session,live_trades
-
-while True:
-      market_trades=live_trades('AAPL', create_session()) 
-      print(market_trades)
-``` 
-```python
-return type : json
-
-{  
-   'type':'trade',
-   'symbol':'AAPL',
-   'exch':'D',
-   'price':'216.495',
-   'size':'100',
-   'cvol':'24102767',
-   'date':'1539888158000',
-   'last':'216.495'
-}
-{  
-   'type':'trade',
-   'symbol':'AAPL',
-   'exch':'B',
-   'price':'216.45',
-   'size':'200',
-   'cvol':'24104772',
-   'date':'1539888163000',
-   'last':'216.45'
-}
-{  
-   'type':'trade',
-   'symbol':'AAPL',
-   'exch':'Q',
-   'price':'216.42',
-   'size':'100',
-   'cvol':'24106342',
-   'date':'1539888166000',
-   'last':'216.42'
-}
-{  
-   'type':'trade',
-   'symbol':'AAPL',
-   'exch':'D',
-   'price':'216.448',
-   'size':'230',
-   'cvol':'24107124',
-   'date':'1539888167000',
-   'last':'216.448'
-}
-{  
-   'type':'trade',
-   'symbol':'AAPL',
-   'exch':'Q',
-   'price':'216.48',
-   'size':'100',
-   'cvol':'24108900',
-   'date':'1539888170000',
-   'last':'216.48'
-}
-{  
-   'type':'trade',
-   'symbol':'AAPL',
-   'exch':'D',
-   'price':'216.451',
-   'size':'175',
-   'cvol':'24109225',
-   'date':'1539888172000',
-   'last':'216.451'
-}
-{  
-   'type':'trade',
-   'symbol':'AAPL',
-   'exch':'Z',
-   'price':'216.51',
-   'size':'100',
-   'cvol':'24110307',
-   'date':'1539888174000',
-   'last':'216.51'
-}
-{  
-   'type':'trade',
-   'symbol':'AAPL',
-   'exch':'B',
-   'price':'216.49',
-   'size':'100',
-   'cvol':'24111408',
-   'date':'1539888176000',
-   'last':'216.49'
-}
-
-```
-
 ***
 ## Exchanges' codes
 These codes are returned in the <code>exch</code> field of all market data APIs. Please use this table for reference to represent the exchange as text.

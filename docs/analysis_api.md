@@ -5,19 +5,9 @@ sidebar_label: Analysis
 ---
 
 ## Technical, portfolio, risk analysis APIs for your quantitative trading algorithms.
-> #### Important
-> 
-> The algorithm you want to deploy should be in a file called **main.py**
-> 
-> Your algorithm must have these imports:
-> 
-> <b>from libkloudtrader.defaults import * </b>
-> 
-> This will help Narwhal to access your access token and account number from the Narwhal Environment so that you don't have to explicitly pass them with each API call. Narwhal would not be able to load your access token and account number from the Narwhal Environment if you don't link your tradier account. So the best practice is to link your tradier account before deploying your Trading Algorithm.
-
-> Note: Your access token will expire after 24 hours. In order to allow your deployed algorithm to trade seemlessly, please manually link your tradier account after 24 hours. Don't worry this is just in Beta Version and will be automated soon!       
+    
 ### Analysis API Index
-#### libkloudtrader provides various analysis APIs. The list below consists of the APIs that are currently implemented and the ones that are coming soon!
+#### Libkloudtrader provides various analysis APIs. The list below consists of the APIs that are currently implemented and the ones that are coming soon!
 | Analysis Functions|Status 
 | -------------     |:-------------:|
 | [Accumulation/Distribution Index](#accumulation-distribution-index)| ✅ 
@@ -182,13 +172,13 @@ Developed by Marc Chaikin, the Accumulation Distribution Line is a volume-based 
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import accumulation_distribution_index
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-31')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-31')['history']['day'])
 
 accumulation_distribution_index(aapl_data['high'],aapl_data['low'],aapl_data['close'],aapl_data['volume'])
 ```
@@ -236,13 +226,13 @@ Absolute Price Oscillator is a technical indicator calculating the percentage di
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import absolute_price_oscillator
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-31')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-31')['history']['day'])
 
 absolute_price_oscillator(aapl_data['close'],4,9)
 ```
@@ -290,14 +280,14 @@ Alpha is a measure of the active return on an investment, the performance of tha
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import alpha
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-31')['history']['day'])
-spy_data=pd.DataFrame(OHLCV('SPY','2018-01-01','2019-01-31')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-31')['history']['day'])
+spy_data=pd.DataFrame(ohlcv('SPY','2018-01-01','2019-01-31')['history']['day'])
 
 alpha(aapl_data['close'],spy['close'])
 ```
@@ -325,13 +315,13 @@ Annual return is the return an investment provides over a period of time, expres
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import annual_return
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 annual_return(aapl_data['close'])
 ```
@@ -360,13 +350,13 @@ Using an annual/annualized Sharpe Ratio is useful for comparison of multiple ret
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import annual_sharpe_ratio
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 annual_sharpe_ratio(aapl_data['close'])
 ```
@@ -394,13 +384,13 @@ Volatility is a statistical measure of the dispersion of returns for a given sec
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import annual_volatility
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 annual_volatility(aapl_data['close'])
 ```
@@ -428,13 +418,13 @@ The Aroon indicator is used to help traders know when a market is uptrending, do
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import aroon
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 aroon(aapl_data['high'],aapl_data['low'],4)
 ```
@@ -487,13 +477,13 @@ The Average Directional Index (ADX) was developed by J. Welles Wilder to evaluat
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import average_directional_movement_index
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 average_directional_moving_index(aapl_data['high'],aapl_data['low'],aapl_data['close'],4)
 ```
@@ -548,13 +538,13 @@ ADXR stands for Average Directional Movement Index Rating. ADXR is a component o
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import average_directional_movement_index_rating
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 average_directional_moving_index_rating(aapl_data['high'],aapl_data['low'],aapl_data['close'],4)
 ```
@@ -612,13 +602,13 @@ The Average Price is the average of the open + high + low + close of a bar. It c
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import average_price
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 average_price(aapl_data['open'],aapl_data['high'],aapl_data['low'],aapl_data['close'])
 ```
@@ -671,13 +661,13 @@ The ATR is a Welles Wilder style moving average of the True Range. The ATR is a 
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import average_true_range
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 average_true_range(aapl_data['high'],aapl_data['low'],aapl_data['close'],4)
 ```
@@ -725,13 +715,13 @@ The Awesome Oscillator is an indicator used to measure market momentum. AO calcu
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import awesome_oscillator
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 awesome_oscillator(aapl_data['high'],aapl_data['low'],4,9)
 ```
@@ -779,13 +769,13 @@ The Awesome Oscillator is an indicator used to measure market momentum. AO calcu
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import awesome_oscillator
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 awesome_oscillator(aapl_data['high'],aapl_data['low'])
 ```
@@ -834,13 +824,13 @@ Balance Of Power (BOP) is an indicator that measures the market strength by asse
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import balance_of_power
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 balance_of_power(aapl_data['open'],aapl_data['high'],aapl_data['low'],aapl_data['close'])
 ```
@@ -886,13 +876,13 @@ Beta is a measure of the volatility, or systematic risk, of a security or a port
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import beta
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 beta(aapl_data['open'],spy_data['close'])
 ```
@@ -919,13 +909,13 @@ Bollinger Bands do not, in themselves, generate buy or sell signals; they are an
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import bollinger_bands
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 bollinger_bands(aapl_data['close'],20)
 ```
@@ -975,13 +965,13 @@ The compound annual growth rate (CAGR) is the rate of return that would be requi
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import cagr
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 cagr(100000,136009,2)
 ```
@@ -1009,13 +999,13 @@ Developed by Marc Chaikin, Chaikin Money Flow measures the amount of Money Flow 
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import chaikin_money_flow
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 chaikin_money_flow(aapl_data['high'],aapl_data['low'],aapl_data['close'],aapl_data['volume'],20)
 ```
@@ -1066,13 +1056,13 @@ Developed by Marc Chaikin, the Chaikin Oscillator measures the momentum of the A
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import chaikin_oscillator
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 chaikin_oscillator(aapl_data['high'],aapl_data['low'],aapl_data['close'],aapl_data['volume'])
 ```
@@ -1122,13 +1112,13 @@ The Chande momentum oscillator is a technical momentum indicator invented by Tus
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import chande_momentum_oscillator
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 chande_momentum_oscillator(aapl_data['close'],8)
 ```
@@ -1178,13 +1168,13 @@ The Commodity Channel Index​ (CCI) is a momentum-based technical trading tool 
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import commodity_channel_index
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 commodity_channel_index(aapl_data['high'],aapl_data['low'],aapl_data['close'],8)
 ```
@@ -1233,13 +1223,13 @@ The indicator is trend following in nature. Given it’s mathematically calculat
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import coppock_curve
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 coppock_curve(aapl_data['close'],8)
 ```
@@ -1289,13 +1279,13 @@ The correlation coefficient is a statistical measure that calculates the strengt
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import correlation_coefficient
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 correlation_coefficient(aapl_data['high'],aapl_data['low'],5)
 ```
@@ -1343,13 +1333,13 @@ A cumulative return is the aggregate amount an investment has gained or lost ove
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import cumulative_returns
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 cumulative_returns(aapl_data['close'])
 ```
@@ -1395,13 +1385,13 @@ Get daily returns of a trading strategy or a stock.
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import daily_returns
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 daily_returns(aapl_data['close'])
 ```
@@ -1449,13 +1439,13 @@ Get daily log returns of a trading strategy or a stock.
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import daily_log_returns
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 daily_log_returns(aapl_data['close'])
 ```
@@ -1503,13 +1493,13 @@ Get daily volatility of trading strategy or stock prices.
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import daily_volatility
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 daily_volatility(aapl_data['close'])
 ```
@@ -1536,13 +1526,13 @@ The detrended price oscillator (DPO) is an indicator in technical analysis that 
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import detrended_price_oscillator
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 detrended_price_oscillator(aapl_data['close'],5)
 ```
@@ -1593,13 +1583,13 @@ The Directional Movement Index (DMI) assists in determining if a security is tre
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import directional_movement_index
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 directional_movement_index(aapl_data['high'],aapl_data['low'],aapl_data['close'],5)
 ```
@@ -1648,13 +1638,13 @@ A Donchian Channel is an indicator formed by upper and lower bands around the pr
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import donchian_channel
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 donchian_channel(aapl_data['close'],5)
 ```
@@ -1705,13 +1695,13 @@ The Double Exponential Moving Average (DEMA) indicator was introduced in January
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import double_ema
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 double_ema(aapl_data['close'],5)
 ```
@@ -1760,13 +1750,13 @@ Downside risk is the financial risk associated with losses. That is, it is the r
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import downside_risk
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 downside_risk(aapl_data['close'])
 ```
@@ -1796,13 +1786,13 @@ The Ease of Movement technical indicator shows the relationship between price an
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import ease_of_movement
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 ease_of_movement(aapl_data['high'], aapl_data['low'], aapl_data['close'], aapl_data['volume'], 7)
 ```
@@ -1850,13 +1840,13 @@ An exponential moving average (EMA) is a type of moving average (MA) that places
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import ema
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 ema(aapl_data['close'], 7)
 ```
@@ -1906,13 +1896,13 @@ The Force Index is an indicator that uses price and volume to assess the power b
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import force_index
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 force_index(aapl_data['close'], aapl_data['volume'],7)
 ```
@@ -1958,13 +1948,13 @@ return type : Pandas DataFrame
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import hilbert_transform_dom_cyc_per
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 hilbert_transform_dom_cyc_per(aapl_data['close'])
 ```
@@ -2010,13 +2000,13 @@ return type : Pandas DataFrame
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import hilbert_transform_dom_cyc_phase
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 hilbert_transform_dom_cyc_phase(aapl_data['close'])
 ```
@@ -2062,13 +2052,13 @@ return type : Pandas DataFrame
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import hilbert_transform_inst_trendline
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 hilbert_transform_inst_trendline(aapl_data['close'])
 ```
@@ -2114,13 +2104,13 @@ return type : Pandas DataFrame
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import hilbert_transform_phasor_components
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 hilbert_transform_phasor_components(aapl_data['close'])
 ```
@@ -2168,13 +2158,13 @@ return type : Pandas DataFrame
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import hilbert_transform_sine_wave
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 hilbert_transform_sine_wave(aapl_data['close'])
 ```
@@ -2221,13 +2211,13 @@ return type : Pandas DataFrame
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import hilbert_transform_trend_vs_cycle_mode
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 hilbert_transform_trend_vs_cycle_mode(aapl_data['close'])
 ```
@@ -2275,13 +2265,13 @@ Hull Moving Average, developed by Alan Hull is an extremely useful indicator to 
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import hull_moving_average
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 hull_moving_average(aapl_data['close'],7)
 ```
@@ -2333,13 +2323,13 @@ The Ichimoku Cloud, also known as Ichimoku Kinko Hyo, is a versatile indicator t
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import ichimoku_cloud
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 ichimoku_cloud(aapl_data['high'],aapl_data['low'],4,7,12)
 ```
@@ -2391,14 +2381,14 @@ The information ratio (IR) is a measure of portfolio returns above the returns o
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import information_ratio
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
-spy_data=pd.DataFrame(OHLCV('SPY','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+spy_data=pd.DataFrame(ohlcv('SPY','2018-01-01','2019-01-01')['history']['day'])
 
 information_ratio( daily_returns(aapl_data['close']), daily_returns(spy_data['close']) )
 ```
@@ -2426,14 +2416,14 @@ Developed by Perry Kaufman, Kaufman's Adaptive Moving Average (KAMA) is a moving
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import kaufman_adaptive_moving_average
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
-spy_data=pd.DataFrame(OHLCV('SPY','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+spy_data=pd.DataFrame(ohlcv('SPY','2018-01-01','2019-01-01')['history']['day'])
 
 kaufman_adaptive_moving_average(aapl_data['close'],7)
 ```
@@ -2483,14 +2473,14 @@ Keltner Channels are a popular technical indicator that traders use to help asse
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import keltner_channels
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
-spy_data=pd.DataFrame(OHLCV('SPY','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+spy_data=pd.DataFrame(ohlcv('SPY','2018-01-01','2019-01-01')['history']['day'])
 
 keltner_channels(aapl_data['high'],aapl_data['low'],aapl_data['close'],7)
 ```
@@ -2548,14 +2538,14 @@ Developed by Martin Pring, Know Sure Thing (KST) is a momentum oscillator based 
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import know_sure_thing
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
-spy_data=pd.DataFrame(OHLCV('SPY','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+spy_data=pd.DataFrame(ohlcv('SPY','2018-01-01','2019-01-01')['history']['day'])
 
 know_sure_thing(aapl_data['close'],r1=10,r2=15,r3=20,r4=30,n1=10,n2=10,n3=10,n4=15,nsig=9)
 ```
@@ -2602,14 +2592,14 @@ kurtosis is a statistical measure that is used to describe the distribution. Whe
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import kurtosis
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
-spy_data=pd.DataFrame(OHLCV('SPY','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+spy_data=pd.DataFrame(ohlcv('SPY','2018-01-01','2019-01-01')['history']['day'])
 
 kurtosis(aapl_data['close'])
 ```
@@ -2634,14 +2624,14 @@ return type : Float
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import linear_regression
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
-spy_data=pd.DataFrame(OHLCV('SPY','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+spy_data=pd.DataFrame(ohlcv('SPY','2018-01-01','2019-01-01')['history']['day'])
 
 linear_regression(aapl_data['close'],7)
 ```
@@ -2688,14 +2678,14 @@ return type : Pandas DataFrame
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import linear_regression_angle
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
-spy_data=pd.DataFrame(OHLCV('SPY','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+spy_data=pd.DataFrame(ohlcv('SPY','2018-01-01','2019-01-01')['history']['day'])
 
 linear_regression_angle(aapl_data['close'],7)
 ```
@@ -2742,14 +2732,14 @@ return type : Pandas DataFrame
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import linear_regression_intercept
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
-spy_data=pd.DataFrame(OHLCV('SPY','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+spy_data=pd.DataFrame(ohlcv('SPY','2018-01-01','2019-01-01')['history']['day'])
 
 linear_regression_intercept(aapl_data['close'],7)
 ```
@@ -2796,14 +2786,14 @@ return type : Pandas DataFrame
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import linear_regression_slope
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
-spy_data=pd.DataFrame(OHLCV('SPY','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+spy_data=pd.DataFrame(ohlcv('SPY','2018-01-01','2019-01-01')['history']['day'])
 
 linear_regression_slope(aapl_data['close'],7)
 ```
@@ -2853,14 +2843,14 @@ The Moving Average Convergence Divergence (MACD) is a trend-following momentum i
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import macd
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
-spy_data=pd.DataFrame(OHLCV('SPY','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+spy_data=pd.DataFrame(ohlcv('SPY','2018-01-01','2019-01-01')['history']['day'])
 
 macd(aapl_data['close'],9)
 ```
@@ -2912,14 +2902,14 @@ Mass index is a form of technical analysis that examines the range between high 
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import mass_index
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
-spy_data=pd.DataFrame(OHLCV('SPY','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+spy_data=pd.DataFrame(ohlcv('SPY','2018-01-01','2019-01-01')['history']['day'])
 
 mass_index(mass_index(aapl_data['high'], aapl_data['low'], 4,9)
 ```
@@ -2966,14 +2956,14 @@ MidPoint over period is simply moving average of the sum of highest and lowest v
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import midpoint_over_period
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
-spy_data=pd.DataFrame(OHLCV('SPY','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+spy_data=pd.DataFrame(ohlcv('SPY','2018-01-01','2019-01-01')['history']['day'])
 
 midpoint_over_period(aapl_data['close'],7)
 ```
@@ -3021,14 +3011,14 @@ MidPoint price over period is simply moving average of the sum of highest high a
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import midpoint_price_over_period
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
-spy_data=pd.DataFrame(OHLCV('SPY','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+spy_data=pd.DataFrame(ohlcv('SPY','2018-01-01','2019-01-01')['history']['day'])
 
 midpoint_price_over_period(aapl_data['high'],aapl_data['low'],7)
 ```
@@ -3079,14 +3069,14 @@ Minus Directional Indicator or Negative Directional Indicator is a negative dire
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import minus_directional_indicator
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
-spy_data=pd.DataFrame(OHLCV('SPY','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+spy_data=pd.DataFrame(ohlcv('SPY','2018-01-01','2019-01-01')['history']['day'])
 
 minus_directional_indicator(aapl_data['high'],aapl_data['low'],aapl_data['close'],7)
 ```
@@ -3134,13 +3124,13 @@ return type : Pandas DataFrame
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import minus_directional_movement
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 minus_directional_movement(aapl_data['high'],aapl_data['low'],aapl_data['close'],7)
 ```
@@ -3189,13 +3179,13 @@ The Median Price indicator is simply the midpoint of each day's price. The Typic
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import median_price
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 median_price(aapl_data['high'],aapl_data['low'])
 ```
@@ -3244,13 +3234,13 @@ The Momentum indicator measures the amount that a security's price has changed o
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import momentum
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 momentum(aapl_data['close'],7)
 ```
@@ -3299,13 +3289,13 @@ The Money Flow Index (MFI) is a technical oscillator used for identifying overbo
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import money_flow_index
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 money_flow_index(aapl_data['high'],aapl_data['low'],aapl_data['close'],aapl_data['volume'],7)
 ```
@@ -3352,13 +3342,13 @@ A moving average (MA) is a widely used indicator in technical analysis that help
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import ma
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 ma(aapl_data['close'],7)
 ```
@@ -3402,13 +3392,13 @@ return type : Pandas DataFrame
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import moving_volatility
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 moving_volatility(aapl_data['close'],7)
 ```
@@ -3455,13 +3445,13 @@ The Negative Volume Index (NVI) is a cumulative indicator that uses the change i
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import negative_volume_index
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 negative_volume_index(aapl_data['close'],aapl_data['volume'])
 ```
@@ -3511,13 +3501,13 @@ Because Normalized Average True Range is normalized, it can be more useful than 
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import normalized_average_true_range
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 normalized_average_true_range(aapl_data['high'],aapl_data['low'],aapl_data['close'],7)
 ```
@@ -3564,13 +3554,13 @@ On-balance volume (OBV) is a momentum indicator that uses volume flow to predict
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import on_balance_volume
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 on_balance_volume(aapl_data['close'], aapl_data['volume'])
 ```
@@ -3619,13 +3609,13 @@ The Omega ratio is a risk-return performance measure of an investment asset, por
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import omega_ratio
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 omega_ratio(aapl_data['close'])
 ```
@@ -3652,13 +3642,13 @@ The parabolic SAR is a technical indicator used to determine the price direction
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import parabolic_sar
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 parabolic_sar(aapl_data['high'],aapl_data['low'])
 ```
@@ -3707,13 +3697,13 @@ The Percentage Price Oscillator (PPO) is a momentum oscillator that measures the
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import percentage_price_oscillator
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 percentage_price_oscillator(aapl_data['close'],4,9)
 ```
@@ -3764,13 +3754,13 @@ The Plus or Positive Directional Indicator (+DI) is a component of the Average D
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import plus_directional_indicator
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 plus_directional_indicator(aapl_data['high'],aapl_data['low'],aapl_data['close'],14)
 ```
@@ -3818,13 +3808,13 @@ return type : Pandas DataFrame
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import plus_directional_movement
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 plus_directional_movement(aapl_data['high'],aapl_data['low'],aapl_data['close'],14)
 ```
@@ -3874,13 +3864,13 @@ The Rate-of-Change (ROC) indicator, which is also referred to as simply Momentum
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import rate_of_change
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 rate_of_change(aapl_data['close'],7)
 ```
@@ -3930,13 +3920,13 @@ The relative strength index (RSI) is a momentum indicator that measures the magn
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import relative_strength_index
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 relative_strength_index(aapl_data['close'],9)
 ```
@@ -3983,13 +3973,13 @@ Get return for any number of trading days. Daily Returns*Number of trading days.
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import returns
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2014-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2014-01-01','2019-01-01')['history']['day'])
 
 returns(aapl_data['close'])
 ```
@@ -4016,13 +4006,13 @@ The Sharpe ratio was developed by Nobel laureate William F. Sharpe, and is used 
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import sharpe_ratio
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2014-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2014-01-01','2019-01-01')['history']['day'])
 
 sharpe_ratio(aapl_data['close'])
 ```
@@ -4048,13 +4038,13 @@ Skewness is the degree of distortion from the symmetrical bell curve, or normal 
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import skewness
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 skewness(aapl_data['close'])
 ```
@@ -4081,13 +4071,13 @@ The Sortino ratio improves upon the Sharpe ratio by isolating downside volatilit
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import skewness
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 sortino_ratio(aapl_data['close'],7.0)
 ```
@@ -4114,13 +4104,13 @@ The standard deviation is a statistic that measures the dispersion of a dataset 
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import standard_deviation
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 standard_deviation(aapl_data['close'],7)
 ```
@@ -4172,13 +4162,13 @@ of a security to the range of its prices over a certain period of time. The sens
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import stochastic_oscillator
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 stochastic_oscillator(aapl_data['high'],aapl_data['low'],aapl_data['close'],7)
 ```
@@ -4229,13 +4219,13 @@ The StochRSI is an indicator used in technical analysis that ranges between zero
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import stochastic_rsi
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 stochastic_rsi(aapl_data['close'],14)
 ```
@@ -4284,13 +4274,13 @@ Tail Ratio is the Ratio between the 95th and (absolute) 5th percentile of the da
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import tail_ratio
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 tail_ratio(aapl_data['close'])
 ```
@@ -4316,13 +4306,13 @@ The Time Series Forecast indicator displays the statistical trend of a security'
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import time_series_forecast
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 time_series_forecast(aapl_data['close'],8)
 ```
@@ -4370,13 +4360,13 @@ TRIX is a momentum oscillator that displays the percent rate of change of a trip
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import trix
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 trix(aapl_data['close'],8)
 ```
@@ -4424,13 +4414,13 @@ The triangular moving average (also known as the TMA) is similar to other moving
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import triangular_ma
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 triangular_ma(aapl_data['close'],8)
 ```
@@ -4478,13 +4468,13 @@ The triple exponential moving average, or TEMA, was developed by Patrick Mulloy 
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import triple_ema
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 triple_ema(aapl_data['close'],8)
 ```
@@ -4532,13 +4522,13 @@ The True Range function is used in the calculation of many indicators, most nota
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import true_range
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 true_range(aapl_data['high'],aapl_data['low'],aapl_data['close'])
 ```
@@ -4586,13 +4576,13 @@ The true strength index is a technical momentum indicator that helps traders ide
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import true_range
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 true_strength_index(aapl_data['close'],25,13)
 ```
@@ -4641,13 +4631,13 @@ The Typical Price is the average of the high + low + close of a bar. It is used 
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import typical_price
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 typical_price(aapl_data['high'],aapl_data['low'],aapl_data['close'])
 ```
@@ -4699,13 +4689,13 @@ The Ultimate Oscillator is a technical indicator that was developed by Larry Wil
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import ultimate_oscillator
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 ultimate_oscillator(aapl_data['high'],aapl_data['low'],aapl_data['close'],4,8,15)
 ```
@@ -4754,13 +4744,13 @@ Value at risk (VaR) is a measure of the risk of loss for investments. It estimat
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import value_at_risk
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 value_at_risk(aapl_data['close'])
 ```
@@ -4791,13 +4781,13 @@ Variance is a measurement of the spread between numbers in a data set. The varia
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import variance
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 variance(aapl_data['close'],7)
 ```
@@ -4842,13 +4832,13 @@ Get volatility for any number of trading days.
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import volatility
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2014-01-01','2018-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2014-01-01','2018-01-01')['history']['day'])
 
 volatility(aapl_data['close'])
 ```
@@ -4874,13 +4864,13 @@ The volume price trend (VPT) indicator helps determine a security’s price dire
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import volume_price_trend
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 volume_price_trend(aapl_data['close'],aapl_data['volume'])
 ```
@@ -4929,13 +4919,13 @@ the volume-adjusted moving average indicator (sometimes  called Equivolume chart
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import volume_adjusted_moving_average
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 volume_adjusted_moving_average(aapl_data['close'],aapl_data['volume'],7)
 ```
@@ -4985,13 +4975,13 @@ Developed by Etienne Botes and Douglas Siepman, the Vortex Indicator consists of
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import vortex_indicator
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 vortex_indicator(aapl_data['high'],aapl_data['low'],aapl_data['close'],7)
 ```
@@ -5043,13 +5033,13 @@ Volume-Weighted Average Price (VWAP) is exactly what it sounds like: the average
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import vwap
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 vwap(aapl_data['high'],aapl_data['low'],aapl_data['close'],aapl_data['volume'])
 ```
@@ -5098,13 +5088,13 @@ The Weighted Close is the average of the high, low and close of a bar, but the c
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import weighted_close_price
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 weighted_close_price(aapl_data['high'],aapl_data['low'],aapl_data['close'])
 ```
@@ -5153,13 +5143,13 @@ Developed by Larry Williams, Williams %R is a momentum indicator that is the inv
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import williams_r
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 williams_r(aapl_data['high'],aapl_data['low'],aapl_data['close'],7)
 ```
@@ -5206,13 +5196,13 @@ The Weighted Moving Average calculates a weight for each value in the series. Th
 ```python
 Example:
 
-from libkloudtrader.defaults import *
+
 from libkloudtrader.analysis import wma
-from libkloudtrader.equities.data import OHLCV
+from libkloudtrader.stocks import ohlcv
 import pandas as pd
 
 #load data
-aapl_data=pd.DataFrame(OHLCV('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
 
 wma(aapl_data['close'],7)
 ```
