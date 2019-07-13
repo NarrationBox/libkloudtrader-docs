@@ -5,18 +5,7 @@ sidebar_label: Alerts
 ---
 ## With libkloudtrader, you can create customized alerts for both SMS and Email.
 
-> #### Important
-> 
-> The algorithm you want to deploy should be in a file called **main.py**
-> 
-> Your algorithm must have these imports:
-> 
-> <b>from libkloudtrader.defaults import * </b>
-> 
-> This will help Narwhal to access your access token and account number from the Narwhal Environment so that you don't have to explicitly pass them with each API call. Narwhal would not be able to load your access token and account number from the Narwhal Environment if you don't link your tradier account. So the best practice is to link your tradier account before deploying your Trading Algorithm.
 
-> Note: Your access token will expire after 24 hours. In order to allow your deployed algorithm to trade seemlessly, please manually link your tradier account after 24 hours. Don't worry this is just in Beta Version and will be automated soon!
-> 
 # Module
 <code>libkloudtrader.alert_me</code>
 *** 

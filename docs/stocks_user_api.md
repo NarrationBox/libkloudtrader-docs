@@ -1,38 +1,29 @@
 ---
-id: user_api
-title: User
+id: stocks_user_api
+title: Info related to User and Account
 sidebar_label: User
 ---
 
-## You can use User APIs to receive any kind information about your account
-> #### Important
-> 
-> The algorithm you want to deploy should be in a file called **main.py**
-> 
-> Your algorithm must have these imports:
-> 
-> <b>from libkloudtrader.defaults import * </b>
-> 
-> This will help Narwhal to access your access token and account number from the Narwhal Environment so that you don't have to explicitly pass them with each API call. Narwhal would not be able to load your access token and account number from the Narwhal Environment if you don't link your tradier account. So the best practice is to link your tradier account before deploying your Trading Algorithm.
+## Get your account and profile related information.
 
-> Note: Your access token will expire after 24 hours. In order to allow your deployed algorithm to trade seemlessly, please manually link your tradier account after 24 hours. Don't worry this is just in Beta Version and will be automated soon!
 # Module
-<code>libkloudtrader.user</code>
+<code>libkloudtrader.stocks</code>
 
 ### User profile
-Get information pertaining to your account<br/>
+Get information pertaining to your all accounts with the provided brokerage.<br/>
 
-<code>user_profile(access_token)</code>
+<code>user_profile(brokerage, access_token)</code>
 | Paramters       | Required/Optional | Description                                    | Type |
 |-----------------|-------------------|------------------------------------------------|------| 
-| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                               | str  |
+| brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
+| access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
 ```python
 Example:
 
-from libkloudtrader.user import user_profile
+import libkloudtrader.stocks as stocks
 
-user_profle()
+stocks.user_profile()
 ```
 ```python
 return type : json
@@ -58,40 +49,22 @@ return type : json
 }
 ```
 ***
-### Account Number
-Get your account number or list of account numbers accosiated with your user profile<br/>
-
-<code>user_account_number(access_token)</code>
-| Paramters       | Required/Optional | Description                                    | Type |
-|-----------------|-------------------|------------------------------------------------|------| 
-| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                               | str  |
-
-```python
-Example:
-
-from libkloudtrader.user import user_account_number
-
-user_account_number()
-```
-```python
-return type : str if one account, list if many accounts
-```
-***
 ### Account balance
 Get your account balance<br/>
 
-<code>account_balance(access_token,account_number)</code>
+<code>account_balance(brokerage, access_token, account_number)</code>
 | Paramters       | Required/Optional | Description                                    | Type |
 |-----------------|-------------------|------------------------------------------------|------| 
-| access_token    | optional          |Will automatically be present when you deploy to Narwhal                                                | str  |
-| account_number  | optional          |  Will automatically be present when you deploy to Narwhal                                              | str  |
+| brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
+| access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+| account_number  | optional          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
 ```python
 Example:
 
-from libkloudtrader.user import account_balance
+import libkloudtrader.stocks as stocks
 
-account_balance()
+stocks.account_balance()
 ```
 ```python
 return type : json
@@ -128,56 +101,22 @@ return type : json
 }
 ```
 
-
-
-***
-### Account Positions
-Get all the postions your account holds<br/>
-
-<code>account_positions(access_token,account_number)</code>
-| Paramters       | Required/Optional | Description                                    | Type |
-|-----------------|-------------------|------------------------------------------------|------| 
-| access_token    | optional          |  Will automatically be present when you deploy to Narwhal                                              | str  |
-| account_number  | optional          |  Will automatically be present when you deploy to Narwhal                                              | str  |
-
-```python
-Example:
-
-from libkloudtrader.user import account_positions
-
-account_positions()
-```
-```python
-return type : json
-
-{  
-   'positions':{  
-      'position':{  
-         'cost_basis':12.87,
-         'date_acquired':'2018-06-19T12:55:12.764Z',
-         'id':354131,
-         'quantity':1.0,
-         'symbol':'GE'
-      }
-   }
-}
-```
-***
 ### Account History
-Get your account's history<br/>
+Get your account's history.<br/>
 
-<code>account_history(access_token,account_number)</code>
+<code>account_history(brokerage, access_token, account_number)</code>
 | Paramters       | Required/Optional | Description                                    | Type |
 |-----------------|-------------------|------------------------------------------------|------| 
-| access_token    | optional          |  Will automatically be present when you deploy to Narwhal                                              | str  |
-| account_number  | optional          |   Will automatically be present when you deploy to Narwhal                                             | str  |
+| brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
+| access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+| account_number  | optional          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
 ```python
 Example:
 
-from libkloudtrader.user import account_history
+import libkloudtrader.stocks as stocks
 
-account_history()
+stocks.account_history()
 ```
 ```python
 return type : json
@@ -214,22 +153,58 @@ return type : json
    }
 }
 ```
-***
-### Account Cost Basis
-Get your account's cost basis. This includes information of all closed positions<br/>
 
-<code>account_costbasis(access_token,account_number)</code>
+
+***
+### Account Positions
+Get all the postions your account holds<br/>
+
+<code>account_positions(brokerage, access_token, account_number)</code>
 | Paramters       | Required/Optional | Description                                    | Type |
 |-----------------|-------------------|------------------------------------------------|------| 
-| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                               | str  |
-| account_number  | optional          |  Will automatically be present when you deploy to Narwhal                                              | str  |
+| brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
+| access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+| account_number  | optional          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
 ```python
 Example:
 
-from libkloudtrader.user import account_costbasis
+import libkloudtrader.stocks as stocks
 
-account_costbasis()
+stocks.account_positions()
+```
+```python
+return type : json
+
+{  
+   'positions':{  
+      'position':{  
+         'cost_basis':12.87,
+         'date_acquired':'2018-06-19T12:55:12.764Z',
+         'id':354131,
+         'quantity':1.0,
+         'symbol':'GE'
+      }
+   }
+}
+```
+
+### Account Closed Positions
+Get your account's closed positions<br/>
+
+<code>account_closed_positions(brokerage, access_token, account_number)</code>
+| Paramters       | Required/Optional | Description                                    | Type |
+|-----------------|-------------------|------------------------------------------------|------| 
+| brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
+| access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+| account_number  | optional          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+
+```python
+Example:
+
+import libkloudtrader.stocks as stocks
+
+stocks.account_closed_positions()
 ```
 ```python
 return type : json
@@ -270,18 +245,19 @@ return type : json
 ### Account Orders
 Get intraday and open/pending order information for your account<br/>
 
-<code>account_orders(access_token,account_number)</code>
+<code>account_orders(brokerage, access_token, account_number)</code>
 | Paramters       | Required/Optional | Description                                    | Type |
 |-----------------|-------------------|------------------------------------------------|------| 
-| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                               | str  |
-| account_number  | optional          | Will automatically be present when you deploy to Narwhal                                               | str  |
+| brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
+| access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+| account_number  | optional          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
 ```python
 Example:
 
-from libkloudtrader.user import account_orders
+import libkloudtrader.stocks as stocks
 
-account_orders()
+stocks.account_orders()
 ```
 ```python
 return type : json
@@ -336,19 +312,20 @@ return type : json
 ### Individual order
 Get detailed information for a specific order<br/>
 
-<code>account_specificorders(order_id,access_token,account_number)</code>
+<code>account_specificorders(order_id, brokerage, access_token, account_number)</code>
 | Paramters       | Required/Optional | Description                                    | Type |
 |-----------------|-------------------|------------------------------------------------|------| 
 | order_id        | required          | Order Id of the order you want info of         | str  |
-| access_token    | optional          | Will automatically be present when you deploy to Narwhal                                               | str  |
-| account_number  | optional          | Will automatically be present when you deploy to Narwhal                                               | str  |
+| brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
+| access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+| account_number  | optional          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
 ```python
 Example:
 
-from libkloudtrader.user import account_specificorders
+import libkloudtrader.stocks as stocks
 
-account_specificorders('1369455')
+stocks.account_specificorders('1369455')
 ```
 ```python
 return type : json

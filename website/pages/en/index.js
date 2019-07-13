@@ -97,7 +97,7 @@ class HomeSplash extends React.Component {
         <div className="inner">
           <ProjectTitle />
           <PromoSection className="promo">
-            <Button href="/docs/intro" className="get-started">Get Started</Button>
+            <Button href="/docs/getting_started_with_libkloudtrader" className="get-started">Get Started</Button>
           </PromoSection>
           <small>Python Client of Libkloudtrader</small>
           

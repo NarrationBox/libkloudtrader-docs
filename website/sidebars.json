@@ -1,26 +1,26 @@
 {
   "docs": {
-   
     "Getting Started": [
-      "intro",
-      "sample_strategy"
-    ],
-
-    "API Reference": [
-      "api_index"
+      "getting_started_with_libkloudtrader",
+      "getting_started_with_narwhal"
     ],
     "Generic":[
       "alert_api",
-      "analysis_api"
+      "analysis_api",
+      "running_your_algorithm"
     ],
-    "Stocks and Options":[
+    "Stocks & Options":[
       "stock_data_api",
       "stock_trading_api",
       "options_data_api",
       "options_trading_api",
-      "user_api"
+      "stocks_user_api"
     ],
-    "Crypto":[]
+    "Crypto":[
+      "crypto_data_api",
+      "crypto_trading_api",
+      "crypto_user_api"
+    ]
    
   }
 }

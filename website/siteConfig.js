@@ -19,8 +19,7 @@ const siteConfig = {
   projectName: 'libkloudtrader-docs',
   organizationName: "KloudTrader Ltd.",
   headerLinks: [
-    {doc: 'intro', label: 'Docs'},
-    {doc: 'api_index', label: 'API'},
+    {doc: 'getting_started_with_libkloudtrader', label: 'Docs'},
     {page: 'help', label: 'Help'},
     {href:'https://kloudtrader.com',label:"KloudTrader"},
     {href:'https://kloudtrader.com/narwhal',label:"Narwhal"},
@@ -41,7 +40,7 @@ const siteConfig = {
 
   fonts: {
     myFont: [
-      "DM Serif Display",
+      "Lato",
       "Serif"
     ],
 
