@@ -204,7 +204,7 @@ Get OHLCV(Open-High-Low-Close-Volume) data for a symbol (As back as you want to 
 | interval        | optional          | daily/weekly/monthly (daily by default) | str  |
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
-| dataframe       | optional          | True if you want data as pandas dataframe. False for JSON. False by default.   | bool  |
+| dataframe       | optional          | True if you want data as pandas dataframe. False for JSON. True by default.   | bool  |
 ```python 
 Example:
 
@@ -214,49 +214,23 @@ import libkloudtrader.stocks as stocks
 stocks.ohlcv('AAPL',start="2018-01-01",end="2019-01-01")
 ```
 ```python
-return type: json 
+return type: <class 'pandas.core.frame.DataFrame'>
 
-{  
-   'history':{  
-      'day':[  
-         {  
-            'date':'2018-01-02',
-            'open':170.16,
-            'high':172.3,
-            'low':169.26,
-            'close':172.26,
-            'volume':25555934
-         },
-         {  
-            'date':'2018-01-03',
-            'open':172.53,
-            'high':174.55,
-            'low':171.96,
-            'close':172.23,
-            'volume':29517899
-         },
-         .
-         .
-         .
-         {  
-            'date':'2018-12-28',
-            'open':157.5,
-            'high':158.52,
-            'low':154.55,
-            'close':156.23,
-            'volume':42291424
-         },
-         {  
-            'date':'2018-12-31',
-            'open':158.53,
-            'high':159.36,
-            'low':156.48,
-            'close':157.74,
-            'volume':35003466
-         }
-      ]
-   }
-}
+              open    high     low   close    volume
+date                                                
+2018-01-02  170.16  172.30  169.26  172.26  25555934
+2018-01-03  172.53  174.55  171.96  172.23  29517899
+2018-01-04  172.54  173.47  172.08  173.03  22434597
+2018-01-05  173.44  175.37  173.05  175.00  23660018
+2018-01-08  174.35  175.61  173.93  174.35  20567766
+...            ...     ...     ...     ...       ...
+2018-12-24  148.15  151.55  146.59  146.83  37169232
+2018-12-26  148.30  157.23  146.72  157.17  58582544
+2018-12-27  155.84  156.77  150.07  156.15  53117065
+2018-12-28  157.50  158.52  154.55  156.23  42291424
+2018-12-31  158.53  159.36  156.48  157.74  35003466
+
+[251 rows x 5 columns]
 ```
 
 ***
@@ -273,51 +247,34 @@ Get historical tick data(trades placed) for a particular period of time. Goes up
 | data_filter        | optional          | 'open' for data points within open market hours only. 'all' for all available data points. 'open' by default. | str  |
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
-| dataframe       | optional          | True if you want data as pandas dataframe. False for JSON. False by default.   | bool  |
+| dataframe       | optional          | True if you want data as pandas dataframe. False for JSON. True by default.   | bool  |
 ```python 
 Example:
 
 
 import libkloudtrader.stocks as stocks
 
-stocks.tick_data('AAPL',start="2019-07-01 09:30:00",end="2019-07-01 09:40:00")
+stocks.tick_data('AAPL',start="2019-08-14 09:30:00",end="2019-08-15 16:00:00")
 ```
 ```python
-return type: json 
+return type: <class 'pandas.core.frame.DataFrame'>
 
-{  
-   'series':{  
-      'data':[  
-         {  
-            'time':'2019-07-01T13:30:00',
-            'timestamp':1561987800007,
-            'price':203.28,
-            'volume':100
-         },
-         {  
-            'time':'2019-07-01T13:30:00',
-            'timestamp':1561987800050,
-            'price':203.28,
-            'volume':175
-         },
-         .
-         .
-         .
-         {  
-            'time':'2019-07-01T13:39:59',
-            'timestamp':1561988399698,
-            'price':204.097,
-            'volume':100
-         },
-         {  
-            'time':'2019-07-01T13:39:59',
-            'timestamp':1561988399753,
-            'price':204.1001,
-            'volume':150
-         }
-      ]
-   }
-}
+
+                      timestamp      price      open    high       low     close  volume       vwap
+time                                                                                               
+2019-08-14 09:30:00  1565789400  203.54500  203.2500  204.39  202.7000  204.2300  909362  203.34538
+2019-08-14 09:31:00  1565789460  203.99000  204.2304  204.40  203.5800  204.0900  289683  204.04309
+2019-08-14 09:32:00  1565789520  204.50030  204.0900  204.99  204.0106  204.6044  337607  204.66582
+2019-08-14 09:33:00  1565789580  204.40500  204.5800  204.78  204.0300  204.1386  206907  204.37505
+2019-08-14 09:34:00  1565789640  204.13000  204.1100  204.50  203.7600  204.3900  179531  204.04424
+...                         ...        ...       ...     ...       ...       ...     ...        ...
+2019-08-15 15:55:00  1565898900  202.18500  202.3000  202.39  201.9800  202.1300  117686  202.18315
+2019-08-15 15:56:00  1565898960  202.03000  202.1200  202.12  201.9400  202.0400   53594  202.01888
+2019-08-15 15:57:00  1565899020  201.95500  202.0278  202.07  201.8400  201.9200   71429  201.95318
+2019-08-15 15:58:00  1565899080  201.85855  201.9100  201.91  201.8071  201.8100   67014  201.85875
+2019-08-15 15:59:00  1565899140  201.72000  201.8200  201.88  201.5600  201.7400  178291  201.76396
+
+[780 rows x 8 columns]
 ```
 
 ***
@@ -334,69 +291,34 @@ Get historical bar data with 1 minute interval for a given period of time. Goes 
 | data_filter        | optional          | 'open' for data points within open market hours only. 'all' for all available data points. 'all' by default. | str  |
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
-| dataframe       | optional          | True if you want data as pandas dataframe. False for JSON. False by default.   | bool  |
+| dataframe       | optional          | True if you want data as pandas dataframe. False for JSON. True by default.   | bool  |
 
 
 ```python
 
 import libkloudtrader.stocks as stocks
 
-stocks.min1_bar_data('AAPL',start="2019-07-01 09:30:00",end="2019-07-03 15:40:00")
+stocks.min1_bar_data('AAPL',start="2019-08-14 09:30:00",end="2019-08-15 16:00:00")
 ```
 ```python
-{  
-   'series':{  
-      'data':[  
-         {  
-            'time':'2019-07-01T09:30:00',
-            'timestamp':1561987800,
-            'price':203.25,
-            'open':203.28,
-            'high':203.8,
-            'low':202.7,
-            'close':203.71,
-            'volume':951431,
-            'vwap':203.15787
-         },
-         {  
-            'time':'2019-07-01T09:31:00',
-            'timestamp':1561987860,
-            'price':203.55545,
-            'open':203.71,
-            'high':203.77,
-            'low':203.3409,
-            'close':203.48,
-            'volume':152798,
-            'vwap':203.54317
-         },
-         .
-         .
-         .
-         {  
-            'time':'2019-07-03T15:30:00',
-            'timestamp':1562182200,
-            'price':204.26,
-            'open':204.26,
-            'high':204.26,
-            'low':204.26,
-            'close':204.26,
-            'volume':200,
-            'vwap':204.26
-         },
-         {  
-            'time':'2019-07-03T15:37:00',
-            'timestamp':1562182620,
-            'price':204.23,
-            'open':204.23,
-            'high':204.23,
-            'low':204.23,
-            'close':204.23,
-            'volume':400,
-            'vwap':204.23
-         }
-      ]
-   }
-}
+return type: <class 'pandas.core.frame.DataFrame'>
+
+
+                      timestamp      price      open    high       low     close   volume       vwap
+time                                                                                                
+2019-08-14 09:30:00  1565789400  203.54500  203.2500  204.39  202.7000  204.2300   909362  203.34538
+2019-08-14 09:31:00  1565789460  203.99000  204.2304  204.40  203.5800  204.0900   289683  204.04309
+2019-08-14 09:32:00  1565789520  204.50030  204.0900  204.99  204.0106  204.6044   337607  204.66582
+2019-08-14 09:33:00  1565789580  204.40500  204.5800  204.78  204.0300  204.1386   206907  204.37505
+2019-08-14 09:34:00  1565789640  204.13000  204.1100  204.50  203.7600  204.3900   179531  204.04424
+...                         ...        ...       ...     ...       ...       ...      ...        ...
+2019-08-15 15:56:00  1565898960  202.03000  202.1200  202.12  201.9400  202.0400    53594  202.01888
+2019-08-15 15:57:00  1565899020  201.95500  202.0278  202.07  201.8400  201.9200    71429  201.95318
+2019-08-15 15:58:00  1565899080  201.85855  201.9100  201.91  201.8071  201.8100    67014  201.85875
+2019-08-15 15:59:00  1565899140  201.72000  201.8200  201.88  201.5600  201.7400   178291  201.76396
+2019-08-15 16:00:00  1565899200  201.70500  201.7400  201.74  201.6700  201.6900  1830565  201.73995
+
+[1154 rows x 8 columns]
 ```
 ***
 ### 5 minute bar data
@@ -412,71 +334,33 @@ Get historical bar data with 15 minute interval for a given period of time. Goes
 | data_filter        | optional          | 'open' for data points within open market hours only. 'all' for all available data points. 'all' by default. | str  |
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
-| dataframe       | optional          | True if you want data as pandas dataframe. False for JSON. False by default.   | bool  |
+| dataframe       | optional          | True if you want data as pandas dataframe. False for JSON. True by default.   | bool  |
 ```python 
 Example:
 
 
 import libkloudtrader.stocks as stocks
 
-stocks.min5_bar_data('AAPL',start="2019-07-01 09:30:00",end="2019-07-03 09:40:00")
+stocks.min5_bar_data('AAPL',start="2019-08-14 09:30:00",end="2019-08-15 16:00:00")
 ```
 ```python
-return type: json 
+return type: <class 'pandas.core.frame.DataFrame'>
 
-{  
-   'series':{  
-      'data':[  
-         {  
-            'time':'2019-07-01T09:30:00',
-            'timestamp':1561987800,
-            'price':203.25,
-            'open':203.28,
-            'high':203.8,
-            'low':202.7,
-            'close':203.37,
-            'volume':1619605,
-            'vwap':203.31102
-         },
-         {  
-            'time':'2019-07-01T09:35:00',
-            'timestamp':1561988100,
-            'price':203.74,
-            'open':203.38,
-            'high':204.14,
-            'low':203.34,
-            'close':204.1001,
-            'volume':926089,
-            'vwap':203.71958
-         },
-         .
-         .
-         .
-         {  
-            'time':'2019-07-03T09:35:00',
-            'timestamp':1562160900,
-            'price':203.2131,
-            'open':202.965,
-            'high':203.5,
-            'low':202.9262,
-            'close':203.4359,
-            'volume':326617,
-            'vwap':203.3028
-         },
-         {  
-            'time':'2019-07-03T09:40:00',
-            'timestamp':1562161200,
-            'price':203.355,
-            'open':203.43,
-            'high':203.48,
-            'low':203.23,
-            'close':203.34,
-            'volume':159393,
-            'vwap':203.36112
-         }
-      ]
-   }
-}
+                      timestamp    price      open     high     low     close   volume       vwap
+time                                                                                             
+2019-08-14 09:30:00  1565789400  203.845  203.2500  204.990  202.70  204.3900  1923090  203.85832
+2019-08-14 09:35:00  1565789700  204.675  204.3900  205.450  203.90  205.4000   888452  204.69031
+2019-08-14 09:40:00  1565790000  205.175  205.4187  205.720  204.63  204.9250   758421  205.14322
+2019-08-14 09:45:00  1565790300  204.805  204.9000  205.540  204.07  205.2506   773080  204.79489
+2019-08-14 09:50:00  1565790600  205.650  205.2600  206.280  205.02  206.1800   723712  205.76264
+...                         ...      ...       ...      ...     ...       ...      ...        ...
+2019-08-15 15:40:00  1565898000  201.820  201.6700  202.130  201.51  202.0300   264595  201.80095
+2019-08-15 15:45:00  1565898300  202.175  202.0500  202.500  201.85  202.3397   399047  202.26095
+2019-08-15 15:50:00  1565898600  202.250  202.3300  202.470  202.03  202.3031   354048  202.20736
+2019-08-15 15:55:00  1565898900  201.975  202.3000  202.390  201.56  201.7400   488014  201.93376
+2019-08-15 16:00:00  1565899200  201.881  201.7400  202.092  201.67  201.7400  1838495  201.74017
+
+[263 rows x 8 columns]
 ```
 
 ***
@@ -493,67 +377,33 @@ Get historical bar data with 15 minute interval for a given period of time. Goes
 | data_filter        | optional          | 'open' for data points within open market hours only. 'all' for all available data points. 'all' by default. | str  |
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
-| dataframe       | optional          | True if you want data as pandas dataframe. False for JSON. False by default.   | bool  |
+| dataframe       | optional          | True if you want data as pandas dataframe. False for JSON. True by default.   | bool  |
 ```python 
 Example:
 
 
 import libkloudtrader.stocks as stocks
 
-stocks.min15_bar_data('AAPL',start="2019-06-25 12:00",end="2019-07-03 16:00")
+stocks.min15_bar_data('AAPL',start="2019-08-14 09:30:00",end="2019-08-15 16:00:00")
 ```
 ```python
-return type: json 
+return type: <class 'pandas.core.frame.DataFrame'>
 
-[  
-   {  
-      'time':'2019-01-25T12:00:00',
-      'timestamp':1548435600,
-      'price':156.82,
-      'open':157.01,
-      'high':157.05,
-      'low':156.59,
-      'close':156.666,
-      'volume':552439,
-      'vwap':156.86707
-   },
-   {  
-      'time':'2019-01-25T12:15:00',
-      'timestamp':1548436500,
-      'price':156.815,
-      'open':156.68,
-      'high':157.02,
-      'low':156.61,
-      'close':156.94,
-      'volume':474270,
-      'vwap':156.81637
-   },
-   .
-   .
-   .
-    {  
-      'time':'2019-01-25T15:45:00',
-      'timestamp':1548449100,
-      'price':157.74,
-      'open':157.58,
-      'high':158.02,
-      'low':157.46,
-      'close':157.72,
-      'volume':2321821,
-      'vwap':157.64307
-   },
-   {  
-      'time':'2019-01-25T16:00:00',
-      'timestamp':1548450000,
-      'price':157.3262,
-      'open':157.76,
-      'high':157.84,
-      'low':156.8124,
-      'close':157.66,
-      'volume':1806919,
-      'vwap':157.7589
-   }
-]
+                      timestamp      price      open     high       low    close   volume       vwap
+time                                                                                                
+2019-08-14 09:30:00  1565789400  204.21000  203.2500  205.720  202.7000  204.925  3569963  204.33834
+2019-08-14 09:45:00  1565790300  205.25500  204.9000  206.440  204.0700  206.070  1938197  205.46306
+2019-08-14 10:00:00  1565791200  205.33000  206.0200  206.060  204.6000  205.130  1399376  205.21804
+2019-08-14 10:15:00  1565792100  205.30535  205.1050  205.720  204.8907  205.610  1075869  205.28415
+2019-08-14 10:30:00  1565793000  205.23000  205.6100  205.790  204.6700  205.430  1014448  205.23389
+...                         ...        ...       ...      ...       ...      ...      ...        ...
+2019-08-15 15:00:00  1565895600  201.44500  200.7500  202.140  200.7500  201.910   745762  201.77360
+2019-08-15 15:15:00  1565896500  201.67000  201.9118  201.970  201.3700  201.490   472728  201.70417
+2019-08-15 15:30:00  1565897400  201.74500  201.4700  202.130  201.3600  202.030   729533  201.62940
+2019-08-15 15:45:00  1565898300  202.03000  202.0500  202.500  201.5600  201.740  1241109  202.11701
+2019-08-15 16:00:00  1565899200  201.87600  201.7400  202.092  201.6600  201.720  1946334  201.75622
+
+[91 rows x 8 columns]
 ```
 ***
 ## Stream Realtime Data
@@ -878,6 +728,7 @@ Get list of all securitites that can be sold short for the given broker<br/>
 |-----------------|-------------------|-----------------------------------------|------|
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+| dataframe       | optional          | True if you want data as pandas dataframe. False for JSON. True by default.   | bool  |
 
 
 ```python
@@ -887,41 +738,23 @@ import libkloudtrader.stocks as stocks
 stocks.shortable_securities()
 ```
 ```python
-return type : json
+return type: <class 'pandas.core.frame.DataFrame'>
 
-{
-  "securities": {
-    "security": [
-      {
-        "symbol": "SCS",
-        "exchange": "N",
-        "type": "stock",
-        "description": "Steelcase Inc"
-      },
-      {
-        "symbol": "EXAS",
-        "exchange": "Q",
-        "type": "stock",
-        "description": "Exact Sciences Corp"
-      },
-      .
-      .
-      .
-      {
-        "symbol": "IBKC",
-        "exchange": "Q",
-        "type": "stock",
-        "description": "IBERIABANK Corp"
-      },
-      {
-        "symbol": "BBT",
-        "exchange": "N",
-        "type": "stock",
-        "description": "BB&T Corp"
-      }
-    ]
-  }
-}
+     symbol exchange   type                      description
+
+0       SCS        N  stock                    Steelcase Inc
+1      EXAS        Q  stock              Exact Sciences Corp
+2       SCZ        Q    etf  iShares MSCI EAFE Small-Cap ETF
+3       WLH        N  stock               William Lyon Homes
+4      TSLA        Q  stock                        Tesla Inc
+...     ...      ...    ...                              ...
+1895   ACBI        Q  stock  Atlantic Capital Bancshares Inc
+1896    SCI        N  stock       Service Corp International
+1897    BAX        N  stock         Baxter International Inc
+1898    SCL        N  stock                        Stepan Co
+1899   JACK        Q  stock              Jack In The Box Inc
+
+[1900 rows x 4 columns]
 ```
 
 ### Check if Shortable
