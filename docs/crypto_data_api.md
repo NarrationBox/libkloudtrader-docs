@@ -1205,8 +1205,8 @@ Supported time intervals:
 |1 month      |1M  |
 
 <!--DOCUSAURUS_CODE_TABS-->
-<!--python-->
-```python
+<!--Python 🐍 -->
+```python 
 Example:
 import libkloudtrader.crypto as crypto
 
@@ -1214,18 +1214,6 @@ crypto.ohlcv(symbol='BTC/USD',start="2019-01-01",end="2019-07-01")
 
 crypto.ohlcv(symbol='BTC/USD',start="2019-01-01 15:30:00",end="2019-01-01 17:35:00",interval='1m')
 ```
-
-<!--python-->
-```python
-Example:
-import libkloudtrader.crypto as crypto
-
-crypto.ohlcv(symbol='BTC/USD',start="2019-01-01",end="2019-07-01")
-
-crypto.ohlcv(symbol='BTC/USD',start="2019-01-01 15:30:00",end="2019-01-01 17:35:00",interval='1m')
-
-```
-
 <!--END_DOCUSAURUS_CODE_TABS-->
 
 ```python 

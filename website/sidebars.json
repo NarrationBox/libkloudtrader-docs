@@ -1,13 +1,14 @@
 {
   "docs": {
     "Getting Started": [
-      "getting_started_with_libkloudtrader",
-      "getting_started_with_narwhal"
+    "getting_started_with_narwhal",
+      "getting_started_with_libkloudtrader"
     ],
     "Generic":[
       "alert_api",
       "analysis_api",
-      "running_your_algorithm"
+      "backtesting",
+      "live_trading"
     ],
     "Stocks & Options":[
       "stock_data_api",

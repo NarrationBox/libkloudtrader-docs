@@ -7,7 +7,8 @@ sidebar_label: Alerts
 
 
 # Module
-<code>libkloudtrader.alert_me</code>
+
+<code><h2>libkloudtrader.alert_me</h2></code>
 *** 
 
 ### SMS alerts 
@@ -18,6 +19,8 @@ sidebar_label: Alerts
 | number       | required          | Number you want to receive alert on | str  |
 | message      | required          | The alert you create                | str  |
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 
 ``` python
 Example:
@@ -31,6 +34,7 @@ if certain_condition is met:
 ```python
 Returns: SMS alert Created!
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
 
 *** 
 ### Email alerts 
@@ -39,6 +43,10 @@ Returns: SMS alert Created!
 |--------------|-------------------|---------------------------------------|------|
 | email_id     | required          | Email Id you want to receive alert on | str  |
 | message      | required          | The alert you create                  | str  |
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
+
 ```python 
 Example:
 
@@ -48,6 +56,7 @@ if particular_condition is met:
     message="{} is met".format(particular_condition)
     email('123@abc.com',message)
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
 
 ```python
 Returns: Email alert Created!
