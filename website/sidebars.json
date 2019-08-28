@@ -7,6 +7,7 @@
     "Generic":[
       "alert_api",
       "analysis_api",
+      "logging",
       "backtesting",
       "live_trading"
     ],
