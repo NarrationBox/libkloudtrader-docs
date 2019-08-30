@@ -45,7 +45,6 @@ sidebar_label: Analysis
 | Cumulative Volume Index| 🔜
 | [Daily Returns](#daily-returns)|✅ 
 | [Daily Log Returns](#daily-log-returns)|✅ 
-| [Daily volatility](#daily-volatility)|✅
 | [Detrended Price Oscillator](#detrended-price-oscillator)| ✅
 | [Directional Movement Index](#directional-movement-index)|✅
 | [Donchian Channel](#donchian-channel)|✅
@@ -164,172 +163,173 @@ Developed by Marc Chaikin, the Accumulation Distribution Line is a volume-based 
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| high         | required          | High prices data       | Pandas dataframe  |
-| low          | required          | Low prices data | Pandas dataframe|
-| close          | required          | Close Prices data | Pandas dataframe  |
-| volume          | required          | Volume data  | Pandas dataframe  |
+| high         | required          | High prices data       | Pandas dataframe column|
+| low          | required          | Low prices data | Pandas dataframe column|
+| close          | required          | Close Prices data | Pandas dataframe column|
+| volume          | required          | Volume data  | Pandas dataframe column|
+
+#### Example
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 
 ```python
-Example:
-
-
-from libkloudtrader.analysis import accumulation_distribution_index
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.analysis as analysis
+import libkloudtrader.stocks as stocks
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-31')['history']['day'])
-
-accumulation_distribution_index(aapl_data['high'],aapl_data['low'],aapl_data['close'],aapl_data['volume'])
+aapl_data=stocks.ohlcv('AAPL','2019-01-01','2019-07-07')
+analysis.accumulation_distribution_index(aapl_data['high'],aapl_data['low'],aapl_data['close'],aapl_data['volume'])
 ```
 ```python
-return type : Pandas Dataframe
+return type : Pandas Series
 
-0               NaN
-1      1.519821e+06
-2     -1.513219e+07
-3      2.434469e+07
-4      5.829405e+06
-5     -7.798453e+06
-6      2.607671e+07
-7      3.445991e+07
-8      2.825995e+07
-9     -1.126491e+07
-10     3.262656e+06
-            ...
-240   -3.874279e+07
-241   -6.163643e+07
-242   -2.284626e+07
-243   -2.555539e+07
-244   -6.359438e+07
-245   -1.067186e+08
-246   -1.046228e+08
-247    2.434146e+07
-248    1.012001e+08
-249    3.678827e+07
-250   -1.087315e+07
+Thursday, August 29, 2019 07:15:05 PM INFO: Calculating Accumulation/Distribution Index...
+
+date
+2019-01-02    2.418361e+07
+2019-01-03   -5.985697e+07
+2019-01-04   -3.053145e+07
+2019-01-07    7.257905e+07
+2019-01-08    3.554691e+07
+                  ...     
+2019-06-28   -2.631732e+07
+2019-07-01   -2.348257e+07
+2019-07-02   -5.265158e+06
+2019-07-03    2.021933e+07
+2019-07-05    1.477405e+07
+
+Length: 128, dtype: float64
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
+
 ### Absolute Price Oscillator
 Absolute Price Oscillator is a technical indicator calculating the percentage difference between two price moving averages. The Absolute Price Oscillator is the MACD indicator in absolute values.<br><br>
 <a href="https://www.marketvolume.com/technicalanalysis/apo.asp" target="_blank">Learn More</a>
 
-<code>absolute_price_oscillator(close,short_period,long_period)</code>
+<code>absolute_price_oscillator(database,short_period,long_period)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| close           | required         | Close prices data       | Pandas dataframe  |
+| data          | required         | Data   | Pandas dataframe column |
 | short_period    | required          | Short Period/Fast Period | int|
 | long_period     | required          | Long period/Slow period | int |
 
+#### Example
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 
 ```python
-Example:
-
-
-from libkloudtrader.analysis import absolute_price_oscillator
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.analysis as analysis
+import libkloudtrader.stocks as stocks
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-31')['history']['day'])
-
-absolute_price_oscillator(aapl_data['close'],4,9)
+aapl_data=stocks.ohlcv('AAPL','2019-01-01','2019-07-07')
+analysis.absolute_price_oscillator(aapl_data['close'],2,10)
 ```
+
 ```python
-return type : Pandas Dataframe
+return type : Pandas Series
 
-0           NaN
-1           NaN
-2           NaN
-3           NaN
-4           NaN
-5           NaN
-6           NaN
-7           NaN
-8      1.040833
-9      1.069167
-10     1.508333
-        ...
-240   -3.513333
-241   -2.365833
-242   -1.943333
-243   -2.921667
-244   -3.788611
-245   -4.994444
-246   -7.382222
-247   -6.986667
-248   -5.512222
-249   -3.109444
-250    0.306944
+Thursday, August 29, 2019 07:27:25 PM INFO: Calculating Absolute Price Oscillator for Short period = 2 and Long period = 10
+
+date
+2019-01-02      NaN
+2019-01-03      NaN
+2019-01-04      NaN
+2019-01-07      NaN
+2019-01-08      NaN
+              ...  
+2019-06-28    0.824
+2019-07-01    0.963
+2019-07-02    2.940
+2019-07-03    3.716
+2019-07-05    3.989
+Length: 128, dtype: float64
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Alpha
 Alpha is a measure of the active return on an investment, the performance of that investment compared with a suitable market index. An alpha of 1% means the investment's return on investment over a selected period of time was 1% better than the market during that same period; a negative alpha means the investment underperformed the market.<br><br>
 <a href="https://en.wikipedia.org/wiki/Alpha_(finance)" target="_blank">Learn More</a>
 
-<code>alpha(close,benchmark_close)</code>
+<code>alpha(daily_returns, benchmark_daily_returns)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| close           | required         | Close prices data       | Pandas dataframe  |
-| benchmark_close   | required          | Close prices data of market or benchmark like SPY, etc | Pandas dataframe |
+| daily_returns       | required         | Daily returns of the asset, strategy or portfolio     | Pandas Series |
+| benchmark_daily_returns | required       | Daily returns of a index or market like Dow Jone Ind. Avg., S&P 500 Index | Pandas Series |
+risk_free|required|Constant risk-free return throughout the period. 0.0 by default|float|
 
+#### Example
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 
 ```python
-Example:
-
-
-from libkloudtrader.analysis import alpha
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.stocks as stocks
+import libkloudtrader.analysis as analysis
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-31')['history']['day'])
-spy_data=pd.DataFrame(ohlcv('SPY','2018-01-01','2019-01-31')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-31')
+spx_data=stocks.ohlcv('SPX','2018-01-01','2019-01-31')
 
-alpha(aapl_data['close'],spy['close'])
+aapl_daily=analysis.daily_returns(aapl_data['close'])
+spx_daily=analysis.daily_returns(spx_data['close'])
+
+analysis.alpha(aapl_daily, spx_daily)
 ```
+
 ```python
-return type : float
+return type: float 
 
-2.589179508866167
+Thursday, August 29, 2019 08:15:30 PM INFO: Calculating Alpha...
+
+-0.9977619138555154
 ```
 
-***
-### Annual Return
-Annual return is the return an investment provides over a period of time, expressed as a time-weighted annual percentage.<br><br>
+<!--END_DOCUSAURUS_CODE_TABS-->
+
+
+### Annual Return (%age)
+Annual return is the return an investment over a period of one year, expressed as a time-weighted annual percentage.<br><br>
 <a href="https://www.investopedia.com/terms/a/annual-return.asp" target="_blank">Learn More</a>
 
-<code>annual_return(close)</code>
+<code>annual_return(data)</code>
 
-> Note: annual_return() only takes a dataframe with 1 year data i.e. dataframe less than 257 trading days and greater 250 days because an average trading year has 250-257 days approximately. To calculate return on n number of trading days use <a href="#Return">returns()</a>
+> Note: annual_return() only takes a series with 1 year data i.e. data with less than 257 trading days or greater 250 days because an average trading year has 250-257 days approximately. To calculate return on n number of trading days use <a href="#Return">returns()</a>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| close           | required         | Close prices data for a year i.e. trading days<257 and trading days>250 | Pandas dataframe  |
+| data           | required         | Data | Pandas series  |
 
+#### Example
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 
 ```python
-Example:
-
-
-from libkloudtrader.analysis import annual_return
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.stocks as stocks
+import libkloudtrader.analysis as analysis
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-07-07','2019-07-07')
 
 annual_return(aapl_data['close'])
 ```
 ```python
 return type : float (%age)
 
--4.73523664720293
+Thursday, August 29, 2019 11:14:49 PM INFO: Calculating Annual return. Number of trading days in provided data: 250
+
+10.913375268550839
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Annual Sharpe Ratio
 The Sharpe ratio is simply the return per unit of risk (represented by variance). The higher the Sharpe ratio, the better the combined performance of "risk" and return.
@@ -337,250 +337,227 @@ Using an annual/annualized Sharpe Ratio is useful for comparison of multiple ret
 <br><br>
 <a href="https://www.quantinsti.com/blog/sharpe-ratio-applications-algorithmic-trading" target="_blank">Learn More</a>
 
-<code>annual_sharpe_ratio(close)</code>
+<code>annual_sharpe_ratio(data)</code>
 
-> Note: annual_sharpe_ratio() only takes a dataframe with 1 year data i.e. dataframe less than 257 trading days and greater 250 days because an average trading year has 250-257 days approximately. To calculate sharpe_ratio on n number of trading days use <a href="#sharpe_ratio">sharpe_ratio()</a>
+> Note: annual_return() only takes a series with 1 year data i.e. data with less than 257 trading days or greater 250 days because an average trading year has 250-257 days approximately. To calculate return on n number of trading days use <a href="#sharpe_ratio">sharpe_ratio()</a>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| close           | required         | Close prices data for a year i.e. trading days<257 and trading days>250 | Pandas dataframe  |
+| data         | required         | Data| Pandas series  |
 
+#### Example
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 
 
 ```python
-Example:
-
-
-from libkloudtrader.analysis import annual_sharpe_ratio
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.stocks as stocks
+import libkloudtrader.analysis as analysis
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-annual_sharpe_ratio(aapl_data['close'])
+analysis.annual_sharpe_ratio(aapl_data['close'])
 ```
 ```python
 return type : float
 
--0.16537924137238377
+Thursday, August 29, 2019 11:21:40 PM INFO: Calculating Annual Sharpe Ratio. Number of trading days in provided data: 251
+
+-0.454619905813581
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Annual Volatility
 Volatility is a statistical measure of the dispersion of returns for a given security or market index. Volatility can either be measured by using the standard deviation or variance between returns from that same security or market index. Commonly, the higher the volatility, the riskier the security. Annual volatility is volatility over an year.
 <br><br>
 <a href="https://www.investopedia.com/terms/v/volatility.asp" target="_blank">Learn More</a>
 
-<code>annual_volatility(close)</code>
+<code>annual_volatility(data)</code>
 
-> Note: annual_volatility() only takes a dataframe with 1 year data i.e. dataframe less than 257 trading days and greater 250 days because an average trading year has 250-257 days approximately. To calculate volaitlity on n number of trading days use <a href="#sharpe_ratio">volatility()</a>
+> Note: annual_return() only takes a series with 1 year data i.e. data with less than 257 trading days or greater 250 days because an average trading year has 250-257 days approximately. To calculate return on n number of trading days use <a href="#sharpe_ratio">volatility()</a>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| close           | required         | Close prices data for a year i.e. trading days<257 and trading days>250 | Pandas dataframe  |
+| data        | required         | Data | Pandas series |
 
-
+#### Example
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 
 ```python
-Example:
-
-
-from libkloudtrader.analysis import annual_volatility
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.stocks as stocks
+import libkloudtrader.analysis as analysis
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-annual_volatility(aapl_data['close'])
+analysis.annual_volatility(aapl_data['close'])
 ```
 ```python
 return type : float
 
-28.63259383649376
+Thursday, August 29, 2019 11:29:48 PM INFO: Calculating Annual Volatility. Number of trading days in provided data: 251
+
+29.913496349667295
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Aroon
 The Aroon indicator is used to help traders know when a market is uptrending, downtrending, or is in a range-bound, trendless market.
 <br><br>
 <a href="https://commodity.com/technical-analysis/aroon/" target="_blank">Learn More</a>
 
-<code>aroon(high,low,n)</code>
+<code>aroon(high,low,period)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| high          | required         | High prices data| Pandas dataframe  |
-| low          | required         | Low prices data| Pandas dataframe  |
-| n         | required         | timeperiod/number of days| Int  |
+| high          | required         | High prices data| Pandas series  |
+| low          | required         | Low prices data| Pandas series |
+| period         | required         | time period| int  |
 
+#### Example
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 
 
 ```python
-Example:
-
-
-from libkloudtrader.analysis import aroon
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.stocks as stocks
+import libkloudtrader.analysis as analysis
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-aroon(aapl_data['high'],aapl_data['low'],4)
+analysis.aroon(aapl_data['high'],aapl_data['low'],4)
 ```
 ```python
 returns: arronup, aroondown, aroon_oscillator
+
 return type : Pandas DataFrame
 
-        aroondown  aroonup  aroon_oscillator
-0          NaN      NaN               NaN
-1          NaN      NaN               NaN
-2          NaN      NaN               NaN
-3          NaN      NaN               NaN
-4          0.0    100.0             100.0
-5          0.0     75.0              75.0
-6          0.0     50.0              50.0
-7          0.0     25.0              25.0
-8        100.0      0.0            -100.0
-9         75.0      0.0             -75.0
-10       100.0     25.0             -75.0
-                ...
-240        0.0     50.0              50.0
-241      100.0     25.0             -75.0
-242       75.0      0.0             -75.0
-243      100.0     25.0             -75.0
-244      100.0      0.0            -100.0
-245      100.0     25.0             -75.0
-246      100.0      0.0            -100.0
-247       75.0      0.0             -75.0
-248       50.0      0.0             -50.0
-249       25.0    100.0              75.0
-250        0.0     75.0              75.0
+Thursday, August 29, 2019 11:40:55 PM INFO: Calculating Aroon for period = 4
+
+            aroondown  aroonup  aroon_oscillator
+date                                            
+2018-01-02        NaN      NaN               NaN
+2018-01-03        NaN      NaN               NaN
+2018-01-04        NaN      NaN               NaN
+2018-01-05        NaN      NaN               NaN
+2018-01-08        0.0    100.0             100.0
+...               ...      ...               ...
+2018-12-24      100.0      0.0            -100.0
+2018-12-26       75.0      0.0             -75.0
+2018-12-27       50.0      0.0             -50.0
+2018-12-28       25.0    100.0              75.0
+2018-12-31        0.0    100.0             100.0
+
+[251 rows x 3 columns]
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Average Directional Movement Index
 The Average Directional Index (ADX) was developed by J. Welles Wilder to evaluate the strength of a trend and to define a period of sideway trading. For better results from the signals generated by technical analysis, many traders use ADX to determine whether the market is trending or trading (moving sideways) and adjust their indicators' settings to the current market condition.
 <br><br>
 <a href="https://www.marketvolume.com/technicalanalysis/adx.asp/" target="_blank">Learn More</a>
 
-<code>average_directional_movement_index(high,low,close,n)</code>
+<code>average_directional_movement_index(high,low,close,period)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| high          | required         | High prices data| Pandas dataframe  |
-| low          | required         | Low prices data| Pandas dataframe  |
-| close         | required         | Close prices data| Pandas dataframe  |
-| n         | required         | timeperiod/number of days| Int  |
+| high          | required         | High prices data| Pandas series |
+| low          | required         | Low prices data| Pandas series |
+| close         | required         | Close prices data| Pandas series |
+| period         | required         | time period| int  |
 
-
-
+#### Example
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 ```python
-Example:
-
-
-from libkloudtrader.analysis import average_directional_movement_index
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.stocks as stocks
+import libkloudtrader.analysis as analysis
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-average_directional_moving_index(aapl_data['high'],aapl_data['low'],aapl_data['close'],4)
+analysis.average_directional_moving_index(aapl_data['high'],aapl_data['low'],aapl_data['close'],4)
 ```
 ```python
-return type : Pandas DataFrame
+return type : Pandas Series
 
-0            NaN
-1            NaN
-2            NaN
-3            NaN
-4            NaN
-5            NaN
-6            NaN
-7      71.495363
-8      69.917531
-9      67.628396
-10     68.153175
-11     60.730823
-12     49.259490
-13     42.728528
-14     45.091676
-        ...
-240    32.017729
-241    32.156497
-242    27.717607
-243    36.589518
-244    45.137380
-245    54.612348
-246    61.858012
-247    52.131699
-248    42.735035
-249    32.778837
-250    31.301982
+Friday, August 30, 2019 12:04:21 AM INFO: Calculating Average Directional Movement Index for period = 4
+
+date
+2018-01-02          NaN
+2018-01-03          NaN
+2018-01-04          NaN
+2018-01-05          NaN
+2018-01-08          NaN
+                ...    
+2018-12-24    80.292175
+2018-12-26    66.908432
+2018-12-27    56.870626
+2018-12-28    44.259004
+2018-12-31    34.065343
+
+Length: 251, dtype: float64
 ```
+
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Average Directional Movement Index Rating
 ADXR stands for Average Directional Movement Index Rating. ADXR is a component of the Directional Movement System developed by Welles Wilder. This system attempts to measure the strength of a price movement in positive and negative directions, as well as the overall strength of the trend. The Average Directional Movement Rating quantifies the change of momentum in the ADX (Average Directional Index).
 <br><br>
 <a href="https://www.marketvolume.com/technicalanalysis/adxr.asp" target="_blank">Learn More</a>
 
-<code>average_directional_movement_index_rating(high,low,close,n)</code>
+<code>average_directional_movement_index_rating(high,low,close,period)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| high          | required         | High prices data| Pandas dataframe  |
-| low          | required         | Low prices data| Pandas dataframe  |
-| close         | required         | Close prices data| Pandas dataframe  |
-| n         | required         | timeperiod/number of days| Int  |
+| high          | required         | High prices data| Pandas series |
+| low          | required         | Low prices data| Pandas series |
+| close         | required         | Close prices data| Pandas series |
+| period         | required         | time period| int  |
 
-
-
+#### Example
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 ```python
-Example:
-
-
-from libkloudtrader.analysis import average_directional_movement_index_rating
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.stocks as stocks
+import libkloudtrader.analysis as analysis
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-average_directional_moving_index_rating(aapl_data['high'],aapl_data['low'],aapl_data['close'],4)
+analysis.average_directional_moving_index_rating(aapl_data['high'],aapl_data['low'],aapl_data['close'],4)
 ```
 ```python
-return type : Pandas DataFrame
+return type : Pandas Series
 
-0            NaN
-1            NaN
-2            NaN
-3            NaN
-4            NaN
-5            NaN
-6            NaN
-7            NaN
-8            NaN
-9            NaN
-10     69.824269
-11     65.324177
-12     58.443943
-13     55.440852
-14     52.911250
-15     48.770118
-16     46.700538
-        ...
-240    26.548196
-241    29.908893
-242    30.157933
-243    34.303623
-244    38.646939
-245    41.164978
-246    49.223765
-247    48.634540
-248    48.673691
-249    47.318424
-250    41.716840
+Friday, August 30, 2019 12:10:36 AM INFO: Calculating Average Directional Movement Index Rating for period = 4
+
+date
+2018-01-02          NaN
+2018-01-03          NaN
+2018-01-04          NaN
+2018-01-05          NaN
+2018-01-08          NaN
+                ...    
+2018-12-24    71.724095
+2018-12-26    68.258208
+2018-12-27    66.187378
+2018-12-28    62.275589
+2018-12-31    50.486888
+
+Length: 251, dtype: float64
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Average Price
 The Average Price is the average of the open + high + low + close of a bar. It can be used to smooth an indicator that normally takes just the closing price as input.
@@ -591,221 +568,151 @@ The Average Price is the average of the open + high + low + close of a bar. It c
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| open         | required         | OPen prices data| Pandas dataframe  |
-| high          | required         | High prices data| Pandas dataframe  |
-| low          | required         | Low prices data| Pandas dataframe  |
-| close         | required         | Close prices data| Pandas dataframe  |
+| open         | required         | Open prices data| Pandas series  |
+| high          | required         | High prices data| Pandas series  |
+| low          | required         | Low prices data| Pandas series |
+| close         | required         | Close prices data| Pandas series  |
 
 
+#### Example
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 
 ```python
-Example:
-
-
-from libkloudtrader.analysis import average_price
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.stocks as stocks 
+import libkloudtrader.analysis as analysis
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-average_price(aapl_data['open'],aapl_data['high'],aapl_data['low'],aapl_data['close'])
+analysis.average_price(aapl_data['open'],aapl_data['high'],aapl_data['low'],aapl_data['close'])
 ```
 ```python
-return type : Pandas DataFrame
+return type : Pandas Series
 
-0      179.557500
-1      183.165000
-2      184.884900
-3      186.067500
-4      187.677500
-5      188.117500
-6      187.075000
-7      187.987500
-8      179.077500
-9      179.920000
-10     177.995000
-        ...
-240    143.980000
-241    141.652500
-242    142.625025
-243    137.965000
-244    132.417500
-245    129.165000
-246    124.980000
-247    130.077500
-248    132.905000
-249    134.165000
-250    132.532500
+Friday, August 30, 2019 12:41:43 AM INFO: Calculating Average Price...
+
+date
+2018-01-02    170.9950
+2018-01-03    172.8175
+2018-01-04    172.7800
+2018-01-05    174.2150
+2018-01-08    174.5600
+                ...   
+2018-12-24    148.2800
+2018-12-26    152.3550
+2018-12-27    154.7075
+2018-12-28    156.7000
+2018-12-31    158.0275
+
+Length: 251, dtype: float64
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Average True Range
 The ATR is a Welles Wilder style moving average of the True Range. The ATR is a measure of volatility. High ATR values indicate high volatility, and low values indicate low volatility, often seen when the price is flat. 
 <br><br>
 <a href="https://www.fmlabs.com/reference/default.htm?url=ATR.htm" target="_blank">Learn More</a>
 
-<code>average_true_range(high, low, close, n)</code>
+<code>average_true_range(high, low, close, period)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| high          | required         | High prices data| Pandas dataframe  |
-| low          | required         | Low prices data| Pandas dataframe  |
-| close         | required         | Close prices data| Pandas dataframe  |
-| n         | required         | timeperiod/number of days| Int  |
+| high          | required         | High prices data| Pandas series |
+| low          | required         | Low prices data| Pandas series |
+| close         | required         | Close prices data| Pandas series  |
+| period        | required         | time period| int  |
 
 
+#### Example
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 
 
 ```python
-Example:
-
-
-from libkloudtrader.analysis import average_true_range
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.stocks as stocks
+import libkloudtrader.analysis as analysis
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-average_true_range(aapl_data['high'],aapl_data['low'],aapl_data['close'],4)
+analysis.average_true_range(aapl_data['high'],aapl_data['low'],aapl_data['close'],4)
 ```
 ```python
-return type : Pandas DataFrame
+return type : Pandas Series
 
-0           NaN
-1           NaN
-2           NaN
-3           NaN
-4      2.675100
-5      2.431325
-6      2.388494
-7      2.046370
-8      4.127278
-9      4.022958
-10     3.897219
-        ...
-240    3.960521
-241    4.595391
-242    4.971518
-243    6.831139
-244    6.515854
-245    7.756891
-246    7.497668
-247    8.168251
-248    7.456188
-249    6.522141
-250    6.064106
+Friday, August 30, 2019 12:50:28 AM INFO: Calculating Average True Range for period = 4
+
+date
+2018-01-02         NaN
+2018-01-03         NaN
+2018-01-04         NaN
+2018-01-05         NaN
+2018-01-08    2.000000
+                ...   
+2018-12-24    6.195630
+2018-12-26    7.274223
+2018-12-27    7.230667
+2018-12-28    6.415500
+2018-12-31    5.594125
+
+Length: 251, dtype: float64
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Awesome Oscilator
 The Awesome Oscillator is an indicator used to measure market momentum. AO calculates the difference of a 34 Period and 5 Period Simple Moving Averages. The Simple Moving Averages that are used are not calculated using closing price but rather each bar’s midpoints. AO is generally used to affirm trends or to anticipate possible reversals. 
 <br><br>
 <a href="https://www.ifcmarkets.co.in/en/ntx-indicators/awesome-oscillator" target="_blank">Learn More</a>
 
-<code>awesome_oscillator(high,low,short_period,long_period)</code>
+<code>awesome_oscillator(high,low,short_period=5,long_period=34)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| high          | required         | High prices data| Pandas dataframe  |
-| low          | required         | Low prices data| Pandas dataframe  |
+| high          | required         | High prices data| Pandas series  |
+| low          | required         | Low prices data| Pandas series  |
+|short_period|required|Short period. 5 by default |int |
+|long_period|required|Long period. 34 by default|int |
 
+#### Example
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 
 ```python
-Example:
-
-
-from libkloudtrader.analysis import awesome_oscillator
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.stocks as stocks
+import libkloudtrader.analysis as analysis
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-awesome_oscillator(aapl_data['high'],aapl_data['low'],4,9)
+analysis.awesome_oscillator(aapl_data['high'],aapl_data['low'])
 ```
 ```python
-return type : Pandas DataFrame
+return type : Pandas Series
 
-0            NaN
-1            NaN
-2            NaN
-3            NaN
-4            NaN
-5            NaN
-6            NaN
-7            NaN
-8            NaN
-9            NaN
-10           NaN
-        ...
-240     1.211454
-241     1.478572
-242     1.587463
-243     0.490403
-244    -1.271450
-245    -3.647627
-246    -5.965480
-247    -7.977019
-248    -8.747460
-249    -7.981872
-250    -6.868254
+Friday, August 30, 2019 11:32:50 AM INFO: Calculating Awesome Oscillator for short period = 5 and long period = 34
+
+date
+2018-01-02     0.000000
+2018-01-03     0.000000
+2018-01-04     0.000000
+2018-01-05     0.000000
+2018-01-08     0.000000
+                ...    
+2018-12-24   -21.124478
+2018-12-26   -22.471331
+2018-12-27   -22.977066
+2018-12-28   -21.924007
+2018-12-31   -19.633272
+
+Length: 251, dtype: float64
 ```
-***
-### Awesome Oscilator
-The Awesome Oscillator is an indicator used to measure market momentum. AO calculates the difference of a 34 Period and 5 Period Simple Moving Averages. The Simple Moving Averages that are used are not calculated using closing price but rather each bar’s midpoints. AO is generally used to affirm trends or to anticipate possible reversals. 
-<br><br>
-<a href="https://www.ifcmarkets.co.in/en/ntx-indicators/awesome-oscillator" target="_blank">Learn More</a>
+<!--END_DOCUSAURUS_CODE_TABS-->
 
-<code>awesome_oscillator(high,low)</code>
-
-| Paramters       | Required/Optional | Description                             | Type |
-|-----------------|-------------------|-----------------------------------------|------|
-| high          | required         | High prices data| Pandas dataframe  |
-| low          | required         | Low prices data| Pandas dataframe  |
-
-
-```python
-Example:
-
-
-from libkloudtrader.analysis import awesome_oscillator
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
-
-#load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
-
-awesome_oscillator(aapl_data['high'],aapl_data['low'])
-```
-```python
-return type : Pandas DataFrame
-
-0            NaN
-1            NaN
-2            NaN
-3            NaN
-4            NaN
-5            NaN
-6            NaN
-7            NaN
-8            NaN
-9            NaN
-10           NaN
-        ...
-240   -20.128684
-241   -18.865919
-242   -18.172625
-243   -18.172772
-244   -18.884066
-245   -19.609007
-246   -21.124478
-247   -22.471331
-248   -22.977066
-249   -21.924007
-250   -19.633272
-```
 ***
 ### Balance of Power
 Balance Of Power (BOP) is an indicator that measures the market strength by assessing the strength of total buyers against that of total sellers and their ability to drive the price to extreme ends.
@@ -815,82 +722,82 @@ Balance Of Power (BOP) is an indicator that measures the market strength by asse
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| open        | required         | Open prices data| Pandas dataframe  |
-| high          | required         | High prices data| Pandas dataframe  |
-| low          | required         | Low prices data| Pandas dataframe  |
-| close         | required         | Close prices data| Pandas dataframe  |
+| open        | required         | Open prices data| Pandas series  |
+| high          | required         | High prices data| Pandas series  |
+| low          | required         | Low prices data| Pandas series  |
+| close         | required         | Close prices data| Pandas series  |
 
-
+#### Example
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 ```python
-Example:
-
-
-from libkloudtrader.analysis import balance_of_power
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.stocks as stocks
+import libkloudtrader.analysis as analysis
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-balance_of_power(aapl_data['open'],aapl_data['high'],aapl_data['low'],aapl_data['close'])
+analysis.balance_of_power(aapl_data['open'],aapl_data['high'],aapl_data['low'],aapl_data['close'])
 ```
 ```python
-return type : Pandas DataFrame
+return type : Pandas Series
 
-0      0.690789
-1     -0.115830
-2      0.352518
-3      0.672414
-4      0.000000
-5     -0.133333
-6      0.869231
-7      0.690967
-8      0.532164
-9     -0.526154
-10     0.705742
-        ...
-240   -0.926316
-241   -0.268683
-242    0.219745
-243   -0.611244
-244   -0.524229
-245   -0.718640
-246   -0.266129
-247    0.843958
-248    0.046269
-249   -0.319899
-250   -0.274306
+Friday, August 30, 2019 11:48:59 AM INFO: Calculating balance of Power...
+
+date
+2018-01-02    0.690789
+2018-01-03   -0.115830
+2018-01-04    0.352518
+2018-01-05    0.672414
+2018-01-08    0.000000
+                ...   
+2018-12-24   -0.266129
+2018-12-26    0.843958
+2018-12-27    0.046269
+2018-12-28   -0.319899
+2018-12-31   -0.274306
+
+Length: 251, dtype: float64
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Beta
 Beta is a measure of the volatility, or systematic risk, of a security or a portfolio in comparison to the entire market or a benchmark. Beta is used in the capital asset pricing model (CAPM), which calculates the expected return of an asset based on its beta and expected market returns. Beta is also known as the beta coefficient.
 
-<code>beta(close,benchmark_close)</code>
+<code>beta(daily_returns,benchmark_daily_returns)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| close         | required         | Close prices data| Pandas dataframe  |
-| benchmark_close   | required          | Close prices data of market or benchmark like SPY, etc | Pandas dataframe |
+| daily_returns       | required         | Daily returns of the asset, strategy or portfolio     | Pandas Series |
+| benchmark_daily_returns | required       | Daily returns of a index or market like Dow Jone Ind. Avg., S&P 500 Index | Pandas Series |
+risk_free|required|Constant risk-free return throughout the period. 0.0 by default|float|
 
-
+#### Example
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 ```python
-Example:
-
-
-from libkloudtrader.analysis import beta
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.stocks as stocks
+import libkloudtrader.analysis as analysis
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-31')
+spx_data=stocks.ohlcv('SPX','2018-01-01','2019-01-31')
 
-beta(aapl_data['open'],spy_data['close'])
+aapl_daily=analysis.daily_returns(aapl_data['close'])
+spx_daily=analysis.daily_returns(spx_data['close'])
+
+analysis.beta(aapl_daily, spx_daily)
 ```
 ```python
 return type : float
 
-0.4526075135378216
+Friday, August 30, 2019 11:55:14 AM INFO: Calculating Beta...
+
+1.362515464869133
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Bollinger Bands
 Bollinger Bands consist of three lines. The middle band is a simple moving average (generally 20 periods) of the typical price (TP). The upper and lower bands are F standard deviations (generally 2) above and below the middle band. The bands widen and narrow when the volatility of the price is higher or lower, respectively.
@@ -898,56 +805,51 @@ Bollinger Bands do not, in themselves, generate buy or sell signals; they are an
 <br><br>
 <a href="https://www.investopedia.com/terms/b/bollingerbands.asp" target="_blank">Learn More</a>
 
-<code>bollinger_bands(close,n)</code>
+<code>bollinger_bands(data,period)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| close         | required         | Close prices data| Pandas dataframe  |
-| n   | required          | timeperiod/number of days | Pandas dataframe |
+| data        | required         | Data| Pandas series  |
+| period  | required          | time period. 20 by default. | int |
 
+#### Example
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 ```python
-Example:
-
-
-from libkloudtrader.analysis import bollinger_bands
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.stocks as stocks
+import libkloudtrader.analysis as analysis
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-bollinger_bands(aapl_data['close'],20)
+analysis.bollinger_bands(aapl_data['close'],20)
 ```
 ```python
 returns: upperband,middleband,lowerband
+
 return type : Pandas DataFrame
 
-        upperband    middleband   lowerband
-0           NaN         NaN         NaN
-1           NaN         NaN         NaN
-2           NaN         NaN         NaN
-3           NaN         NaN         NaN
-4           NaN         NaN         NaN
-5           NaN         NaN         NaN
-6           NaN         NaN         NaN
-7           NaN         NaN         NaN
-8           NaN         NaN         NaN
-9           NaN         NaN         NaN
-10          NaN         NaN         NaN
-                        ...
-240     191.579846    176.6630  161.746154
-241     189.566979    175.2895  161.012021
-242     186.031060    173.9165  161.801940
-243     184.748400    172.6680  160.587600
-244     185.383678    171.6605  157.937322
-245     186.603458    170.3580  154.112542
-246     188.252671    169.0850  149.917329
-247     187.875175    168.2125  148.549825
-248     187.437157    167.3080  147.178843
-249     185.730965    166.0725  146.414035
-250     183.936049    164.9820  146.027951
+Friday, August 30, 2019 12:06:16 PM INFO: Calculating Bollinger Bands for period = 20
+
+             upperband  middleband   lowerband
+date                                          
+2018-01-02         NaN         NaN         NaN
+2018-01-03         NaN         NaN         NaN
+2018-01-04         NaN         NaN         NaN
+2018-01-05         NaN         NaN         NaN
+2018-01-08         NaN         NaN         NaN
+...                ...         ...         ...
+2018-12-24  188.252671    169.0850  149.917329
+2018-12-26  187.875175    168.2125  148.549825
+2018-12-27  187.437157    167.3080  147.178843
+2018-12-28  185.730965    166.0725  146.414035
+2018-12-31  183.936049    164.9820  146.027951
+
+[251 rows x 3 columns]
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### CAGR (Compounded Annual Growth Rate)
 The compound annual growth rate (CAGR) is the rate of return that would be required for an investment to grow from its beginning balance to its ending balance assuming the profits were reinvested at the end of each year of the investment’s lifespan.
@@ -962,80 +864,75 @@ The compound annual growth rate (CAGR) is the rate of return that would be requi
 | end_value       | required         | End value of the investment  |
 | period_in_years      | required         | Life of investment(in years)  |
 
+#### Example
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 ```python
-Example:
+import libkloudtrader.analysis as analysis
 
-
-from libkloudtrader.analysis import cagr
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
-
-#load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
-
-cagr(100000,136009,2)
+analysis.cagr(100000,136009,2)
 ```
 ```python
 return type : Float (%age)
 
+Friday, August 30, 2019 01:42:58 PM INFO: Calculating CAGR for years = 2
+
 16.622896551234746
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Chaikin Money Flow
 Developed by Marc Chaikin, Chaikin Money Flow measures the amount of Money Flow Volume over a specific period. Money Flow Volume forms the basis for the Accumulation Distribution Line. Instead of a cumulative total of Money Flow Volume, Chaikin Money Flow simply sums Money Flow Volume for a specific look-back period, typically 20 or 21 days. The resulting indicator fluctuates above/below the zero line just like an oscillator. 
 <br><br>
 <a href="https://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:chaikin_money_flow_cmf" target="_blank">Learn More</a>
 
-<code>chaikin_money_flow(high, low, close, volume, n)</code>
+<code>chaikin_money_flow(high, low, close, volume, period)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| high            | required          | High Prices Data                        |Pandas Dataframe|
-| low            | required          | Low Prices Data                        |Pandas Dataframe|
-| close            | required          | Close Prices Data                        |Pandas Dataframe|
-| volume           | required          | Volume Data                        |Pandas Dataframe|
-| n            | required          | Time period/number of days                        |Int|
+| high            | required          | High Prices Data                        |Pandas series|
+| low            | required          | Low Prices Data                        |Pandas series|
+| close            | required          | Close Prices Data                        |Pandas series|
+| volume           | required          | Volume Data                        |Pandas series|
+| period           | required          | time period                        |int|
+
+#### Example
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 
 ```python
-Example:
-
-
-from libkloudtrader.analysis import chaikin_money_flow
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.stocks as stocks 
+import libkloudtrader.analysis as analysis
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-chaikin_money_flow(aapl_data['high'],aapl_data['low'],aapl_data['close'],aapl_data['volume'],20)
+analysis.chaikin_money_flow(aapl_data['high'],aapl_data['low'],aapl_data['close'],aapl_data['volume'],20)
 ```
 ```python
-return type : Pandas DataFrame
+return type : Pandas series
 
-0           NaN
-1           NaN
-2           NaN
-3           NaN
-4           NaN
-5           NaN
-6           NaN
-7           NaN
-8           NaN
-9           NaN
-10          NaN
-        ...
-240    0.008964
-241   -0.063752
-242   -0.082122
-243   -0.079995
-244   -0.081821
-245   -0.124110
-246   -0.135223
-247   -0.112727
-248   -0.097448
-249   -0.148081
-250   -0.141593
+Friday, August 30, 2019 02:02:47 PM INFO: Calculating Chaikin Money Flow for period = 4
+
+date
+2018-01-02    0.973684
+2018-01-03    0.027596
+2018-01-04    0.125809
+2018-01-05    0.255658
+2018-01-08   -0.096722
+                ...   
+2018-12-24   -0.681776
+2018-12-26   -0.321448
+2018-12-27   -0.013992
+2018-12-28    0.319783
+2018-12-31    0.477932
+
+Length: 251, dtype: float64
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Chaikin Oscillator
 Developed by Marc Chaikin, the Chaikin Oscillator measures the momentum of the Accumulation Distribution Line using the MACD formula. This makes it an indicator of an indicator. The Chaikin Oscillator is the difference between the 3-day EMA of the Accumulation Distribution Line and the 10-day EMA of the Accumulation Distribution Line. Like other momentum indicators, this indicator is designed to anticipate directional changes in the Accumulation Distribution Line by measuring the momentum behind the movements. 
@@ -1046,165 +943,151 @@ Developed by Marc Chaikin, the Chaikin Oscillator measures the momentum of the A
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| high            | required          | High Prices Data                        |Pandas Dataframe|
-| low            | required          | Low Prices Data                        |Pandas Dataframe|
-| close            | required          | Close Prices Data                        |Pandas Dataframe|
-| volume           | required          | Volume Data                        |Pandas Dataframe|
-| short_period      | optional          | Short Period/Fast Period. 3 by default.          |Int|
-| long_period      | optional          | Long Period/Slow Period. 10 by default.          |Int|
+| high            | required          | High Prices Data                        |Pandas series|
+| low            | required          | Low Prices Data                        |Pandas series|
+| close            | required          | Close Prices Data                        |Pandas series|
+| volume           | required          | Volume Data                        |Pandas series|
+| short_period      | optional          | Short Period/Fast Period. 3 by default.          |int|
+| long_period      | optional          | Long Period/Slow Period. 10 by default.          | int|
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
+
+#### Example
 
 ```python
-Example:
-
-
-from libkloudtrader.analysis import chaikin_oscillator
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.stocks as stocks 
+import libkloudtrader.analysis as analysis
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-chaikin_oscillator(aapl_data['high'],aapl_data['low'],aapl_data['close'],aapl_data['volume'])
+analysis.chaikin_oscillator(aapl_data['high'],aapl_data['low'],aapl_data['close'],aapl_data['volume'])
 ```
 ```python
 returns: chaikin_ad_line, chaikin_oscillator
+
 return type : Pandas DataFrame
 
-       chaikin_ad_line    chaikin_oscillator
-0       2.488341e+07                 NaN
-1       1.519821e+06                 NaN
-2       9.751220e+06                 NaN
-3       2.586451e+07                 NaN
-4       1.558063e+07                 NaN
-5       1.806606e+07                 NaN
-6       4.165734e+07                 NaN
-7       5.252597e+07                 NaN
-8       6.991729e+07                 NaN
-9       4.126106e+07        1.143408e+07
-10      7.317994e+07        1.724639e+07
-                ...
-240    -1.227356e+08       -1.461823e+07
-241    -1.479529e+08       -2.718628e+07
-242    -1.455819e+08       -2.910185e+07
-243    -1.735083e+08       -3.612556e+07
-244    -2.091762e+08       -4.706364e+07
-245    -2.802269e+08       -6.986682e+07
-246    -3.137991e+08       -8.352593e+07
-247    -2.558854e+08       -6.309340e+07
-248    -2.125990e+08       -3.522592e+07
-249    -2.190971e+08       -2.269083e+07
-250    -2.234721e+08       -1.689208e+07
+Friday, August 30, 2019 02:36:56 PM INFO: Calculating Chaikin Oscillator for short period = 3 and long period = 10
+
+            chaikin_ad_line  chaikin_oscillator
+date                                           
+2018-01-02     2.488341e+07                 NaN
+2018-01-03     1.519821e+06                 NaN
+2018-01-04     9.751220e+06                 NaN
+2018-01-05     2.586451e+07                 NaN
+2018-01-08     1.558063e+07                 NaN
+...                     ...                 ...
+2018-12-24    -3.137997e+08       -8.352595e+07
+2018-12-26    -2.558860e+08       -6.309343e+07
+2018-12-27    -2.125996e+08       -3.522594e+07
+2018-12-28    -2.190978e+08       -2.269085e+07
+2018-12-31    -2.234732e+08       -1.689223e+07
+
+[251 rows x 2 columns]
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Chande Momentum Oscillator
 The Chande momentum oscillator is a technical momentum indicator invented by Tushar Chande.“It is created by calculating the difference between the sum of all recent gains and the sum of all recent losses and then dividing the result by the sum of all price movement over the period.
 <br><br>
 <a href="https://www.investopedia.com/terms/c/chandemomentumoscillator.asp" target="_blank">Learn More</a>
 
-<code>chande_momentum_oscillator(close, n)</code>
+<code>chande_momentum_oscillator(data, period)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| close            | required          | Close Prices Data                      |Pandas Dataframe|
-| n                | required          | Time period/Number of days             |Int|
+| data           | required          | Data                      |Pandas series|
+| period | required          | time period            |int|
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 
+#### Example
 
 ```python
-Example:
-
-
-from libkloudtrader.analysis import chande_momentum_oscillator
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.stocks as stocks
+import libkloudtrader.analysis as analysis
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-chande_momentum_oscillator(aapl_data['close'],8)
+analysis.chande_momentum_oscillator(aapl_data['close'],8)
 ```
 ```python
-return type : Pandas DataFrame
+return type : Pandas series
 
-0            NaN
-1            NaN
-2            NaN
-3            NaN
-4            NaN
-5            NaN
-6            NaN
-7            NaN
-8      76.545166
-9      51.800662
-10     68.246524
-        ...
-240   -40.593699
-241   -44.270567
-242   -31.413650
-243   -45.029151
-244   -53.328369
-245   -62.936640
-246   -67.782887
-247   -20.171553
-248   -22.646215
-249   -22.306363
-250   -15.407946
+Friday, August 30, 2019 02:42:08 PM INFO: Calculating Chande Momentum Oscillator for period = 8
+
+date
+2018-01-02          NaN
+2018-01-03          NaN
+2018-01-04          NaN
+2018-01-05          NaN
+2018-01-08          NaN
+                ...    
+2018-12-24   -67.782887
+2018-12-26   -20.171553
+2018-12-27   -22.646215
+2018-12-28   -22.306363
+2018-12-31   -15.407946
+
+Length: 251, dtype: float64
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Commodity Channel Index
 The Commodity Channel Index​ (CCI) is a momentum-based technical trading tool used most often to help determine when an investment vehicle is reaching a condition of being overbought or oversold. As the price of an investment moves continually in one direction, these indicators help traders to determine when institutional conviction may be changing, and a pause or pullback in the market price may be coming. This information can permit traders to take profit or add to an existing position following a price pullback.
 <br><br>
 <a href="https://www.investopedia.com/terms/c/commoditychannelindex.asp" target="_blank">Learn More</a>
 
-<code>commodity_channel_index(high, low, close,n)</code>
+<code>commodity_channel_index(high, low, close, period)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| high           | required          | High Prices Data                      |Pandas Dataframe|
-| low            | required          | Low Prices Data                      |Pandas Dataframe|
-| close            | required          | Close Prices Data                      |Pandas Dataframe|
-| n                | required          | Time period/Number of days             |Int|
+| high           | required          | High Prices Data                      |Pandas series|
+| low            | required          | Low Prices Data                      |Pandas seires|
+| close            | required          | Close Prices Data                      |Pandas seires|
+| period                | required          | time period          |int|
 
+#### Example
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 
 ```python
-Example:
-
-
-from libkloudtrader.analysis import commodity_channel_index
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.stocks as stocks
+import libkloudtrader.analysis as analysis
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-commodity_channel_index(aapl_data['high'],aapl_data['low'],aapl_data['close'],8)
+analysis.commodity_channel_index(aapl_data['high'],aapl_data['low'],aapl_data['close'],8)
 ```
 ```python
-return type : Pandas DataFrame
+return type : Pandas series
 
-0             NaN
-1             NaN
-2             NaN
-3             NaN
-4             NaN
-5             NaN
-6             NaN
-7       95.178816
-8      179.469367
-9      143.854058
-10     117.373234
-        ...
-240   -109.323726
-241   -135.278515
-242    -78.014802
-243   -143.157500
-244   -168.344563
-245   -159.899761
-246   -140.376508
-247    -61.358976
-248    -41.107963
-249     -1.413150
-250     48.940871
+Friday, August 30, 2019 02:47:04 PM INFO: Calculating Commodity Channel Index for period = 8
+
+date
+2018-01-02           NaN
+2018-01-03           NaN
+2018-01-04           NaN
+2018-01-05           NaN
+2018-01-08           NaN
+                 ...    
+2018-12-24   -140.376508
+2018-12-26    -61.358976
+2018-12-27    -41.107963
+2018-12-28     -1.413150
+2018-12-31     48.940871
+
+Length: 251, dtype: float64
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Coppock Curve
 The Coppock curve is intended as a long-term forecasting tool to find trending securities and generate buy signals. It was originally published by E.S.C. Coppock in Barron’s Magazine in 1962.
@@ -1212,1097 +1095,961 @@ The indicator is trend following in nature. Given it’s mathematically calculat
 <br><br>
 <a href="https://www.daytrading.com/coppock-curve" target="_blank">Learn More</a>
 
-<code>coppock_curve(close,n)</code>
+<code>coppock_curve(data,period)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| close            | required          | Close Prices Data                      |Pandas Dataframe|
-| n                | required          | Time period/Number of days             |Int|
+| data          | required          | Data                      |Pandas series|
+| period               | required          | time period         |int|
 
+#### Example
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 
 ```python
-Example:
-
-
-from libkloudtrader.analysis import coppock_curve
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.stocks as stocks
+import libkloudtrader.analysis as analysis
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-coppock_curve(aapl_data['close'],8)
+analysis.coppock_curve(aapl_data['close'],8)
 ```
 ```python
-return type : Pandas DataFrame
+return type : Pandas series
 
-        coppock_curve
-0              NaN
-1              NaN
-2              NaN
-3              NaN
-4              NaN
-5              NaN
-6              NaN
-7              NaN
-8              NaN
-9              NaN
-10             NaN
-        ...
-240      -0.102676
-241      -0.111788
-242      -0.112682
-243      -0.118926
-244      -0.130802
-245      -0.149299
-246      -0.177311
-247      -0.164170
-248      -0.155265
-249      -0.153064
-250      -0.133795
+Friday, August 30, 2019 02:54:26 PM INFO: Calculating Cappock Curve for period = 8
+
+date
+2018-01-02         NaN
+2018-01-03         NaN
+2018-01-04         NaN
+2018-01-05         NaN
+2018-01-08         NaN
+                ...   
+2018-12-24   -0.177311
+2018-12-26   -0.164170
+2018-12-27   -0.155265
+2018-12-28   -0.153064
+2018-12-31   -0.133795
+
+Name: coppock_curve, Length: 251, dtype: float64
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Correlation Coefficient
 The correlation coefficient is a statistical measure that calculates the strength of the relationship between the relative movements of the two variables.
 <br><br>
 <a href="https://www.investopedia.com/terms/c/correlationcoefficient.asp" target="_blank">Learn More</a>
 
-<code>correlation_coefficient(high,low,n)</code>
+<code>correlation_coefficient(high,low,period)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| high            | required          | High Prices Data                      |Pandas Dataframe|
-| low            | required          | Low Prices Data                      |Pandas Dataframe|
-| n                | required          | Time period/Number of days             |Int|
+| high            | required          | High Prices Data                      |Pandas series|
+| low            | required          | Low Prices Data                      |Pandas series|
+| period                | required          | time period           |int|
 
+#### Example
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 ```python
-Example:
-
-
-from libkloudtrader.analysis import correlation_coefficient
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.analysis as analysis
+import libkloudtrader.stocks as stocks
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-correlation_coefficient(aapl_data['high'],aapl_data['low'],5)
+analysis.correlation_coefficient(aapl_data['high'],aapl_data['low'],5)
 ```
 ```python
-return type : Pandas DataFrame
+return type : Pandas series
 
- 0           NaN
-1           NaN
-2           NaN
-3           NaN
-4      0.936435
-5      0.823446
-6      0.898113
-7      0.648593
-8      0.962489
-9      0.949877
-10     0.856626
-        ...
-240    0.836647
-241    0.949250
-242    0.945109
-243    0.865475
-244    0.881233
-245    0.950200
-246    0.946665
-247    0.936427
-248    0.836791
-249    0.626376
-250    0.753480
+Friday, August 30, 2019 02:58:59 PM INFO: Calculating Correlation Coefficient for period = 5
+
+date
+2018-01-02         NaN
+2018-01-03         NaN
+2018-01-04         NaN
+2018-01-05         NaN
+2018-01-08    0.936435
+                ...   
+2018-12-24    0.946665
+2018-12-26    0.936427
+2018-12-27    0.836791
+2018-12-28    0.626376
+2018-12-31    0.753480
+
+Length: 251, dtype: float64
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Cumulative Returns
 A cumulative return is the aggregate amount an investment has gained or lost over time, independent of the period of time involved. 
 <br><br>
 <a href="https://www.investopedia.com/terms/c/cumulativereturn.asp" target="_blank">Learn More</a>
 
-<code>cumulative_returns(close)</code>
+<code>cumulative_returns(data)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| close           | required          | Close Prices Data                      |Pandas Dataframe|
+| daily_returns       | required         | Daily returns of the asset, strategy or portfolio     | Pandas Series |
 
+#### Example
 
-
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 ```python
-Example:
-
-
-from libkloudtrader.analysis import cumulative_returns
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.analysis as analysis
+import libkloudtrader.crypto as crypto
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+btc_data=crypto.ohlcv('BTC/USD','2019-01-01','2019-07-01')
+daily_returns=analysis.daily_returns(btc_data['close'])
 
-cumulative_returns(aapl_data['close'])
+analysis.cumulative_returns(daily_returns)
 ```
 ```python
-return type : Pandas DataFrame
+return type : Pandas series
 
-0       0.000000
-1      -0.017416
-2       0.446999
-3       1.590619
-4       1.213282
-5       1.201672
-6       1.178451
-7       1.753164
-8       2.803901
-9       2.281435
-10      3.970742
-        ...
-240    -3.935911
-241    -4.829908
-242    -3.593405
-243    -6.600488
-244    -8.957390
-245   -12.498549
-246   -14.762568
-247    -8.760014
-248    -9.352142
-249    -9.305701
-250    -8.429119
+Friday, August 30, 2019 03:21:26 PM INFO: Calculating Cumulative Returns...
+
+date
+2019-01-02   -3.039620e+01
+2019-01-03    4.758991e+01
+2019-01-04    9.024560e+01
+2019-01-05    3.722943e+01
+2019-01-06    2.811514e+02
+                  ...     
+2019-06-28   -2.258266e+40
+2019-06-29    6.788355e+40
+2019-06-30   -5.637527e+41
+2019-07-01    3.982342e+41
+2019-07-02    1.345288e+42
+
+Length: 182, dtype: float64
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
-### Daily Returns
+### Daily Returns (%age)
 Get daily returns of a trading strategy or a stock.
 
-<code>daily_returns(close)</code>
+<code>daily_returns(data)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| close           | required          | Close Prices Data                      |Pandas Dataframe|
+| data         | required          | Data                      |Pandas series|
 
+#### Example
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 
 ```python
-Example:
-
-
-from libkloudtrader.analysis import daily_returns
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.analysis as analysis
+import libkloudtrader.stocks as stocks
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-daily_returns(aapl_data['close'])
+analysis.daily_returns(aapl_data['close'])
 ```
 ```python
-return type : Pandas DataFrame
+return type : Pandas series (%age)
 
-0           NaN
-1     -0.017416
-2      0.464495
-3      1.138531
-4     -0.371429
-5     -0.011471
-6     -0.022945
-7      0.568019
-8      1.032634
-9     -0.508216
-10     1.651626
-        ...
-240   -3.199766
-241   -0.930626
-242    1.299256
-243   -3.119167
-244   -2.523463
-245   -3.889562
-246   -2.587408
-247    7.042158
-248   -0.648979
-249    0.051233
-250    0.966524
+Friday, August 30, 2019 03:47:47 PM INFO: Calculating Daily Returns...
+
+date
+2018-01-02         NaN
+2018-01-03   -0.000174
+2018-01-04    0.004645
+2018-01-05    0.011385
+2018-01-08   -0.003714
+                ...   
+2018-12-24   -0.025874
+2018-12-26    0.070422
+2018-12-27   -0.006490
+2018-12-28    0.000512
+2018-12-31    0.009665
+
+Name: daily_returns, Length: 251, dtype: float64
 ```
 ***
-### Daily Log Returns
+<!--END_DOCUSAURUS_CODE_TABS-->
+
+### Daily Log Returns (%age)
 Get daily log returns of a trading strategy or a stock.
 <br><br>
 <a href="https://quantivity.wordpress.com/2011/02/21/why-log-returns/" target="_blank">Learn More</a>
 
-<code>daily_log_returns(close)</code>
+<code>daily_log_returns(data)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| close           | required          | Close Prices Data                      |Pandas Dataframe|
+| data          | required          | Data                      |Pandas series|
 
+#### Example
 
-
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 ```python
-Example:
-
-
-from libkloudtrader.analysis import daily_log_returns
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.stocks as stocks
+import libkloudtrader.analysis as analysis
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-daily_log_returns(aapl_data['close'])
+analysis.daily_log_returns(aapl_data['close'])
 ```
 ```python
-return type : Pandas DataFrame
+return type : Pandas series (%age)
 
-0           NaN
-1     -0.017417
-2      0.463420
-3      1.132098
-4     -0.372120
-5     -0.011472
-6     -0.022948
-7      0.566412
-8      1.027338
-9     -0.509512
-10     1.638135
-        ...
-240   -3.252077
-241   -0.934983
-242    1.290888
-243   -3.168848
-244   -2.555849
-245   -3.967226
-246   -2.621470
-247    6.805257
-248   -0.651094
-249    0.051220
-250    0.961883
+Friday, August 30, 2019 04:06:49 PM INFO: Calculating Daily Log Returns...
+
+date
+2018-01-02         NaN
+2018-01-03   -0.017417
+2018-01-04    0.463420
+2018-01-05    1.132098
+2018-01-08   -0.372120
+                ...   
+2018-12-24   -2.621470
+2018-12-26    6.805257
+2018-12-27   -0.651094
+2018-12-28    0.051220
+2018-12-31    0.961883
+
+Name: daily_log_returns, Length: 251, dtype: float64
 ``` 
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
-### Daily Volatility
-Get daily volatility of trading strategy or stock prices.
-<br><br>
-<a href="https://www.investopedia.com/terms/v/volatility.asp/" target="_blank">Learn More</a>
 
-<code>daily_volatility(close)</code>
-
-| Paramters       | Required/Optional | Description                             | Type |
-|-----------------|-------------------|-----------------------------------------|------|
-| close           | required          | Close Prices Data                      |Pandas Dataframe|
-
-
-
-```python
-Example:
-
-
-from libkloudtrader.analysis import daily_volatility
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
-
-#load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
-
-daily_volatility(aapl_data['close'])
-```
-```python
-return type : Float
-
-1.8072732975767518
-```
-***
 ### Detrended Price Oscillator
 The detrended price oscillator (DPO) is an indicator in technical analysis that attempts to eliminate the long-term trends in prices by using a displaced moving average so it does not react to the most current price action. This allows the indicator to show intermediate overbought and oversold levels effectively.
 <br><br>
 <a href="https://en.wikipedia.org/wiki/Detrended_price_oscillator/" target="_blank">Learn More</a>
 
-<code>detrended_price_oscillator(close,n)</code>
+<code>detrended_price_oscillator(data,period)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| close           | required          | Close Prices Data                      |Pandas Dataframe|
-| n                | required          | Time period/number of days            |Int|
+| data     | required          | Data                      |Pandas series|
+| period              | required          | time period           |int|
 
+#### Example
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 
 ```python
-Example:
-
-
-from libkloudtrader.analysis import detrended_price_oscillator
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.stocks as stocks
+import libkloudtrader.analysis as analysis
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-detrended_price_oscillator(aapl_data['close'],5)
+analysis.detrended_price_oscillator(aapl_data['close'],5)
 ```
 ```python
-return type : Pandas DataFrame
+return type : Pandas series
 
-0        NaN
-1        NaN
-2        NaN
-3        NaN
-4     -1.144
-5     -0.758
-6      0.800
-7     -0.300
-8     -0.738
-9     -1.146
-10    -1.110
-        ...
-240   -0.122
-241    1.480
-242    3.842
-243    0.014
-244    1.298
-245    6.378
-246    4.620
-247    2.340
-248   -2.812
-249   -6.592
-250    2.346
+Friday, August 30, 2019 07:08:35 PM INFO: Calculating Detrended Price Oscillator for period = 5
+
+date
+2018-01-02    16.793426
+2018-01-03    16.808426
+2018-01-04    16.546760
+2018-01-05    -0.870000
+2018-01-08    -1.144000
+                ...    
+2018-12-24     4.620000
+2018-12-26     2.340000
+2018-12-27    -2.812000
+2018-12-28    -6.592000
+2018-12-31     2.346000
+
+Name: close, Length: 251, dtype: float64
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Directional Movememnt Index
 The Directional Movement Index (DMI) assists in determining if a security is trending and attempts to measure the strength of the trend. The DMI disregards the direction of the security. It only attempts to determine if there is a trend and that trends strength.
 <br><br>
 <a href="https://www.danielstrading.com/education/technical-analysis-learning-center/directional-movement-index" target="_blank">Learn More</a>
 
-<code>directional_movement_index(high, low, close, n)</code>
+<code>directional_movement_index(high, low, close, period)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| high           | required          | High Prices Data                      |Pandas Dataframe|
-| low           | required          | Low Prices Data                      |Pandas Dataframe|
-| close           | required          | Close Prices Data                      |Pandas Dataframe|
-| n                | required          | Time period/number of days            |Int|
+| high           | required          | High Prices Data                      |Pandas series|
+| low           | required          | Low Prices Data                      |Pandas series|
+| close           | required          | Close Prices Data                      |Pandas series|
+| period            | required          | time period         |Int|
 
+#### Example
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 
 ```python
-Example:
-
-
-from libkloudtrader.analysis import directional_movement_index
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.stocks as stocks 
+import libkloudtrader.analysis as analysis
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-directional_movement_index(aapl_data['high'],aapl_data['low'],aapl_data['close'],5)
+analysis.directional_movement_index(aapl_data['high'],aapl_data['low'],aapl_data['close'],5)
 ```
 ```python
-return type : Pandas DataFrame
+return type: Pandas series
 
-0            NaN
-1            NaN
-2            NaN
-3            NaN
-4            NaN
-5      74.206349
-6      54.560458
-7      67.742880
-8      79.466559
-9      86.245089
-10     52.972606
-        ...
-240    55.074842
-241    63.602429
-242    63.602429
-243    77.482910
-244    83.207269
-245    88.618262
-246    90.639645
-247    34.747986
-248    34.747986
-249    18.082128
-250     9.924722
+Friday, August 30, 2019 07:23:28 PM INFO: Calculating Directional Movement Index for period = 5
+
+date
+2018-01-02          NaN
+2018-01-03          NaN
+2018-01-04          NaN
+2018-01-05          NaN
+2018-01-08          NaN
+                ...    
+2018-12-24    90.639645
+2018-12-26    34.747986
+2018-12-27    34.747986
+2018-12-28    18.082128
+2018-12-31     9.924722
+
+Length: 251, dtype: float64
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Donchain Channel 
 A Donchian Channel is an indicator formed by upper and lower bands around the price bars. The upper band marks the highest price of an issue for n periods while the lower band marks the lowest price for n periods. The area between the upper and lower bands represents the Donchian Channel.
 <br><br>
 <a href="https://www.investopedia.com/terms/d/donchianchannels.asp" target="_blank">Learn More</a>
 
-<code>donchian_channel(close,n)</code>
+<code>donchian_channel(data,period)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| close           | required          | Close Prices Data                      |Pandas Dataframe|
-| n                | required          | Time period/number of days            |Int|
+| close           | required          | Data                      |Pandas series|
+| period                | required          | time period       |int|
 
+#### Example
 
-
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 ```python
-Example:
-
-
-from libkloudtrader.analysis import donchian_channel
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.stocks as stocks 
+import libkloudtrader.analysis as analysis
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-donchian_channel(aapl_data['close'],5)
+analysis.donchian_channel(aapl_data['close'],5)
 ```
 ```python 
 returns: dc_high_band, dc_high_band_indicator, dc_low_band, dc_low_band_indicator
 return type : Pandas DataFrame 
  
-         dc_high_band  dc_high_band_indicator  dc_low_band  dc_low_band_indicator
-0             NaN                     0.0          NaN                    0.0
-1             NaN                     0.0          NaN                    0.0
-2             NaN                     0.0          NaN                    0.0
-3             NaN                     0.0          NaN                    0.0
-4          175.00                     0.0       172.23                    0.0
-5          175.00                     0.0       172.23                    0.0
-6          175.00                     0.0       173.03                    0.0
-7          175.28                     1.0       174.29                    0.0
-8          177.09                     1.0       174.29                    0.0
-9          177.09                     0.0       174.29                    0.0
-10         179.10                     1.0       174.29                    0.0
-                                      ...
-240        170.95                     0.0       165.48                    1.0
-241        170.95                     0.0       163.94                    1.0
-242        170.95                     0.0       163.94                    0.0
-243        170.95                     0.0       160.89                    1.0
-244        166.07                     0.0       156.83                    1.0
-245        166.07                     0.0       150.73                    1.0
-246        166.07                     0.0       146.83                    1.0
-247        160.89                     0.0       146.83                    0.0
-248        157.17                     0.0       146.83                    0.0
-249        157.17                     0.0       146.83                    0.0
-250        157.74                     1.0       146.83                    0.0
+Friday, August 30, 2019 07:40:35 PM INFO: Calculating Donchian Channels for period = 5
+
+            dc_high_band  dc_high_band_indicator  dc_low_band  dc_low_band_indicator
+date                                                                                
+2018-01-02        172.26                     0.0       172.26                    0.0
+2018-01-03        172.26                     0.0       172.23                    0.0
+2018-01-04        173.03                     0.0       172.23                    0.0
+2018-01-05        175.00                     0.0       172.23                    0.0
+2018-01-08        175.00                     0.0       172.23                    0.0
+...                  ...                     ...          ...                    ...
+2018-12-24        166.07                     0.0       146.83                    1.0
+2018-12-26        160.89                     0.0       146.83                    0.0
+2018-12-27        157.17                     0.0       146.83                    0.0
+2018-12-28        157.17                     0.0       146.83                    0.0
+2018-12-31        157.74                     1.0       146.83                    0.0
+
+[251 rows x 4 columns]
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Double EMA
 The Double Exponential Moving Average (DEMA) indicator was introduced in January 1994 by Patrick G. Mulloy. It attempts to remove the inherent lag associated to Moving Averages by placing more weight on recent values. The name suggests this is achieved by applying a double exponential smoothing which is not the case. The name double comes from the fact that the value of an EMA (Exponential Moving Average) is doubled.
 <br><br>
 <a href="https://en.wikipedia.org/wiki/Double_exponential_moving_average" target="_blank">Learn More</a>
 
-<code>double_ema(close,n)</code>
+<code>double_ema(data,period)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| close           | required          | Close Prices Data                      |Pandas Dataframe|
-| n                | required          | Time period/number of days            |Int|
+| data         | required          | Data                      |Pandas series|
+| period                | required          | time preiod           |int|
 
+#### Example
 
-
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 ```python
-Example:
-
-
-from libkloudtrader.analysis import double_ema
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.analysis as analysis
+import libkloudtrader.stocks as crypto
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+eth_data=crypto.ohlcv('ETH/USD','2019-01-01','2019-08-01')
 
-double_ema(aapl_data['close'],5)
+analysis.double_ema(eth_data['close'],5)
 ```
 ```python 
-return type : Pandas DataFrame 
+return type : Pandas series
  
-0             NaN
-1             NaN
-2             NaN
-3             NaN
-4             NaN
-5             NaN
-6             NaN
-7             NaN
-8      176.416830
-9      176.546476
-10     178.181155
-           ...
-240    166.747925
-241    164.681302
-242    164.863769
-243    162.201113
-244    158.616476
-245    153.435918
-246    148.666123
-247    152.086645
-248    153.605028
-249    154.607084
-250    156.071655
+Friday, August 30, 2019 07:46:47 PM INFO: Calculating Double Exponential Moving Average for period = 5
+
+date
+2019-01-02           NaN
+2019-01-03           NaN
+2019-01-04           NaN
+2019-01-05           NaN
+2019-01-06           NaN
+                 ...    
+2019-07-29    209.944465
+2019-07-30    209.249528
+2019-07-31    213.932942
+2019-08-01    215.905243
+2019-08-02    217.103462
+
+Length: 213, dtype: float64
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Downside Risk
 Downside risk is the financial risk associated with losses. That is, it is the risk of the actual return being below the expected return, or the uncertainty about the magnitude of that difference.
 <br><br>
 <a href="https://en.wikipedia.org/wiki/Downside_risk" target="_blank">Learn More</a>
 
-<code>downside_risk(close,required_return=0)</code>
+<code>downside_risk(dily_returns, required_return)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| close           | required          | Close Prices Data                      |Pandas Dataframe|
+| daily_returns        | required          | Daily Returns of an asset, strategy or portfolio                |Pandas series|
 | required_return | optional          | Required Return. 0 by default           |Int/Float|
 
+#### Data
 
-
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 ```python
-Example:
-
-
-from libkloudtrader.analysis import downside_risk
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.stocks as stocks
+import libkloudtrader.analysis as analysis
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
+daily_returns=analysis.daily_returns(aapl_data['close])
 
-downside_risk(aapl_data['close'])
+analysis.downside_risk(daily_returns)
 ```
 ```python 
 return type : Float
  
-20.749425627440665
+Friday, August 30, 2019 07:58:08 PM INFO: Calculating Downside Risk...
+
+0.20749425627440662
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Ease of Movement
 The Ease of Movement technical indicator shows the relationship between price and volume. Often times, traders use this indicator when assessing the strength of an underlying trend.
 <br><br>
 <a href="https://www.investopedia.com/terms/e/easeofmovement.asp" target="_blank">Learn More</a>
 
-<code>ease_of_movement(high, low, close, volume, n)</code>
+<code>ease_of_movement(high, low, close, volume, period)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| high           | required          | High Prices Data                      |Pandas Dataframe|
-| low          | required          | Low Prices Data                      |Pandas Dataframe|
-| close           | required          | Close Prices Data                      |Pandas Dataframe|
-| volume           | required          | Volume Data                      |Pandas Dataframe|
-| n               | required          | Timeperiod/ number of days           |Int |
+| high           | required          | High Prices Data                      |Pandas series|
+| low          | required          | Low Prices Data                      |Pandas series|
+| close           | required          | Close Prices Data                      |Pandas series|
+| volume           | required          | Volume Data                      |Pandas series|
+| period             | required          | time period        |int |
+
+#### Example
 
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 
 ```python
-Example:
-
-
-from libkloudtrader.analysis import ease_of_movement
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.stocks as stocks
+import libkloudtrader.analysis as analysis
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-ease_of_movement(aapl_data['high'], aapl_data['low'], aapl_data['close'], aapl_data['volume'], 7)
+analysis.ease_of_movement(aapl_data['high'], aapl_data['low'], aapl_data['close'], aapl_data['volume'], 7)
 ```
 ```python 
-return type : Pandas DataFrame
-0               NaN
-1               NaN
-2               NaN
-3               NaN
-4               NaN
-5               NaN
-6               NaN
-7      5.326876e-08
-8      3.681215e-08
-9      6.084697e-08
-10     3.023945e-08 
-           ...
-240   -1.878136e-07
-241   -1.202826e-07
-242   -8.951391e-08
-243   -8.207138e-08
-244   -1.894941e-07
-245   -2.632130e-07
-246   -3.631737e-07
-247   -2.369739e-07
-248   -1.812056e-07
-249   -1.449995e-07
-250   -6.321794e-08
+return type : Pandas series
+
+Friday, August 30, 2019 08:22:40 PM INFO: Calculating Ease of Movement for period = 7
+
+date
+2018-01-02             NaN
+2018-01-03    2.171648e-07
+2018-01-04    9.371253e-08
+2018-01-05    1.093783e-07
+2018-01-08    9.346912e-08
+                  ...     
+2018-12-24   -3.631737e-07
+2018-12-26   -2.369739e-07
+2018-12-27   -1.812056e-07
+2018-12-28   -1.449995e-07
+2018-12-31   -6.321965e-08
+
+Length: 251, dtype: float64
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Exponential Moving Average(EMA)
 An exponential moving average (EMA) is a type of moving average (MA) that places a greater weight and significance on the most recent data points. The exponential moving average is also referred to as the exponentially weighted moving average. 
 <br><br>
 <a href="https://www.investopedia.com/terms/e/ema.asp" target="_blank">Learn More</a>
 
-<code>ema(close,n)</code>
+<code>ema(data,period)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| close           | required          | Close Prices Data                      |Pandas Dataframe|
-| n               | required          | Timeperiod/ number of days           |Int |
+| data         | required          | Data                      |Pandas series|
+| period               | required          | time period          |int |
 
+#### Example
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 
 ```python
-Example:
-
-
-from libkloudtrader.analysis import ema
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.analysis as analysis 
+import libkloudtrader.stocks as stocks
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-ema(aapl_data['close'], 7)
+analysis.ema(aapl_data['close'], 7)
 ```
 ```python 
-return type : Pandas DataFrame
+return type: Pandas series
 
-0               NaN
-1               NaN
-2               NaN
-3               NaN
-4               NaN
-5               NaN
-6               NaN
-7      5.326876e-08
-8      3.681215e-08
-9      6.084697e-08
-10     3.023945e-08
-           ...
-240   -1.878136e-07
-241   -1.202826e-07
-242   -8.951391e-08
-243   -8.207138e-08
-244   -1.894941e-07
-245   -2.632130e-07
-246   -3.631737e-07
-247   -2.369739e-07
-248   -1.812056e-07
-249   -1.449995e-07
-250   -6.321794e-08 
+Friday, August 30, 2019 10:04:01 PM INFO: Calculating Exponential Moving Average for period = 7
+
+date
+2018-01-02           NaN
+2018-01-03           NaN
+2018-01-04           NaN
+2018-01-05           NaN
+2018-01-08           NaN
+                 ...    
+2018-12-24    157.139004
+2018-12-26    157.146753
+2018-12-27    156.897565
+2018-12-28    156.730673
+2018-12-31    156.983005
+
+Length: 251, dtype: float64
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Force Index
 The Force Index is an indicator that uses price and volume to assess the power behind a move or identify possible turning points developed by Alexander Elder. According to Elder, there are three essential elements to a stock's price movement: direction, extent and volume. The Force Index combines all three as an oscillator that fluctuates in positive and negative territory as the balance of power shifts. The Force Index can be used to reinforce the overall trend, identify playable corrections or foreshadow reversals with divergences.
 <br><br>
 <a href="https://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:force_index" target="_blank">Learn More</a>
 
-<code>force_index(close,volume,n)</code>
+<code>force_index(close,volume,period)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| close           | required          | Close Prices Data                      |Pandas Dataframe|
-| volume           | required          | Volume Data                      |Pandas Dataframe|
-| n               | required          | Timeperiod/ number of days           |Int |
+| close           | required          | Close Prices Data                      |Pandas series|
+| volume           | required          | Volume Data                      |Pandas series|
+| period               | required          | time period     |int |
 
+#### Example
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 
 ```python
-Example:
-
-
-from libkloudtrader.analysis import force_index
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.stocks as stocks 
+import libkloudtrader.analysis as analysis 
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-force_index(aapl_data['close'], aapl_data['volume'],7)
+analysis.force_index(aapl_data['close'], aapl_data['volume'],7)
 ```
 ```python 
-return type : Pandas DataFrame
+return type : Pandas series
 
-0               NaN
-1               NaN
-2               NaN
-3               NaN
-4               NaN
-5               NaN
-6               NaN
-7     -2.080238e+07
-8     -1.992512e+07
-9      2.253507e+07
-10     4.397995e+07
-           ...
-240    7.180812e+06
-241   -1.282294e+07
-242    2.042507e+07
-243    1.130445e+08
-244   -2.063973e+08
-245   -1.104344e+09
-246   -1.271463e+08
-247   -1.485731e+08
-248   -6.877902e+07
-249   -8.314708e+07
-250    4.424966e+07
+Friday, August 30, 2019 10:28:23 PM INFO: Calculating Force Index for period = 7
+
+date
+2018-01-02             NaN
+2018-01-03             NaN
+2018-01-04             NaN
+2018-01-05             NaN
+2018-01-08             NaN
+                  ...     
+2018-12-24   -1.271463e+08
+2018-12-26   -1.485731e+08
+2018-12-27   -6.877902e+07
+2018-12-28   -8.314708e+07
+2018-12-31    4.423807e+07
+
+Length: 251, dtype: float64
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Hilbert Transform - Dominant Cycle Period
 
 <a href="https://books.google.co.in/books?id=_KjOT1b9bfUC&printsec=frontcover#v=onepage&q&f=false" target="_blank">Learn More</a>
 
-<code>hilbert_transform_dom_cyc_per(close)</code>
+<code>hilbert_transform_dom_cyc_per(data)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| close           | required          | Close Prices Data                      |Pandas Dataframe|
+| data       | required          | Data                      |Pandas series|
 
+#### Example
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 
 ```python
-Example:
-
-
-from libkloudtrader.analysis import hilbert_transform_dom_cyc_per
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.analysis as analysis
+import libkloudtrader.stocks as stocks
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-hilbert_transform_dom_cyc_per(aapl_data['close'])
+analysis.hilbert_transform_dom_cyc_per(aapl_data['close'])
 ```
 ```python 
-return type : Pandas DataFrame
+return type : Pandas series
 
-0          NaN
-1          NaN
-2          NaN
-3          NaN
-4          NaN
-5          NaN
-6          NaN
-7          NaN
-8          NaN
-9          NaN
-10         NaN
-           ...
-240    33.336852
-241    31.890946
-242    30.340229
-243    28.709012
-244    27.062946
-245    25.526817
-246    24.295141
-247    23.350891
-248    22.695126
-249    22.273510
-250    22.070809
+Friday, August 30, 2019 10:36:32 PM INFO: Calculating Hilbert Transform - Dominant Cycle Period
+
+date
+2018-01-02          NaN
+2018-01-03          NaN
+2018-01-04          NaN
+2018-01-05          NaN
+2018-01-08          NaN
+                ...    
+2018-12-24    24.295141
+2018-12-26    23.350891
+2018-12-27    22.695126
+2018-12-28    22.273510
+2018-12-31    22.070809
+
+Length: 251, dtype: float64
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Hilbert Transform - Dominant Cycle Phase
 
 <a href="https://books.google.co.in/books?id=_KjOT1b9bfUC&printsec=frontcover#v=onepage&q&f=false" target="_blank">Learn More</a>
 
-<code>hilbert_transform_dom_cyc_phase(close)</code>
+<code>hilbert_transform_dom_cyc_phase(data)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| close           | required          | Close Prices Data                      |Pandas Dataframe|
+| data         | required          | Data                      |Pandas series|
 
+#### Example
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 
 ```python
-Example:
-
-
-from libkloudtrader.analysis import hilbert_transform_dom_cyc_phase
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.analysis as analysis
+import libkloudtrader.stocks as stocks
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-hilbert_transform_dom_cyc_phase(aapl_data['close'])
+analysis.hilbert_transform_dom_cyc_phase(aapl_data['close'])
 ```
 ```python 
-return type : Pandas DataFrame
+return type : Pandas series
 
-0          NaN
-1          NaN
-2          NaN
-3          NaN
-4          NaN
-5          NaN
-6          NaN
-7          NaN
-8          NaN
-9          NaN
-10         NaN
-           ...
-240    19.561229
-241    23.836128
-242    25.580045
-243    26.905135
-244    17.512746
-245     3.211247
-246   -15.042917
-247   -19.351484
-248   -15.028136
-249    -4.230537
-250     4.311873
+Friday, August 30, 2019 10:40:15 PM INFO: Calculating Hilbert Transform - Dominant Cycle Phase
+
+date
+2018-01-02          NaN
+2018-01-03          NaN
+2018-01-04          NaN
+2018-01-05          NaN
+2018-01-08          NaN
+                ...    
+2018-12-24   -15.042917
+2018-12-26   -19.351484
+2018-12-27   -15.028136
+2018-12-28    -4.230537
+2018-12-31     4.311873
+
+Length: 251, dtype: float64
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Hilbert Transform - Instantaneous Trendline
 
 <a href="https://books.google.co.in/books?id=_KjOT1b9bfUC&printsec=frontcover#v=onepage&q&f=false" target="_blank">Learn More</a>
 
-<code>hilbert_transform_inst_trendline(close)</code>
+<code>hilbert_transform_inst_trendline(data)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| close           | required          | Close Prices Data                      |Pandas Dataframe|
+| data         | required          | Data                      |Pandas series|
+
+#### Example
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 
 
 ```python
-Example:
-
-
-from libkloudtrader.analysis import hilbert_transform_inst_trendline
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.stocks as stocks
+import libkloudtrader.analysis as analysis
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-hilbert_transform_inst_trendline(aapl_data['close'])
+analysis.hilbert_transform_inst_trendline(aapl_data['close'])
 ```
 ```python 
-return type : Pandas DataFrame
+return type : Pandas series
 
-0          NaN
-1          NaN
-2          NaN
-3          NaN
-4          NaN
-5          NaN
-6          NaN
-7          NaN
-8          NaN
-9          NaN
-10         NaN
-           ...
-240    190.837872
-241    188.391493
-242    185.375011
-243    182.635948
-244    179.451931
-245    176.557688
-246    173.580756
-247    171.152430
-248    169.462166
-249    168.155874
-250    167.216551
+Friday, August 30, 2019 10:50:41 PM INFO: Calculating Hilbert Transform - Instantaneous Trendline...
+
+date
+2018-01-02           NaN
+2018-01-03           NaN
+2018-01-04           NaN
+2018-01-05           NaN
+2018-01-08           NaN
+                 ...    
+2018-12-24    173.580756
+2018-12-26    171.152430
+2018-12-27    169.462166
+2018-12-28    168.155874
+2018-12-31    167.216551
+
+Length: 251, dtype: float64
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Hilbert Transform - Phasor Components
 
 <a href="https://books.google.co.in/books?id=_KjOT1b9bfUC&printsec=frontcover#v=onepage&q&f=false" target="_blank">Learn More</a>
 
-<code>hilbert_transform_phasor_components(close)</code>
+<code>hilbert_transform_phasor_components(data)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| close           | required          | Close Prices Data                      |Pandas Dataframe|
+| data      | required          | Data                      |Pandas series|
 
+#### Example
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 
 ```python
-Example:
-
-
-from libkloudtrader.analysis import hilbert_transform_phasor_components
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.analysis as analysis
+import libkloudtrader.stocks as stocks 
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-hilbert_transform_phasor_components(aapl_data['close'])
+analysis.hilbert_transform_phasor_components(aapl_data['close'])
 ```
 ```python 
 returns: inphase, quadrature
 return type : Pandas DataFrame
 
-       inphase  quadrature
-0          NaN         NaN
-1          NaN         NaN
-2          NaN         NaN
-3          NaN         NaN
-4          NaN         NaN
-5          NaN         NaN
-6          NaN         NaN
-7          NaN         NaN
-8          NaN         NaN
-9          NaN         NaN
-10         NaN         NaN
-           ...
-240   -15.814747  -16.123834
-241   -17.002610    7.959273
-242   -10.577220   18.745264
-243   -6.201544   15.765057
-244   -1.509589    7.737092
-245   -2.667140   -6.047104
-246   -6.658545   -4.234801
-247   -5.300593   -2.400738
-248   -6.805108   -8.416180
-249   -10.232868   -6.383109
-250   -12.106739   -2.837278
+              inphase  quadrature
+date                             
+2018-01-02        NaN         NaN
+2018-01-03        NaN         NaN
+2018-01-04        NaN         NaN
+2018-01-05        NaN         NaN
+2018-01-08        NaN         NaN
+...               ...         ...
+2018-12-24  -6.658545   -4.234801
+2018-12-26  -5.300593   -2.400738
+2018-12-27  -6.805108   -8.416180
+2018-12-28 -10.232868   -6.383109
+2018-12-31 -12.106739   -2.837278
+
+[251 rows x 2 columns]
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Hilbert Transform - SineWave
 
 <a href="https://books.google.co.in/books?id=_KjOT1b9bfUC&printsec=frontcover#v=onepage&q&f=false" target="_blank">Learn More</a>
 
-<code>hilbert_transform_sine_wave(close)</code>
+<code>hilbert_transform_sine_wave(data)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| close           | required          | Close Prices Data                      |Pandas Dataframe|
+| data        | required          | Data                      |Pandas series|
 
+#### Example
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 
 ```python
-Example:
-
-
-from libkloudtrader.analysis import hilbert_transform_sine_wave
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.stocks as stocks
+import libkloudtrader.analysis as analysis
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-hilbert_transform_sine_wave(aapl_data['close'])
+analysis.hilbert_transform_sine_wave(aapl_data['close'])
 ```
 ```python 
 returns: sine leadsine
 return type : Pandas DataFrame
 
-         sine  leadsine
-0         NaN       NaN
-1         NaN       NaN
-2         NaN       NaN
-3         NaN       NaN
-4         NaN       NaN
-5         NaN       NaN
-6         NaN       NaN
-7         NaN       NaN
-8         NaN       NaN
-9         NaN       NaN
-10        NaN       NaN
-        ...
-240  0.334814  0.903045
-241  0.404122  0.932552
-242  0.431772  0.943107
-243  0.452515  0.950544
-244  0.300918  0.887114
-245  0.056017  0.745607
-246 -0.259542  0.499351
-247 -0.331362  0.432849
-248 -0.259293  0.499575
-249 -0.073770  0.653017
+Friday, August 30, 2019 11:09:02 PM INFO: Calculating Hilbert Transform - Sine Wave...
+
+                sine  leadsine
+date                          
+2018-01-02       NaN       NaN
+2018-01-03       NaN       NaN
+2018-01-04       NaN       NaN
+2018-01-05       NaN       NaN
+2018-01-08       NaN       NaN
+...              ...       ...
+2018-12-24 -0.259542  0.499351
+2018-12-26 -0.331362  0.432849
+2018-12-27 -0.259293  0.499575
+2018-12-28 -0.073770  0.653017
+2018-12-31  0.075185  0.758269
+
+[251 rows x 2 columns]
 ```
+
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Hilbert Transform - Trend vs Cycle Mode
 
 <a href="https://books.google.co.in/books?id=_KjOT1b9bfUC&printsec=frontcover#v=onepage&q&f=false" target="_blank">Learn More</a>
 
-<code>hilbert_transform_trend_vs_cycle_mode(close)</code>
+<code>hilbert_transform_trend_vs_cycle_mode(data)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| close           | required          | Close Prices Data                      |Pandas Dataframe|
+| data       | required          | Data                      |Pandas series|
 
+#### Example
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 
 ```python
-Example:
-
-
-from libkloudtrader.analysis import hilbert_transform_trend_vs_cycle_mode
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.stocks as stocks
+import libkloudtrader.analysis as analysis
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-hilbert_transform_trend_vs_cycle_mode(aapl_data['close'])
+analysis.hilbert_transform_trend_vs_cycle_mode(aapl_data['close'])
 ```
 ```python 
-return type : Pandas DataFrame
+return type : Pandas series
 
-0      0
-1      0
-2      0
-3      0
-4      0
-5      0
-6      0
-7      0
-8      0
-9      0
-10     0
-      ...
-240    1
-241    1
-242    1
-243    1
-244    1
-245    1
-246    1
-247    1
-248    1
-249    1
-250    1
+Friday, August 30, 2019 11:16:18 PM INFO: Calculating Hilbert Transform - Trend vs cycle mode...
+
+date
+2018-01-02    0
+2018-01-03    0
+2018-01-04    0
+2018-01-05    0
+2018-01-08    0
+             ..
+2018-12-24    1
+2018-12-26    1
+2018-12-27    1
+2018-12-28    1
+2018-12-31    1
+
+Length: 251, dtype: int32
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Hull Moving Average
 Hull Moving Average, developed by Alan Hull is an extremely useful indicator to overcome the lag associated with traditional moving averages.
 <br><br>
 <a href="http://tradingtuitions.com/hull-moving-average-2/" target="_blank">Learn More</a>
 
-<code>hull_moving_average(close,n)</code>
+<code>hull_moving_average(data,period)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| close           | required          | Close Prices Data                      |Pandas Dataframe|
-| n          | required          | Time period/Number of days |Int|
+| data         | required          | Data                      |Pandas series|
+| period          | required          | time period |int|
 
+### Example
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 
 ```python
-Example:
-
-
-from libkloudtrader.analysis import hull_moving_average
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.analysis as analysis
+import libkloudtrader.crypto as crypto
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+btc_data=crypto.ohlcv('BTC/USD','2019-01-01','2019-08-01')
 
-hull_moving_average(aapl_data['close'],7)
+analysis.hull_moving_average(btc_data['close'],7)
 ```
 ```python 
-return type : Pandas DataFrame
+return type : Pandas series
 
-      hull_mavg
-0           NaN
-1           NaN
-2           NaN
-3           NaN
-4           NaN
-5           NaN
-6           NaN
-7    174.935278
-8    176.252540
-9    177.007302
-10   178.396270
-        ...
-240  167.964286
-241  164.969524
-242  163.761310
-243  161.967421
-244  158.174563
-245  152.022063
-246  146.015595
-247  148.240040
-248  153.541151
-249  157.100635
-250  158.416984
+Friday, August 30, 2019 11:20:20 PM INFO: Calculating Hull Moving Average for period = 7
+
+date
+2019-01-02             NaN
+2019-01-03             NaN
+2019-01-04             NaN
+2019-01-05             NaN
+2019-01-06             NaN
+                  ...     
+2019-07-29     9401.301071
+2019-07-30     9461.199921
+2019-07-31     9792.339960
+2019-08-01    10276.583730
+2019-08-02    10656.194246
+
+Length: 213, dtype: float64
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Ichimoku Cloud
 The Ichimoku Cloud, also known as Ichimoku Kinko Hyo, is a versatile indicator that defines support and resistance, identifies trend direction, gauges momentum and provides trading signals.
@@ -2313,206 +2060,194 @@ The Ichimoku Cloud, also known as Ichimoku Kinko Hyo, is a versatile indicator t
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| high           | required          | High Prices Data                      |Pandas Dataframe|
-| low           | required          | Low Prices Data                      |Pandas Dataframe|
-| short_period          | required          | Short Period |Int|
-| medium_period          | required          | Medium Period |Int|
-| long_period          | required          | Long Period |Int|
+| high           | required          | High Prices Data                      |Pandas series|
+| low           | required          | Low Prices Data                      |Pandas series|
+| short_period          | required          | Short Period |int|
+| medium_period          | required          | Medium Period |int|
+| long_period          | required          | Long Period |int|
 
+
+#### Example
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 
 ```python
-Example:
-
-
-from libkloudtrader.analysis import ichimoku_cloud
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.analysis as analysis
+import libkloudtrader.stocks as stocks
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-ichimoku_cloud(aapl_data['high'],aapl_data['low'],4,7,12)
+analysis.ichimoku_cloud(aapl_data['high'],aapl_data['low'],4,7,12)
 ```
 ```python 
 returns: chimoku_cloud_a, ichimoku_cloud_b
 return type : Pandas DataFrame
 
-          ichimoku_cloud_a  ichimoku_cloud_b
-0                 NaN               NaN
-1                 NaN               NaN
-2                 NaN               NaN
-3                 NaN               NaN
-4                 NaN               NaN
-5                 NaN               NaN
-6          173.370000               NaN
-7          174.045000               NaN
-8          174.950000               NaN
-9          176.195000               NaN
-10         176.567500               NaN
-                ...
-240        168.990000         174.13500
-241        168.130000         173.83500
-242        167.650000         173.83500
-243        164.957500         172.01500
-244        162.880000         168.84495
-245        159.840000         162.20500
-246        157.427500         160.54000
-247        155.910000         159.58000
-248        154.717500         159.58000
-249        154.787500         159.58000
-250        153.695000         159.58000
+Friday, August 30, 2019 11:37:24 PM INFO: Calculating Ichimoku Cloud for short period = 4, medium period = 7 and long period = 12
+
+            ichimoku_cloud_a  ichimoku_cloud_b
+date                                          
+2018-01-02          170.7800           170.780
+2018-01-03          171.9050           171.905
+2018-01-04          171.9050           171.905
+2018-01-05          172.3150           172.315
+2018-01-08          173.1100           172.435
+...                      ...               ...
+2018-12-24          157.4275           160.540
+2018-12-26          155.9100           159.580
+2018-12-27          154.7175           159.580
+2018-12-28          154.7875           159.580
+2018-12-31          153.6950           159.580
+
+[251 rows x 2 columns]
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Information Ratio
-What is Information Ratio (IR)
-The information ratio (IR) is a measure of portfolio returns above the returns of a benchmark, usually an index, to the volatility of those returns. 
+Information ratio (IR) is a measure of portfolio returns above the returns of a benchmark, usually an index, to the volatility of those returns. 
 <br><br>
 <a href="https://www.investopedia.com/terms/i/informationratio.asp" target="_blank">Learn More</a>
 
-<code>information_ratio(daily_Returns,benchmark_daily_returns)</code>
+<code>information_ratio(daily_returns,benchmark_daily_returns)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| returns           | required          | Daily returns' Data                      |Pandas Dataframe|
-| benchmark_returns   | required          | Daily returns' data of market or benchmark like SPY, etc | Pandas dataframe |
+| daily_returns       | required         | Daily returns of the asset, strategy or portfolio     | Pandas Series |
+| benchmark_daily_returns | required       | Daily returns of a index or market like Dow Jone Ind. Avg., S&P 500 Index | Pandas Series |
 
+#### Example
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 
 ```python
-Example:
-
-
-from libkloudtrader.analysis import information_ratio
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.analysis as analysis
+import libkloudtrader.stocks as stocks
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
-spy_data=pd.DataFrame(ohlcv('SPY','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
+spx_data=stocks.ohlcv('SPX','2018-01-01','2019-01-01')
+aapl_rets=analysis.daily_returns(aapl_data['close'])
+spx_rets=analysis.daily_returns(spx_data['close'])
 
-information_ratio( daily_returns(aapl_data['close']), daily_returns(spy_data['close']) )
+analysis.information_ratio(aapl_rets, spx_rets)
 ```
 ```python 
 return type : Float
 
-0.0386038148944812
+Friday, August 30, 2019 11:45:59 PM INFO: Calculating Information Raito...
+
+0.03870562680142687
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Kaufman Adaptive Moving Average
 Developed by Perry Kaufman, Kaufman's Adaptive Moving Average (KAMA) is a moving average designed to account for market noise or volatility. KAMA will closely follow prices when the price swings are relatively small and the noise is low. KAMA will adjust when the price swings widen and follow prices from a greater distance. This trend-following indicator can be used to identify the overall trend, time turning points and filter price movements.
 <br><br>
 <a href="https://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:kaufman_s_adaptive_moving_average" target="_blank">Learn More</a>
 
-<code>kaufman_adaptive_moving_average(close,n)</code>
+<code>kaufman_adaptive_moving_average(data,period)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| close           | required          | Close prices Data                      |Pandas Dataframe|
-| n           | required          | Time period/number of days                      |Pandas Dataframe|
+| data           | required          | Data                      |Pandas series|
+| period           | required          | time period                    |Pandas series|
 
 
+#### Example
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 
 ```python
-Example:
-
-
-from libkloudtrader.analysis import kaufman_adaptive_moving_average
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.stocks as stocks
+import libkloudtrader.analysis as analysis
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
-spy_data=pd.DataFrame(ohlcv('SPY','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-kaufman_adaptive_moving_average(aapl_data['close'],7)
+analysis.kaufman_adaptive_moving_average(aapl_data['close'],7)
 ```
 ```python 
-return type : Pandas DataFrame
-0             NaN
-1             NaN
-2             NaN
-3             NaN
-4             NaN
-5             NaN
-6             NaN
-7      174.507414
-8      175.234264
-9      175.360034
-10     175.963785
-           ...
-240    175.274526
-241    173.154361
-242    172.944440
-243    171.361783
-244    168.945479
-245    164.667340
-246    158.743575
-247    158.670831
-248    158.561945
-249    158.407149
-250    158.395037
+return type : Pandas series
+
+Friday, August 30, 2019 11:53:22 PM INFO: Calculating Kaufman Adaptive Moving Average for period = 7
+
+date
+2018-01-02           NaN
+2018-01-03           NaN
+2018-01-04           NaN
+2018-01-05           NaN
+2018-01-08           NaN
+                 ...    
+2018-12-24    158.743575
+2018-12-26    158.670831
+2018-12-27    158.561945
+2018-12-28    158.407149
+2018-12-31    158.395037
+
+Length: 251, dtype: float64
 ```
+
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Keltner Channels
 Keltner Channels are a popular technical indicator that traders use to help assess the current trend, spot potential reversals and provide trade signals. The channels use volatility and average prices to plot upper and lower lines, as well as a middle (or average) line. All three of these lines move with the price, creating a channel-like appearance.
 <br><br>
 <a href="https://www.thebalance.com/how-to-day-with-trade-keltner-channels-4051613" target="_blank">Learn More</a>
 
-<code>keltner_channels(high, low, close, n)</code>
+<code>keltner_channels(high, low, close, period)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| high           | required          | High prices Data                      |Pandas Dataframe|
-| high           | required          | Low prices Data                      |Pandas Dataframe|
-| close           | required          | Close prices Data                      |Pandas Dataframe|
-| n           | required          | Time period/number of days                      |Pandas Dataframe|
+| high           | required          | High prices Data                      |Pandas series|
+| high           | required          | Low prices Data                      |Pandas series|
+| close           | required          | Close prices Data                      |Pandas series|
+| period          | required          | time period           |int|
 
+#### Example
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 
 ```python
-Example:
-
-
-from libkloudtrader.analysis import keltner_channels
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.analysis as analysis
+import libkloudtrader.stocks as stocks
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
-spy_data=pd.DataFrame(ohlcv('SPY','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-keltner_channels(aapl_data['high'],aapl_data['low'],aapl_data['close'],7)
+analysis.keltner_channels(aapl_data['high'],aapl_data['low'],aapl_data['close'],7)
 ```
 ```python 
-returns:keltner_channel_central, keltner_channel_highband,  keltner_channel_highband_indicator, keltner_channel_lowband, keltner_channel_lowband_indicator
+returns:keltner_channel_central, keltner_channel_highband, keltner_channel_lowband
 return type : Pandas DataFrame
 
-        keltner_channel_central  keltner_channel_highband  keltner_channel_highband_indicator  keltner_channel_lowband  keltner_channel_lowband_indicator
-0                        NaN                       NaN                                 0.0                      NaN                                0.0
-1                        NaN                       NaN                                 0.0                      NaN                                0.0
-2                        NaN                       NaN                                 0.0                      NaN                                0.0
-3                        NaN                       NaN                                 0.0                      NaN                                0.0
-4                        NaN                       NaN                                 0.0                      NaN                                0.0
-5                        NaN                       NaN                                 0.0                      NaN                                0.0
-6                 173.468571                175.464286                                 0.0               171.472857                                0.0
-7                 174.013267                175.717352                                 0.0               172.309181                                0.0
-8                 174.554219                176.132590                                 0.0               172.975848                                0.0
-9                 175.179933                177.024019                                 0.0               173.335848                                0.0
-10                175.656124                177.765924                                 0.0               173.546324                                0.0
-                                                                                ...
-240               169.742381                174.288095                                 0.0               165.196667                                0.0
-241               168.556667                173.282381                                 0.0               163.830952                                0.0
-242               167.923810                172.213810                                 0.0               163.633810                                0.0
-243               167.181429                171.700000                                 0.0               162.662857                                0.0
-244               165.601429                170.408571                                 0.0               160.794286                                0.0
-245               163.148095                168.759524                                 0.0               157.536667                                0.0
-246               159.905238                165.793810                                 0.0               154.016667                                0.0
-247               158.061429                164.908571                                 0.0               151.214286                                0.0
-248               156.536190                163.537619                                 0.0               149.534762                                0.0
-249               155.170000                162.290000                                 0.0               148.050000                                0.0
-250               154.510476                160.847619                                 0.0               148.173333                                0.0
+Saturday, August 31, 2019 12:09:37 AM INFO: Calculating Kelnter Channels for period = 7
+
+            keltner_channel_highband  keltner_channel_central  keltner_channel_lowband
+date                                                                                  
+2018-01-02                174.313333               171.273333               168.233333
+2018-01-03                174.908333               172.093333               169.278333
+2018-01-04                174.688889               172.348889               170.008889
+2018-01-05                175.215000               172.880000               170.545000
+2018-01-08                175.434000               173.230000               171.026000
+...                              ...                      ...                      ...
+2018-12-24                165.793810               159.905238               154.016667
+2018-12-26                164.908571               158.061429               151.214286
+2018-12-27                163.537619               156.536190               149.534762
+2018-12-28                162.290000               155.170000               148.050000
+2018-12-31                160.847619               154.510476               148.173333
+
+[251 rows x 3 columns]
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Know sure thing/KST
 Developed by Martin Pring, Know Sure Thing (KST) is a momentum oscillator based on the smoothed rate-of-change for four different timeframes. In short, KST measures price momentum for four different price cycles, combining them into a single oscillator. Like any other unbound momentum oscillator, chartists can use KST to look for divergences, signal line crossovers, and centerline crossovers. Pring frequently applied trend lines to KST. Although trend line signals do not occur often.
