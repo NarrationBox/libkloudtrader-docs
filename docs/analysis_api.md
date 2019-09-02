@@ -29,7 +29,7 @@ sidebar_label: Analysis
 | [Beta](#beta)|✅ 
 | Berke Ratio| 🔜
 | [Bollinger Bands](#bollinger-bands)|✅ 
-| Calmar Ratio|🔜
+| [Calmar Ratio](#calmar-ratio)|✅ 
 | [CAGR (Compounded Annual Growth Rate)](#cagr-compounded-annual-growth-rate)|✅ 
 | [Chaikin Money Flow](#chaikin-money-flow)|✅
 | [Chaikin Oscillator](#chaikin-oscillator)|✅
@@ -128,9 +128,9 @@ sidebar_label: Analysis
 | [Typical Price](#typical-price)|✅ 
 | [Ultimate Oscillator](#ultimate-oscillator) |✅ 
 | Upside-potential Ratio| 🔜
-| [Value at Risk (Variance-Covariance method)](#value-at-risk-variance-covariance-method)|✅ 
-| [Variance (Moving)](#variance-moving)|✅ 
-| Vertical Horizontal Filter| 🔜
+|  Value at Risk| 🔜
+| [Variance](#variance)|✅ 
+| [Vertical Horizontal Filter](#vertical-horizontal-filter)| ✅ 
 | [Volatility](#volatility)|✅ 
 | Volatility Stop| 🔜
 | Volume Osciallor | 🔜
@@ -850,6 +850,40 @@ date
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
 
+**** 
+### Calmar Ratio
+The Calmar ratio is a comparison of the average annual compounded rate of return and the maximum drawdown risk of commodity trading advisors and hedge funds. The lower the Calmar ratio, the worse the investment performed on a risk-adjusted basis over the specified time period; the higher the Calmar ratio, the better it performed. Generally speaking, the time period used is three years, but this can be higher or lower based on the investment in question.
+<br><br>
+<a href="https://www.investopedia.com/terms/c/calmarratio.asp" target="_blank">Learn More</a>
+
+<code>calmar_ratio(daily_returns)</code>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| daily_returns        | required         | Starting value of an asset, strategy or portfolio  |Pandas series|
+
+#### Example
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
+
+```python 
+import libkloudtrader.analysis as analysis
+import libkloudtrader.stocks as stocks
+
+#load data
+aapl_data=stocks.ohlcv('AAPL','2016-01-01','2019-01-01')
+rets=analysis.daily_returns(aapl_data['close'])
+
+analysis.calmar_ratio(rets)
+```
+```python 
+Monday, September 02, 2019 02:25:16 PM INFO: Calculating Calmar Ratio...
+
+0.39322862528483427
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### CAGR (Compounded Annual Growth Rate)
 The compound annual growth rate (CAGR) is the rate of return that would be required for an investment to grow from its beginning balance to its ending balance assuming the profits were reinvested at the end of each year of the investment’s lifespan.
@@ -860,9 +894,9 @@ The compound annual growth rate (CAGR) is the rate of return that would be requi
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| start_value        | required         | Starting value of the investment  |
-| end_value       | required         | End value of the investment  |
-| period_in_years      | required         | Life of investment(in years)  |
+| start_value        | required         | Starting value of the investment  | Float/Int|
+| end_value       | required         | End value of the investment  |Float/Int|
+| period_in_years      | required         | Life of investment(in years)  |Int|
 
 #### Example
 <!--DOCUSAURUS_CODE_TABS-->
@@ -4100,104 +4134,98 @@ The True Range function is used in the calculation of many indicators, most nota
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| high          | required          | High prices data                      |Pandas Dataframe|
-| low          | required          | Low prices data                      |Pandas Dataframe|
-| close          | required          | Close prices data                      |Pandas Dataframe|
+| high          | required          | High prices data                      |Pandas series|
+| low          | required          | Low prices data                      |Pandas series|
+| close          | required          | Close prices data                      |Pandas series|
+
+#### Example
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 
 ```python
-Example:
-
-
-from libkloudtrader.analysis import true_range
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.analysis as analysis
+import libkloudtrader.stocks as stocks
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-true_range(aapl_data['high'],aapl_data['low'],aapl_data['close'])
+analysis.true_range(aapl_data['high'],aapl_data['low'],aapl_data['close'])
 ```
 ```python 
-return type : Pandas DataFrame
+return type : Pandas series
 
-0          NaN
-1       2.5900
-2       1.3900
-3       2.3400
-4       1.6800
-5       1.6500
-6       1.3300
-7       1.1986
-8       2.0800
-9       3.2500
-10      4.1800
-          ...
-240     5.6700
-241     5.6200
-242     3.5900
-243     8.3600
-244     6.8100
-245     8.5300
-246     4.9600
-247    10.5100
-248     7.1000
-249     3.9700
-250     3.1300
+Sunday, September 01, 2019 06:16:49 PM INFO: Calculating True Range...
+
+date
+2018-01-02      NaN
+2018-01-03     2.59
+2018-01-04     1.39
+2018-01-05     2.34
+2018-01-08     1.68
+              ...  
+2018-12-24     4.96
+2018-12-26    10.51
+2018-12-27     7.10
+2018-12-28     3.97
+2018-12-31     3.13
+
+Length: 251, dtype: float64
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
+
 ***
 ### True Strength Index
 The true strength index is a technical momentum indicator that helps traders identify short-term price swings while trading in the direction of the trend. The indicator is useful for determining overbought and oversold conditions of a security by incorporating the short-term momentum of the market with the lagging benefits of moving averages.
 <br><br>
 <a href="https://www.investopedia.com/terms/t/tsi.asp" target="_blank">Learn More</a>
 
-<code>true_strength_index(close,high_period,low_period)</code>
+<code>true_strength_index(data,high_period,low_period)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| close          | required          | Close prices data                      |Pandas Dataframe|
+| data         | required          | Data                      |Pandas series|
 | high_period         | required          | High Period                     |Int|
 | low_period         | required          | Low Period                     |Int|
 
+#### Example 
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
+
 ```python
-Example:
-
-
-from libkloudtrader.analysis import true_range
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.analysis as analysis
+import libkloudtrader.stocks as stocks
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-true_strength_index(aapl_data['close'],25,13)
+analysis.true_strength_index(true_strength_index(aapl_data['close'],25,13))
 ```
 ```python 
-return type : Pandas DataFrame
+return type : Pandas series 
 
-0             NaN
-1     -100.000000
-2       81.100159
-3       92.863506
-4       79.135730
-5       73.739236
-6       70.454540
-7       69.820933
-8       71.364465
-9       67.960841
-10      67.917664
-          ...
-240    -22.147206
-241    -22.714944
-242    -23.030292
-243    -23.610509
-244    -24.361747
-245    -25.377251
-246    -26.499802
-247    -26.526134
-248    -26.604845
-249    -26.667434
-250    -26.581779
+Sunday, September 01, 2019 07:53:29 PM INFO: Calculating True Strength Index for high period = 25 and low period = 13
+
+date
+2018-01-02   -100.000000
+2018-01-03   -100.000000
+2018-01-04    -98.006195
+2018-01-05    -93.555546
+2018-01-08    -90.780855
+                 ...    
+2018-12-24    -26.501575
+2018-12-26    -26.527827
+2018-12-27    -26.606466
+2018-12-28    -26.668990
+2018-12-31    -26.583278
+
+Name: tsi, Length: 251, dtype: float64
+
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Typical Price
 The Typical Price is the average of the high + low + close of a bar. It is used in the calculation of several indicators. It can be used to smooth an indicator that normally takes just the closing price as input.
@@ -4208,51 +4236,46 @@ The Typical Price is the average of the high + low + close of a bar. It is used 
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| high          | required          | High prices data                      |Pandas Dataframe|
-| low         | required          | Low prices data                      |Pandas Dataframe|
-| close          | required          | Close prices data                      |Pandas Dataframe|
+| high          | required          | High prices data                      |Pandas series|
+| low         | required          | Low prices data                      |Pandas series|
+| close          | required          | Close prices data                      |Pandas series|
 
+#### Example
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 
 ```python
-Example:
-
-
-from libkloudtrader.analysis import typical_price
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.analysis as analysis
+import libkloudtrader.stocks as stocks
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-typical_price(aapl_data['high'],aapl_data['low'],aapl_data['close'])
+analysis.typical_price(aapl_data['high'],aapl_data['low'],aapl_data['close'])
 ```
 ```python 
-return type : Pandas DataFrame
+return type : Pandas series
 
-0      171.273333
-1      172.913333
-2      172.860000
-3      174.473333
-4      174.630000
-5      174.266667
-6      173.863333
-7      175.086200
-8      176.700000
-9      177.240000
-10     177.806667
-          ...
-240    166.613333
-241    165.006667
-242    165.996667
-243    162.476667
-244    158.080000
-245    152.840000
-246    148.323333
-247    153.706667
-248    154.330000
-249    156.433333
-250    157.860000
+Sunday, September 01, 2019 08:11:40 PM INFO: Calculating Typical Price...
+
+date
+2018-01-02    171.273333
+2018-01-03    172.913333
+2018-01-04    172.860000
+2018-01-05    174.473333
+2018-01-08    174.630000
+                 ...    
+2018-12-24    148.323333
+2018-12-26    153.706667
+2018-12-27    154.330000
+2018-12-28    156.433333
+2018-12-31    157.860000
+
+Length: 251, dtype: float64
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Ultimate Oscillator
 The Ultimate Oscillator is a technical indicator that was developed by Larry Williams in 1976 to measure momentum across multiple timeframes. By using the weighted average of three different timeframes, the indicator has less volatility and fewer trade signals compared to other indicators that rely on a single timeframe.
@@ -4263,342 +4286,325 @@ The Ultimate Oscillator is a technical indicator that was developed by Larry Wil
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| high          | required          | High prices data                      |Pandas Dataframe|
-| low         | required          | Low prices data                      |Pandas Dataframe|
-| close          | required          | Close prices data                      |Pandas Dataframe|
+| high          | required          | High prices data                      |Pandas series|
+| low         | required          | Low prices data                      |Pandas series|
+| close          | required          | Close prices data                      |Pandas series|
 | short_period         | required          | Short Period                    |Int|
 | medium_period          | required          | Medium Period                  |Int|
 | long_period          | required          | Long Period                    |Int|
 
+#### Example
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 
 ```python
-Example:
-
-
-from libkloudtrader.analysis import ultimate_oscillator
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.analysis as analysis
+import libkloudtrader.stocks as stocks
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-ultimate_oscillator(aapl_data['high'],aapl_data['low'],aapl_data['close'],4,8,15)
+analysis.ultimate_oscillator(aapl_data['high'],aapl_data['low'],aapl_data['close'],4,8,15)
 ```
 ```python 
-return type : Pandas DataFrame
+return type : Pandas series 
 
-0            NaN
-1            NaN
-2            NaN
-3            NaN
-4            NaN
-5            NaN
-6            NaN
-7            NaN
-8            NaN
-9            NaN
-10           NaN
-          ...
-240    30.499671
-241    29.839476
-242    33.687805
-243    30.045550
-244    28.422731
-245    25.247009
-246    20.149444
-247    39.725496
-248    51.587739
-249    58.854791
-250    64.956589
+Sunday, September 01, 2019 08:23:28 PM INFO: Calculating Ultimate Oscillator for short period = 4, medium period = 8 and long period = 15
+
+date
+2018-01-02          NaN
+2018-01-03          NaN
+2018-01-04          NaN
+2018-01-05          NaN
+2018-01-08          NaN
+                ...    
+2018-12-24    20.149444
+2018-12-26    39.725496
+2018-12-27    51.587739
+2018-12-28    58.854791
+2018-12-31    64.956589
+
+Length: 251, dtype: float64
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
-### Value at Risk (Variance-Covariance method)
-The 5% Value at Risk of a hypothetical profit-and-loss probability density function
-Value at risk (VaR) is a measure of the risk of loss for investments. It estimates how much a set of investments might lose (with a given probability), given normal market conditions, in a set time period such as a day.
-<br><br>
-<a href="http://treasurytoday.com/2001/11/value-at-risk-the-variance-covariance-method" target="_blank">Learn More</a>
-
-<code>value_at_risk(close,tabular=True)</code>
-
-| Paramters       | Required/Optional | Description                             | Type |
-|-----------------|-------------------|-----------------------------------------|------|
-| close          | required          | Close prices data                      |Pandas Dataframe|
-| tabular          | optional          | True if you want output in form of table else False. True by Default                   |Bool|
-
-
-```python
-Example:
-
-
-from libkloudtrader.analysis import value_at_risk
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
-
-#load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
-
-value_at_risk(aapl_data['close'])
-```
-```python 
-return type : table
-
-Confidence Level      Value at Risk
-------------------  ---------------
-90%                        -2.33498
-95%                        -2.99157
-99%                        -4.22321
-```
-***
-### Variance (Moving)
-The 5% Value at Risk of a hypothetical profit-and-loss probability density function
+### Variance 
 Variance is a measurement of the spread between numbers in a data set. The variance measures how far each number in the set is from the mean. Variance is calculated by taking the differences between each number in the set and the mean, squaring the differences (to make them positive) and dividing the sum of the squares by the number of values in the set.
 <br><br>
 <a href="https://www.investopedia.com/terms/v/variance.asp" target="_blank">Learn More</a>
 
-<code>variance(close, n)</code>
+<code>variance(data)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| close          | required          | Close prices data                      |Pandas Dataframe|
-| n          | required         | time period                 |Bool|
+| data          | required          | Data                      |Pandas series|
 
+#### Example
 
-```python
-Example:
-
-
-from libkloudtrader.analysis import variance
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
-
-#load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
-
-variance(aapl_data['close'],7)
-```
-```python 
-return type : Pandas DataFrame
-0            NaN
-1            NaN
-2            NaN
-3            NaN
-4            NaN
-5            NaN
-6       1.073841
-7       0.998649
-8       1.331906
-9       0.986241
-10      2.788567
-          ...
-240     6.775249
-241     5.134049
-242     5.531127
-243    10.046106
-244    19.702841
-245    38.200306
-246    48.635898
-247    40.949996
-248    34.034384
-249    18.651853
-250    14.54399
-```
-***
-### Volatility
-Get volatility for any number of trading days.
-
-<code>volatility(close)</code>
-
-| Paramters       | Required/Optional | Description                             | Type |
-|-----------------|-------------------|-----------------------------------------|------|
-| close          | required          | Close prices data                      |Pandas Dataframe|
-
-
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 
 ```python
-Example:
-
-
-from libkloudtrader.analysis import volatility
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.analysis as analysis
+import libkloudtrader.stocks as stocks
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2014-01-01','2018-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-volatility(aapl_data['close'])
+analysis.variance(aapl_data['close'])
 ```
 ```python 
 return type : Float
 
-45.19526597527543
+Sunday, September 01, 2019 09:03:10 PM INFO: Calculating Variance...
+
+424.1070858135459
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
+****
+### Vertical Horizontal Filter
+
+Vertical Horizontal Filter (VHF) was developed by  Adam White in 1991 and it is used in technical analysis to recognize periods when price is trending (up-trend or down-trend) or it is in the congestion phase (side-way trend).
+<br><br>
+<a href="https://www.marketvolume.com/technicalanalysis/verticalhorizontalfilter.asp" target="_blank">Learn More</a>
+
+<code>vertical_horizontal_filter(data, period)</code>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| data        | required          | Data                      |Pandas series|
+| period      | required          | time period                    |Int|
+
+#### Example
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
+
+```python
+import libkloudtrader.analysis as analysis
+import libkloudtrader.stocks as stocks
+
+#load data
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
+
+analysis.vertical_horizontal_filter(aapl_data['close'],7)
+```
+```python
+return type: Pandas Dataframe
+
+Monday, September 02, 2019 02:18:12 PM INFO: Calculating Vertical Horizontal Filter for period = 7
+
+                 vhf
+date                
+2018-01-02       NaN
+2018-01-03       NaN
+2018-01-04       NaN
+2018-01-05       NaN
+2018-01-08       NaN
+...              ...
+2018-12-24  0.462945
+2018-12-26  0.500000
+2018-12-27  0.474827
+2018-12-28  0.466180
+2018-12-31  0.457251
+
+[251 rows x 1 columns]
+```
+
+
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
+### Volatility
+Get volatility for any number of trading days.
+
+<code>volatility(daily_returns)</code>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| daily_returns         | required          | daily returns of an asset, strategy or portfolio         |Pandas series|
+
+#### Example
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
+
+```python
+import libkloudtrader.analysis as analysis
+import libkloudtrader.stocks as stocks
+
+#load data
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
+rets=analysis.daily_returns(aapl_data['close'])
+
+analysis.volatility(rets)
+```
+```python 
+return type : Float
+
+Sunday, September 01, 2019 09:11:21 PM INFO: Calculating Volatility...
+
+0.28690031394393173
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
+***
+
 ### Volume Price Trend
 The volume price trend (VPT) indicator helps determine a security’s price direction and strength of price change. The indicator consists of a cumulative volume line that adds or subtracts a multiple of the percentage change in a share price’s trend and current volume, depending upon the security’s upward or downward movements.
 <br><br>
 <a href="https://www.investopedia.com/terms/v/vptindicator.asp" target="_blank">Learn More</a>
 
-<code>volume_price_trend(close,volume)</code>
+<code>volume_price_trend(data,volume)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| close          | required          | Close prices data                      |Pandas Dataframe|
-| volume          | required          | Volume data                      |Pandas Dataframe|             
+| data         | required          | Price data                      |Pandas series|
+| volume       | required          | Volume data                      |Pandas series|   
 
+#### Example
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 
 ```python
-Example:
-
-
-from libkloudtrader.analysis import volume_price_trend
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.analysis as analysis
+import libkloudtrader.stocks as stocks
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-volume_price_trend(aapl_data['close'],aapl_data['volume'])
+analysis.volume_price_trend(aapl_data['close'],aapl_data['volume'])
 ```
+
 ```python 
-return type : Pandas DataFrame
+return type : Pandas series
 
-0                   NaN
-1                   NaN
-2          9.906692e+04
-3          3.735842e+05
-4          1.929821e+05
-5         -7.887050e+04
-6         -7.973534e+03
-7          1.005386e+05
-8          3.685118e+05
-9          1.122167e+05
-10         4.176830e+05
-                ...
-240       -9.534526e+05
-241       -1.714578e+06
-242        2.753295e+04
-243       -1.090179e+06
-244       -3.164389e+06
-245       -5.358559e+06
-246       -4.685757e+06
-247        3.163755e+06
-248        3.780757e+06
-249       -3.230514e+05
-250        3.599483e+05
+Sunday, September 01, 2019 10:31:52 PM INFO: Calculating Volume Price Trend...
+
+date
+2018-01-02             NaN
+2018-01-03             NaN
+2018-01-04    9.906692e+04
+2018-01-05    3.735842e+05
+2018-01-08    1.929821e+05
+                  ...     
+2018-12-24   -4.685757e+06
+2018-12-26    3.163755e+06
+2018-12-27    3.780757e+06
+2018-12-28   -3.230514e+05
+2018-12-31    3.599839e+05
+
+Length: 251, dtype: float64
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Volume adjusted moving average
 the volume-adjusted moving average indicator (sometimes  called Equivolume charting) makes price and volume equal partners in computing the price average. The volume value is used as a weight factor for the price value. Therefore, the VAMA is responsive to changes in the trading volume. Important days on the market (high trading volume) have greater contribution in the moving average than days with low trading volume.
 <br><br>
 <a href="http://www.neuroshell.com/manuals/ais1/index.html?vama.htm" target="_blank">Learn More</a>
 
-<code>volume_adjusted_moving_average(close, volume, n)</code>
+<code>volume_adjusted_moving_average(data, volume, period)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| close          | required          | Close prices data                      |Pandas Dataframe|
-| volume          | required          | Volume data                      |Pandas Dataframe| 
-| n         | required          | time period                    |Int|             
+| data          | required          | Price data                      |Pandas series|
+| volume          | required         | Volume data                      |Pandas series| 
+| period         | required          | time period                    |Int|             
 
+#### Example 
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 
 ```python
-Example:
-
-
-from libkloudtrader.analysis import volume_adjusted_moving_average
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.analysis as analysis
+import libkloudtrader.stocks as stocks
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-volume_adjusted_moving_average(aapl_data['close'],aapl_data['volume'],7)
+analysis.volume_adjusted_moving_average(aapl_data['close'],aapl_data['volume'],7)
 ```
 ```python 
-return type : Pandas DataFrame
+return type : Pandas series
 
-0                    NaN
-1                    NaN
-2                    NaN
-3                    NaN
-4                    NaN
-5                    NaN
-6             181.952947
-7             174.869999
-8             171.218931
-9             179.537621
-10            192.185684
-                ...
-240           321.877315
-241           320.187763
-242           310.762276
-243           294.289988
-244           307.985008
-245           360.671679
-246           360.700663
-247           376.191401
-248           382.669465
-249           388.855864
-250           374.000702
+Sunday, September 01, 2019 11:18:27 PM INFO: Calcilating Volume adjusted moving average for period = 7
+
+date
+2018-01-02           NaN
+2018-01-03           NaN
+2018-01-04           NaN
+2018-01-05           NaN
+2018-01-08           NaN
+                 ...    
+2018-12-24    360.700066
+2018-12-26    376.190778
+2018-12-27    382.668832
+2018-12-28    388.855220
+2018-12-31    374.003721
+
+Length: 251, dtype: float64
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Vortex Indicator
 Developed by Etienne Botes and Douglas Siepman, the Vortex Indicator consists of two oscillators that capture positive and negative trend movement. In creating this indicator, Botes and Seipman drew on the work of Welles Wilder and Viktor Schauberger, who is considered the father of implosion technology. Despite a rather involved formula, the indicator is quite straightforward to understand and easy to interpret. A bullish signal triggers when the positive trend indicator crosses above the negative trend indicator or a key level. A bearish signal triggers when the negative trend indicator crosses above the positive trend indicator or a key level. The Vortex Indicator is either above or below these levels, which means it always has a clear bullish or bearish bias.
 <br><br>
 <a href="https://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:vortex_indicator" target="_blank">Learn More</a>
 
-<code>vortex_indicator(high,low,close,n)</code>
+<code>vortex_indicator(high,low,close,period)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| high          | required          | High prices data                      |Pandas Dataframe|
-| low          | required          | Low prices data                      |Pandas Dataframe|
-| close          | required          | Close prices data                      |Pandas Dataframe|
-| n         | required          | time period                    |Int|             
+| high          | required          | High prices data                      |Pandas series|
+| low          | required          | Low prices data                      |Pandas series|
+| close          | required          | Close prices data                      |Pandas series|
+| period         | required          | time period                    |Int|             
 
+#### Example
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 
 ```python
-Example:
-
-
-from libkloudtrader.analysis import vortex_indicator
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.analysis as analysis
+import libkloudtrader.stocks as stocks
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-vortex_indicator(aapl_data['high'],aapl_data['low'],aapl_data['close'],7)
+analysis.vortex_indicator(aapl_data['high'],aapl_data['low'],aapl_data['close'],7)
 ```
 ```python 
 returns: vortex_inidicator_positive, vortex_indicator_negative
 return type : Pandas DataFrame
 
-              vortex_inidicator_positive  vortex_indicator_negative
-0                           NaN                        NaN
-1                           NaN                        NaN
-2                           NaN                        NaN
-3                           NaN                        NaN
-4                           NaN                        NaN
-5                           NaN                        NaN
-6                           NaN                        NaN
-7                      1.408914                   0.748855
-8                      1.263099                   0.766279
-9                      1.254276                   0.568529
-10                     1.092396                   0.754226
-                           ...
-240                    0.674939                   1.230704
-241                    0.730983                   1.096891
-242                    0.815306                   1.114492
-243                    0.814314                   0.985053
-244                    0.621842                   1.177126
-245                    0.495363                   1.261356
-246                    0.440974                   1.429490
-247                    0.607069                   1.235635
-248                    0.729041                   1.215203
-249                    0.796178                   1.171377
-250                    0.927572                   1.165297
+Monday, September 02, 2019 12:06:35 PM INFO: Calculating Vortex Indicator for period = 7
+
+            vortex_inidicator_positive  vortex_indicator_negative
+date                                                             
+2018-01-02                         NaN                        NaN
+2018-01-03                         NaN                        NaN
+2018-01-04                         NaN                        NaN
+2018-01-05                         NaN                        NaN
+2018-01-08                         NaN                        NaN
+...                                ...                        ...
+2018-12-24                    0.440974                   1.429490
+2018-12-26                    0.607069                   1.235635
+2018-12-27                    0.729041                   1.215203
+2018-12-28                    0.796178                   1.171377
+2018-12-31                    0.927572                   1.165297
+
+[251 rows x 2 columns]
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Volume Weighted Average Price (VWAP)
 Volume-Weighted Average Price (VWAP) is exactly what it sounds like: the average price weighted by volume. VWAP equals the dollar value of all trading periods divided by the total trading volume for the current day. The calculation starts when trading opens and ends when trading closes. Because it is good for the current trading day only, intraday periods and data are used in the calculation.
@@ -4609,52 +4615,46 @@ Volume-Weighted Average Price (VWAP) is exactly what it sounds like: the average
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| high          | required          | High prices data                      |Pandas Dataframe|
-| low          | required          | Low prices data                      |Pandas Dataframe|
-| close          | required          | Close prices data                      |Pandas Dataframe|
-| volume          | required          | Volume data                      |Pandas Dataframe|            
+| high          | required          | High prices data                      |Pandas series|
+| low          | required          | Low prices data                      |Pandas series|
+| close          | required          | Close prices data                      |Pandas series|
+| volume          | required          | Volume data                      |Pandas series|            
 
+#### Example
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 
 ```python
-Example:
-
-
-from libkloudtrader.analysis import vwap
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.analysis as analysis
+import libkloudtrader.stocks as stocks
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-vwap(aapl_data['high'],aapl_data['low'],aapl_data['close'],aapl_data['volume'])
+print(analysis.vwap(aapl_data['high'],aapl_data['low'],aapl_data['close'],aapl_data['volume']))
 ```
 ```python 
-return type : Pandas DataFrame
+return type : Pandas series
 
-0    170.780000
-1    172.106525
-2    172.300013
-3    172.746697
-4    173.088541
-5    173.261198
-6    173.316887
-7    173.484784
-8    173.847984
-9    174.328661
-10   174.682290
-        ...
-240  189.229560
-241  189.099553
-242  189.002923
-243  188.848115
-244  188.610523
-245  188.210709
-246  188.036491
-247  187.785268
-248  187.569560
-249  187.415232
-250  187.294345
+Monday, September 02, 2019 01:34:08 PM INFO: Calculating Volume Weighted Average Price...
+date
+2018-01-02    170.780000
+2018-01-03    172.106525
+2018-01-04    172.300013
+2018-01-05    172.746697
+2018-01-08    173.088541
+                 ...    
+2018-12-24    188.036479
+2018-12-26    187.785257
+2018-12-27    187.569549
+2018-12-28    187.415221
+2018-12-31    187.294322
+
+Length: 251, dtype: float64
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Weighted Close Price
 The Weighted Close is the average of the high, low and close of a bar, but the close is weighted, actually counted twice. It is used in the calculation of several indicators. It can be used to smooth an indicator that normally takes just the closing price as input.
@@ -4665,156 +4665,145 @@ The Weighted Close is the average of the high, low and close of a bar, but the c
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| high          | required          | High prices data                      |Pandas Dataframe|
-| low          | required          | Low prices data                      |Pandas Dataframe|
-| close          | required          | Close prices data                      |Pandas Dataframe|
+| high          | required          | High prices data                      |Pandas series|
+| low          | required          | Low prices data                      |Pandas series|
+| close          | required          | Close prices data                      |Pandas series|
 
+#### Example
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 
 ```python
-Example:
-
-
-from libkloudtrader.analysis import weighted_close_price
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.analysis as analysis
+import libkloudtrader.stocks as stocks
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
+
+analysis.weighted_close_price(aapl_data['high'],aapl_data['low'],aapl_data['close'])
 
 weighted_close_price(aapl_data['high'],aapl_data['low'],aapl_data['close'])
 ```
 ```python 
-return type : Pandas DataFrame
+return type : Pandas series
 
-0      171.520000
-1      172.742500
-2      172.902500
-3      174.605000
-4      174.560000
-5      174.282500
-6      173.970000
-7      175.134650
-8      176.797500
-9      176.977500
-10     178.130000
-        ...
-240    166.330000
-241    164.740000
-242    166.015000
-243    162.080000
-244    157.767500
-245    152.312500
-246    147.950000
-247    154.572500
-248    154.785000
-249    156.382500
-250    157.830000
+Monday, September 02, 2019 01:47:31 PM INFO: Calculating Weighted Close Price...
+
+date
+2018-01-02    171.5200
+2018-01-03    172.7425
+2018-01-04    172.9025
+2018-01-05    174.6050
+2018-01-08    174.5600
+                ...   
+2018-12-24    147.9500
+2018-12-26    154.5725
+2018-12-27    154.7850
+2018-12-28    156.3825
+2018-12-31    157.8300
+
+Length: 251, dtype: float64
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Williams %R
 Developed by Larry Williams, Williams %R is a momentum indicator that is the inverse of the Fast Stochastic Oscillator. Also referred to as %R, Williams %R reflects the level of the close relative to the highest high for the look-back period. In contrast, the Stochastic Oscillator reflects the level of the close relative to the lowest low. %R corrects for the inversion by multiplying the raw value by -100. As a result, the Fast Stochastic Oscillator and Williams %R produce the exact same lines, only the scaling is different. Williams %R oscillates from 0 to -100. Readings from 0 to -20 are considered overbought. Readings from -80 to -100 are considered oversold. 
 <br><br>
 <a href="https://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:williams_r" target="_blank">Learn More</a>
 
-<code>williams_r(high,low,close,n)</code>
+<code>williams_r(high,low,close,period)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| high          | required          | High prices data                      |Pandas Dataframe|
-| low          | required          | Low prices data                      |Pandas Dataframe|
-| close          | required          | Close prices data                      |Pandas Dataframe|
-| n         | required          | time period                    |Int|
+| high          | required          | High prices data                      |Pandas series|
+| low          | required          | Low prices data                      |Pandas series|
+| close          | required          | Close prices data                      |Pandas series|
+| period         | required          | time period                    |Int|
+
+#### Example
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 
 ```python
-Example:
-
-
-from libkloudtrader.analysis import williams_r
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.analysis as analysis
+import libkloudtrader.stocks as stocks
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-williams_r(aapl_data['high'],aapl_data['low'],aapl_data['close'],7)
+analysis.williams_r(aapl_data['high'],aapl_data['low'],aapl_data['close'],7)
 ```
 ```python 
-return type : Pandas DataFrame
+return type : Pandas series
 
-0            NaN
-1            NaN
-2            NaN
-3            NaN
-4            NaN
-5            NaN
-6     -20.787402
-7      -9.041096
-8      -5.113636
-9     -50.078247
-10     -4.538341
-         ...
-240   -81.222707
-241   -89.710884
-242   -66.056911
-243   -86.646884
-244   -91.140706
-245   -95.204882
-246   -98.932859
-247   -51.378676
-248   -54.345750
-249   -53.787152
-250   -28.157216
+Monday, September 02, 2019 01:53:54 PM INFO: Calculating Williams' %R for period = {}
+
+date
+2018-01-02          NaN
+2018-01-03          NaN
+2018-01-04          NaN
+2018-01-05          NaN
+2018-01-08          NaN
+                ...    
+2018-12-24   -98.932859
+2018-12-26   -51.378676
+2018-12-27   -54.345750
+2018-12-28   -53.787152
+2018-12-31   -28.157216
+
+Length: 251, dtype: float64
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ***
 ### Weighted Moving Average (WMA)
 The Weighted Moving Average calculates a weight for each value in the series. The more recent values are assigned greater weights. The Weighted Moving Average is similar to a Simple Moving average in that it is not cumulative, that is, it only includes values in the time period (unlike an Exponential Moving Average). The Weighted Moving Average is similar to an Exponential Moving Average in that more recent data has a greater contribution to the average.
 <br><br>
 <a href="https://www.fmlabs.com/reference/default.htm?url=WeightedMA.htm" target="_blank">Learn More</a>
 
-<code>wma(close,n)</code>
+<code>wma(data, period)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
-| close          | required          | Close prices data                      |Pandas Dataframe|
-| n         | required          | time period                    |Int|
+| data          | required          | Sata                      |Pandas Dataframe|
+| period         | required          | time period                    |Int|
+
+#### Example
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
 
 ```python
-Example:
-
-
-from libkloudtrader.analysis import wma
-from libkloudtrader.stocks import ohlcv
-import pandas as pd
+import libkloudtrader.analysis as analysis
+import libkloudtrader.stocks as stocks
 
 #load data
-aapl_data=pd.DataFrame(ohlcv('AAPL','2018-01-01','2019-01-01')['history']['day'])
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
 
-wma(aapl_data['close'],7)
+print(analysis.wma(aapl_data['close'],7))
 ```
 ```python 
-return type : Pandas DataFrame
+return type : Pandas series
 
-0             NaN
-1             NaN
-2             NaN
-3             NaN
-4             NaN
-5             NaN
-6      174.056071
-7      174.465714
-8      175.220000
-9      175.575714
-10     176.546071
-         ...
-240    168.735000
-241    167.328214
-242    166.838929
-243    165.141071
-244    162.739286
-245    159.233929
-246    155.409643
-247    155.031786
-248    154.695714
-249    154.657857
-250    155.348929
+Monday, September 02, 2019 02:04:05 PM INFO: Calculating Weighted Moving Average for period = 7
+
+date
+2018-01-02           NaN
+2018-01-03           NaN
+2018-01-04           NaN
+2018-01-05           NaN
+2018-01-08           NaN
+                 ...    
+2018-12-24    155.409643
+2018-12-26    155.031786
+2018-12-27    154.695714
+2018-12-28    154.657857
+2018-12-31    155.348929
+
+Length: 251, dtype: float64
 ```
+
+<!--END_DOCUSAURUS_CODE_TABS-->

@@ -477,7 +477,7 @@ Get Companies listed on <b>Nasdaq, NYSE, AMEX</b>, their symbols, last prices, m
 Example:
 
 
-import libkloudtrader.stocks and stocks
+import libkloudtrader.stocks as stocks
 
 stocks.list_of_companies()
 stocks.list_of_companies('nyse')
@@ -533,7 +533,7 @@ Get the intraday market status<br/>
 Example: 
 
 
-import libkloudtrader.stocks and stocks
+import libkloudtrader.stocks as stocks
 
 stocks.intraday_status()
 ```
@@ -564,7 +564,7 @@ Get the market calendar of a given month(Goes back till 2013)<br/>
 Example:
 
 
-from libkloudtrader.stocks import stocks
+import libkloudtrader.stocks as stocks
 
 stocks.market_calendar(7,2019)
 ```
@@ -997,7 +997,7 @@ Get company dividend information for given symbol<br/>
 Example:
 
 
-from libkloudtrader.stocks import stocks
+import libkloudtrader.stocks as stocks
 
 stocks.dividend_information('AAPL')
 ```
