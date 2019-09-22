@@ -337,11 +337,12 @@ return type : list
 ### Markets on an Exchanges
 Get all the markets available in the exchange and their structures<br>
 
-<code>markets(exchange)</code>
+<code>markets(exchange, rate_limit)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
 | exchange        | required as environment variable          | The exchange you want to trade on. Will automatically be present when you deploy to Narwhal after you link your favored exchange| str  |
+|rate_limit|optional|Flag for setting wether your requests to the exchange should be rate limited or not. True by default.|bool|
 
 ```python
 Example:
@@ -510,12 +511,14 @@ return type : json
 ### Market Structure
 Get the market structure of a particular symbol<br>
 
-<code>market_strcuture(symbol, exchange)</code>
+<code>market_strcuture(symbol, exchange, rate_limit)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
 | symbol          | required          | The Symbol of your crypto currencies (E.g BTC/USD, ETH/BTC)|str| 
 | exchange        | required as environment variable| The exchange you want to trade on. Will automatically be present when you deploy to Narwhal after you link your favored exchange| str  |
+|rate_limit|optional|Flag for setting wether your requests to the exchange should be rate limited or not. True by default.|bool|
+
 
 ```python
 Example:
@@ -671,11 +674,13 @@ return type : json
 ### Currencies
 Get all Currencies available on an exchange<br>
 
-<code>currencies(exchange)</code>
+<code>currencies(exchange, rate_limit)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
 | exchange        | required as environment variable| The exchange you want to trade on. Will automatically be present when you deploy to Narwhal after you link your favored exchange| str  |
+|rate_limit|optional|Flag for setting wether your requests to the exchange should be rate limited or not. True by default.|bool|
+
 
 ```python
 import libkloudtrader.crypto as crypto
