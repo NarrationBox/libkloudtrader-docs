@@ -42,7 +42,6 @@ const siteConfig = {
   fonts: {
     myFont: [
       "Lato",
-      "Serif"
     ],
 
   },
