@@ -193,31 +193,46 @@ return type : json
 ```
 
 ### Historical OHLCV Data
-Get OHLCV(Open-High-Low-Close-Volume) data for a symbol (As back as you want to go)<br/>
+Get OHLCV(Open-High-Low-Close-Volume) data for a symbol.<br/>
 
 <code>ohlcv(symbol,start,end,data_filter,brokerage,access_token,datframe)</code>
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
 | symbol          | required          | stock symbol/ticker                     | str  |
-| start           | required          | starting date (YYYY-MM-DD)              | str  |
-| end             | required          | end date (YYYY-MM-DD)                   | str  |
-| interval        | optional          | Time Interval. E.g. (1m, 5m, 15m, 30m, 1h, 1d, 1w, 1M). See next table to find out more about time intervals. 1d by default. | str  |
+| start           | required          | Starting date (YYYY-MM-DD). (YYYY-MM-DD) for intervals: "1d","1w","1M", (YYYY-MM-DD HH:MM:SS) for intervals: "1m", "5m", "15m"                  | str  |
+| end             | required          | Ending date (YYYY-MM-DD). (YYYY-MM-DD) for intervals: "1d","1w","1M", (YYYY-MM-DD HH:MM:SS) for intervals: "1m", "5m", "15m"             | str  |
+| interval        | optional          | Time Interval. E.g. (1m, 5m, 15m, 1d, 1w, 1M). See next table to find out more about time intervals. 1d by default. | str  |
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 | dataframe       | optional          | True if you want data as pandas dataframe. False for JSON. True by default.   | bool  |
+
+Supported time intervals: 
+
+
+
+| Interval    | Accepted Symbol |Data Availability|
+|-----------------|-------------------|-----------|
+|1 minute         |1m|20 days in the past|
+|5 minutes        |5m|40 days in the past|
+|15 minutes       |15m|40 days in the past|
+|1 day        |1d|Usually cover the entire lifetime of the company|
+|1 week       |1w|Usually cover the entire lifetime of the company|
+|1 month      |1M|Usually cover the entire lifetime of the company|
+
+#### Example
+
 ```python 
-Example:
-
-
 import libkloudtrader.stocks as stocks
 
 stocks.ohlcv('AAPL',start="2018-01-01",end="2019-01-01")
+
+stocks.ohlcv('AAPL',start="2019-09-04 09:30:00",end="2019-09-10 15:30:00", interval="5m")
 ```
 ```python
-return type: <class 'pandas.core.frame.DataFrame'>
+return type: Pandas Dataframe
 
               open    high     low   close    volume
-date                                                
+datetime                                                
 2018-01-02  170.16  172.30  169.26  172.26  25555934
 2018-01-03  172.53  174.55  171.96  172.23  29517899
 2018-01-04  172.54  173.47  172.08  173.03  22434597
@@ -233,17 +248,37 @@ date
 [251 rows x 5 columns]
 ```
 
+```python 
+return type: Pandas Dataframe
+
+                         price      open      high       low     close  volume       vwap
+datetime                                                                                 
+2019-09-04 09:30:00  208.36500  208.3900  208.7300  208.0000  208.2400  931829  208.40953
+2019-09-04 09:35:00  208.22000  208.2900  208.4700  207.9700  208.1227  380634  208.20392
+2019-09-04 09:40:00  208.01500  208.1400  208.2500  207.7800  208.1300  391809  208.09492
+2019-09-04 09:45:00  208.13000  208.1500  208.4600  207.8000  207.8288  401724  208.16506
+2019-09-04 09:50:00  207.75505  207.8174  207.9200  207.5901  207.6800  270973  207.75256
+...                        ...       ...       ...       ...       ...     ...        ...
+2019-09-10 15:10:00  214.52500  214.5100  214.6400  214.4100  214.4200  110552  214.54924
+2019-09-10 15:15:00  214.67245  214.4250  214.9199  214.4250  214.8800  187494  214.71908
+2019-09-10 15:20:00  214.72500  214.8899  214.9200  214.5300  214.6950  183348  214.73652
+2019-09-10 15:25:00  214.62995  214.7000  214.7599  214.5000  214.5800  141997  214.63384
+2019-09-10 15:30:00  214.60915  214.5800  214.6765  214.5418  214.5800  131203  214.60373
+
+[385 rows x 7 columns]
+```
+
 ***
 ### Tick Data
-Get historical tick data(trades placed) for a particular period of time. Goes upto 5 days in the past.<br>
+Get historical tick data(trades placed) for a particular period of time. Data available for past 5 days.<br>
 
 <code>tick_data(symbol,start,end,data_filter,brokerage,access_token,datframe)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
 | symbol          | required          | stock symbol/ticker                     | str  |
-| start           | optional         | starting date and time(YYYY-MM-DD HH:MM). None by default. Can go only upto 1 week in past.             | str  |
-| end             | required          | end date and time(YYYY-MM-DD HH:MM). None by default. Can go only upto 1 week in past.                    | str  |
+| start           | optional         | starting date and time(YYYY-MM-DD HH:MM). None by default. Should not be older than one week.             | str  |
+| end             | required          | end date and time(YYYY-MM-DD HH:MM). None by default. Should not be older than one week.                    | str  |
 | data_filter        | optional          | 'open' for data points within open market hours only. 'all' for all available data points. 'open' by default. | str  |
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
@@ -257,154 +292,26 @@ import libkloudtrader.stocks as stocks
 stocks.tick_data('AAPL',start="2019-08-14 09:30:00",end="2019-08-15 16:00:00")
 ```
 ```python
-return type: <class 'pandas.core.frame.DataFrame'>
+return type: Pandas Dataframe
 
 
-                      timestamp      price      open    high       low     close  volume       vwap
-time                                                                                               
-2019-08-14 09:30:00  1565789400  203.54500  203.2500  204.39  202.7000  204.2300  909362  203.34538
-2019-08-14 09:31:00  1565789460  203.99000  204.2304  204.40  203.5800  204.0900  289683  204.04309
-2019-08-14 09:32:00  1565789520  204.50030  204.0900  204.99  204.0106  204.6044  337607  204.66582
-2019-08-14 09:33:00  1565789580  204.40500  204.5800  204.78  204.0300  204.1386  206907  204.37505
-2019-08-14 09:34:00  1565789640  204.13000  204.1100  204.50  203.7600  204.3900  179531  204.04424
-...                         ...        ...       ...     ...       ...       ...     ...        ...
-2019-08-15 15:55:00  1565898900  202.18500  202.3000  202.39  201.9800  202.1300  117686  202.18315
-2019-08-15 15:56:00  1565898960  202.03000  202.1200  202.12  201.9400  202.0400   53594  202.01888
-2019-08-15 15:57:00  1565899020  201.95500  202.0278  202.07  201.8400  201.9200   71429  201.95318
-2019-08-15 15:58:00  1565899080  201.85855  201.9100  201.91  201.8071  201.8100   67014  201.85875
-2019-08-15 15:59:00  1565899140  201.72000  201.8200  201.88  201.5600  201.7400  178291  201.76396
+                        price  volume
+datetime                             
+2019-09-19 13:30:00  222.1200     100
+2019-09-19 13:30:00  222.1200     282
+2019-09-19 13:30:00  222.1200     400
+2019-09-19 13:30:00  222.1200     100
+2019-09-19 13:30:00  222.1200     296
+...                       ...     ...
+2019-09-19 16:30:07  220.8900     100
+2019-09-19 16:30:07  220.8900     100
+2019-09-19 16:30:08  220.8800     100
+2019-09-19 16:30:08  220.8800     100
+2019-09-19 16:30:09  220.8908     200
 
-[780 rows x 8 columns]
+[48878 rows x 2 columns]
 ```
 
-***
-### 1 minute bar data
-Get historical bar data with 1 minute interval for a given period of time. Goes upto 20 days with data points during open market. Goes upto 10 days will all data points.
-
-<code>min1_bar_data(symbol,start,end,data_filter,brokerage,access_token,datframe)</code>
-
-| Paramters       | Required/Optional | Description                             | Type |
-|-----------------|-------------------|-----------------------------------------|------|
-| symbol          | required          | stock symbol/ticker                     | str  |
-| start           | optional         | starting date and time(YYYY-MM-DD HH:MM). None by default. Can go only upto 1 week in past.             | str  |
-| end             | required          | end date and time(YYYY-MM-DD HH:MM). None by default. Can go only upto 1 week in past.                    | str  |
-| data_filter        | optional          | 'open' for data points within open market hours only. 'all' for all available data points. 'all' by default. | str  |
-| brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
-| access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
-| dataframe       | optional          | True if you want data as pandas dataframe. False for JSON. True by default.   | bool  |
-
-
-```python
-
-import libkloudtrader.stocks as stocks
-
-stocks.min1_bar_data('AAPL',start="2019-08-14 09:30:00",end="2019-08-15 16:00:00")
-```
-```python
-return type: <class 'pandas.core.frame.DataFrame'>
-
-
-                      timestamp      price      open    high       low     close   volume       vwap
-time                                                                                                
-2019-08-14 09:30:00  1565789400  203.54500  203.2500  204.39  202.7000  204.2300   909362  203.34538
-2019-08-14 09:31:00  1565789460  203.99000  204.2304  204.40  203.5800  204.0900   289683  204.04309
-2019-08-14 09:32:00  1565789520  204.50030  204.0900  204.99  204.0106  204.6044   337607  204.66582
-2019-08-14 09:33:00  1565789580  204.40500  204.5800  204.78  204.0300  204.1386   206907  204.37505
-2019-08-14 09:34:00  1565789640  204.13000  204.1100  204.50  203.7600  204.3900   179531  204.04424
-...                         ...        ...       ...     ...       ...       ...      ...        ...
-2019-08-15 15:56:00  1565898960  202.03000  202.1200  202.12  201.9400  202.0400    53594  202.01888
-2019-08-15 15:57:00  1565899020  201.95500  202.0278  202.07  201.8400  201.9200    71429  201.95318
-2019-08-15 15:58:00  1565899080  201.85855  201.9100  201.91  201.8071  201.8100    67014  201.85875
-2019-08-15 15:59:00  1565899140  201.72000  201.8200  201.88  201.5600  201.7400   178291  201.76396
-2019-08-15 16:00:00  1565899200  201.70500  201.7400  201.74  201.6700  201.6900  1830565  201.73995
-
-[1154 rows x 8 columns]
-```
-***
-### 5 minute bar data
-Get historical bar data with 15 minute interval for a given period of time. Goes upto 40 days with data points duing open market. Goes upto 18 days will all data points.
-
-<code>min5_bar_data(symbol,start,end,data_filter,brokerage,access_token,dataframe)</code>
-
-| Paramters       | Required/Optional | Description                             | Type |
-|-----------------|-------------------|-----------------------------------------|------|
-| symbol          | required          | stock symbol/ticker                     | str  |
-| start           | optional         | starting date and time(YYYY-MM-DD HH:MM). None by default. Can go only upto 1 week in past.             | str  |
-| end             | required          | end date and time(YYYY-MM-DD HH:MM). None by default. Can go only upto 1 week in past.                    | str  |
-| data_filter        | optional          | 'open' for data points within open market hours only. 'all' for all available data points. 'all' by default. | str  |
-| brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
-| access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
-| dataframe       | optional          | True if you want data as pandas dataframe. False for JSON. True by default.   | bool  |
-```python 
-Example:
-
-
-import libkloudtrader.stocks as stocks
-
-stocks.min5_bar_data('AAPL',start="2019-08-14 09:30:00",end="2019-08-15 16:00:00")
-```
-```python
-return type: <class 'pandas.core.frame.DataFrame'>
-
-                      timestamp    price      open     high     low     close   volume       vwap
-time                                                                                             
-2019-08-14 09:30:00  1565789400  203.845  203.2500  204.990  202.70  204.3900  1923090  203.85832
-2019-08-14 09:35:00  1565789700  204.675  204.3900  205.450  203.90  205.4000   888452  204.69031
-2019-08-14 09:40:00  1565790000  205.175  205.4187  205.720  204.63  204.9250   758421  205.14322
-2019-08-14 09:45:00  1565790300  204.805  204.9000  205.540  204.07  205.2506   773080  204.79489
-2019-08-14 09:50:00  1565790600  205.650  205.2600  206.280  205.02  206.1800   723712  205.76264
-...                         ...      ...       ...      ...     ...       ...      ...        ...
-2019-08-15 15:40:00  1565898000  201.820  201.6700  202.130  201.51  202.0300   264595  201.80095
-2019-08-15 15:45:00  1565898300  202.175  202.0500  202.500  201.85  202.3397   399047  202.26095
-2019-08-15 15:50:00  1565898600  202.250  202.3300  202.470  202.03  202.3031   354048  202.20736
-2019-08-15 15:55:00  1565898900  201.975  202.3000  202.390  201.56  201.7400   488014  201.93376
-2019-08-15 16:00:00  1565899200  201.881  201.7400  202.092  201.67  201.7400  1838495  201.74017
-
-[263 rows x 8 columns]
-```
-
-***
-### 15 minute bar data
-Get historical bar data with 15 minute interval for a given period of time. Goes upto 40 days with data points duing open market. Goes upto 18 days will all data points.
-
-<code>min15_bar_data(symbol,start,end,data_filter,brokerage,access_token,dataframe)</code>
-
-| Paramters       | Required/Optional | Description                             | Type |
-|-----------------|-------------------|-----------------------------------------|------|
-| symbol          | required          | stock symbol/ticker                     | str  |
-| start           | optional         | starting date and time(YYYY-MM-DD HH:MM). None by default. Can go only upto 1 week in past.             | str  |
-| end             | required          | end date and time(YYYY-MM-DD HH:MM). None by default. Can go only upto 1 week in past.                    | str  |
-| data_filter        | optional          | 'open' for data points within open market hours only. 'all' for all available data points. 'all' by default. | str  |
-| brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
-| access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
-| dataframe       | optional          | True if you want data as pandas dataframe. False for JSON. True by default.   | bool  |
-```python 
-Example:
-
-
-import libkloudtrader.stocks as stocks
-
-stocks.min15_bar_data('AAPL',start="2019-08-14 09:30:00",end="2019-08-15 16:00:00")
-```
-```python
-return type: <class 'pandas.core.frame.DataFrame'>
-
-                      timestamp      price      open     high       low    close   volume       vwap
-time                                                                                                
-2019-08-14 09:30:00  1565789400  204.21000  203.2500  205.720  202.7000  204.925  3569963  204.33834
-2019-08-14 09:45:00  1565790300  205.25500  204.9000  206.440  204.0700  206.070  1938197  205.46306
-2019-08-14 10:00:00  1565791200  205.33000  206.0200  206.060  204.6000  205.130  1399376  205.21804
-2019-08-14 10:15:00  1565792100  205.30535  205.1050  205.720  204.8907  205.610  1075869  205.28415
-2019-08-14 10:30:00  1565793000  205.23000  205.6100  205.790  204.6700  205.430  1014448  205.23389
-...                         ...        ...       ...      ...       ...      ...      ...        ...
-2019-08-15 15:00:00  1565895600  201.44500  200.7500  202.140  200.7500  201.910   745762  201.77360
-2019-08-15 15:15:00  1565896500  201.67000  201.9118  201.970  201.3700  201.490   472728  201.70417
-2019-08-15 15:30:00  1565897400  201.74500  201.4700  202.130  201.3600  202.030   729533  201.62940
-2019-08-15 15:45:00  1565898300  202.03000  202.0500  202.500  201.5600  201.740  1241109  202.11701
-2019-08-15 16:00:00  1565899200  201.87600  201.7400  202.092  201.6600  201.720  1946334  201.75622
-
-[91 rows x 8 columns]
-```
 ***
 ## Stream Realtime Data
 libkloudtrader provides live streaming data for live trades happening across various exchanges, live quotes from various exchanges and the realtime intraday summary of the security.
@@ -738,7 +645,7 @@ import libkloudtrader.stocks as stocks
 stocks.shortable_securities()
 ```
 ```python
-return type: <class 'pandas.core.frame.DataFrame'>
+return type: Pandas Dataframe
 
      symbol exchange   type                      description
 

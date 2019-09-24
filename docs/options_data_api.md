@@ -33,7 +33,7 @@ expiration=options.expirations(underlying_symbol='AAPL')[0]['date']
 options.chains(underlying_symbol='AAPL',expiration=expiration)
 ```
 ```python 
-return type : <class 'pandas.core.frame.DataFrame'>
+return type : Pandas Dataframe
 
 
                                        description exch    type   last  change  ...  contract_size expiration_date expiration_type option_type root_symbol

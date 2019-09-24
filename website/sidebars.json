@@ -8,8 +8,7 @@
       "alert_api",
       "analysis_api",
       "logging",
-      "backtesting",
-      "live_trading"
+      "running_your_algorithm"
     ],
     "Stocks & Options":[
       "stock_data_api",
