@@ -201,7 +201,7 @@ Get OHLCV(Open-High-Low-Close-Volume) data for a symbol (As back as you want to 
 | symbol          | required          | stock symbol/ticker                     | str  |
 | start           | required          | starting date (YYYY-MM-DD)              | str  |
 | end             | required          | end date (YYYY-MM-DD)                   | str  |
-| interval        | optional          | daily/weekly/monthly (daily by default) | str  |
+| interval        | optional          | Time Interval. E.g. (1m, 5m, 15m, 30m, 1h, 1d, 1w, 1M). See next table to find out more about time intervals. 1d by default. | str  |
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 | dataframe       | optional          | True if you want data as pandas dataframe. False for JSON. True by default.   | bool  |
