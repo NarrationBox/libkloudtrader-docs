@@ -1915,6 +1915,102 @@ Length: 251, dtype: float64
 <!--END_DOCUSAURUS_CODE_TABS-->
 
 ***
+### Moving Standard Deviation
+
+<code>moving_standard_deviation(data, period)</code>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| data         | required          | Data                    |Pandas series|
+| period          | required          | time period                    |Int|
+
+#### Example
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
+
+```python
+import libkloudtrader.analysis as analysis
+import libkloudtrader.stocks as stocks
+
+#load data
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
+
+analysis.moving_standard_deviation(aapl_data['close'],5)
+```
+```python 
+return type : Pandas series
+
+Tuesday, September 24, 2019 11:52:47 AM INFO: Calculating Moving Standar Deviation for period = 5
+
+datetime
+2018-01-02         NaN
+2018-01-03         NaN
+2018-01-04         NaN
+2018-01-05         NaN
+2018-01-08    1.251451
+                ...   
+2018-12-24    7.705569
+2018-12-26    5.622081
+2018-12-27    4.575295
+2018-12-28    4.474251
+2018-12-31    4.517907
+
+Name: msd, Length: 251, dtype: float64
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
+
+
+
+***
+### Moving Variance
+
+<code>moving_variance(data, period)</code>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| data         | required          | Data                    |Pandas series|
+| period          | required          | time period                    |Int|
+
+#### Example
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
+
+```python
+import libkloudtrader.analysis as analysis
+import libkloudtrader.stocks as stocks
+
+#load data
+aapl_data=stocks.ohlcv('AAPL','2018-01-01','2019-01-01')
+
+analysis.moving_variance(aapl_data['close'],5)
+```
+```python 
+return type : Pandas series
+
+Tuesday, September 24, 2019 11:59:41 AM INFO: Calculating Moving Variance for period = 5...
+
+datetime
+2018-01-02         NaN
+2018-01-03         NaN
+2018-01-04         NaN
+2018-01-05         NaN
+2018-01-08     1.56613
+                ...   
+2018-12-24    59.37580
+2018-12-26    31.60780
+2018-12-27    20.93332
+2018-12-28    20.01892
+2018-12-31    20.41148
+
+Name: mv, Length: 251, dtype: float64
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
+
+***
 ### Moving Volatility
 
 <code>moving_volatility(daily_returns, period)</code>
