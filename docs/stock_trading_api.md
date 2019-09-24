@@ -25,15 +25,18 @@ Preview your buy order. This will allow you to place a <code>buy</code> order wi
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 | account_number  | optional          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+
+#### Example
+
 ```python
-Example: (Previewing a buy order of order_type 'market')
+ (Previewing a buy order of order_type 'market')
 
 import libkloudtrader.stocks as stocks
 
 stocks.buy_preview('AAPL',1)
 ```
 ```python
-Example: (Previwing a buy order of order_type 'limit')
+ (Previwing a buy order of order_type 'limit')
 
 import libkloudtrader.stocks as stocks
 
@@ -104,9 +107,10 @@ Preview your sell order. This will allow you to place a <code>sell</code> order 
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 | account_number  | optional          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
-```python
-Example: 
 
+#### Example
+
+```python
 import libkloudtrader.stocks as stocks
 
 stocks.sell_preview('aapl',1,order_type='limit',price='197')
@@ -155,10 +159,10 @@ Sell short order cannot be placed for long position or if there are pending Buy 
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 | account_number  | optional          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+
+#### Example
+
 ```python
-Example: 
-
-
 import libkloudtrader.stocks as stocks
 
 stocks.sell_short_preview('snap',1,order_type='limit',price='197')
@@ -205,10 +209,10 @@ Buy to cover order cannot be placed for long and zero position.
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 | account_number  | optional          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+
+#### Example
+
 ```python
-Example: 
-
-
 import libkloudtrader.stocks as stocks
 
 stocks.buy_to_cover_preview('AAPL',1)
@@ -231,9 +235,10 @@ Buy equities. Order placed using this API will be sent to the market and execute
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 | account_number  | optional          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
-```python
-Example: 
 
+#### Example
+
+```python
 import libkloudtrader.stocks as stocks
 
 stocks.buy('AAPL',2)
@@ -268,9 +273,10 @@ Sell equities. Order placed using this API will be sent to the market and execut
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 | account_number  | optional          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
-```python
-Example: 
 
+#### Example
+
+```python
 import libkloudtrader.stocks as stocks
 
 stocks.sell('AAPL',2)
@@ -305,9 +311,10 @@ Sell short equities(equities you don't own yet). Order placed using this API wil
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 | account_number  | optional          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
-```python
-Example: 
 
+#### Example
+
+```python
 import libkloudtrader.stocks as stocks
 
 stocks.sell_short('AAPL',2)
@@ -341,10 +348,10 @@ Buy to cover short positions. Order placed using this API will be sent to the ma
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 | account_number  | optional          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+
+#### Example
+
 ```python
-Example: 
-
-
 import libkloudtrader.stocks as stocks
 
 stocks.buy_to_cover('AAPL',2)
@@ -376,10 +383,10 @@ Change an order's attributes like duration, type, price, etc if it is not filled
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 | account_number  | optional          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+
+#### Example
+
 ```python
-Example: 
-
-
 import libkloudtrader.stocks as stocks
 
 stocks.change_order(order_id='1372964',order_type='limit',duration="gtc",price=215)
@@ -408,10 +415,9 @@ Cancel an order if it is not filled yet.
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 | account_number  | optional          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
+#### Example
+
 ```python
-Example: 
-
-
 import libkloudtrader.stocks as stocks
 
 stocks.cancel_equity_order(order_id='1372964')

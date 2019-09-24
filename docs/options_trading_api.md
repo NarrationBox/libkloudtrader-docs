@@ -29,9 +29,9 @@ Preview your buy to open order. This will allow you to place a <code>buy to open
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 | account_number  | optional          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
-```python 
-Example:
+#### Example
 
+```python 
 import libkloudtrader.options as options
 
 options.buy_to_open_preview(underlying_symbol='AAPL',option_symbol="AAPL190816P00090000",quantity=1,order_type='limit',price=191)
@@ -63,6 +63,7 @@ return type : json
    }
 }
 ```
+
 ### Buy to Close preview
 Preview your buy to close order. This will allow you to place a <code>buy to close</code> order without it being sent to the market so that you can know what will it actaully look like when you place a real order
 
@@ -80,9 +81,9 @@ Preview your buy to close order. This will allow you to place a <code>buy to clo
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 | account_number  | optional          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
-```python 
-Example:
+#### Example
 
+```python 
 import libkloudtrader.options as options
 
 options.buy_to_close_preview(underlying_symbol='AAPL',option_symbol="AAPL190816P00090000",quantity=1,order_type='limit',price=191)
@@ -106,9 +107,9 @@ sell_to_open_preview(underlying_sumbol, option_symbol, quantity, duration, order
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 | account_number  | optional          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
-```python 
-Example:
+#### Example
 
+```python 
 import libkloudtrader.options as options
 
 options.sell_to_open_preview(underlying_symbol='AAPL',option_symbol="AAPL190816P00090000",quantity=1,order_type='limit',price=191)
@@ -159,9 +160,9 @@ sell_to_close_preview(underlying_sumbol, option_symbol, quantity, duration, orde
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 | account_number  | optional          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
-```python 
-Example:
+#### Example
 
+```python 
 import libkloudtrader.options as options
 
 options.sell_to_close_preview(underlying_symbol='AAPL',option_symbol="AAPL190816P00090000",quantity=1,order_type='limit',price=191)
@@ -189,9 +190,9 @@ Place a Buy to open order
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 | account_number  | optional          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
-```python 
-Example:
+#### Example
 
+```python 
 import libkloudtrader.options as options
 
 options.buy_to_open(underlying_symbol='AAPL',option_symbol="AAPL190816P00090000",quantity=1,order_type='limit',price=191)
@@ -207,6 +208,7 @@ return type : json
    }
 }
 ```
+
 ### Buy to Close 
 Place a buy to close order
 
@@ -224,13 +226,14 @@ Place a buy to close order
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 | account_number  | optional          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
-```python 
-Example:
+#### Example
 
+```python 
 import libkloudtrader.options as options
 
 options.buy_to_close(underlying_symbol='AAPL',option_symbol="AAPL190816P00090000",quantity=1,order_type='limit',price=191)
 ```
+
 ```python 
 return type : json
 
@@ -261,9 +264,9 @@ sell_to_open(underlying_symbol, option_symbol, quantity, duration, order_type, p
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 | account_number  | optional          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
-```python 
-Example:
+#### Example
 
+```python 
 import libkloudtrader.options as options
 
 options.sell_to_open(underlying_symbol='AAPL',option_symbol="AAPL190816P00090000",quantity=1,order_type='limit',price=191)
@@ -298,9 +301,9 @@ sell_to_close(underlying_sumbol, option_symbol, quantity, duration, order_type, 
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 | account_number  | optional          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
-```python 
-Example:
+#### Examples
 
+```python 
 import libkloudtrader.options as options
 
 options.sell_to_close(underlying_symbol='AAPL',option_symbol="AAPL190816P00090000",quantity=1,order_type='limit',price=191)
@@ -332,15 +335,16 @@ Change an order's attributes like duration, type, price, etc if it is not filled
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 | account_number  | optional          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+
+#### Example
+
 ```python
-Example: 
-
-
 import libkloudtrader.stocks as stocks
 
 stocks.change_order(order_id='1372964',order_type='limit',duration="gtc",price=215)
 
 ```
+
 ```python
 return type: json (Market order type)
 
@@ -364,10 +368,9 @@ Cancel an order if it is not filled yet.
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 | account_number  | optional          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
+#### Example
+
 ```python
-Example: 
-
-
 import libkloudtrader.stocks as stocks
 
 stocks.cancel_equity_order(order_id='1372964')

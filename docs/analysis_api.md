@@ -1484,7 +1484,6 @@ Keltner Channels are a popular technical indicator that traders use to help asse
 
 <!--DOCUSAURUS_CODE_TABS-->
 <!--Python 🐍 -->
-
 ```python
 import libkloudtrader.analysis as analysis
 import libkloudtrader.stocks as stocks

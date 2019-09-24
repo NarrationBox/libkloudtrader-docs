@@ -24,9 +24,9 @@ Get latest price information for an individual or multiple symbols<br/>
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 | dataframe       | optional          | True if you want data as pandas dataframe. False for JSON. False by default.   | bool  |
 
-```python
-Example:
+#### Example
 
+```python
 import libkloudtrader.stocks as stocks
 
 stocks.latest_price_info('AAPL,MSFT')
@@ -106,9 +106,9 @@ Get lastest quote entry for the given symbol from various exchanges
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
-```python 
-Example:
+#### Example
 
+```python 
 import libkloudtrader.stocks as stocks
 
 stocks.latest_quote('AAPL')
@@ -140,9 +140,9 @@ Get lastest trade for the given symbol
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
-```python 
-Example:
+#### Example
 
+```python 
 import libkloudtrader.stocks as stocks
 
 stocks.latest_trade('AAPL')
@@ -171,9 +171,10 @@ Get the intraday summary for the given symbol
 | symbol          | required          | stock symbol/ticker                     | str  |
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
-```python 
-Example:
 
+#### Example
+
+```python 
 import libkloudtrader.stocks as stocks
 
 stocks.intraday_summary('AAPL')
@@ -283,10 +284,10 @@ Get historical tick data(trades placed) for a particular period of time. Data av
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 | dataframe       | optional          | True if you want data as pandas dataframe. False for JSON. True by default.   | bool  |
+
+#### Example
+
 ```python 
-Example:
-
-
 import libkloudtrader.stocks as stocks
 
 stocks.tick_data('AAPL',start="2019-08-14 09:30:00",end="2019-08-15 16:00:00")
@@ -325,14 +326,16 @@ Stream live quotes direct from various exchanges.<br/>
 | symbols         | required          | Symbol or list of symbols(seperated by a comma)| str  |
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
-``` python
-Example:
 
+#### Example
+
+``` python
 import libkloudtrader.stocks as stocks
 
 for data in stream_live_quotes('AAPL,MSFT'):
     print(data)
 ``` 
+
 ### Stream Live Trades
 Stream live trades direct from various exchanges.<br/>
 
@@ -342,9 +345,10 @@ Stream live trades direct from various exchanges.<br/>
 | symbols         | required          | Symbol or list of symbols(seperated by a comma)| str  |
 | brokerage       | optional          | Your Brokerage. Will automatically be present when you deploy to Narwhal. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal| str  |
-``` python
-Example:
 
+#### Example
+
+```python
 import libkloudtrader.stocks as stocks
 
 for data in stream_live_trades('AAPL,MSFT'):
@@ -359,9 +363,10 @@ Stream live intraday summary.<br/>
 | symbols         | required          | Symbol or list of symbols(seperated by a comma)| str  |
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal| str  |
-``` python
-Example:
 
+#### Example
+
+``` python
 import libkloudtrader.stocks as stocks
 
 for data in stream_live_summary('AAPL,MSFT'):
@@ -370,7 +375,9 @@ for data in stream_live_summary('AAPL,MSFT'):
 
 
 ## Market Related Data
+
 ***
+
 ### Listed Companies
 Get Companies listed on <b>Nasdaq, NYSE, AMEX</b>, their symbols, last prices, market-cap and other information about them.
 
@@ -380,15 +387,16 @@ Get Companies listed on <b>Nasdaq, NYSE, AMEX</b>, their symbols, last prices, m
 |-----------------|-------------------|-----------------------------------------|------|
 | exchange         | required          | name of exchange. 'nyse' for New York Stock Exchange. 'nasdaq' for Nasdaq. 'amex' for American Stock Exchange. 'all' for all 3 of them. all by default.                    | str  |
 
+
+#### Example
+
 ```python 
-Example:
-
-
 import libkloudtrader.stocks as stocks
 
 stocks.list_of_companies()
 stocks.list_of_companies('nyse')
 ```
+
 ```python
 return type: pandas dataframe
 
@@ -436,10 +444,9 @@ Get the intraday market status<br/>
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
+#### Example
+
 ```python
-Example: 
-
-
 import libkloudtrader.stocks as stocks
 
 stocks.intraday_status()
@@ -467,10 +474,9 @@ Get the market calendar of a given month(Goes back till 2013)<br/>
 | month           | required          | month of the year in number             | int  |
 | year            | required          | year                                    | int  |
 
+#### Example
+
 ```python
-Example:
-
-
 import libkloudtrader.stocks as stocks
 
 stocks.market_calendar(7,2019)
@@ -535,10 +541,10 @@ Search for securities' symbols<br/>
 | indexes         | optional         | True if you want to include indexes in data else False. True by default | bool  |
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+
+#### Example
+
 ```python
-Example:
-
-
 import libkloudtrader.stocks as stocks
 
 stocks.symbol_search('apple')
@@ -588,10 +594,10 @@ Search for listed company's symbolbr/>
 | symbol          | required          | Symbol you want to look up              | str  |
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+
+#### Example
+
 ```python
-Example:
-
-
 import libkloudtrader.stocks as stocks
 
 stocks.symbol_lookup('aap')
@@ -637,9 +643,9 @@ Get list of all securitites that can be sold short for the given broker<br/>
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 | dataframe       | optional          | True if you want data as pandas dataframe. False for JSON. True by default.   | bool  |
 
+#### Example
 
 ```python
-
 import libkloudtrader.stocks as stocks
 
 stocks.shortable_securities()
@@ -675,8 +681,9 @@ Check if the given stock/security is shortable or not for the given broker.
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
-```python 
+#### Example
 
+```python 
 import libkloudtrader.stocks as stocks
 
 stocks.check_if_shortable('AAPL')
@@ -700,10 +707,9 @@ Get company fundamental information<br/>
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
+#### Example
+
 ```python
-Example:
-
-
 import libkloudtrader.stocks as stocks
 
 stocks.company_fundamentals('AAPL')
@@ -837,10 +843,10 @@ Get the corporate calendar information for given symbol<br/>
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
+#### Example
+
+
 ```python
-Example:
-
-
 import libkloudtrader.stocks as stocks
 
 stocks.corporate_calendar('AAPL')
@@ -900,10 +906,10 @@ Get company dividend information for given symbol<br/>
 | symbols         | required          | Symbol or list of symbols(seperated by a comma)               | str  |
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+
+#### Example
+
 ```python
-Example:
-
-
 import libkloudtrader.stocks as stocks
 
 stocks.dividend_information('AAPL')
@@ -964,10 +970,10 @@ Get corporate actions information for given symbol<br/>
 | symbols         | required          | Symbol or list of symbols(seperated by a comma)               | str  |
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+
+#### Example
+
 ```python
-Example:
-
-
 import libkloudtrader.stocks as stocks
 
 stocks.corporate_actions('AAPL')
@@ -1049,10 +1055,10 @@ Get operation ratio information for given symbol<br/>
 | symbols         | required          | Symbol or list of symbols(seperated by a comma)               | str  |
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+
+#### Example
+
 ```python
-Example:
-
-
 import libkloudtrader.stocks as stocks 
 
 stocks.operation_ratio('AAPL')
@@ -1169,10 +1175,10 @@ Get corporate financials information for given symbol<br/>
 | symbols         | required          | Symbol or list of symbols(seperated by a comma)               | str  |
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+
+#### Example
+
 ```python
-Example:
-
-
 import libkloustrader.stocks as stocks
 
 stocks.corporate_financials('AAPL')
@@ -1409,10 +1415,10 @@ Get price statistics information for given symbol<br/>
 | symbols         | required          | Symbol or list of symbols(seperated by a comma)               | str  |
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+
+#### Example
+
 ```python
-Example:
-
-
 import libkloudtrader.stocks as stocks
 
 stocks.price_statistics('AAPL')

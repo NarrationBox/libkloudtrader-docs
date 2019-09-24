@@ -24,9 +24,9 @@ Get all quotes in an option chain.
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 | dataframe       | optional          | True if you want data as pandas dataframe. False for JSON. True by default.   | bool  |
 
-```python
-Example:
+#### Example
 
+```python
 import libkloudtrader.options as options 
 
 expiration=options.expirations(underlying_symbol='AAPL')[0]['date']
@@ -64,9 +64,9 @@ Get all expiration dates and respective strike prices for a particular underlyin
 | dataframe       | optional          | True if you want data as pandas dataframe. False for JSON. False by default.   | bool  |
 ```
 
-```python 
-Example:
+#### Example
 
+```python 
 import libkloudtrader.options as options
 
 options.expirations(underlying_symbol='AAPL')
@@ -203,9 +203,9 @@ Get option strike prices for a specified expiration date.
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 | dataframe       | optional          | True if you want data as pandas dataframe. False for JSON. False by default.   | bool  |
 
-```python 
-Example:
+#### Example
 
+```python 
 import libkloudtrader.options as options 
 
 options.strikes(underlying_symbol='AAPL',expiration="2019-07-19")

@@ -18,9 +18,9 @@ Get information pertaining to your all accounts with the provided brokerage.<br/
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
-```python
-Example:
+#### Example
 
+```python
 import libkloudtrader.stocks as stocks
 
 stocks.user_profile()
@@ -59,9 +59,9 @@ Get your account balance<br/>
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 | account_number  | optional          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
-```python
-Example:
+#### Example
 
+```python
 import libkloudtrader.stocks as stocks
 
 stocks.account_balance()
@@ -111,9 +111,9 @@ Get your account's history.<br/>
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 | account_number  | optional          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
-```python
-Example:
+#### Example
 
+```python
 import libkloudtrader.stocks as stocks
 
 stocks.account_history()
@@ -166,9 +166,9 @@ Get all the postions your account holds<br/>
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 | account_number  | optional          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
-```python
-Example:
+#### Example
 
+```python
 import libkloudtrader.stocks as stocks
 
 stocks.account_positions()
@@ -199,9 +199,9 @@ Get your account's closed positions<br/>
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 | account_number  | optional          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
-```python
-Example:
+#### Example
 
+```python
 import libkloudtrader.stocks as stocks
 
 stocks.account_closed_positions()
@@ -252,9 +252,9 @@ Get intraday and open/pending order information for your account<br/>
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 | account_number  | optional          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
-```python
-Example:
+#### Example
 
+```python
 import libkloudtrader.stocks as stocks
 
 stocks.account_orders()
@@ -320,9 +320,9 @@ Get detailed information for a specific order<br/>
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 | account_number  | optional          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
-```python
-Example:
+#### Example
 
+```python
 import libkloudtrader.stocks as stocks
 
 stocks.account_specificorders('1369455')

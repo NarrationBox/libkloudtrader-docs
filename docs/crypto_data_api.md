@@ -175,9 +175,9 @@ Get the list of exchanges available via libkloudtrader.crypto<br>
 |-----------------|-------------------|-----------------------------------------|------|
 |test_mode        | optional          | True if you want to list exchanges that support Test mode. False by default. | bool|
 
-```python
-Example:
+#### Example
 
+```python
 import libkloudtrader.crypto as crypto
 
 # List of all exchanges
@@ -344,9 +344,9 @@ Get all the markets available in the exchange and their structures<br>
 | exchange        | required as environment variable          | The exchange you want to trade on. Will automatically be present when you deploy to Narwhal after you link your favored exchange| str  |
 |rate_limit|optional|Flag for setting wether your requests to the exchange should be rate limited or not. True by default.|bool|
 
-```python
-Example:
+#### Example
 
+```python
 import libkloudtrader.crypto as crypto
 
 crypto.markets()
@@ -519,10 +519,9 @@ Get the market structure of a particular symbol<br>
 | exchange        | required as environment variable| The exchange you want to trade on. Will automatically be present when you deploy to Narwhal after you link your favored exchange| str  |
 |rate_limit|optional|Flag for setting wether your requests to the exchange should be rate limited or not. True by default.|bool|
 
+#### Example
 
 ```python
-Example:
-
 import libkloudtrader.crypto as crypto
 
 crypto.market_structure(symbol="BTC/USD")
@@ -681,6 +680,7 @@ Get all Currencies available on an exchange<br>
 | exchange        | required as environment variable| The exchange you want to trade on. Will automatically be present when you deploy to Narwhal after you link your favored exchange| str  |
 |rate_limit|optional|Flag for setting wether your requests to the exchange should be rate limited or not. True by default.|bool|
 
+#### Example
 
 ```python
 import libkloudtrader.crypto as crypto
@@ -777,6 +777,7 @@ Get latest price related information for a given symbool from the given exchange
 |rate_limit|optional|Flag for setting wether your requests to the exchange should be rate limited or not. True by default.|bool|
 
 #### Example
+
 ```python 
 import libkloudtrader.crypto as crypto
 
@@ -1069,9 +1070,9 @@ Get latest trades for a particular trading symbol.<br>
 | exchange        | required as environment variable| The exchange you want to trade on. Will automatically be present when you deploy to Narwhal after you link your favored exchange| str  |
 |rate_limit|optional|Flag for setting wether your requests to the exchange should be rate limited or not. True by default.|bool|
 
+#### Example
 
 ```python 
-Example:
 import libkloudtrader.crypto as crypto 
 
 crypto.trades('BTC/USD')
@@ -1136,10 +1137,12 @@ Supported time intervals:
 |1 week       |1w  |
 |1 month      |1M  |
 
+#### Example
+
 <!--DOCUSAURUS_CODE_TABS-->
 <!--Python 🐍 -->
+
 ```python 
-Example:
 import libkloudtrader.crypto as crypto
 
 crypto.ohlcv(symbol='BTC/USD',start="2019-01-01",end="2019-07-01")
@@ -1269,9 +1272,9 @@ Get order book for a particular market trading symbol.<br>
 | number_of_data_points | required for some exchanges  | number of entries/data points you want. 1 by default|int|
 |rate_limit|optional|Flag for setting wether your requests to the exchange should be rate limited or not. True by default.|bool|
 
-```python
-Example:
+#### Example
 
+```python
 import libkloudtrader.crypto as crypto
 
 crypto.order_book('BTC/USD',number_of_data_points=5)
@@ -1343,9 +1346,9 @@ Get Level 2 (price-aggregated) order book for a particular symbol.<br>
 | exchange        | required as environment variable| The exchange you want to trade on. Will automatically be present when you deploy to Narwhal after you link your favored exchange| str  |
 |rate_limit|optional|Flag for setting wether your requests to the exchange should be rate limited or not. True by default.|bool|
 
-```python 
-Example:
+#### Example
 
+```python 
 import libkloudtrader.crypto as crypto 
 
 crypto.L2_order_book(symbol='BTC/USD',number_of_data_points=5)
