@@ -175,9 +175,9 @@ Get the list of exchanges available via libkloudtrader.crypto<br>
 |-----------------|-------------------|-----------------------------------------|------|
 |test_mode        | optional          | True if you want to list exchanges that support Test mode. False by default. | bool|
 
-```python
-Example:
+#### Example
 
+```python
 import libkloudtrader.crypto as crypto
 
 # List of all exchanges
@@ -337,15 +337,16 @@ return type : list
 ### Markets on an Exchanges
 Get all the markets available in the exchange and their structures<br>
 
-<code>markets(exchange)</code>
+<code>markets(exchange, rate_limit)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
 | exchange        | required as environment variable          | The exchange you want to trade on. Will automatically be present when you deploy to Narwhal after you link your favored exchange| str  |
+|rate_limit|optional|Flag for setting wether your requests to the exchange should be rate limited or not. True by default.|bool|
+
+#### Example
 
 ```python
-Example:
-
 import libkloudtrader.crypto as crypto
 
 crypto.markets()
@@ -510,16 +511,17 @@ return type : json
 ### Market Structure
 Get the market structure of a particular symbol<br>
 
-<code>market_strcuture(symbol, exchange)</code>
+<code>market_strcuture(symbol, exchange, rate_limit)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
 | symbol          | required          | The Symbol of your crypto currencies (E.g BTC/USD, ETH/BTC)|str| 
 | exchange        | required as environment variable| The exchange you want to trade on. Will automatically be present when you deploy to Narwhal after you link your favored exchange| str  |
+|rate_limit|optional|Flag for setting wether your requests to the exchange should be rate limited or not. True by default.|bool|
+
+#### Example
 
 ```python
-Example:
-
 import libkloudtrader.crypto as crypto
 
 crypto.market_structure(symbol="BTC/USD")
@@ -671,11 +673,14 @@ return type : json
 ### Currencies
 Get all Currencies available on an exchange<br>
 
-<code>currencies(exchange)</code>
+<code>currencies(exchange, rate_limit)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
 | exchange        | required as environment variable| The exchange you want to trade on. Will automatically be present when you deploy to Narwhal after you link your favored exchange| str  |
+|rate_limit|optional|Flag for setting wether your requests to the exchange should be rate limited or not. True by default.|bool|
+
+#### Example
 
 ```python
 import libkloudtrader.crypto as crypto
@@ -760,15 +765,24 @@ return type : json
 
 ## Price Data
 
-### Latest Quotes
-Get latest quotes/ticker data for a given symbool from the given exchange<br>
+### Latest Price Information
+Get latest price related information for a given symbool from the given exchange<br>
 
-<code>quotes(symbol,exchange)</code>
+<code>latest_price_info(symbol, exchange, rate_limit)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
 | symbol          | required          | The Symbol of your crypto currencies (E.g BTC/USD, ETH/BTC)|str| 
 | exchange        | required as environment variable| The exchange you want to trade on. Will automatically be present when you deploy to Narwhal after you link your favored exchange| str  |
+|rate_limit|optional|Flag for setting wether your requests to the exchange should be rate limited or not. True by default.|bool|
+
+#### Example
+
+```python 
+import libkloudtrader.crypto as crypto
+
+crypto.latest_price_info('BTC/USD')
+```
 
 ```python
 return type : json
@@ -900,21 +914,22 @@ return type : json
    }
 }
 ```
-### Latest Quotes for all symbols
-Get quotes/ticker data for all symbols listed on an exchange<br>
+### Latest Price information for all symbols
+Get latest price related information for all symbols listed on an exchange<br>
 
-<code>quotes_for_all_symbols(exchange)</code>
+<code>quotes_for_all_symbols(exchange, rate_limit)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
 | exchange        | required as environment variable| The exchange you want to trade on. Will automatically be present when you deploy to Narwhal after you link your favored exchange| str  |
+|rate_limit|optional|Flag for setting wether your requests to the exchange should be rate limited or not. True by default.|bool|
+
+#### Example
 
 ```python 
-Example:
-
 import libkloudtrader.crypto as crypto
 
-crypto.quotes_for_all_symbols()
+crypto.latest_price_info_for_all()
 ```
 
 ```python
@@ -1046,138 +1061,55 @@ return type : json
 ### Latest Trades
 Get latest trades for a particular trading symbol.<br>
 
-<code>trades(symbol, number_of_data_points, exchange)</code>
+<code>trades(symbol, number_of_data_points, exchange, rate_liit)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
 | symbol          | required          | The Symbol of your crypto currencies (E.g BTC/USD, ETH/BTC)|str| 
-| number_of_data_points | required for some exchanges  | number of trades/data points you want. 0 by default|int|
+| number_of_data_points | required for some exchanges  | number of trades/data points you want. 1 by default|int|
 | exchange        | required as environment variable| The exchange you want to trade on. Will automatically be present when you deploy to Narwhal after you link your favored exchange| str  |
+|rate_limit|optional|Flag for setting wether your requests to the exchange should be rate limited or not. True by default.|bool|
+
+#### Example
 
 ```python 
-Example:
 import libkloudtrader.crypto as crypto 
 
-crypto.trades('ETH/BTC', number_of_data_points=5)
+crypto.trades('BTC/USD')
 ```
 ```python
-[  
-   {  
-      'id':None,
+[ 
+   { 
+      'id':'74451323',
       'order':None,
-      'info':[  
-         '11516.10000',
-         '0.00200000',
-         1562831632.4331,
-         's',
-         'l',
-         ''
-      ],
-      'timestamp':1562831632433,
-      'datetime':'2019-07-11T07:53:52.433Z',
+      'info':{ 
+         'time':'2019-09-23T08:57:47.89Z',
+         'trade_id':74451323,
+         'price':'9926.08000000',
+         'size':'0.16232422',
+         'side':'sell'
+      },
+      'timestamp':1569229067089,
+      'datetime':'2019-09-23T08:57:47.089Z',
       'symbol':'BTC/USD',
-      'type':'limit',
-      'side':'sell',
+      'type':None,
       'takerOrMaker':None,
-      'price':11516.1,
-      'amount':0.002,
-      'cost':23.0322,
-      'fee':None
-   },
-   {  
-      'id':None,
-      'order':None,
-      'info':[  
-         '11514.50000',
-         '0.25000000',
-         1562831632.7141,
-         's',
-         'l',
-         ''
-      ],
-      'timestamp':1562831632714,
-      'datetime':'2019-07-11T07:53:52.714Z',
-      'symbol':'BTC/USD',
-      'type':'limit',
-      'side':'sell',
-      'takerOrMaker':None,
-      'price':11514.5,
-      'amount':0.25,
-      'cost':2878.625,
-      'fee':None
-   },
-   {  
-      'id':None,
-      'order':None,
-      'info':[  
-         '11514.50000',
-         '0.00200000',
-         1562831632.7182,
-         's',
-         'l',
-         ''
-      ],
-      'timestamp':1562831632718,
-      'datetime':'2019-07-11T07:53:52.718Z',
-      'symbol':'BTC/USD',
-      'type':'limit',
-      'side':'sell',
-      'takerOrMaker':None,
-      'price':11514.5,
-      'amount':0.002,
-      'cost':23.029,
-      'fee':None
-   },
-   {  
-      'id':None,
-      'order':None,
-      'info':[  
-         '11511.10000',
-         '0.25700000',
-         1562831632.721,
-         's',
-         'l',
-         ''
-      ],
-      'timestamp':1562831632721,
-      'datetime':'2019-07-11T07:53:52.721Z',
-      'symbol':'BTC/USD',
-      'type':'limit',
-      'side':'sell',
-      'takerOrMaker':None,
-      'price':11511.1,
-      'amount':0.257,
-      'cost':2958.3527,
-      'fee':None
-   },
-   {  
-      'id':None,
-      'order':None,
-      'info':[  
-         '11510.60000',
-         '0.15800000',
-         1562831632.7755,
-         'b',
-         'l',
-         ''
-      ],
-      'timestamp':1562831632775,
-      'datetime':'2019-07-11T07:53:52.775Z',
-      'symbol':'BTC/USD',
-      'type':'limit',
       'side':'buy',
-      'takerOrMaker':None,
-      'price':11510.6,
-      'amount':0.158,
-      'cost':1818.6748,
-      'fee':None
+      'price':9926.08,
+      'amount':0.16232422,
+      'fee':{ 
+         'cost':None,
+         'currency':'USD',
+         'rate':None
+      },
+      'cost':1611.2431936576
    }
 ]
 ```
 ### OHLCV Data
 Get OHLCV/bar data. Most exchanges don't go very back in time. The very few that go need pagination which will be released soon. Some exchanges return data for today only if interval is very less like 1 minute, 5 minutes, etc. <br>
 
-<code>ohlcv(symbol, start, end, interval, exchange)</code>
+<code>ohlcv(symbol, start, end, interval, exchange, rate_limit)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
@@ -1186,14 +1118,15 @@ Get OHLCV/bar data. Most exchanges don't go very back in time. The very few that
 | end           | required          | Ending date. (YYYY-MM-DD) for intervals: "1d","1w","1M", (YYYY-MM-DD HH:MM:SS) for intervals: "1m", "5m", "15m", "30m", "1h"| str|
 | interval      | required          | Time Interval. E.g. (1m, 5m, 15m, 30m, 1h, 1d, 1w, 1M). See next table to find out more about time intervals. 1d by default.|str|
 | exchange        | required as environment variable| The exchange you want to trade on. Will automatically be present when you deploy to Narwhal after you link your favored exchange| str  |
-| dataframe       | optional          | True if you want data as pandas dataframe. False for JSON. False by default.   | bool  |
+| dataframe       | optional          | True if you want data as pandas dataframe. False for JSON. True by default.   | bool  |
+|rate_limit|optional|Flag for setting wether your requests to the exchange should be rate limited or not. True by default.|bool|
 
 
 Supported time intervals: 
 
 
 
-| Inverteal     | Accepted Symbol |
+| Interval    | Accepted Symbol |
 |-----------------|-------------------|
 |1 minute         |1m         |
 |5 minutes        |5m          |
@@ -1204,139 +1137,144 @@ Supported time intervals:
 |1 week       |1w  |
 |1 month      |1M  |
 
-```python
-Example:
+#### Example
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Python 🐍 -->
+
+```python 
 import libkloudtrader.crypto as crypto
 
-crypto.ohlcv(symbol='BTC/USD',start="2018-01-01",end="2019-01-01",dataframe=True)
+crypto.ohlcv(symbol='BTC/USD',start="2019-01-01",end="2019-07-01")
 
 crypto.ohlcv(symbol='BTC/USD',start="2019-01-01 15:30:00",end="2019-01-01 17:35:00",interval='1m')
 ```
-```pyhton 
+<!--END_DOCUSAURUS_CODE_TABS-->
+
+```python 
 return type : pandas datframe
 
-                        open     high      low    close        volume
-time                                                                 
-2018-01-01 00:00:00  12673.5  14350.0  12468.5  13873.0  8.144056e+08
-2018-01-02 00:00:00  13873.0  14011.5  12772.0  13477.0  6.389587e+08
-2018-01-03 00:00:00  13477.0  15269.0  12900.0  14786.5  9.041597e+08
-2018-01-04 00:00:00  14786.5  15524.0  14555.0  15157.0  8.126866e+08
-2018-01-05 00:00:00  15157.0  15500.0  14150.0  15186.0  8.141421e+08
-2018-01-06 00:00:00  15186.0  17088.0  14805.0  16891.0  1.010611e+09
-2018-01-07 00:00:00  16891.0  17422.0  16235.0  17210.0  7.643035e+08
-2018-01-08 00:00:00  17210.0  17213.0  15770.5  16224.5  8.633417e+08
-2018-01-09 00:00:00  16224.5  16329.0  13800.0  14952.5  1.473521e+09
-2018-01-10 00:00:00  14952.5  15375.0  14183.0  14465.0  9.990242e+08
-2018-01-11 00:00:00  14465.0  15012.5  13426.0  14963.5  1.154658e+09
-2018-01-12 00:00:00  14963.5  15033.5  12703.5  13287.5  1.514630e+09
-2018-01-13 00:00:00  13287.5  14197.0  12818.5  13874.5  8.862648e+08
-2018-01-14 00:00:00  13874.5  14600.0  13810.0  14209.0  5.885310e+08
-2018-01-15 00:00:00  14209.0  14364.0  13049.0  13645.0  8.069327e+08
-2018-01-16 00:00:00  13645.0  14374.5  13400.0  13621.0  7.473986e+08
-2018-01-17 00:00:00  13621.0  13619.0  10100.0  11330.0  2.755983e+09
-2018-01-18 00:00:00  11330.0  11799.0   9209.0  11210.0  2.266854e+09
-2018-01-19 00:00:00  11210.0  12183.0  10615.5  11252.0  1.431205e+09
-2018-01-20 00:00:00  11252.0  12078.0  10956.5  11546.5  9.895290e+08
-2018-01-21 00:00:00  11546.5  13008.0  11490.0  12746.5  9.306491e+08
-2018-01-22 00:00:00  12746.5  12757.0  11088.5  11560.0  1.143588e+09
-2018-01-23 00:00:00  11560.0  11855.0  10020.0  10792.5  1.486838e+09
-2018-01-24 00:00:00  10792.5  11437.0   9874.0  10830.0  1.449900e+09
-2018-01-25 00:00:00  10830.0  11499.0  10437.0  11394.5  1.131616e+09
-2018-01-26 00:00:00  11394.5  11750.0  10840.5  11117.0  9.813252e+08
-2018-01-27 00:00:00  11117.0  11653.0  10230.0  11110.0  1.452834e+09
-2018-01-28 00:00:00  11110.0  11631.0  10777.5  11398.0  1.009596e+09
-2018-01-29 00:00:00  11398.0  11970.0  11350.0  11631.5  7.520359e+08
-2018-01-30 00:00:00  11631.5  11768.0  10865.0  11127.0  9.228316e+08
-...                      ...      ...      ...      ...           ...
-2018-12-03 00:00:00   4136.5   4270.0   4025.0   4096.5  1.787717e+09
-2018-12-04 00:00:00   4096.5   4118.5   3729.5   3829.5  1.946678e+09
-2018-12-05 00:00:00   3829.5   4042.0   3730.0   3902.0  1.935439e+09
-2018-12-06 00:00:00   3902.0   3917.0   3655.0   3695.5  1.775228e+09
-2018-12-07 00:00:00   3695.5   3843.0   3400.0   3430.5  2.752500e+09
-2018-12-08 00:00:00   3430.5   3542.0   3200.0   3369.0  2.747024e+09
-2018-12-09 00:00:00   3369.0   3500.0   3246.0   3397.0  1.640638e+09
-2018-12-10 00:00:00   3397.0   3630.0   3370.5   3526.5  1.456050e+09
-2018-12-11 00:00:00   3526.5   3596.0   3350.0   3406.0  1.601489e+09
-2018-12-12 00:00:00   3406.0   3422.0   3281.5   3344.0  1.214572e+09
-2018-12-13 00:00:00   3344.0   3493.5   3321.5   3431.5  1.211426e+09
-2018-12-14 00:00:00   3431.5   3439.0   3217.5   3257.5  1.424966e+09
-2018-12-15 00:00:00   3257.5   3300.0   3134.5   3193.0  1.536197e+09
-2018-12-16 00:00:00   3193.0   3226.0   3121.0   3183.0  1.009583e+09
-2018-12-17 00:00:00   3183.0   3260.0   3177.0   3189.5  1.025713e+09
-2018-12-18 00:00:00   3189.5   3590.0   3178.0   3495.5  2.156459e+09
-2018-12-19 00:00:00   3495.5   3690.0   3435.0   3665.0  2.155901e+09
-2018-12-20 00:00:00   3665.0   3916.5   3641.0   3680.0  3.567542e+09
-2018-12-21 00:00:00   3680.0   4174.0   3654.5   4069.0  3.971091e+09
-2018-12-22 00:00:00   4069.0   4168.0   3770.0   3841.0  3.040224e+09
-2018-12-23 00:00:00   3841.0   4007.0   3783.5   3981.0  1.679001e+09
-2018-12-24 00:00:00   3981.0   4055.0   3903.0   3944.0  1.492831e+09
-2018-12-25 00:00:00   3944.0   4241.0   3943.5   4033.5  2.193196e+09
-2018-12-26 00:00:00   4033.5   4043.0   3670.5   3777.0  1.991915e+09
-2018-12-27 00:00:00   3777.0   3868.0   3683.0   3806.5  1.419108e+09
-2018-12-28 00:00:00   3806.5   3842.0   3565.0   3588.0  1.386767e+09
-2018-12-29 00:00:00   3588.0   3960.0   3568.0   3889.5  1.542324e+09
-2018-12-30 00:00:00   3889.5   3944.0   3650.0   3712.0  1.267439e+09
-2018-12-31 00:00:00   3712.0   3898.5   3671.0   3830.5  1.225536e+09
-2019-01-01 00:00:00   3830.5   3839.5   3615.0   3693.0  9.764756e+08
+                open      high       low     close        volume
+datetime                                                            
+2019-01-02   3826.10   3916.57   3770.07   3890.79   9982.470846
+2019-01-03   3890.80   3893.80   3758.07   3787.57   9327.647089
+2019-01-04   3787.57   3849.00   3730.00   3820.82   9225.150500
+2019-01-05   3820.82   3874.12   3775.00   3798.62   6451.007750
+2019-01-06   3799.99   4088.00   3756.01   4040.99  10057.453673
+...              ...       ...       ...       ...           ...
+2019-06-28  11159.29  12444.77  10737.87  12360.45  42092.854956
+2019-06-29  12360.42  12379.99  11318.94  11865.29  28879.349941
+2019-06-30  11869.84  12200.00  10650.06  10761.26  28722.485390
+2019-07-01  10761.26  11210.52   9953.00  10577.63  39825.954711
+2019-07-02  10578.23  10925.00   9651.00  10829.18  43614.893653
 
-[366 rows x 5 columns]
+[182 rows x 5 columns]
+
 ```
 
 ```python
-return type : json
+return type :  pandas dataframe
 
-[  
-   {  
-      'time':'2019-01-01 15:30:00',
-      'open':3677.5,
-      'high':3677.5,
-      'low':3677.0,
-      'close':3677.5,
-      'volume':155170.0
-   },
-   {  
-      'time':'2019-01-01 15:31:00',
-      'open':3677.5,
-      'high':3679.5,
-      'low':3677.0,
-      'close':3679.5,
-      'volume':464216.0
-   },
-   .
-   .
-   .
-   {  
-      'time':'2019-01-01 17:34:00',
-      'open':3688.0,
-      'high':3688.0,
-      'low':3687.5,
-      'close':3688.0,
-      'volume':49234.0
-   },
-   {  
-      'time':'2019-01-01 17:35:00',
-      'open':3688.0,
-      'high':3688.0,
-      'low':3687.5,
-      'close':3687.5,
-      'volume':54317.0
-   }
-]
+                        open     high      low    close    volume
+time                                                             
+2019-01-01 15:31:00  3679.22  3680.39  3679.22  3680.39  4.498412
+2019-01-01 15:32:00  3680.39  3687.00  3679.45  3687.00  7.759357
+2019-01-01 15:33:00  3684.50  3687.43  3684.50  3687.43  2.075761
+2019-01-01 15:34:00  3687.41  3689.39  3684.49  3685.41  4.141909
+2019-01-01 15:35:00  3687.43  3689.39  3687.43  3688.11  2.015642
+...                      ...      ...      ...      ...       ...
+2019-01-01 17:32:00  3694.71  3694.71  3694.70  3694.71  2.954000
+2019-01-01 17:33:00  3694.71  3694.71  3694.70  3694.71  1.222838
+2019-01-01 17:34:00  3694.71  3694.93  3694.00  3694.00  2.965331
+2019-01-01 17:35:00  3694.69  3694.72  3694.00  3694.01  1.171569
+2019-01-01 17:36:00  3694.01  3694.01  3694.00  3694.01  1.098283
+
+[126 rows x 5 columns]
 ```
-### Order Book
-Get L2/L3 orderbook for a particular market trading symbol.<br>
 
-<code>order_book(symbol, number_of_data_points, exchange)</code>
+### Latest Order book entry
+Get latest entry from the orderbook direct from your favorite exchange exchange<br>
+
+<code>latest_order_book_entry(symbol, exchange, rate_limit)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
 | symbol          | required          | The Symbol of your crypto currencies (E.g BTC/USD, ETH/BTC)|str| 
-| number_of_data_points | required for some exchanges  | number of entries/data points you want. 0 by default|int|
 | exchange        | required as environment variable| The exchange you want to trade on. Will automatically be present when you deploy to Narwhal after you link your favored exchange| str  |
+|rate_limit|optional|Flag for setting wether your requests to the exchange should be rate limited or not. True by default.|bool|
+
+#### Example
 
 ```python
-Example:
+import libkloudtrader.crypto as crypto
 
+crypto.latest_order_book_entry('BTC/USD')
+```
+
+```python
+return type: dict
+
+{ 
+   'symbol':'BTC/USD',
+   'ask':9889.91,
+   'asksize':0.46499152,
+   'bid':9889.01,
+   'bidsize':2.0,
+   'datetime':None,
+   'nonce':None
+}
+```
+
+### Latest entry from Level 2 order book
+Get latest entry from the Level 2 (price-aggregated) orderbook direct from your favorite exchange exchange<br>
+
+<code>latest_L2_order_book_entry(symbol, exchange, rate_limit)</code>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| symbol          | required          | The Symbol of your crypto currencies (E.g BTC/USD, ETH/BTC)|str| 
+| exchange        | required as environment variable| The exchange you want to trade on. Will automatically be present when you deploy to Narwhal after you link your exchange| str  |
+|rate_limit|optional|Flag for setting wether your requests to the exchange should be rate limited or not. True by default.|bool|
+
+#### Example
+
+```python
+import libkloudtrader.crypto as crypto
+
+crypto.latest_L2_order_book_entry('BTC/USD')
+```
+
+```python
+return type: dict
+
+{ 
+   'symbol':'BTC/USD',
+   'ask':9889.89,
+   'asksize':6.6737705,
+   'bid':9889.88,
+   'bidsize':0.10065141,
+   'datetime':None,
+   'nonce':None
+}
+```
+
+
+
+### Order book
+Get order book for a particular market trading symbol.<br>
+
+<code>order_book(symbol, number_of_data_points, exchange, rate_limit)</code>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| symbol          | required          | The Symbol of your crypto currencies (E.g BTC/USD, ETH/BTC)|str| 
+| exchange        | required as environment variable| The exchange you want to trade on. Will automatically be present when you deploy to Narwhal after you link your favored exchange| str  |
+| number_of_data_points | required for some exchanges  | number of entries/data points you want. 1 by default|int|
+|rate_limit|optional|Flag for setting wether your requests to the exchange should be rate limited or not. True by default.|bool|
+
+#### Example
+
+```python
 import libkloudtrader.crypto as crypto
 
 crypto.order_book('BTC/USD',number_of_data_points=5)
@@ -1399,17 +1337,18 @@ return type : json
 ### L2 order Book
 Get Level 2 (price-aggregated) order book for a particular symbol.<br>
 
-<code>L2_order_book(symbol, limit, exchange)</code>
+<code>L2_order_book(symbol, limit, exchange, rate_limit)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
 | symbol          | required          | The Symbol of your crypto currencies (E.g BTC/USD, ETH/BTC)|str| 
 | number_of_data_points | required for some exchanges  | number of entries/data points you want. 0 by default|int|
 | exchange        | required as environment variable| The exchange you want to trade on. Will automatically be present when you deploy to Narwhal after you link your favored exchange| str  |
+|rate_limit|optional|Flag for setting wether your requests to the exchange should be rate limited or not. True by default.|bool|
+
+#### Example
 
 ```python 
-Example:
-
 import libkloudtrader.crypto as crypto 
 
 crypto.L2_order_book(symbol='BTC/USD',number_of_data_points=5)

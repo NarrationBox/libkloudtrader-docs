@@ -98,8 +98,8 @@ class HomeSplash extends React.Component {
           <ProjectTitle />
           <PromoSection className="promo">
             <Button href="/docs/getting_started_with_libkloudtrader" className="get-started">Get Started</Button>
+           
           </PromoSection>
-          <small>Python Client of Libkloudtrader</small>
           
         </div>
       </SplashContainer>
@@ -164,7 +164,7 @@ const Features = () => (
         title: 'Customized alerts',
       },
       {
-        content: 'Switch from your backtest to your live trading algorithm with change in just few keywords.',
+        content: 'Switch from your backtesting to live trading in a matter of seconds.',
         image: imgUrl('feature6.svg'),
         imageAlign: 'bottom',
         title: 'Backtesting',

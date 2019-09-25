@@ -182,9 +182,9 @@ Place a buy order.
 |exchange_uid         | optional/set as environment variable          | A unique Id provided by your exchange for trading(if needed). Not all exchanges need this, thus it is optional. Will automatically be present when you deploy to Narwhal after linking your exchange. | str |
 |test_mode        | optional          | True if you want to want the API to be executed in test/sandbox mode. False by default. | bool|
 
-```python
-Example:
+#### Example
 
+```python
 import libkloudtrader.crypto as crypto
 
 crypto.buy('BTC/USD',1,order_type='limit',price=11760)
@@ -265,9 +265,9 @@ Place a sell order.
 |exchange_uid         | optional/set as environment variable          | A unique Id provided by your exchange for trading(if needed). Not all exchanges need this, thus it is optional. Will automatically be present when you deploy to Narwhal after linking your exchange. | str |
 |test_mode        | optional          | True if you want to want the API to be executed in test/sandbox mode. False by default. | bool|
 
-```python
-Example:
+#### Example
 
+```python
 import libkloudtrader.crypto as crypto
 
 crypto.sell('BTC/USD',1,order_type='limit',price=11765)
@@ -345,9 +345,9 @@ Cancel an order if it is not filled yet.
 |exchange_uid         | optional/set as environment variable          | A unique Id provided by your exchange for trading(if needed). Not all exchanges need this, thus it is optional. Will automatically be present when you deploy to Narwhal after linking your exchange. | str |
 |test_mode        | optional          | True if you want to want the API to be executed in test/sandbox mode. False by default. | bool|
 
-```python 
-Example:
+#### Example
 
+```python 
 import libkloudtrader.crypto as crypto 
 
 crypto.cancel_order(order_id="4a00fa7a-787c-9988-94b5-205c6f582e16")

@@ -177,9 +177,9 @@ Get your account balance<br>
 |exchange_uid         | optional/set as environment variable          | A unique Id provided by your exchange for trading(if needed). Not all exchanges need this, thus it is optional. Will automatically be present when you deploy to Narwhal after linking your exchange. | str |
 |test_mode        | optional          | True if you want to want the API to be executed in test/sandbox mode. False by default. | bool|
 
-```python 
-Example:
+#### Example
 
+```python 
 import libkloudtrader.crypto as crypto 
 
 crypto.user_balance()
@@ -242,9 +242,9 @@ Get your latest ledger history<br>
 |exchange_uid         | optional/set as environment variable          | A unique Id provided by your exchange for trading(if needed). Not all exchanges need this, thus it is optional. Will automatically be present when you deploy to Narwhal after linking your exchange. | str |
 |test_mode        | optional          | True if you want to want the API to be executed in test/sandbox mode. False by default. | bool|
 
-```python
-Example:
+#### Example
 
+```python
 import libkloudtrader.crypto as crypto 
 
 crypto.user_ledger(currency_code="USD")
@@ -322,9 +322,9 @@ Get all of your closed orders<br>
 |exchange_uid         | optional/set as environment variable          | A unique Id provided by your exchange for trading(if needed). Not all exchanges need this, thus it is optional. Will automatically be present when you deploy to Narwhal after linking your exchange. | str |
 |test_mode        | optional          | True if you want to want the API to be executed in test/sandbox mode. False by default. | bool|
 
-```python
-Example:
+#### Example
 
+```python
 import libkloudtrader.crypto as crypto
 
 crypto.user_closed_orders(symbol='BTC/USD')
@@ -427,9 +427,9 @@ Get info about an individual order
 |exchange_uid         | optional/set as environment variable          | A unique Id provided by your exchange for trading(if needed). Not all exchanges need this, thus it is optional. Will automatically be present when you deploy to Narwhal after linking your exchange. | str |
 |test_mode        | optional          | True if you want to want the API to be executed in test/sandbox mode. False by default. | bool|
 
-```python 
-Example:
+#### Example
 
+```python 
 import libkloudtrader.crypto as crypto 
 
 crypto.get_order(order_id="55d7e42e-3a6c-41f7-a692-9bdcd23dce70",symbol='BTC/USD')
@@ -492,9 +492,9 @@ Get info about all of your orders wether they are closed, half filled or even re
 |exchange_uid         | optional/set as environment variable          | A unique Id provided by your exchange for trading(if needed). Not all exchanges need this, thus it is optional. Will automatically be present when you deploy to Narwhal after linking your exchange. | str |
 |test_mode        | optional          | True if you want to want the API to be executed in test/sandbox mode. False by default. | bool|
 
-```python
-Example:
+#### Example
 
+```python
 import libkloudtrader.crypto as crypto 
 
 crypto.user_orders(symbol="BTC/USD")
@@ -595,9 +595,9 @@ Get your positions. Many exchanges don't support this functionality via their AP
 |exchange_uid         | optional/set as environment variable          | A unique Id provided by your exchange for trading(if needed). Not all exchanges need this, thus it is optional. Will automatically be present when you deploy to Narwhal after linking your exchange. | str |
 |test_mode        | optional          | True if you want to want the API to be executed in test/sandbox mode. False by default. | bool|
 
-```python
-Example:
+#### Example
 
+```python
 import libkloudtrade.crypto as crypto
 
 crypto.user_positions()
@@ -811,15 +811,16 @@ Get all of your latest transactions
 |exchange_uid         | optional/set as environment variable          | A unique Id provided by your exchange for trading(if needed). Not all exchanges need this, thus it is optional. Will automatically be present when you deploy to Narwhal after linking your exchange. | str |
 |test_mode        | optional          | True if you want to want the API to be executed in test/sandbox mode. False by default. | bool|
 
-```python
+#### Example
 
+```python
 import libkloudtrader.crypto as crypto 
 
 crypto.user_transactions('USD')
 ```
 
 ```python
-Example:
+
 [  
    {  
       'info':{  

@@ -24,9 +24,9 @@ Get latest price information for an individual or multiple symbols<br/>
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 | dataframe       | optional          | True if you want data as pandas dataframe. False for JSON. False by default.   | bool  |
 
-```python
-Example:
+#### Example
 
+```python
 import libkloudtrader.stocks as stocks
 
 stocks.latest_price_info('AAPL,MSFT')
@@ -106,9 +106,9 @@ Get lastest quote entry for the given symbol from various exchanges
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
-```python 
-Example:
+#### Example
 
+```python 
 import libkloudtrader.stocks as stocks
 
 stocks.latest_quote('AAPL')
@@ -140,9 +140,9 @@ Get lastest trade for the given symbol
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
-```python 
-Example:
+#### Example
 
+```python 
 import libkloudtrader.stocks as stocks
 
 stocks.latest_trade('AAPL')
@@ -171,9 +171,10 @@ Get the intraday summary for the given symbol
 | symbol          | required          | stock symbol/ticker                     | str  |
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
-```python 
-Example:
 
+#### Example
+
+```python 
 import libkloudtrader.stocks as stocks
 
 stocks.intraday_summary('AAPL')
@@ -193,368 +194,125 @@ return type : json
 ```
 
 ### Historical OHLCV Data
-Get OHLCV(Open-High-Low-Close-Volume) data for a symbol (As back as you want to go)<br/>
+Get OHLCV(Open-High-Low-Close-Volume) data for a symbol.<br/>
 
 <code>ohlcv(symbol,start,end,data_filter,brokerage,access_token,datframe)</code>
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
 | symbol          | required          | stock symbol/ticker                     | str  |
-| start           | required          | starting date (YYYY-MM-DD)              | str  |
-| end             | required          | end date (YYYY-MM-DD)                   | str  |
-| interval        | optional          | daily/weekly/monthly (daily by default) | str  |
+| start           | required          | Starting date (YYYY-MM-DD). (YYYY-MM-DD) for intervals: "1d","1w","1M", (YYYY-MM-DD HH:MM:SS) for intervals: "1m", "5m", "15m"                  | str  |
+| end             | required          | Ending date (YYYY-MM-DD). (YYYY-MM-DD) for intervals: "1d","1w","1M", (YYYY-MM-DD HH:MM:SS) for intervals: "1m", "5m", "15m"             | str  |
+| interval        | optional          | Time Interval. E.g. (1m, 5m, 15m, 1d, 1w, 1M). See next table to find out more about time intervals. 1d by default. | str  |
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
-| dataframe       | optional          | True if you want data as pandas dataframe. False for JSON. False by default.   | bool  |
+| dataframe       | optional          | True if you want data as pandas dataframe. False for JSON. True by default.   | bool  |
+
+Supported time intervals: 
+
+
+
+| Interval    | Accepted Symbol |Data Availability|
+|-----------------|-------------------|-----------|
+|1 minute         |1m|20 days in the past|
+|5 minutes        |5m|40 days in the past|
+|15 minutes       |15m|40 days in the past|
+|1 day        |1d|Usually cover the entire lifetime of the company|
+|1 week       |1w|Usually cover the entire lifetime of the company|
+|1 month      |1M|Usually cover the entire lifetime of the company|
+
+#### Example
+
 ```python 
-Example:
-
-
 import libkloudtrader.stocks as stocks
 
 stocks.ohlcv('AAPL',start="2018-01-01",end="2019-01-01")
+
+stocks.ohlcv('AAPL',start="2019-09-04 09:30:00",end="2019-09-10 15:30:00", interval="5m")
 ```
 ```python
-return type: json 
+return type: Pandas Dataframe
 
-{  
-   'history':{  
-      'day':[  
-         {  
-            'date':'2018-01-02',
-            'open':170.16,
-            'high':172.3,
-            'low':169.26,
-            'close':172.26,
-            'volume':25555934
-         },
-         {  
-            'date':'2018-01-03',
-            'open':172.53,
-            'high':174.55,
-            'low':171.96,
-            'close':172.23,
-            'volume':29517899
-         },
-         .
-         .
-         .
-         {  
-            'date':'2018-12-28',
-            'open':157.5,
-            'high':158.52,
-            'low':154.55,
-            'close':156.23,
-            'volume':42291424
-         },
-         {  
-            'date':'2018-12-31',
-            'open':158.53,
-            'high':159.36,
-            'low':156.48,
-            'close':157.74,
-            'volume':35003466
-         }
-      ]
-   }
-}
+              open    high     low   close    volume
+datetime                                                
+2018-01-02  170.16  172.30  169.26  172.26  25555934
+2018-01-03  172.53  174.55  171.96  172.23  29517899
+2018-01-04  172.54  173.47  172.08  173.03  22434597
+2018-01-05  173.44  175.37  173.05  175.00  23660018
+2018-01-08  174.35  175.61  173.93  174.35  20567766
+...            ...     ...     ...     ...       ...
+2018-12-24  148.15  151.55  146.59  146.83  37169232
+2018-12-26  148.30  157.23  146.72  157.17  58582544
+2018-12-27  155.84  156.77  150.07  156.15  53117065
+2018-12-28  157.50  158.52  154.55  156.23  42291424
+2018-12-31  158.53  159.36  156.48  157.74  35003466
+
+[251 rows x 5 columns]
+```
+
+```python 
+return type: Pandas Dataframe
+
+                         price      open      high       low     close  volume       vwap
+datetime                                                                                 
+2019-09-04 09:30:00  208.36500  208.3900  208.7300  208.0000  208.2400  931829  208.40953
+2019-09-04 09:35:00  208.22000  208.2900  208.4700  207.9700  208.1227  380634  208.20392
+2019-09-04 09:40:00  208.01500  208.1400  208.2500  207.7800  208.1300  391809  208.09492
+2019-09-04 09:45:00  208.13000  208.1500  208.4600  207.8000  207.8288  401724  208.16506
+2019-09-04 09:50:00  207.75505  207.8174  207.9200  207.5901  207.6800  270973  207.75256
+...                        ...       ...       ...       ...       ...     ...        ...
+2019-09-10 15:10:00  214.52500  214.5100  214.6400  214.4100  214.4200  110552  214.54924
+2019-09-10 15:15:00  214.67245  214.4250  214.9199  214.4250  214.8800  187494  214.71908
+2019-09-10 15:20:00  214.72500  214.8899  214.9200  214.5300  214.6950  183348  214.73652
+2019-09-10 15:25:00  214.62995  214.7000  214.7599  214.5000  214.5800  141997  214.63384
+2019-09-10 15:30:00  214.60915  214.5800  214.6765  214.5418  214.5800  131203  214.60373
+
+[385 rows x 7 columns]
 ```
 
 ***
 ### Tick Data
-Get historical tick data(trades placed) for a particular period of time. Goes upto 5 days in the past.<br>
+Get historical tick data(trades placed) for a particular period of time. Data available for past 5 days.<br>
 
 <code>tick_data(symbol,start,end,data_filter,brokerage,access_token,datframe)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
 | symbol          | required          | stock symbol/ticker                     | str  |
-| start           | optional         | starting date and time(YYYY-MM-DD HH:MM). None by default. Can go only upto 1 week in past.             | str  |
-| end             | required          | end date and time(YYYY-MM-DD HH:MM). None by default. Can go only upto 1 week in past.                    | str  |
+| start           | optional         | starting date and time(YYYY-MM-DD HH:MM). None by default. Should not be older than one week.             | str  |
+| end             | required          | end date and time(YYYY-MM-DD HH:MM). None by default. Should not be older than one week.                    | str  |
 | data_filter        | optional          | 'open' for data points within open market hours only. 'all' for all available data points. 'open' by default. | str  |
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
-| dataframe       | optional          | True if you want data as pandas dataframe. False for JSON. False by default.   | bool  |
+| dataframe       | optional          | True if you want data as pandas dataframe. False for JSON. True by default.   | bool  |
+
+#### Example
+
 ```python 
-Example:
-
-
 import libkloudtrader.stocks as stocks
 
-stocks.tick_data('AAPL',start="2019-07-01 09:30:00",end="2019-07-01 09:40:00")
+stocks.tick_data('AAPL',start="2019-08-14 09:30:00",end="2019-08-15 16:00:00")
 ```
 ```python
-return type: json 
+return type: Pandas Dataframe
 
-{  
-   'series':{  
-      'data':[  
-         {  
-            'time':'2019-07-01T13:30:00',
-            'timestamp':1561987800007,
-            'price':203.28,
-            'volume':100
-         },
-         {  
-            'time':'2019-07-01T13:30:00',
-            'timestamp':1561987800050,
-            'price':203.28,
-            'volume':175
-         },
-         .
-         .
-         .
-         {  
-            'time':'2019-07-01T13:39:59',
-            'timestamp':1561988399698,
-            'price':204.097,
-            'volume':100
-         },
-         {  
-            'time':'2019-07-01T13:39:59',
-            'timestamp':1561988399753,
-            'price':204.1001,
-            'volume':150
-         }
-      ]
-   }
-}
+
+                        price  volume
+datetime                             
+2019-09-19 13:30:00  222.1200     100
+2019-09-19 13:30:00  222.1200     282
+2019-09-19 13:30:00  222.1200     400
+2019-09-19 13:30:00  222.1200     100
+2019-09-19 13:30:00  222.1200     296
+...                       ...     ...
+2019-09-19 16:30:07  220.8900     100
+2019-09-19 16:30:07  220.8900     100
+2019-09-19 16:30:08  220.8800     100
+2019-09-19 16:30:08  220.8800     100
+2019-09-19 16:30:09  220.8908     200
+
+[48878 rows x 2 columns]
 ```
 
-***
-### 1 minute bar data
-Get historical bar data with 1 minute interval for a given period of time. Goes upto 20 days with data points during open market. Goes upto 10 days will all data points.
-
-<code>min1_bar_data(symbol,start,end,data_filter,brokerage,access_token,datframe)</code>
-
-| Paramters       | Required/Optional | Description                             | Type |
-|-----------------|-------------------|-----------------------------------------|------|
-| symbol          | required          | stock symbol/ticker                     | str  |
-| start           | optional         | starting date and time(YYYY-MM-DD HH:MM). None by default. Can go only upto 1 week in past.             | str  |
-| end             | required          | end date and time(YYYY-MM-DD HH:MM). None by default. Can go only upto 1 week in past.                    | str  |
-| data_filter        | optional          | 'open' for data points within open market hours only. 'all' for all available data points. 'all' by default. | str  |
-| brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
-| access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
-| dataframe       | optional          | True if you want data as pandas dataframe. False for JSON. False by default.   | bool  |
-
-
-```python
-
-import libkloudtrader.stocks as stocks
-
-stocks.min1_bar_data('AAPL',start="2019-07-01 09:30:00",end="2019-07-03 15:40:00")
-```
-```python
-{  
-   'series':{  
-      'data':[  
-         {  
-            'time':'2019-07-01T09:30:00',
-            'timestamp':1561987800,
-            'price':203.25,
-            'open':203.28,
-            'high':203.8,
-            'low':202.7,
-            'close':203.71,
-            'volume':951431,
-            'vwap':203.15787
-         },
-         {  
-            'time':'2019-07-01T09:31:00',
-            'timestamp':1561987860,
-            'price':203.55545,
-            'open':203.71,
-            'high':203.77,
-            'low':203.3409,
-            'close':203.48,
-            'volume':152798,
-            'vwap':203.54317
-         },
-         .
-         .
-         .
-         {  
-            'time':'2019-07-03T15:30:00',
-            'timestamp':1562182200,
-            'price':204.26,
-            'open':204.26,
-            'high':204.26,
-            'low':204.26,
-            'close':204.26,
-            'volume':200,
-            'vwap':204.26
-         },
-         {  
-            'time':'2019-07-03T15:37:00',
-            'timestamp':1562182620,
-            'price':204.23,
-            'open':204.23,
-            'high':204.23,
-            'low':204.23,
-            'close':204.23,
-            'volume':400,
-            'vwap':204.23
-         }
-      ]
-   }
-}
-```
-***
-### 5 minute bar data
-Get historical bar data with 15 minute interval for a given period of time. Goes upto 40 days with data points duing open market. Goes upto 18 days will all data points.
-
-<code>min5_bar_data(symbol,start,end,data_filter,brokerage,access_token,dataframe)</code>
-
-| Paramters       | Required/Optional | Description                             | Type |
-|-----------------|-------------------|-----------------------------------------|------|
-| symbol          | required          | stock symbol/ticker                     | str  |
-| start           | optional         | starting date and time(YYYY-MM-DD HH:MM). None by default. Can go only upto 1 week in past.             | str  |
-| end             | required          | end date and time(YYYY-MM-DD HH:MM). None by default. Can go only upto 1 week in past.                    | str  |
-| data_filter        | optional          | 'open' for data points within open market hours only. 'all' for all available data points. 'all' by default. | str  |
-| brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
-| access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
-| dataframe       | optional          | True if you want data as pandas dataframe. False for JSON. False by default.   | bool  |
-```python 
-Example:
-
-
-import libkloudtrader.stocks as stocks
-
-stocks.min5_bar_data('AAPL',start="2019-07-01 09:30:00",end="2019-07-03 09:40:00")
-```
-```python
-return type: json 
-
-{  
-   'series':{  
-      'data':[  
-         {  
-            'time':'2019-07-01T09:30:00',
-            'timestamp':1561987800,
-            'price':203.25,
-            'open':203.28,
-            'high':203.8,
-            'low':202.7,
-            'close':203.37,
-            'volume':1619605,
-            'vwap':203.31102
-         },
-         {  
-            'time':'2019-07-01T09:35:00',
-            'timestamp':1561988100,
-            'price':203.74,
-            'open':203.38,
-            'high':204.14,
-            'low':203.34,
-            'close':204.1001,
-            'volume':926089,
-            'vwap':203.71958
-         },
-         .
-         .
-         .
-         {  
-            'time':'2019-07-03T09:35:00',
-            'timestamp':1562160900,
-            'price':203.2131,
-            'open':202.965,
-            'high':203.5,
-            'low':202.9262,
-            'close':203.4359,
-            'volume':326617,
-            'vwap':203.3028
-         },
-         {  
-            'time':'2019-07-03T09:40:00',
-            'timestamp':1562161200,
-            'price':203.355,
-            'open':203.43,
-            'high':203.48,
-            'low':203.23,
-            'close':203.34,
-            'volume':159393,
-            'vwap':203.36112
-         }
-      ]
-   }
-}
-```
-
-***
-### 15 minute bar data
-Get historical bar data with 15 minute interval for a given period of time. Goes upto 40 days with data points duing open market. Goes upto 18 days will all data points.
-
-<code>min15_bar_data(symbol,start,end,data_filter,brokerage,access_token,dataframe)</code>
-
-| Paramters       | Required/Optional | Description                             | Type |
-|-----------------|-------------------|-----------------------------------------|------|
-| symbol          | required          | stock symbol/ticker                     | str  |
-| start           | optional         | starting date and time(YYYY-MM-DD HH:MM). None by default. Can go only upto 1 week in past.             | str  |
-| end             | required          | end date and time(YYYY-MM-DD HH:MM). None by default. Can go only upto 1 week in past.                    | str  |
-| data_filter        | optional          | 'open' for data points within open market hours only. 'all' for all available data points. 'all' by default. | str  |
-| brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
-| access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
-| dataframe       | optional          | True if you want data as pandas dataframe. False for JSON. False by default.   | bool  |
-```python 
-Example:
-
-
-import libkloudtrader.stocks as stocks
-
-stocks.min15_bar_data('AAPL',start="2019-06-25 12:00",end="2019-07-03 16:00")
-```
-```python
-return type: json 
-
-[  
-   {  
-      'time':'2019-01-25T12:00:00',
-      'timestamp':1548435600,
-      'price':156.82,
-      'open':157.01,
-      'high':157.05,
-      'low':156.59,
-      'close':156.666,
-      'volume':552439,
-      'vwap':156.86707
-   },
-   {  
-      'time':'2019-01-25T12:15:00',
-      'timestamp':1548436500,
-      'price':156.815,
-      'open':156.68,
-      'high':157.02,
-      'low':156.61,
-      'close':156.94,
-      'volume':474270,
-      'vwap':156.81637
-   },
-   .
-   .
-   .
-    {  
-      'time':'2019-01-25T15:45:00',
-      'timestamp':1548449100,
-      'price':157.74,
-      'open':157.58,
-      'high':158.02,
-      'low':157.46,
-      'close':157.72,
-      'volume':2321821,
-      'vwap':157.64307
-   },
-   {  
-      'time':'2019-01-25T16:00:00',
-      'timestamp':1548450000,
-      'price':157.3262,
-      'open':157.76,
-      'high':157.84,
-      'low':156.8124,
-      'close':157.66,
-      'volume':1806919,
-      'vwap':157.7589
-   }
-]
-```
 ***
 ## Stream Realtime Data
 libkloudtrader provides live streaming data for live trades happening across various exchanges, live quotes from various exchanges and the realtime intraday summary of the security.
@@ -568,14 +326,16 @@ Stream live quotes direct from various exchanges.<br/>
 | symbols         | required          | Symbol or list of symbols(seperated by a comma)| str  |
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
-``` python
-Example:
 
+#### Example
+
+``` python
 import libkloudtrader.stocks as stocks
 
 for data in stream_live_quotes('AAPL,MSFT'):
     print(data)
 ``` 
+
 ### Stream Live Trades
 Stream live trades direct from various exchanges.<br/>
 
@@ -585,9 +345,10 @@ Stream live trades direct from various exchanges.<br/>
 | symbols         | required          | Symbol or list of symbols(seperated by a comma)| str  |
 | brokerage       | optional          | Your Brokerage. Will automatically be present when you deploy to Narwhal. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal| str  |
-``` python
-Example:
 
+#### Example
+
+```python
 import libkloudtrader.stocks as stocks
 
 for data in stream_live_trades('AAPL,MSFT'):
@@ -602,9 +363,10 @@ Stream live intraday summary.<br/>
 | symbols         | required          | Symbol or list of symbols(seperated by a comma)| str  |
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal| str  |
-``` python
-Example:
 
+#### Example
+
+``` python
 import libkloudtrader.stocks as stocks
 
 for data in stream_live_summary('AAPL,MSFT'):
@@ -613,7 +375,9 @@ for data in stream_live_summary('AAPL,MSFT'):
 
 
 ## Market Related Data
+
 ***
+
 ### Listed Companies
 Get Companies listed on <b>Nasdaq, NYSE, AMEX</b>, their symbols, last prices, market-cap and other information about them.
 
@@ -623,15 +387,16 @@ Get Companies listed on <b>Nasdaq, NYSE, AMEX</b>, their symbols, last prices, m
 |-----------------|-------------------|-----------------------------------------|------|
 | exchange         | required          | name of exchange. 'nyse' for New York Stock Exchange. 'nasdaq' for Nasdaq. 'amex' for American Stock Exchange. 'all' for all 3 of them. all by default.                    | str  |
 
+
+#### Example
+
 ```python 
-Example:
-
-
-import libkloudtrader.stocks and stocks
+import libkloudtrader.stocks as stocks
 
 stocks.list_of_companies()
 stocks.list_of_companies('nyse')
 ```
+
 ```python
 return type: pandas dataframe
 
@@ -679,11 +444,10 @@ Get the intraday market status<br/>
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
+#### Example
+
 ```python
-Example: 
-
-
-import libkloudtrader.stocks and stocks
+import libkloudtrader.stocks as stocks
 
 stocks.intraday_status()
 ```
@@ -710,11 +474,10 @@ Get the market calendar of a given month(Goes back till 2013)<br/>
 | month           | required          | month of the year in number             | int  |
 | year            | required          | year                                    | int  |
 
+#### Example
+
 ```python
-Example:
-
-
-from libkloudtrader.stocks import stocks
+import libkloudtrader.stocks as stocks
 
 stocks.market_calendar(7,2019)
 ```
@@ -778,10 +541,10 @@ Search for securities' symbols<br/>
 | indexes         | optional         | True if you want to include indexes in data else False. True by default | bool  |
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+
+#### Example
+
 ```python
-Example:
-
-
 import libkloudtrader.stocks as stocks
 
 stocks.symbol_search('apple')
@@ -831,10 +594,10 @@ Search for listed company's symbolbr/>
 | symbol          | required          | Symbol you want to look up              | str  |
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+
+#### Example
+
 ```python
-Example:
-
-
 import libkloudtrader.stocks as stocks
 
 stocks.symbol_lookup('aap')
@@ -878,50 +641,33 @@ Get list of all securitites that can be sold short for the given broker<br/>
 |-----------------|-------------------|-----------------------------------------|------|
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+| dataframe       | optional          | True if you want data as pandas dataframe. False for JSON. True by default.   | bool  |
 
+#### Example
 
 ```python
-
 import libkloudtrader.stocks as stocks
 
 stocks.shortable_securities()
 ```
 ```python
-return type : json
+return type: Pandas Dataframe
 
-{
-  "securities": {
-    "security": [
-      {
-        "symbol": "SCS",
-        "exchange": "N",
-        "type": "stock",
-        "description": "Steelcase Inc"
-      },
-      {
-        "symbol": "EXAS",
-        "exchange": "Q",
-        "type": "stock",
-        "description": "Exact Sciences Corp"
-      },
-      .
-      .
-      .
-      {
-        "symbol": "IBKC",
-        "exchange": "Q",
-        "type": "stock",
-        "description": "IBERIABANK Corp"
-      },
-      {
-        "symbol": "BBT",
-        "exchange": "N",
-        "type": "stock",
-        "description": "BB&T Corp"
-      }
-    ]
-  }
-}
+     symbol exchange   type                      description
+
+0       SCS        N  stock                    Steelcase Inc
+1      EXAS        Q  stock              Exact Sciences Corp
+2       SCZ        Q    etf  iShares MSCI EAFE Small-Cap ETF
+3       WLH        N  stock               William Lyon Homes
+4      TSLA        Q  stock                        Tesla Inc
+...     ...      ...    ...                              ...
+1895   ACBI        Q  stock  Atlantic Capital Bancshares Inc
+1896    SCI        N  stock       Service Corp International
+1897    BAX        N  stock         Baxter International Inc
+1898    SCL        N  stock                        Stepan Co
+1899   JACK        Q  stock              Jack In The Box Inc
+
+[1900 rows x 4 columns]
 ```
 
 ### Check if Shortable
@@ -935,8 +681,9 @@ Check if the given stock/security is shortable or not for the given broker.
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
-```python 
+#### Example
 
+```python 
 import libkloudtrader.stocks as stocks
 
 stocks.check_if_shortable('AAPL')
@@ -960,10 +707,9 @@ Get company fundamental information<br/>
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
+#### Example
+
 ```python
-Example:
-
-
 import libkloudtrader.stocks as stocks
 
 stocks.company_fundamentals('AAPL')
@@ -1097,10 +843,10 @@ Get the corporate calendar information for given symbol<br/>
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
+#### Example
+
+
 ```python
-Example:
-
-
 import libkloudtrader.stocks as stocks
 
 stocks.corporate_calendar('AAPL')
@@ -1160,11 +906,11 @@ Get company dividend information for given symbol<br/>
 | symbols         | required          | Symbol or list of symbols(seperated by a comma)               | str  |
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+
+#### Example
+
 ```python
-Example:
-
-
-from libkloudtrader.stocks import stocks
+import libkloudtrader.stocks as stocks
 
 stocks.dividend_information('AAPL')
 ```
@@ -1224,10 +970,10 @@ Get corporate actions information for given symbol<br/>
 | symbols         | required          | Symbol or list of symbols(seperated by a comma)               | str  |
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+
+#### Example
+
 ```python
-Example:
-
-
 import libkloudtrader.stocks as stocks
 
 stocks.corporate_actions('AAPL')
@@ -1309,10 +1055,10 @@ Get operation ratio information for given symbol<br/>
 | symbols         | required          | Symbol or list of symbols(seperated by a comma)               | str  |
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+
+#### Example
+
 ```python
-Example:
-
-
 import libkloudtrader.stocks as stocks 
 
 stocks.operation_ratio('AAPL')
@@ -1429,10 +1175,10 @@ Get corporate financials information for given symbol<br/>
 | symbols         | required          | Symbol or list of symbols(seperated by a comma)               | str  |
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+
+#### Example
+
 ```python
-Example:
-
-
 import libkloustrader.stocks as stocks
 
 stocks.corporate_financials('AAPL')
@@ -1669,10 +1415,10 @@ Get price statistics information for given symbol<br/>
 | symbols         | required          | Symbol or list of symbols(seperated by a comma)               | str  |
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+
+#### Example
+
 ```python
-Example:
-
-
 import libkloudtrader.stocks as stocks
 
 stocks.price_statistics('AAPL')

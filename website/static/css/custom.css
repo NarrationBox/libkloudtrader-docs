@@ -87,7 +87,7 @@ min-height: 20vh;
  .features{
    color: #374549;
    text-align: center;
-   font-family: 'Press Start 2P', cursive;
+
    font-size: 1.7em;
  }
 
@@ -110,3 +110,48 @@ select:focus {
   outline: none !important;
 }
 
+
+pre {
+    position: relative;
+  }
+  
+  pre .btnIcon {
+    position: absolute;
+    top: 4px;
+    z-index: 2;
+    cursor: pointer;
+    border: 1px solid transparent;
+    padding: 0;
+    color: #fff;
+    background-color: transparent;
+    height: 30px;
+    transition: all .25s ease-out;
+    outline:none;
+  }
+  
+  pre .btnIcon:hover {
+    text-decoration: none;
+    outline:none;
+  }
+  
+  .btnIcon__body {
+    align-items: center;
+    display: flex;
+    outline:none;
+  }
+  
+  .btnIcon svg {
+    fill: currentColor;
+    margin-right: .4em;
+    outline:none;
+  }
+  
+  .btnIcon__label {
+    font-size: 11px;
+    outline:none;
+  }
+  
+  .btnClipboard {
+    right: 10px;
+    outline:none;
+  }
