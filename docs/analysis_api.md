@@ -482,6 +482,7 @@ Bollinger Bands do not, in themselves, generate buy or sell signals; they are an
 |-----------------|-------------------|-----------------------------------------|------|
 | data        | required         | Data| Pandas series  |
 | period  | required          | time period. 20 by default. | int |
+|std|optional|Standard Deviation. 2.0 by default|float|
 
 #### Example
 
