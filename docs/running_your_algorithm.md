@@ -5,4 +5,11 @@ sidebar_label: Running your algorithm
 ---
 
 
-# Coming Soon
+## Backtesting 
+
+
+## Live Trading
+
+
+## Data Feeds 
+

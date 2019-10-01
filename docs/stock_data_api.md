@@ -196,13 +196,13 @@ return type : json
 ### Historical OHLCV Data
 Get OHLCV(Open-High-Low-Close-Volume) data for a symbol.<br/>
 
-<code>ohlcv(symbol,start,end,data_filter,brokerage,access_token,datframe)</code>
+<code>ohlcv(symbol,start,end,data_filter,brokerage,access_token,dataframe)</code>
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
 | symbol          | required          | stock symbol/ticker                     | str  |
-| start           | required          | Starting date (YYYY-MM-DD). (YYYY-MM-DD) for intervals: "1d","1w","1M", (YYYY-MM-DD HH:MM:SS) for intervals: "1m", "5m", "15m"                  | str  |
-| end             | required          | Ending date (YYYY-MM-DD). (YYYY-MM-DD) for intervals: "1d","1w","1M", (YYYY-MM-DD HH:MM:SS) for intervals: "1m", "5m", "15m"             | str  |
-| interval        | optional          | Time Interval. E.g. (1m, 5m, 15m, 1d, 1w, 1M). See next table to find out more about time intervals. 1d by default. | str  |
+| start           | required          | Starting date (YYYY-MM-DD)                 | str  |
+| end             | required          | Ending date (YYYY-MM-DD)            | str  |
+| interval        | optional          | Time Interval. E.g. (1d, 1w, 1M). See next table to find out more about time intervals. 1d by default. | str  |
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 | dataframe       | optional          | True if you want data as pandas dataframe. False for JSON. True by default.   | bool  |
@@ -211,11 +211,8 @@ Supported time intervals:
 
 
 
-| Interval    | Accepted Symbol |Data Availability|
+| Time Interval    | Accepted Symbol |Data Availability|
 |-----------------|-------------------|-----------|
-|1 minute         |1m|20 days in the past|
-|5 minutes        |5m|40 days in the past|
-|15 minutes       |15m|40 days in the past|
 |1 day        |1d|Usually cover the entire lifetime of the company|
 |1 week       |1w|Usually cover the entire lifetime of the company|
 |1 month      |1M|Usually cover the entire lifetime of the company|
@@ -226,8 +223,6 @@ Supported time intervals:
 import libkloudtrader.stocks as stocks
 
 stocks.ohlcv('AAPL',start="2018-01-01",end="2019-01-01")
-
-stocks.ohlcv('AAPL',start="2019-09-04 09:30:00",end="2019-09-10 15:30:00", interval="5m")
 ```
 ```python
 return type: Pandas Dataframe
@@ -249,7 +244,39 @@ datetime
 [251 rows x 5 columns]
 ```
 
+
+
+*** 
+### Time and Sale Data
+Get historical intraday OHLCV, VWAP and trade price data for a particular period of time.<br>
+
+<code>time_and_sale(symbol,start,end,data_filter,brokerage,access_token,dataframe)</code>
+
+| Paramters       | Required/Optional | Description                             | Type |
+|-----------------|-------------------|-----------------------------------------|------|
+| symbol          | required          | stock symbol/ticker                     | str  |
+| start           | required      | starting date and time(YYYY-MM-DD HH:MM) | str  |
+| end             | required          | end date and time(YYYY-MM-DD HH:MM)                    | str  |
+| interval        | required        | Time Interval. E.g. (1m, 5m, 15m). See next table to find out more about time intervals.| str  |
+| data_filter        | optional          | 'open' for data points within open market hours only. 'all' for all available data points. 'open' by default. | str  |
+| brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
+| access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
+| dataframe       | optional          | True if you want data as pandas dataframe. False for JSON. True by default.   | bool  |
+
+| Time Interval    | Accepted Symbol |Data Availability|
+|-----------------|-------------------|-----------|
+|1 minute         |1m|20 days in the past|
+|5 minutes        |5m|40 days in the past|
+|15 minutes       |15m|40 days in the past|
+
+#### Example
+
 ```python 
+import libkloudtrader.stocks as stocks
+
+stocks.time_and_sale('AAPL',start="2019-09-04 09:30:00",end="2019-09-10 15:30:00", interval="5m")
+```
+```python
 return type: Pandas Dataframe
 
                          price      open      high       low     close  volume       vwap
@@ -266,14 +293,14 @@ datetime
 2019-09-10 15:25:00  214.62995  214.7000  214.7599  214.5000  214.5800  141997  214.63384
 2019-09-10 15:30:00  214.60915  214.5800  214.6765  214.5418  214.5800  131203  214.60373
 
-[385 rows x 7 columns]
+[740 rows x 7 columns]
 ```
 
 ***
 ### Tick Data
 Get historical tick data(trades placed) for a particular period of time. Data available for past 5 days.<br>
 
-<code>tick_data(symbol,start,end,data_filter,brokerage,access_token,datframe)</code>
+<code>tick_data(symbol,start,end,data_filter,brokerage,access_token,dataframe)</code>
 
 | Paramters       | Required/Optional | Description                             | Type |
 |-----------------|-------------------|-----------------------------------------|------|
@@ -315,7 +342,7 @@ datetime
 
 ***
 ## Stream Realtime Data
-libkloudtrader provides live streaming data for live trades happening across various exchanges, live quotes from various exchanges and the realtime intraday summary of the security.
+libkloudtrader provides live streaming data for live trades happening across various exchanges, live quotes from various exchanges and the real-time intraday summary of the security.
 
 ### Stream Live Quotes
 Stream live quotes direct from various exchanges.<br/>
@@ -323,7 +350,7 @@ Stream live quotes direct from various exchanges.<br/>
 <code>stream_live_quotes(symbol,brokerage,access_token)</code>
 | Paramters       | Required/Optional | Description                                    | Type |
 |-----------------|-------------------|------------------------------------------------|------| 
-| symbols         | required          | Symbol or list of symbols(seperated by a comma)| str  |
+| symbols         | required          | Symbol or list of symbols(separated by a comma)| str  |
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
@@ -342,7 +369,7 @@ Stream live trades direct from various exchanges.<br/>
 <code>stream_live_trades(symbol,brokerage,access_token)</code>
 | Paramters       | Required/Optional | Description                                    | Type |
 |-----------------|-------------------|------------------------------------------------|------| 
-| symbols         | required          | Symbol or list of symbols(seperated by a comma)| str  |
+| symbols         | required          | Symbol or list of symbols(separated by a comma)| str  |
 | brokerage       | optional          | Your Brokerage. Will automatically be present when you deploy to Narwhal. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal| str  |
 
@@ -360,7 +387,7 @@ Stream live intraday summary.<br/>
 <code>stream_live_summary(symbol,brokerage,access_token)</code>
 | Paramters       | Required/Optional | Description                                    | Type |
 |-----------------|-------------------|------------------------------------------------|------| 
-| symbols         | required          | Symbol or list of symbols(seperated by a comma)| str  |
+| symbols         | required          | Symbol or list of symbols(separated by a comma)| str  |
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal| str  |
 
@@ -677,7 +704,7 @@ Check if the given stock/security is shortable or not for the given broker.
 
 | Paramters       | Required/Optional | Description                                                   | Type |
 |-----------------|-------------------|---------------------------------------------------------------|------|
-|  symbols        | required          | Symbol or list of symbols(seperated by a comma)               | str  |
+|  symbols        | required          | Symbol or list of symbols(separated by a comma)               | str  |
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
@@ -703,7 +730,7 @@ Get company fundamental information<br/>
 
 | Paramters       | Required/Optional | Description                                                   | Type |
 |-----------------|-------------------|---------------------------------------------------------------|------|
-|  symbols        | required          | Symbol or list of symbols(seperated by a comma)               | str  |
+|  symbols        | required          | Symbol or list of symbols(separated by a comma)               | str  |
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
@@ -839,7 +866,7 @@ Get the corporate calendar information for given symbol<br/>
 <code>corporate_calendar(symbols,brokerage,access_token)</code>
 | Paramters       | Required/Optional | Description                                                   | Type |
 |-----------------|-------------------|---------------------------------------------------------------|------|
-|  symbols        | required          | Symbol or list of symbols(seperated by a comma)               | str  |
+|  symbols        | required          | Symbol or list of symbols(separated by a comma)               | str  |
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
@@ -903,7 +930,7 @@ Get company dividend information for given symbol<br/>
 <code>corporate_calendar(symbols,brokerage,access_token)</code>
 | Paramters       | Required/Optional | Description                                                   | Type |
 |-----------------|-------------------|---------------------------------------------------------------|------|
-| symbols         | required          | Symbol or list of symbols(seperated by a comma)               | str  |
+| symbols         | required          | Symbol or list of symbols(separated by a comma)               | str  |
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
@@ -967,7 +994,7 @@ Get corporate actions information for given symbol<br/>
 <code>corporate_actions(symbols,brokerage,access_token)</code>
 | Paramters       | Required/Optional | Description                                                   | Type |
 |-----------------|-------------------|---------------------------------------------------------------|------|
-| symbols         | required          | Symbol or list of symbols(seperated by a comma)               | str  |
+| symbols         | required          | Symbol or list of symbols(separated by a comma)               | str  |
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
@@ -1052,7 +1079,7 @@ Get operation ratio information for given symbol<br/>
 <code>operation_ratio(symbols,brokerage,access_token)</code>
 | Paramters       | Required/Optional | Description                                                   | Type |
 |-----------------|-------------------|---------------------------------------------------------------|------|
-| symbols         | required          | Symbol or list of symbols(seperated by a comma)               | str  |
+| symbols         | required          | Symbol or list of symbols(separated by a comma)               | str  |
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
@@ -1172,7 +1199,7 @@ Get corporate financials information for given symbol<br/>
 <code>corporate_financials(symbols,brokerage,access_token)</code>
 | Paramters       | Required/Optional | Description                                                   | Type |
 |-----------------|-------------------|---------------------------------------------------------------|------|
-| symbols         | required          | Symbol or list of symbols(seperated by a comma)               | str  |
+| symbols         | required          | Symbol or list of symbols(separated by a comma)               | str  |
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
@@ -1412,7 +1439,7 @@ Get price statistics information for given symbol<br/>
 <code>price_statistics(symbols,brokerage,access_token)</code>
 | Paramters       | Required/Optional | Description                                                   | Type |
 |-----------------|-------------------|---------------------------------------------------------------|------|
-| symbols         | required          | Symbol or list of symbols(seperated by a comma)               | str  |
+| symbols         | required          | Symbol or list of symbols(separated by a comma)               | str  |
 | brokerage       | required as environment variable          | Your Brokerage. Will automatically be present when you deploy to Narwhal after linking your brokerage account. Currently supported brokerage: 'Tradier Inc.'| str  |
 | access_token    | required as environment variable          | Will automatically be present when you deploy to Narwhal after linking your brokerage account| str  |
 
