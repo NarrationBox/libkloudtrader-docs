@@ -598,7 +598,7 @@ Get your positions. Many exchanges don't support this functionality via their AP
 #### Example
 
 ```python
-import libkloudtrade.crypto as crypto
+import libkloudtrader.crypto as crypto
 
 crypto.user_positions()
 ```
